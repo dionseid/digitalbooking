@@ -1,0 +1,48 @@
+{
+    "informacionAlojamiento":[                
+    {
+        "id":1,
+        "URLimg":"mi-proyecto\\src\\UI KITS\\inner-space-1026452_640 2.png",
+        "titulo":"Hoteles",
+        "parrafo":"807.105 hoteles"
+    },
+    {
+        "id":2,
+        "URLimg":"mi-proyecto\\src\\UI KITS\\inner-space-1026452_640 2.png",
+        "titulo":"Hostels",
+        "parrafo":"807.105 hostels"
+    },
+    {
+        "id":3,
+        "URLimg":"mi-proyecto\\src\\UI KITS\\inner-space-1026452_640 2.png",
+        "titulo":"Departamentos",
+        "parrafo":"807.105 departamentos"
+    },
+    {
+        "id":4,
+        "URLimg":"mi-proyecto\\src\\UI KITS\\inner-space-1026452_640 2.png",
+        "titulo":"Bed and breakfast",
+        "parrafo":"807.105 Bed and breakfast"
+    }
+    ],
+    "informacionRecomendacion":[                
+        {
+            "id":1,
+            "URLimg":"mi-proyecto\\src\\UI KITS\\inner-space-1026452_640 2.png",
+            "titulo":"Hermitage Hotel",
+            "puntaje":8,
+            "calificacion":"Muy bueno",
+            "ubicacion": "A 940 m del centro - ",
+            "parrafo":"En el corazón de San Telmo, disfruta de un albergue inspirado en las pasiones de Buenos Aires. "
+        },
+        {
+            "id":2,
+            "URLimg":"../img/inner-space-1026452_640 2.png",
+            "titulo":"Hermitage Hotel",
+            "puntaje":8,
+            "calificacion":"Muy bueno",
+            "ubicacion": "A 940 m del centro - ",
+            "parrafo":"En el corazón de San Telmo, disfruta de un albergue inspirado en las pasiones de Buenos Aires. "
+        }
+        ]
+}

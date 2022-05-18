@@ -1,0 +1,144 @@
+.App {
+  text-align: center;
+  color: #191B1D;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+body{
+  background-color: #DFE4EA;
+}
+
+h2, h3{
+  text-align: start;
+  font-weight: 700;
+}
+h3{
+  font-size: 24px;
+}
+h4{
+  font-size: 20px;
+  text-align: start;
+}
+
+p{
+  font-weight: 400;
+  color: #31363F;
+  text-align: start;
+}
+
+section{
+  margin: 40px;
+}
+
+.cards{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.cardAlojamiento{
+  display: flex;
+  flex-direction: column;
+  margin-right:20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #F3F3F3;
+  align-items: center;
+  justify-content: space-between;
+  border-radius:8px;
+}
+
+.cardRecomendacion{
+  display: flex;
+  margin-right: 15px;
+  box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
+  background-color: #F3F3F3;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  border-radius:8px;
+}
+
+.cardBody{
+  padding: 10px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.presentacion{
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  text-align: end;
+}
+
+.puntaje{
+  background-color: #31363F;
+  color: #DFE4EA;
+  padding: 2px 9px 3px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.buttonCard{
+  color: #DFE4EA;
+  background-color: #F0572D;
+  padding: 5px 20px;
+  width: 100%;
+  border-radius:8px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.estrella{
+  font-size: 13px;
+  color: #F0572D;
+}
+
+.imagen{
+  height: 50px;
+  width: 100%;
+  padding: 5px 15px;
+  font-size: 1.62;
+  border-radius: 10px 10px 0 0;
+}
+
+footer{
+  color: #DFE4EA;
+  background-color: #F0572D;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 58px;
+}
+
+footer p{
+  color: #DFE4EA;
+  margin-left: 40px;
+  font-size: 14px;
+}
+
+.redes{
+  padding: 10px;
+  height: 27px;
+}
+
+
