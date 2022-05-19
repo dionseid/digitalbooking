@@ -14,7 +14,7 @@ class CardRecomendacion extends React.Component{
             <div className="cards">
                 {data.informacionRecomendacion.map((card)=>(
                     <div key={card.id} className="cardRecomendacion">
-                        <img src={card.URLimg} alt="hotel" className="imagen"/>
+                        <div style={{backgroundImage:"url(./img/" + card.URLimg + ")", borderRadius: "10px 0px 0 10px"}} className="fondoImagen"/>
                         <div className="cardBody">
                             <div className="presentacion">
                                 <div>
@@ -26,9 +26,9 @@ class CardRecomendacion extends React.Component{
                                     <p style={{fontWeight: "700"}}>{card.calificacion}</p>
                                 </div>
                             </div>                            
-                            <p><FontAwesomeIcon icon={faLocationDot} style={{marginRight:"4px"}}/>{card.ubicacion} <span style={{color:"#F0572D", fontWeight: "700"}}>MOSTRAR EN EL MAPA</span></p>
+                            <p><FontAwesomeIcon icon={faLocationDot} style={{marginRight:"4px"}}/>{card.ubicacion} <span>MOSTRAR EN EL MAPA</span></p>
                             <p><FontAwesomeIcon icon={faWifi} style={{marginRight:"8px"}}/><FontAwesomeIcon icon={faPersonSwimming}/></p>
-                            <p>{card.parrafo} <span style={{color:"#F0572D"}}>más...</span></p>
+                            <p>{card.parrafo} <span>más...</span></p>
                             <button className="buttonCard">ver más</button>
                         </div>
                     </div>
