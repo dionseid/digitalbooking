@@ -20,7 +20,7 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaService.agregarCategoria(categoria));
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<Categoria> buscarCategoria (@PathVariable Integer id){
        Categoria categoria= categoriaService.buscarCategoria(id).orElse(null);
         return  ResponseEntity.ok(categoria);
@@ -28,7 +28,7 @@ public class CategoriaController {
 
     @PutMapping()
     public ResponseEntity<Categoria> actualizarCategoria(@RequestBody Categoria categoria){
-        ResponseEntity<Categoria> response= null;
+        ResponseEntity<Categoria> response;
 
         if (categoria.getId()!=null && categoriaService.buscarCategoria(categoria.getId()).isPresent())
             response= ResponseEntity.ok(categoriaService.actualizarCategoria(categoria));
