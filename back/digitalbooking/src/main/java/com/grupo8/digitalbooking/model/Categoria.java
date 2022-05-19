@@ -1,8 +1,15 @@
 package com.grupo8.digitalbooking.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 //Crear una tabla categorias en la base de datos
+@ToString
+@Getter
+@Setter
 
 //nombre de la tabla en la bd
 @Entity
