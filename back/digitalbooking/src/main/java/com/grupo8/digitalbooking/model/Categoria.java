@@ -1,8 +1,15 @@
 package com.grupo8.digitalbooking.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 //Crear una tabla categorias en la base de datos
+@ToString
+@Getter
+@Setter
 
 //nombre de la tabla en la bd
 @Entity
@@ -36,31 +43,4 @@ public class Categoria {
         this.urlImg = urlImg;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getUrlImg() {
-        return urlImg;
-    }
-
-    public void setUrlImg(String urlImg) {
-        this.urlImg = urlImg;
-    }
 }
