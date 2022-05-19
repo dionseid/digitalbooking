@@ -14,7 +14,7 @@ class CardRecomendacion extends React.Component{
             <div className="cards">
                 {data.informacionRecomendacion.map((card)=>(
                     <div key={card.id} className="cardRecomendacion">
-                        <div style={{backgroundImage:"url(./img/" + card.URLimg + ")", borderRadius: "10px 0px 0 10px"}} className="fondoImagen"/>
+                        <div style={{backgroundImage:"url(./img/" + card.URLimg + ")"}} className="fondoImagen"/>
                         <div className="cardBody">
                             <div className="presentacion">
                                 <div>

@@ -1,3 +1,8 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   text-align: center;
   color: #191B1D;
@@ -27,7 +32,9 @@ body{
 h2, h3{
   text-align: start;
   font-weight: 700;
+  margin-bottom:8px;
 }
+
 h3{
   font-size: 24px;
 }
@@ -40,6 +47,7 @@ p{
   font-weight: 400;
   color: #31363F;
   text-align: start;
+  margin-top: 10px;
 }
 
 section{
@@ -70,7 +78,6 @@ section{
   box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
   background-color: #F3F3F3;
   align-items: center;
-  justify-content: space-between;
   width: 50%;
   border-radius:8px;
   height:320px;
@@ -90,11 +97,16 @@ section{
   background-size: cover;
 }
 
+.cardRecomendacion .fondoImagen{
+  border-radius: 10px 0px 0 10px;
+}
+
 .presentacion{
   display: flex;
   justify-content: space-between;
   align-items:center;
   text-align: end;
+  margin-bottom: 25px;
 }
 
 .puntaje{
@@ -115,6 +127,7 @@ span{
   color: #DFE4EA;
   background-color: #F0572D;
   padding: 5px 20px;
+  margin: 5px;
   width: 100%;
   border-radius:8px;
   font-weight: 700;
@@ -142,6 +155,9 @@ footer{
   justify-content: space-between;
   align-items: center;
   height: 58px;
+  position: sticky;
+  z-index: 999;
+  bottom: 0px;
 }
 
 footer p{
@@ -155,4 +171,48 @@ footer p{
   height: 27px;
 }
 
+
+@media screen and (max-width: 768px) {
+  .cards{
+    flex-direction: column;
+  }
+
+  .cardAlojamiento{
+    margin-bottom: 10px;
+  }
+
+  .cardRecomendacion{
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 10px;
+    height: 520px;
+    color: #282c34;
+  }
+
+  .cardRecomendacion .fondoImagen{
+    border-radius: 8px 8px 0 0;
+  }
+
+  .Recomendaciones{
+    color: #DFE4EA;
+    background-color: #31363F;
+    margin: 0;
+    padding: 15px;
+  }
+
+  .iconos{
+    visibility:hidden;
+  }
+
+  footer p{
+    width: 100%;
+    margin: 10px;
+  }
+
+  section{
+    margin: 20px;
+  }
+
+}
 

@@ -17,14 +17,14 @@ function App() {
           <h2>Buscar por tipo de alojamiento</h2>
           <CardAlojamiento/>
         </section>
-        <section>
+        <section className='Recomendaciones'>
           <h2>Recomendaciones</h2>
           <CardRecomendacion/>
         </section>
       </body>
       <footer>
         <p>©2021 Digital Booking</p>
-        <div>
+        <div className='iconos'>
           <FontAwesomeIcon icon={faFacebook} className="redes"/>
           <FontAwesomeIcon icon={faLinkedinIn} className="redes"/>
           <FontAwesomeIcon icon={faTwitter} className="redes"/>
