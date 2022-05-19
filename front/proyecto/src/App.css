@@ -3,6 +3,12 @@
   padding: 0;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+}
+
 .App {
   text-align: center;
   color: #191B1D;
@@ -213,6 +219,5 @@ footer p{
   section{
     margin: 20px;
   }
-
 }
 

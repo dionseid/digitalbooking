@@ -25,10 +25,10 @@ function App() {
       <footer>
         <p>©2021 Digital Booking</p>
         <div className='iconos'>
-          <FontAwesomeIcon icon={faFacebook} className="redes"/>
-          <FontAwesomeIcon icon={faLinkedinIn} className="redes"/>
-          <FontAwesomeIcon icon={faTwitter} className="redes"/>
-          <FontAwesomeIcon icon={faInstagram} className="redes"/>
+          <a href='#'><FontAwesomeIcon icon={faFacebook} className="redes"/></a>
+          <a href='#'><FontAwesomeIcon icon={faLinkedinIn} className="redes"/></a>
+          <a href='#'><FontAwesomeIcon icon={faTwitter} className="redes"/></a>
+          <a href='#'><FontAwesomeIcon icon={faInstagram} className="redes"/></a>
         </div>
       </footer>
     </div>
