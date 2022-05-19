@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+
 //request a la bdd
 @RestController
 @RequestMapping("/categorias")
@@ -42,4 +44,11 @@ public class CategoriaController {
         categoriaService.eliminarCategoria(id);
         return ResponseEntity.ok("Se eliminó la categoria correctamente");
     }
+
+    @GetMapping()
+    public ResponseEntity<Collection<Categoria>> listarCategorias(){
+        return ResponseEntity.ok(categoriaService.listarCategorias());
+    }
+
+
 }

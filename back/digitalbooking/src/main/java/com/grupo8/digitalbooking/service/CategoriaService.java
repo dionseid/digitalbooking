@@ -7,7 +7,10 @@ import org.springframework.boot.context.config.ConfigDataResourceNotFoundExcepti
 import org.springframework.stereotype.Service;
 
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 //CRUD Categorias
 
@@ -45,4 +48,13 @@ public class CategoriaService {
         else
             throw new Exception("Categoría no encontrada");
     }
+
+    //traer todas las categorias
+    public List<Categoria> listarCategorias(){
+
+        List<Categoria> categorias= categoriaRepository.findAll();
+
+        return categorias;
+    }
+
 }
