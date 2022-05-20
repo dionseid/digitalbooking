@@ -41,8 +41,18 @@ public class CategoriaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarCatgoria(@PathVariable Integer id) throws Exception {
-        categoriaService.eliminarCategoria(id);
-        return ResponseEntity.ok("Se eliminó la categoria correctamente");
+
+        ResponseEntity<String> response = null;
+
+        if (categoriaService.buscarCategoria(id).isPresent()) {
+            categoriaService.eliminarCategoria(id);
+            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Se eliminó la categoria correctamente");
+        } else {
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: no se encontró el id");
+        }
+
+        return response;
+
     }
 
     @GetMapping()
