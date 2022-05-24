@@ -1,5 +1,5 @@
 import React from "react";
-import data from "../helpers/data.json"
+import data from "../../../helpers/data.json"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar, faLocationDot, faWifi, faPersonSwimming} from "@fortawesome/free-solid-svg-icons"
 

@@ -1,0 +1,66 @@
+.navBar{
+    display: flex;  
+    justify-content: space-between;
+    align-items: center;
+    color: #F0572D;
+    background-color: #FFFF;
+    padding: 5px;
+  }
+  
+  .logoNavBar{
+    display: flex;
+    padding: 10px;
+    color:#282c34;
+    align-items: center;
+  }
+  
+  .parrafoNavBar{
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20px;
+  }
+  
+  .buttonNavBar{
+    background-color: #DFE4EA;
+    color: #F0572D;
+    padding: 5px 20px;
+    font-weight: 700;
+    font-size: 16px;
+    background: #FFFFFF;
+    border: 1px solid #F0572D;
+    border-radius: 5px;
+    margin: 5px;
+  }
+  
+  .botones{
+    display: flex;
+    padding: 10px;
+  }
+  
+  img{
+    padding: 10px;
+  }
+
+  .menu{
+    visibility: hidden;
+  }
+
+  @media screen and (max-width: 768px) {
+    .parrafoNavBar{
+      visibility:hidden;
+    }
+
+    .botones{
+      visibility: hidden;
+      align-items: flex-end;
+    }
+
+    .menu{
+      visibility: visible;
+    }
+
+    .navBar{
+      height:93px;
+    }
+
+  }
