@@ -1,0 +1,31 @@
+footer{
+    color: #DFE4EA;
+    background-color: #F0572D;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    z-index: 999;
+    bottom: 0px;
+  }
+  
+
+footer p{
+  color: #DFE4EA;
+  margin-left: 40px;
+  font-size: 14px;
+}
+
+.redes{
+  padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .iconos{
+    visibility:hidden;
+  }
+
+  footer p{
+    margin-left: 20px;
+  }
+}
