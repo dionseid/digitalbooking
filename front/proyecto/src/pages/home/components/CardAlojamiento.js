@@ -1,5 +1,5 @@
 import React from "react";
-import data from "../helpers/data.json";
+import data from "../../../helpers/data.json";
 
 
 
