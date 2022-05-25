@@ -2,10 +2,10 @@ import React from 'react';
 import "./label.css";
 
 
-const Label =({text}) =>{
+const Label =({attribute, text}) =>{
     return(
         <div className='parrafo'>
-            <label>{text}</label>
+            <label htmlFor={attribute}>{text}</label>
         </div>
     )
 };

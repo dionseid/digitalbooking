@@ -31,12 +31,7 @@
     border-radius: 5px;
     margin: 5px;
   }
-  
-  .botones{
-    display: flex;
-    padding: 0px;
-  }
-  
+    
   img{
     padding: 10px;
   }
@@ -50,21 +45,20 @@
       visibility:hidden;
     }
 
+    .botones{
+      visibility: hidden;
+      align-items: flex-end;
+    }
 
     .menu{
       visibility: visible;
-      font-size: 25px;
     }
 
     .navBar{
+      height:93px;
       position: sticky;
       z-index: 9999;
       top: 0;
-    }
-
-    .buttonNavBar{
-      width: 0%;
-      visibility:hidden;
     }
 
   }

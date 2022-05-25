@@ -36,6 +36,7 @@
     font-style: normal;
     font-weight: 700;
     font-size: 36px;
+    color: #DFE4EA;
   }
 
 
@@ -49,7 +50,7 @@
     }
 
     .banner{
-      Height: 300px;
+      Height: 250px;
     }
 
     h1{
