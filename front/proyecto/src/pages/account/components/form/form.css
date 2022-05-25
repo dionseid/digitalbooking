@@ -23,6 +23,7 @@ h1{
 
 .contenido{
     width: 85%;
+    max-width: 450px;
     height: 100%;
     display: flex;
     flex-direction: column;
