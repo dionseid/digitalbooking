@@ -53,6 +53,7 @@
     .botones{
       visibility: hidden;
       align-items: flex-end;
+      position: absolute;
     }
 
     .menu{
