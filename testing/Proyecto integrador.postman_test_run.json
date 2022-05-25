@@ -1,0 +1,209 @@
+{
+	"id": "67aa0b1b-0ee0-4403-8e2b-5d9809bd6f3b",
+	"name": "Proyecto integrador",
+	"timestamp": "2022-05-25T05:16:40.842Z",
+	"collection_id": "18045963-28035114-d80d-4ceb-bb7c-440db164be14",
+	"folder_id": "18045963-27e0937f-55ac-4ca7-bee9-ab2a4d11446c",
+	"environment_id": "0",
+	"totalPass": 11,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "0a274f12-24b3-4c10-b7ea-13e2671f5e9b",
+			"name": "Agregar Categoria",
+			"url": "http://localhost:8080/categorias",
+			"time": 1105,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true,
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1105
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true,
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "e0479daf-add1-4a5f-9a4d-a55877809ccf",
+			"name": "Buscar Categoria",
+			"url": "http://localhost:8080/categorias/102",
+			"time": 67,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true,
+				"The response has all properties": true,
+				"Titulo value is in valid list": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"The response has all properties": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Titulo value is in valid list": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				67
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true,
+					"The response has all properties": true,
+					"Titulo value is in valid list": true
+				}
+			]
+		},
+		{
+			"id": "f6fb700b-d35c-4602-90a9-131ebc028083",
+			"name": "Actualizar Categoria",
+			"url": "http://localhost:8080/categorias",
+			"time": 81,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true,
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				81
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true,
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "a662dabf-a838-4c2b-ab56-c7cd9c0aef0f",
+			"name": "Borrar Categoria",
+			"url": "http://localhost:8080/categorias/169",
+			"time": 87,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 200 or 204": true,
+				"Status code is 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				87
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true,
+					"Status code is 204": true
+				}
+			]
+		},
+		{
+			"id": "3a2187bc-1894-401c-90cf-af7b989e7756",
+			"name": "Listar Categorias",
+			"url": "http://localhost:8080/categorias",
+			"time": 60,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				60
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true,
+					"Test data type of the response": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1400,
+	"collection": {
+		"requests": [
+			{
+				"id": "0a274f12-24b3-4c10-b7ea-13e2671f5e9b",
+				"method": "POST"
+			},
+			{
+				"id": "e0479daf-add1-4a5f-9a4d-a55877809ccf",
+				"method": "GET"
+			},
+			{
+				"id": "f6fb700b-d35c-4602-90a9-131ebc028083",
+				"method": "PUT"
+			},
+			{
+				"id": "a662dabf-a838-4c2b-ab56-c7cd9c0aef0f",
+				"method": "DELETE"
+			},
+			{
+				"id": "3a2187bc-1894-401c-90cf-af7b989e7756",
+				"method": "GET"
+			}
+		]
+	}
+}

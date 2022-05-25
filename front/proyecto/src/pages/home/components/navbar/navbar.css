@@ -50,6 +50,14 @@
       visibility:hidden;
     }
 
+<<<<<<< HEAD
+=======
+    .botones{
+      visibility: hidden;
+      align-items: flex-end;
+      position: absolute;
+    }
+>>>>>>> d6c0714de70aa428fff78a2d21faeba2ffdfef67
 
     .menu{
       visibility: visible;
