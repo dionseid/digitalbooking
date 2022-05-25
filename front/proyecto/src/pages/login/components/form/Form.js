@@ -32,35 +32,33 @@ const Form = () => {
  
   return (
             <div className='contenedor'>
-                <h1 className='titulo'>Iniciar sesión</h1>
-                <form>
-                    <div>
-                        <Label attribute="mail" text="Correo electrónico"/>
-                        <Input
-                            attribute={{
-                            id:"mail",
-                            name:"mail",
-                            type:"text",
-                            placeholder:"Ingrese su correo electrónico"
-                            }}
-                            handleChange={handleChange}
-                        />
+                <div className='contenido'>
+                    <h1 className='titulo'>Iniciar sesión</h1>
+                    <Label attribute="mail" text="Correo electrónico"/>
+                    <Input
+                        attribute={{
+                        id:"mail",
+                        name:"mail",
+                        type:"text",
+                        placeholder:"Ingrese su correo electrónico"
+                        }}
+                        handleChange={handleChange}
+                    />
+                    <Label attribute="password" text="Contraseña"/>
+                    <Input
+                        attribute={{
+                        id:"password",
+                        name:"password",
+                        type:"password",
+                        placeholder:"Ingrese su contraseña"
+                        }}
+                        handleChange={handleChange}
+                        param={passwordError}
+                    />
+                    <div className='contendor-boton'>
+                        <button onClick={handleSubmit}>Ingresar</button>
                     </div>
-                    <div>
-                        <Label attribute="password" text="Contraseña"/>
-                        <Input
-                            attribute={{
-                            id:"password",
-                            name:"password",
-                            type:"password",
-                            placeholder:"Ingrese su contraseña"
-                            }}
-                            handleChange={handleChange}
-                            param={passwordError}
-                        />
-                    </div>
-                    <button onClick={handleSubmit}>Ingresar</button>
-                </form>
+                </div>
             </div>
   )
  
