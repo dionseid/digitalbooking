@@ -57,7 +57,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"\r",
 									"pm.test(\"The response has all properties\", () => {\r",
 									"    //parse the response JSON and test three properties\r",
 									"    const responseJson = pm.response.json();\r",
@@ -102,12 +101,25 @@
 				},
 				{
 					"name": "Actualizar Categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":52,\r\n    \"titulo\":\"Departamento\",\r\n    \"descripcion\":\"bueno\",\r\n    \"urlImg\":\"wwwalgocom\"\r\n}",
+							"raw": "{\r\n    \"id\":102,\r\n    \"titulo\":\"Departamento\",\r\n    \"descripcion\":\"bueno\",\r\n    \"urlImg\":\"wwwalgocom\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -146,8 +158,12 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
-							"raw": "http://localhost:8080/categorias/106",
+							"raw": "http://localhost:8080/categorias/169",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -155,7 +171,7 @@
 							"port": "8080",
 							"path": [
 								"categorias",
-								"106"
+								"169"
 							]
 						}
 					},
@@ -163,9 +179,30 @@
 				},
 				{
 					"name": "Listar Categorias",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"    pm.expect(jsonData).to.be.an(\"array\");\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8080/categorias",
 							"protocol": "http",
