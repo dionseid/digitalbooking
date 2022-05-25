@@ -1,13 +1,4 @@
-.navBar{
-    display: flex;  
-    justify-content: space-between;
-    align-items: center;
-    color: #F0572D;
-    background-color: #FFFF;
-    padding: 5px;
-  }
-  
-  .logoNavBar{
+/*   .logoNavBar{
     display: flex;
     padding: 10px;
     color:#282c34;
@@ -54,11 +45,4 @@
       visibility: visible;
     }
 
-    .navBar{
-      height:93px;
-      position: sticky;
-      z-index: 9999;
-      top: 0;
-    }
-
-  }
+  } */

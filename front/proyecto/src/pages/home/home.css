@@ -4,14 +4,14 @@
     box-sizing: border-box;
 }
 
-header{
+/* header{
     position: sticky;
     z-index: 9999;
     top: 0px;
-}
+} */
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
     header{
         position:inherit;
     }
-}
+} */

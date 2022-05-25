@@ -5,6 +5,10 @@
     color: #F0572D;
     background-color: #FFFF;
     padding: 5px;
+    top: 0;    
+    position: fixed !important;
+    width: 100%;
+    height: 80px;
   }
   
   .logoNavBar{
@@ -62,9 +66,10 @@
     }
 
     .navBar{
-      position: sticky;
-      z-index: 9999;
-      top: 0;
+      height:93px;
+     /*  top: 0;    
+      position: fixed !important;
+      width: 100%; */
     }
 
     .buttonNavBar{
