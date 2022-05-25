@@ -1,10 +1,10 @@
 import React from 'react';
-import Footer from '../../pages/home/components/footer/Footer';
+import Footer from '../home/components/footer/Footer';
+import "./account.css";
 import Form from './components/form/Form';
 import Header from './components/header/Header';
-import "./login.css";
 
-const Login = () =>{
+const Account = () =>{
 
     return(
         <>
@@ -21,4 +21,4 @@ const Login = () =>{
     )
 };
 
-export default Login;
+export default Account;

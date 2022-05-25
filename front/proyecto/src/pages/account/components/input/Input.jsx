@@ -10,7 +10,7 @@ const Input = ({attribute, handleChange, param})=>{
             name={attribute.name}
             placeholder={attribute.placeholder}
             type={attribute.type}
-            onChange={handleChange}
+            onChange={(e)=>handleChange(e.target.name, e.target.value)}
             className="regular-style"></input>
         </div>
     )
