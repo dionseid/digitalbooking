@@ -57,12 +57,14 @@
     .botones{
       visibility: hidden;
       align-items: flex-end;
-      position: absolute;
+      /* position: absolute; */
+
     }
 
     .menu{
       visibility: visible;
       font-size: 25px;
+      margin-right: 15px;
     }
 
     .navBar{
