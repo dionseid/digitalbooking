@@ -1,11 +1,9 @@
 import React from 'react';
-
-import './App.css';
-import Home from './pages/home/Home';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './pages/login/login';
-import Account from './pages/account/Account.js';
-
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Account from './pages/Account';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import './styles/App.css';
 
 function App() {
   return (
@@ -15,12 +13,15 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/account' element={<Account/>}/>
+<Route path='/login' element={ <> <Navigate to="/login" /> </> }/>
         </Routes>
       </BrowserRouter>
-
     </div>
   );
   
 }
 
 export default App;
+
+
+//<Route path='/login' element={ <> <Navigate to="/login" /> </> }/>
