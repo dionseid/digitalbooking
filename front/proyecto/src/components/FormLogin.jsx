@@ -1,22 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import { useForm } from './hooks/useForm';
 import {Formulario, Label, ContenedorBotonCentrado, Boton, MensajeError, Input} from './elementStyle/Form';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import "../styles/form.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons"
 import ComponenteInput from './ComponenteInput';
+import { useNavigate } from 'react-router-dom'; 
 
 
 
 const FormLogin = () => {
-    
-	const [nombre, cambiarNombre] = useState({campo: '', valido: null});
-    const [apellido, cambiarApellido] = useState({campo: '', valido: null});
     const [correo, cambiarCorreo] = useState({campo: '', valido: null});
 	const [password, cambiarPassword] = useState({campo: '', valido: null});
-	const [password2, cambiarPassword2] = useState({campo: '', valido: null});
 	const [formularioValido, cambiarFormularioValido] = useState(null);
+
+    const navigate = useNavigate();
 
 const expresiones = {
     password: /^.{6,15}$/, // 6 a 15 digitos.
@@ -33,7 +32,8 @@ const onSubmit = (e) => {
         cambiarFormularioValido(true);
         cambiarCorreo({campo: '', valido: null});
         cambiarPassword({campo: '', valido: null});
-        
+        navigate("/");
+       
 
         // ... 
     } else {
@@ -61,6 +61,7 @@ return (
                 cambiarEstado={cambiarPassword}
                 tipo="password"
                 label="Contraseña"
+                placeholder="Escriba su contraseña"
                 name="password1"
                 parrafoError="La contraseña tiene que tener más de 6 caracteres"
                 expresionRegular={expresiones.password}
