@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import { helpHttp } from '../../helpers/helpHttp';
 
 export const useForm = (initialForm, validateForm)=>{
     //variables de estado que controlan el formulario
@@ -26,6 +27,7 @@ export const useForm = (initialForm, validateForm)=>{
         setErrors(validateForm(form));
 
         if(Object.keys(errors).length===0 ){
+            alert("Enviando Formulario")
             setLoading(true);
         }else{
             return;

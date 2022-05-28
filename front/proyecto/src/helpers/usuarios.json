@@ -1,0 +1,24 @@
+{
+    "usuarios":[{
+        "id":1,
+        "mail": "dianasauval@hotmail.com",
+        "password": "123456"
+  },
+  {
+        "id": 2,
+        "mail": "alepantano@hotmail.com",
+        "password": "123456"
+  },
+  {
+        "id": 3,
+        "mail": "sofiamonasterio@hotmail.com",
+        "password": "123456"
+  },
+  {
+        "id": 4,
+        "mail": "dion.seid@hotmail.com",
+        "password": "123456"
+  }
+
+    ]
+}

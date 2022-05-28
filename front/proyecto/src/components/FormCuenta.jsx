@@ -1,177 +1,146 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useForm } from './hooks/useForm';
-import Label from './Label';
 import "../styles/form.css";
 import { Link } from 'react-router-dom';
+import {Formulario, Label, ContenedorBotonCentrado, Boton, MensajeExito, MensajeError, Input} from './elementStyle/Form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import ComponenteInput from './ComponenteInput';
 
-const initialForm = {
-    nombre:"",
-    apellido:"",
-    mail:"",
-    password:"",
-    repetirPassword:""
-};
 
-const  validationForm =(form) =>{
-    let errors ={};
 
-    //expresion regulares
-    let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
-    let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-    let regexPassword = /^.{6,15}$/;
+const FormCuenta = () => {
 
-    if (!form.nombre.trim()) {
-        errors.nombre = "El campo Nombre es requerido";
-      }else if (!regexName.test(form.nombre.trim())) {
-        errors.mail = "El campo Nombre solo acepta letras y espacios en blanco";
-      }
+	const [nombre, cambiarNombre] = useState({campo: '', valido: null});
+    const [apellido, cambiarApellido] = useState({campo: '', valido: null});
+    const [correo, cambiarCorreo] = useState({campo: '', valido: null});
+	const [password, cambiarPassword] = useState({campo: '', valido: null});
+	const [password2, cambiarPassword2] = useState({campo: '', valido: null});
+	const [formularioValido, cambiarFormularioValido] = useState(null);
 
-    if (!form.apellido.trim()) {
-        errors.apellido = "El campo Apellido es requerido";
-    }  
+const expresiones = {
+    nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+    password: /^.{6,15}$/, // 6 a 15 digitos.
+    correo: /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/  //coreo electrónico válido
+}
 
-    if (!form.mail.trim()) {
-        errors.mail = "El campo Email es requerido";
-      } else if (!regexEmail.test(form.mail.trim())) {
-        errors.mail = "El campo 'Email' es incorrecto";
-      }
-
-    if(!form.password.trim()){
-        errors.password = "El campo contraseña es requerido";
-    }else if(!regexPassword.test(form.password.trim())){
-        errors.password = "La contraseña debe tener más de 6 caracteres";
+const validarPassword2 = () => {
+    if(password.campo.length > 0){
+        if(password.campo !== password2.campo){
+            cambiarPassword2((prevState) => {
+                return {...prevState, valido: 'false'}
+            });
+        } else {
+            cambiarPassword2((prevState) => {
+                return {...prevState, valido: 'true'}
+            });
+        }
     }
-
-    if (!form.repetirPassword === form.password) {
-        errors.repetirPassword = "Las contraseñas no son iguales";
-    } 
-
-    return errors;
-}
-
-const initialDb={
-    id:null,
-    nombre:"",
-    apellido:"",
-    mail:"",
-    password:"",
-    repetirPassword:"",
 }
 
 
 
-const Form = () => {
-    const { 
-        form, 
-        errors, 
-        loading, 
-        response, 
-        handleChange, 
-        handleBlur, 
-        handleSubmit, 
-    } = useForm(initialForm, validationForm);
+const onSubmit = (e) => {
+    e.preventDefault();
 
-    const [db, setDb] = useState(initialDb);
-    
-  
-    const createData = (data) => {
-      data.id = Date.now();
-      //console.log(data);
-      setDb([...db, data]);
-    };
+    if(
+        nombre.valido === 'true' &&
+        apellido.valido === 'true' &&
+        correo.valido === 'true' &&
+        password.valido === 'true' &&
+        password2.valido === 'true' 
+    ){
+        cambiarFormularioValido(true);
+        cambiarNombre({campo: '', valido: null});
+        cambiarApellido({campo: '', valido: ''});
+        cambiarCorreo({campo: '', valido: null});
+        cambiarPassword({campo: '', valido: null});
+        cambiarPassword2({campo: '', valido: 'null'});
+        
 
- 
-  return (
-            <div className='contenedor'>
-                <form>
-                <div className='contenido'>
-                    <h1 className='titulo'>Iniciar sesión</h1>
-                    <div className='nombreCompleto'>
-                        <div className="nombre">
-                            <Label attribute="nombre" text="Nombre"/>
-                            <div className='input-contenedor'>
-                                <input
-                                    id='nombre'
-                                    type="text"
-                                    name="nombre"
-                                    placeholder="Escribe tu nombre"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={form.nombre}
-                                    required
-                                    className="regular-style"/>
-                            </div>
-                            {errors.nombre && <p className='parrafoError'>{errors.nombre}</p>}
-                        </div>
-                        <div className="nombre">
-                            <Label attribute="apellido" text="Apellido"/>
-                            <div className='input-contenedor'>
-                                <input
-                                    id='apellido'
-                                    type="text"
-                                    name="apellido"
-                                    placeholder="Escribe tu apellido"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={form.apellido}
-                                    required
-                                    className="regular-style"/>
-                            </div>
-                            {errors.apellido && <p className='parrafoError'>{errors.apellido}</p>}
-                        </div>
-                    </div>
-                    <Label attribute="mail" text="Correo electrónico"/>
-                    <div className='input-contenedor'>
-                                <input
-                                    id='mail'
-                                    type="mail"
-                                    name="mail"
-                                    placeholder="Escribe tu correo electrónico"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={form.mail}
-                                    required
-                                    className="regular-style"/>
-                    </div>
-                    {errors.mail && <p className='parrafoError'>{errors.mail}</p>}
-                    <Label attribute="password" text="Contraseña"/>
-                    <div className='input-contenedor'>
-                                <input
-                                    id='password'
-                                    type="password"
-                                    name="password"
-                                    placeholder="Escribe tu contraseña"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={form.password}
-                                    required
-                                    className="regular-style"/>
-                    </div>
-                    {errors.password && <p className='parrafoError'>{errors.password}</p>}
-                    <Label attribute="repetirPassword" text="Confirmar contraseña"/>
-                    <div className='input-contenedor'>
-                                <input
-                                    id='repetirPassword'
-                                    type="password"
-                                    name="repetirPassword"
-                                    placeholder="Repite tu contraseña"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={form.repetirPassword}
-                                    required
-                                    className="regular-style"/>
-                    </div>
-                    {errors.repetirPassword && <p className='parrafoError'>{errors.repetirPassword}</p>}
-                    <div className='contendor-boton'>
-                        <button onClick={handleSubmit}>Crear Cuenta</button>
-                        <p>¿Ya tienes una cuenta? <Link to='/login'><span>Iniciar sesión</span></Link></p>
-                    
-                    </div>
+        // ... 
+    } else {
+        cambiarFormularioValido(false);
+    }
+}
+
+return (
+    <div className='contenedor'>
+        <div className='contenido'>
+        <Formulario action="" onSubmit={onSubmit}>
+            <h1 className='titulo'>Crear Cuenta</h1>
+            <div className='nombreCompleto'>
+                <div className='nombre'>
+                <ComponenteInput
+                estado={nombre}
+                cambiarEstado={cambiarNombre}
+                tipo="text"
+                label="Nombre"
+                placeholder="Escriba su nombre"
+                name="nombre"
+                parrafoError="El apellido solo puede contener letras y espacios."
+                expresionRegular={expresiones.nombre}
+                />
                 </div>
-                </form>
+                <div className='nombre'>
+                <ComponenteInput
+                estado={apellido}
+                cambiarEstado={cambiarApellido}
+                tipo="text"
+                label="Apellido"
+                placeholder="Escriba su apellido"
+                name="apellido"
+                parrafoError="El apellido solo puede contener letras y espacios."
+                expresionRegular={expresiones.nombre}
+                />
+                </div>
             </div>
-  )
- 
-};
+            <ComponenteInput
+                estado={correo}
+                cambiarEstado={cambiarCorreo}
+                tipo="email"
+                label="Correo Electrónico"
+                placeholder="Escriba su correo electrónico"
+                name="correo"
+                parrafoError="Correo inválido"
+                expresionRegular={expresiones.correo}
+            /> 
+            <ComponenteInput
+                estado={password}
+                cambiarEstado={cambiarPassword}
+                tipo="password"
+                label="Contraseña"
+                name="password1"
+                parrafoError="La contraseña tiene que tener más de 6 caracteres"
+                expresionRegular={expresiones.password}
+            />
+            <ComponenteInput
+                estado={password2}
+                cambiarEstado={cambiarPassword2}
+                tipo="password"
+                label="Repetir Contraseña"
+                name="password2"
+                parrafoError="Ambas contraseñas deben ser iguales."
+                funcion={validarPassword2}
+            />
 
-export default Form;
+            {formularioValido === false && <MensajeError>
+                <p>
+                    <FontAwesomeIcon icon={faExclamationTriangle}/>
+                    <b>Error:</b> Por favor rellena el formulario correctamente.
+                </p>
+            </MensajeError>}
+            <ContenedorBotonCentrado>
+                <Boton type="submit">Crear Cuenta</Boton>
+                <p>¿Ya tienes una cuenta? <Link to='/login'><span>Iniciar sesión</span></Link></p>
+                {formularioValido === true && <MensajeExito>Formulario enviado exitosamente!</MensajeExito>}
+            </ContenedorBotonCentrado>
+        </Formulario>
+        </div>
+    </div>
+);
+
+}
+
+
+export default FormCuenta;
