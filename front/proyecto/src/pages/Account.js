@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from '../components/Footer';
 import "../styles/pages/account.css";
-import Form from '../components/FormCuenta';
+import FormCuenta from '../components/FormCuenta';
 import Header from '../components/Header';
 
 const Account = () =>{
@@ -12,7 +12,7 @@ const Account = () =>{
             <Header/>
         </header>
         <body>
-            <Form/>
+            <FormCuenta/>
         </body>
         <footer>
             <Footer/>

@@ -1,118 +1,87 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useForm } from './hooks/useForm';
-import Label from './Label';
-import "../styles/form.css";
+import {Formulario, Label, ContenedorBotonCentrado, Boton, MensajeError, Input} from './elementStyle/Form';
 import { Link } from 'react-router-dom';
-
-const initialForm = {
-    mail:"",
-    password:"",
-};
-
-const initialDb = [
-    {
-      id: 1,
-      mail: "dianasauval@hotmail.com",
-      password: "1234",
-    },
-    {
-      id: 2,
-      mail: "alepantano@hotmail.com",
-      password: "1234",
-    },
-    {
-      id: 3,
-      mail: "sofiamonasterio@hotmail.com",
-      password: "1234",
-    },
-    {
-      id: 4,
-      mail: "dion.seid@hotmail.com",
-      password: "1234",
-    },
-  ];
-
-const  validationForm =(form) =>{
-    let errors ={};
-
-    //expresion regular para email
-    let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-    let regexPassword = /^.{6,15}$/;
+import "../styles/form.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons"
+import ComponenteInput from './ComponenteInput';
 
 
-    if (!form.mail.trim()) {
-        errors.mail = "El campo Email es requerido";
-      } else if (!regexEmail.test(form.mail.trim())) {
-        errors.mail = "El campo Email es incorrecto";
-      }
 
-    if(!form.password.trim()){
-        errors.password = "El campo contraseña es requerido";
-    }else if(!regexPassword.test(form.password.trim())){
-        errors.password = "La contraseña debe tener más de 6 caracteres";
-    }
+const FormLogin = () => {
+    
+	const [nombre, cambiarNombre] = useState({campo: '', valido: null});
+    const [apellido, cambiarApellido] = useState({campo: '', valido: null});
+    const [correo, cambiarCorreo] = useState({campo: '', valido: null});
+	const [password, cambiarPassword] = useState({campo: '', valido: null});
+	const [password2, cambiarPassword2] = useState({campo: '', valido: null});
+	const [formularioValido, cambiarFormularioValido] = useState(null);
 
-    return errors;
+const expresiones = {
+    password: /^.{6,15}$/, // 6 a 15 digitos.
+    correo: /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/  //coreo electrónico válido
 }
 
-const Form = () => {
-    const { 
-        form, 
-        errors, 
-        loading, 
-        response, 
-        handleChange, 
-        handleBlur, 
-        handleSubmit, 
-    } = useForm(initialForm, validationForm);
+const onSubmit = (e) => {
+    e.preventDefault();
+
+    if(
+        correo.valido === 'true' &&
+        password.valido === 'true'
+    ){
+        cambiarFormularioValido(true);
+        cambiarCorreo({campo: '', valido: null});
+        cambiarPassword({campo: '', valido: null});
+        
+
+        // ... 
+    } else {
+        cambiarFormularioValido(false);
+    }
+}
+
+return (
+    <div className='contenedor'>
+        <div className='contenido'>
+        <Formulario action="" onSubmit={onSubmit}>
+            <h1 className='titulo'>Iniciar sesión</h1>
+            <ComponenteInput
+                estado={correo}
+                cambiarEstado={cambiarCorreo}
+                tipo="email"
+                label="Correo Electrónico"
+                placeholder="Escriba su correo electrónico"
+                name="correo"
+                parrafoError="Correo inválido"
+                expresionRegular={expresiones.correo}
+            /> 
+            <ComponenteInput
+                estado={password}
+                cambiarEstado={cambiarPassword}
+                tipo="password"
+                label="Contraseña"
+                name="password1"
+                parrafoError="La contraseña tiene que tener más de 6 caracteres"
+                expresionRegular={expresiones.password}
+            />
+            {formularioValido === false && <MensajeError>
+                <p>
+                    <FontAwesomeIcon icon={faExclamationTriangle}/>
+                    Credenciales Inválidas
+                </p>
+            </MensajeError>}
+            <ContenedorBotonCentrado>
+                <Boton type="submit">Ingresar</Boton>
+                <p>¿Aún no tenes cuenta? <Link to='/account'><span>Registrate</span></Link></p>
+            </ContenedorBotonCentrado>
+        </Formulario>
+        </div>
+    </div>
+);
+
+}
+   
 
 
-
-
- 
-  return (
-            <div className='contenedor'>
-                <form onSubmit={handleSubmit}>
-                <div className='contenido'>
-                    <h1 className='titulo'>Iniciar sesión</h1>
-                    <Label attribute="mail" text="Correo electrónico"/>
-                    <div className='input-contenedor'>
-                        <input
-                            id='mail'
-                            type="email"
-                            name="mail"
-                            placeholder="Escribe tu correo electrónico"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={form.mail}
-                            required
-                            className="regular-style"/>
-                    </div>
-                    {errors.mail && <p className='parrafoError'>{errors.mail}</p>}                    
-                    <Label attribute="password" text="Contraseña"/>
-                    <div className='input-contenedor'>
-                        <input
-                            id='password'
-                            type="password"
-                            name="password"
-                            placeholder="Escribe tu contraseña"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={form.password}
-                            required
-                            className="regular-style"
-                        />
-                    </div>
-                    {errors.password && <p className='parrafoError'>{errors.password}</p>}    
-                    <div className='contendor-boton'>
-                        <button onClick={handleSubmit}>Ingresar</button>
-                        <p>¿Aún no tenes cuenta? <Link to='/account'><span>Registrate</span></Link></p>
-                    </div>
-                </div>
-                </form>
-            </div>
-  )
- 
-};
-
-export default Form;
+export default FormLogin;
