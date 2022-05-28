@@ -28,9 +28,9 @@ const Banner = () => {
                     }} className='inputBanner'
                   />
                   </div>
-                  <div>
+
                     <button className='botonBanner'>Buscar</button>
-                  </div>
+
                 </div>
             </div>
     </>

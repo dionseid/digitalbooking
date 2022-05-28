@@ -30,7 +30,7 @@
 
 
   ::placeholder{
-    font-family: "Font Awesome 5 Free"; 
+    /* font-family: "Quicksand";  */
     font-weight: 900; 
   }
 
@@ -54,6 +54,8 @@
   @media screen and (max-width: 768px) {
     .buscador{
       flex-direction: column;
+      width : 100%;
+      align-items: stretch;
     }
 
     .banner{
@@ -68,7 +70,7 @@
 
     .inputBanner{
       margin-bottom: 10px;
-      max-width: 100%;
+      width: 100%;
     }
 
     .botonBanner{

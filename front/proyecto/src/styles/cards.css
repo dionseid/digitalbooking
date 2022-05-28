@@ -1,7 +1,7 @@
 .cards{
     display: flex;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: space-around;
     align-items: center;
     padding-top: 20px;
   }
@@ -27,7 +27,7 @@
     background-color: #F3F3F3;
     border-radius:8px;
     height:320px;
-    width:635px;  
+    /* width:635px; */  
   }
   
   .cardBody{
@@ -45,5 +45,22 @@
   }
   
   .cardRecomendacion .fondoImagen{
-    border-radius: 10px 0px 0 10px;
+    border-radius: 10px;
   }
+  
+
+  /*Responsive*/
+  @media screen and (max-width: 768px){
+    .cardRecomendacion{
+      flex-direction: column;
+      height:500px;
+      width: 90vw;
+      margin-bottom: 35px;      
+    }
+
+    .buttonCard{
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+

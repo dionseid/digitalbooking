@@ -16,8 +16,6 @@ const Home = () =>{
         <Banner/>
       </header>
       <body>
-      <p>afafafasfasfafafasf</p>
-      <p>afafafasfasfafafasf</p>
         <section className='Alojamiento'>
           <h2>Buscar por tipo de alojamiento</h2>
           <CardAlojamiento/>
