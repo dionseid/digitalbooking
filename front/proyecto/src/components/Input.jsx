@@ -15,7 +15,7 @@ const Input = ({attribute, handleChange, param})=>{
             className="regular-style">                
             </input>
             <FontAwesomeIcon icon={faCheckCircle} className="iconoValidacion"/>
-            <p>error</p>
+
         </div>
     )
 };
