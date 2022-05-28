@@ -3,6 +3,7 @@ import Input from '../components/Input';
 import "../styles/banner.css";
 
 
+
 const Banner = () => {
  
   return (
@@ -15,8 +16,8 @@ const Banner = () => {
                     id:"location",
                     name:"location",
                     type:"text",
-                    placeholder:" ¿A dónde vamos?"
-                    }} 
+                    placeholder:"¿A dónde vamos?"
+                    }}
                   />
                   </div>
                   <div className='inputBanner'>
@@ -24,7 +25,7 @@ const Banner = () => {
                     id:"location",
                     name:"location",
                     type:"text",
-                    placeholder:" Check in - Check out"
+                    placeholder:"Check in - Check out"
                     }} className='inputBanner'
                   />
                   </div>
