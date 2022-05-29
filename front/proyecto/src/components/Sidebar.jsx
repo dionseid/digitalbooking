@@ -3,7 +3,7 @@ import { slide as Menu } from 'react-burger-menu';
 import '../styles/sidebar.css';
 import '../styles/navbar.css';
 import { matchPath } from 'react-router';
-import { Link } from 'react-router-dom';
+import SocialIcons from './SocialIcons';
 
 const Sidebar = props => {
     const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
@@ -15,29 +15,21 @@ const Sidebar = props => {
             {isAuthenticatedMenu && <div>
                 <span>{props.username.split(' ')[0][0] + props.username.split(' ')[1][0]}</span>
                 <p>Hola,</p>
-                <p>{props.username}</p>
-            </div>}
-        </div>
+                <p>{props.username}</p></div>}</div>
         <div className='menu-main'>
             {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/') && <>
-                <p to='/account'>Crear cuenta</p>
+                <a className="menu-item" href="/account">Crear cuenta</a>
                 <br />
-                <p>Iniciar sesión</p>
-            </>}
-        </div>
-        <a className="menu-item" href="/">
-            Home
-        </a>
-        <a className="menu-item" href="/salads">
-            Salads
-        </a>
-        <a className="menu-item" href="/pizzas">
-            Pizzas
-        </a>
-        <a className="menu-item" href="/desserts">
-            Desserts
-        </a>
-    </Menu>;
+                <a className="menu-item" href="/login">Iniciar sesión</a></>}
+            {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/account') && <>
+                <a className="menu-item" href="/login">Iniciar sesión</a></>}
+            {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/login') && <>
+                <a className="menu-item" href="/account">Crear cuenta</a></>}</div>
+        <div>
+            {isAuthenticatedMenu && <>
+                <p>¿Deseas <a className="menu-item" href="/login">cerrar sesión</a>?</p>
+                <br /></>}
+            <SocialIcons /></div></Menu>;
 }
 
 export default Sidebar;
