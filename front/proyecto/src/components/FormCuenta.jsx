@@ -7,21 +7,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import ComponenteInput from './ComponenteInput';
 
+const initailForm = [
+    {
+      id: 1,
+      nombre: "Diana",
+      apellido: "Sauval",
+      email: "dianasauval@hotmail.com",
+      password:"123456"
+    }
+  ];
 
 
 const FormCuenta = () => {
 
 	const [nombre, cambiarNombre] = useState({campo: '', valido: null});
     const [apellido, cambiarApellido] = useState({campo: '', valido: null});
-    const [correo, cambiarCorreo] = useState({campo: '', valido: null});
+    const [email, cambiarCorreo] = useState({campo: '', valido: null});
 	const [password, cambiarPassword] = useState({campo: '', valido: null});
 	const [password2, cambiarPassword2] = useState({campo: '', valido: null});
 	const [formularioValido, cambiarFormularioValido] = useState(null);
+    const [form, setForm] = useState(initailForm);
+
+
 
 const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     password: /^.{6,15}$/, // 6 a 15 digitos.
-    correo: /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/  //coreo electrónico válido
+    email: /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/  //coreo electrónico válido
 }
 
 const validarPassword2 = () => {
@@ -40,22 +52,29 @@ const validarPassword2 = () => {
 
 
 
+
+
 const onSubmit = (e) => {
     e.preventDefault();
 
     if(
         nombre.valido === 'true' &&
         apellido.valido === 'true' &&
-        correo.valido === 'true' &&
+        email.valido === 'true' &&
         password.valido === 'true' &&
         password2.valido === 'true' 
     ){
         cambiarFormularioValido(true);
         cambiarNombre({campo: '', valido: null});
-        cambiarApellido({campo: '', valido: ''});
+        cambiarApellido({campo: '', valido: null});
         cambiarCorreo({campo: '', valido: null});
         cambiarPassword({campo: '', valido: null});
-        cambiarPassword2({campo: '', valido: 'null'});
+        cambiarPassword2({campo: '', valido: null});
+
+        localStorage.setItem(
+            "user",
+            JSON.stringify({ emailStorage: email, passwordStorage: password })
+          );
         
 
         // ... 
@@ -80,6 +99,8 @@ return (
                 name="nombre"
                 parrafoError="El apellido solo puede contener letras y espacios."
                 expresionRegular={expresiones.nombre}
+                value = {form.nombre}
+
                 />
                 </div>
                 <div className='nombre'>
@@ -92,33 +113,38 @@ return (
                 name="apellido"
                 parrafoError="El apellido solo puede contener letras y espacios."
                 expresionRegular={expresiones.nombre}
+                value = {form.apellido}
                 />
                 </div>
             </div>
             <ComponenteInput
-                estado={correo}
+                estado={email}
                 cambiarEstado={cambiarCorreo}
                 tipo="email"
                 label="Correo Electrónico"
                 placeholder="Escriba su correo electrónico"
-                name="correo"
+                name="email"
                 parrafoError="Correo inválido"
-                expresionRegular={expresiones.correo}
+                expresionRegular={expresiones.email}
+                value = {form.email}
             /> 
             <ComponenteInput
                 estado={password}
                 cambiarEstado={cambiarPassword}
                 tipo="password"
                 label="Contraseña"
+                placeholder="Escriba su contraseña"
                 name="password1"
                 parrafoError="La contraseña tiene que tener más de 6 caracteres"
                 expresionRegular={expresiones.password}
+                value = {form.password}
             />
             <ComponenteInput
                 estado={password2}
                 cambiarEstado={cambiarPassword2}
                 tipo="password"
                 label="Repetir Contraseña"
+                placeholder="Repita su contraseña"
                 name="password2"
                 parrafoError="Ambas contraseñas deben ser iguales."
                 funcion={validarPassword2}

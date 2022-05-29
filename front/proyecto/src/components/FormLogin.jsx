@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const FormLogin = () => {
-    const [correo, cambiarCorreo] = useState({campo: '', valido: null});
+    const [email, cambiarCorreo] = useState({campo: '', valido: null});
 	const [password, cambiarPassword] = useState({campo: '', valido: null});
 	const [formularioValido, cambiarFormularioValido] = useState(null);
 
@@ -19,19 +19,29 @@ const FormLogin = () => {
 
 const expresiones = {
     password: /^.{6,15}$/, // 6 a 15 digitos.
-    correo: /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/  //coreo electrónico válido
+    email: /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/  //coreo electrónico válido
 }
 
 const onSubmit = (e) => {
     e.preventDefault();
+    const data = JSON.parse(localStorage.getItem("user"));
+
+
+
+    const { emailStorage, passwordStorage } = data;
+
 
     if(
-        correo.valido === 'true' &&
-        password.valido === 'true'
+        email.valido === 'true' &&
+        password.valido === 'true' &&
+        email.campo === emailStorage.campo &&
+        password.campo === passwordStorage.campo
     ){
         cambiarFormularioValido(true);
         cambiarCorreo({campo: '', valido: null});
         cambiarPassword({campo: '', valido: null});
+        console.log(passwordStorage);
+        
         navigate("/");
        
 
@@ -47,14 +57,14 @@ return (
         <Formulario action="" onSubmit={onSubmit}>
             <h1 className='titulo'>Iniciar sesión</h1>
             <ComponenteInput
-                estado={correo}
+                estado={email}
                 cambiarEstado={cambiarCorreo}
                 tipo="email"
                 label="Correo Electrónico"
                 placeholder="Escriba su correo electrónico"
-                name="correo"
+                name="email"
                 parrafoError="Correo inválido"
-                expresionRegular={expresiones.correo}
+                expresionRegular={expresiones.email}
             /> 
             <ComponenteInput
                 estado={password}
