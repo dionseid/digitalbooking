@@ -2,21 +2,21 @@ import React from 'react';
 import Footer from '../components/Footer';
 import "../styles/pages/account.css";
 import FormCuenta from '../components/FormCuenta';
-import Header from '../components/Header';
+import Navbar from '../components/Navbar';
 
-const Account = () =>{
+const Account = () => {
 
-    return(
+    return (
         <>
-        <header>
-            <Header/>
-        </header>
-        <body>
-            <FormCuenta/>
-        </body>
-        <footer>
-            <Footer/>
-        </footer>
+            <header>
+                <Navbar />
+            </header>
+            <body>
+                <FormCuenta />
+            </body>
+            <footer>
+                <Footer />
+            </footer>
         </>
     )
 };

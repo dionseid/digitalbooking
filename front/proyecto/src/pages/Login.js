@@ -1,22 +1,22 @@
 import React from 'react';
 import Footer from '../components/Footer';
 import FormLogin from '../components/FormLogin';
-import Header from '../components/Header';
+import Navbar from '../components/Navbar';
 import "../styles/pages/login.css";
 
-const Login = () =>{
+const Login = () => {
 
-    return(
+    return (
         <>
-        <header>
-            <Header/>
-        </header>
-        <body>
-            <FormLogin/>
-        </body>
-        <footer>
-            <Footer/>
-        </footer>
+            <header>
+                <Navbar />
+            </header>
+            <body>
+                <FormLogin />
+            </body>
+            <footer>
+                <Footer />
+            </footer>
         </>
     )
 };
