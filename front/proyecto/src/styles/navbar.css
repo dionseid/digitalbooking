@@ -7,6 +7,7 @@
   padding: 5px;
   top: 0;
   position: fixed !important;
+  z-index: 999;
   width: 100vw;
   height: 80px;
 }
@@ -63,6 +64,7 @@ img {
     visibility: visible;
     font-size: 25px;
     margin-right: 15px;
+    z-index: 1000;
   } /* Quizás se podría sacar, ya que el menú hamburguesa ya no le usa */
 
   .navBar {

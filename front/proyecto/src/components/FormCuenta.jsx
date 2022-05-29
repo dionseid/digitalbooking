@@ -66,10 +66,10 @@ const onSubmit = (e) => {
     ){
         cambiarFormularioValido(true);
         cambiarNombre({campo: '', valido: null});
-        cambiarApellido({campo: '', valido: ''});
+        cambiarApellido({campo: '', valido: null});
         cambiarCorreo({campo: '', valido: null});
         cambiarPassword({campo: '', valido: null});
-        cambiarPassword2({campo: '', valido: 'null'});
+        cambiarPassword2({campo: '', valido: null});
 
         localStorage.setItem(
             "user",
