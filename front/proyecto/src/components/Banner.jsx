@@ -3,8 +3,6 @@ import Input from '../components/Input';
 import "../styles/banner.css";
 
 const Banner = () => {
-  const [displayPicker, setDisplayPicker] = useState(false);
-
   return (
     <div className='banner'>
       <h1>Busca ofertas en hoteles, casas y mucho más</h1>

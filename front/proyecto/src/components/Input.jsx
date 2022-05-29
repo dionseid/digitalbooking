@@ -5,7 +5,7 @@ import 'bootstrap-daterangepicker/daterangepicker.css';
 import "../styles/banner.css";
 
 const Input = ({ attribute, handleChange, param, isInputWithCalendar }) => {
-    const [calendarMonth, setCalendarMonth] = useState("");
+    // const [calendarMonth, setCalendarMonth] = useState("");
 
     // useEffect(() => {
     //     if (document.querySelector('th.month')) {
@@ -22,7 +22,7 @@ const Input = ({ attribute, handleChange, param, isInputWithCalendar }) => {
 
     const handleCancel = (event, picker) => picker.element.val('');
 
-    const formatMonth = () => setCalendarMonth(document.querySelector('th.month').innerText.split(" ")[0]);
+    // const formatMonth = () => setCalendarMonth(document.querySelector('th.month').innerText.split(" ")[0]);
 
     return <div className='input-contenedor'>
         {isInputWithCalendar && <DateRangePicker
@@ -58,8 +58,8 @@ const Input = ({ attribute, handleChange, param, isInputWithCalendar }) => {
                 cancelButtonClasses: 'hide',
 
             }} onApply={handleApply}
-            onCancel={handleCancel}
-            onShow={formatMonth} >
+            // onShow={formatMonth}
+            onCancel={handleCancel} >
             <input
                 {...attribute}
                 className="regular-style calendar-input" />
