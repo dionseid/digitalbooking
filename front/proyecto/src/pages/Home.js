@@ -7,29 +7,29 @@ import Banner from '../components/Banner';
 import "../styles/pages/home.css";
 
 
-const Home = () =>{
-    return(
-      <>
+const Home = () => {
+  return (
+    <div id="page-wrap">
       <header>
-        
-        <Navbar/>
-        <Banner/>
+
+        <Navbar />
+        <Banner />
       </header>
       <body>
         <section className='Alojamiento'>
           <h2>Buscar por tipo de alojamiento</h2>
-          <CardAlojamiento/>
+          <CardAlojamiento />
         </section>
         <section className='Recomendaciones'>
           <h2>Recomendaciones</h2>
-          <CardRecomendacion/>
+          <CardRecomendacion />
         </section>
       </body>
-    <footer>
-        <Footer/>
-    </footer>
-      </>
-    )
+      <footer>
+        <Footer />
+      </footer>
+    </div>
+  )
 }
 
 export default Home;

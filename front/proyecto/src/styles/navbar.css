@@ -1,78 +1,77 @@
-.navBar{
-    display: flex;  
-    justify-content: space-between;
-    align-items: center;
-    color: #F0572D;
-    background-color: #FFFF;
-    padding: 5px;
-    top: 0;    
-    position: fixed !important;
-    width: 100vw;
-    height: 80px;
-  }
-  
-  .logoNavBar{
-    display: flex;
-    padding: 10px;
-    color:#282c34;
-    align-items: center;
-  }
-  
-  .parrafoNavBar{
-    font-style: italic;
-    font-weight: 300;
-    font-size: 20px;
-  }
-  
-  .buttonNavBar{
-    background-color: #DFE4EA;
-    color: #F0572D;
-    padding: 5px 20px;
-    font-weight: 700;
-    font-size: 16px;
-    background: #FFFFFF;
-    border: 1px solid #F0572D;
-    border-radius: 5px;
-    margin: 5px;
-  }
-  
-  .botones{
-    display: flex;
-    padding: 0px;
-  }
-  
-  img{
-    padding: 10px;
-  }
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #f0572d;
+  background-color: #ffff;
+  padding: 5px;
+  top: 0;
+  position: fixed !important;
+  width: 100vw;
+  height: 80px;
+}
 
-  .menu{
+.logoNavBar {
+  display: flex;
+  padding: 10px;
+  color: #282c34;
+  align-items: center;
+}
+
+.parrafoNavBar {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.buttonNavBar {
+  background-color: #dfe4ea;
+  color: #f0572d;
+  padding: 5px 20px;
+  font-weight: 700;
+  font-size: 16px;
+  background: #ffffff;
+  border: 1px solid #f0572d;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.botones {
+  display: flex;
+  padding: 0px;
+}
+
+img {
+  padding: 10px;
+}
+
+.menu {
+  visibility: hidden;
+} /* Quizás se podría sacar, ya que el menú hamburguesa ya no le usa */
+
+@media screen and (max-width: 768px) {
+  .parrafoNavBar {
     visibility: hidden;
   }
 
-  @media screen and (max-width: 768px) {
-    .parrafoNavBar{
-      visibility:hidden;
-    }
-
-    .botones{
-      visibility: hidden;
-      align-items: flex-end;
-    }
-
-    .menu{
-      visibility: visible;
-      font-size: 25px;
-      margin-right: 15px;
-    }
-
-    .navBar{
-      height:93px;
-    }
-
-    .buttonNavBar{
-      width: 0%;
-      display: none;
-      visibility:hidden;
-    }
-
+  .botones {
+    visibility: hidden;
+    align-items: flex-end;
   }
+
+  .menu {
+    visibility: visible;
+    font-size: 25px;
+    margin-right: 15px;
+  } /* Quizás se podría sacar, ya que el menú hamburguesa ya no le usa */
+
+  .navBar {
+    height: 93px;
+  }
+
+  .buttonNavBar {
+    width: 0%;
+    display: none;
+    visibility: hidden;
+  }
+}
