@@ -7,13 +7,13 @@ import "../styles/banner.css";
 const Input = ({ attribute, handleChange, param, isInputWithCalendar }) => {
     const [calendarMonth, setCalendarMonth] = useState("");
 
-    useEffect(() => {
-        if (document.querySelector('th.month')) {
-            console.log(calendarMonth);
-            document.querySelector('th.month').dangerouslySetInnerHTML = calendarMonth;
-            document.querySelector('h1').innerHTML = "Testing";
-        }
-    }, [calendarMonth]);
+    // useEffect(() => {
+    //     if (document.querySelector('th.month')) {
+    //         console.log(calendarMonth);
+    //         document.querySelector('th.month').dangerouslySetInnerHTML = calendarMonth;
+    //         document.querySelector('h1').innerHTML = "Testing";
+    //     }
+    // }, [calendarMonth]); // El objetivo de este hook es formatear el calendario para que muestre el mes sin el año
 
     const handleApply = (event, picker) => {
         const formatter = date => date.format('DD') + ' de ' + new Date(picker.startDate.format('MM')).toLocaleDateString('es-ES', { month: 'short' }) + '.';
