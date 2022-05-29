@@ -1,7 +1,7 @@
 .cards{
     display: flex;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: space-around;
     align-items: center;
     padding-top: 20px;
   }
@@ -27,8 +27,46 @@
     background-color: #F3F3F3;
     border-radius:8px;
     height:320px;
-    width:635px;  
+    
   }
+
+  .hotel{
+    font-weight: lighter;
+    font-size: 14px;
+  }
+  .estrella, .mostrarMapa, .mas{
+    color: #F0572D;
+    font-weight: bold;
+  }
+.nombreHotel{
+  font-size: 24px;
+  font-weight: 700;
+}
+  .presentacion{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .infoHotel{
+    margin: 10px 0;
+  }
+  .calificacion{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+  .puntaje{
+    background-color: #F0572D;
+    padding: 3px;
+    border: solid 6px #F0572D;
+    border-radius: 9px;
+    color: white;
+    font-weight: bolder;
+    font-size: 20px;
+  }
+
   
   .cardBody{
     padding: 10px;
@@ -39,11 +77,42 @@
   .fondoImagen{
     height:100%;
     width: 100%;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px;
     background-repeat: no-repeat;
     background-size: cover;
   }
   
   .cardRecomendacion .fondoImagen{
-    border-radius: 10px 0px 0 10px;
+    border-radius: 10px;
   }
+
+
+  /*Responsive*/
+  @media screen and (max-width: 768px){
+    .cardRecomendacion{
+      flex-direction: column;
+      height:500px;
+      width: 90vw;
+      margin-bottom: 35px;      
+    }
+
+    .buttonCard{
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .iconosInfoHotel{
+      display:none;
+    }
+  }
+
+@media screen and (min-width: 769px){
+  .cardRecomendacion{
+    width: 635px;
+    margin-bottom: 50px;
+  }
+
+  .cardAlojamiento{
+    width: 20vw;
+  }
+}

@@ -19,7 +19,7 @@ const Navbar = () => {
                 <div className='botones'>                    
                     <button className='buttonNavBar'>Crear cuenta</button>
                     <button className='buttonNavBar'>Iniciar Sesión</button>
-                    <div><FontAwesomeIcon icon={faBars} className="menu"/></div>                    
+                    <FontAwesomeIcon icon={faBars} className="menu"/>                    
                 </div>
             </div>
     </>

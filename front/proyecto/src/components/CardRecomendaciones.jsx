@@ -19,17 +19,19 @@ class CardRecomendacion extends React.Component{
                         <div className="cardBody">
                             <div className="presentacion">
                                 <div>
-                                    <p>HOTEL <FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/></p>
-                                    <h3>{card.titulo}</h3>
+                                    <p className="hotel">HOTEL <FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/></p>
+                                    <h3 className="nombreHotel">{card.titulo}</h3>
                                 </div>
-                                <div>
+                                <div className="calificacion">
                                     <span className="puntaje">{card.puntaje}</span>
                                     <p style={{fontWeight: "700"}}>{card.calificacion}</p>
                                 </div>
-                            </div>                            
-                            <p><FontAwesomeIcon icon={faLocationDot} style={{marginRight:"4px"}}/>{card.ubicacion} <span>MOSTRAR EN EL MAPA</span></p>
-                            <p><FontAwesomeIcon icon={faWifi} style={{marginRight:"8px"}}/><FontAwesomeIcon icon={faPersonSwimming}/></p>
-                            <p>{card.parrafo} <span>más...</span></p>
+                            </div>
+                            <div className="infoHotel">                            
+                            <p><FontAwesomeIcon icon={faLocationDot} style={{marginRight:"4px"}}/>{card.ubicacion} <span className="mostrarMapa">MOSTRAR EN EL MAPA</span></p>
+                            <p className="iconosInfoHotel"><FontAwesomeIcon icon={faWifi} style={{marginRight:"8px"}}/><FontAwesomeIcon icon={faPersonSwimming}/></p>
+                            </div>
+                            <p>{card.parrafo} <span className="mas">más...</span></p>
                             <button className="buttonCard">ver más</button>
                         </div>
                     </div>

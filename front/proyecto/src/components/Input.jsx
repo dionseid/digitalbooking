@@ -71,3 +71,4 @@ const Input = ({ attribute, handleChange, param, isInputWithCalendar }) => {
 }
 
 export default Input;
+

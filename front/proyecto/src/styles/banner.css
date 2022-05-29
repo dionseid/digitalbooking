@@ -78,9 +78,44 @@ h1 {
     padding: 5px;
   }
 
+  .inputBanner ::placeholder {
+    font: "Quicksand";
+    font-weight: normal;
+  }
+
+  .botonBanner {
+    width: 100%;
+  }
+
+  .buscador {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 10px 25px 10px;
+    max-width: 85%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .buscador {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .banner {
+    height: 263px;
+    margin-top: 93px;
+  }
+
+  h1 {
+    font-size: 30px;
+    padding: 5px;
+  }
+
   .inputBanner {
     margin-bottom: 10px;
-    max-width: 100%;
+    width: 100%;
   }
 
   .botonBanner {
