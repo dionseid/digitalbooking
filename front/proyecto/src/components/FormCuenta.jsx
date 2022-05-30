@@ -156,9 +156,9 @@ return (
                     <b>Error:</b> Por favor rellena el formulario correctamente.
                 </p>
             </MensajeError>}
-            <ContenedorBotonCentrado>
+            <ContenedorBotonCentrado className='contenedorBotonCentrado'>
                 <Boton type="submit">Crear Cuenta</Boton>
-                <p>¿Ya tienes una cuenta? <Link to='/login'><span>Iniciar sesión</span></Link></p>
+                <p>¿Ya tienes una cuenta? <Link to='/login' className='link'><span>Iniciar sesión</span></Link></p>
                 {formularioValido === true && <MensajeExito>Formulario enviado exitosamente!</MensajeExito>}
             </ContenedorBotonCentrado>
         </Formulario>
