@@ -31,23 +31,17 @@ variable "main_vpc_cidr" {
 variable "public_subnets" {
   description = "subredes con acceso a internet"
   type        = list(string)
-  #default     = ["10.0.0.0/24", "10.0.1.0/24"]
+  default     = ["10.0.0.0/24", "10.0.1.0/24"]
 }
 
 variable "private_subnets" {
   description = "subredes privadas para uso de los servidores web"
   type        = list(string)
-  #default     = ["10.0.2.0/24", "10.0.3.0/24"]
+  default     = ["10.0.2.0/24", "10.0.3.0/24"]
 }
 
 variable "database_subnets" {
   description = "subredes para la BD, sin acceso de entrada desde internet"
   type        = list(string)
-  #default     = ["10.0.4.0/24", "10.0.5.0/24"]
-}
-
-variable "subnet_suffixes" {
-  description = "Suffix to add to subnet name"
-  type        = list(string)
-  default     = ["a", "b", "c", "d"]
+  default     = ["10.0.4.0/24", "10.0.5.0/24"]
 }

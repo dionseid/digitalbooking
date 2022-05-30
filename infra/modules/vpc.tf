@@ -4,7 +4,7 @@ module "vpc" {
   name = "g8-vpc"
   cidr = var.main_vpc_cidr
 
-  azs              = var.azs # Me va a crear cada subnet en su correspondiente AZ?
+  azs              = var.azs
   public_subnets   = var.public_subnets
   private_subnets  = var.private_subnets
   database_subnets = var.database_subnets
