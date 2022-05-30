@@ -3,7 +3,7 @@ import { slide as Menu } from 'react-burger-menu';
 import '../styles/sidebar.css';
 import '../styles/navbar.css';
 import { matchPath } from 'react-router';
-import SocialIcons from './SocialIcons';
+import SocialIconsSidebar from './SocialIconsSidebar';
 
 const Sidebar = props => {
     const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
@@ -30,7 +30,7 @@ const Sidebar = props => {
             {isAuthenticatedMenu && <>
                 <p>¿Deseas <a className="menu-item" href="/login">cerrar sesión</a>?</p>
                 <br /></>}
-            <SocialIcons/></div>
+            <SocialIconsSidebar/></div>
         </div>
         </Menu>;
         
