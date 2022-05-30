@@ -6,16 +6,34 @@ import { matchPath } from 'react-router';
 import SocialIcons from './SocialIcons';
 
 const Sidebar = props => {
-    const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
+    const data = JSON.parse(localStorage.getItem("user"));
+    const { nombreStorage, apellidoStorage } = data;
+    const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(true);
+    const [isLog, setIsLog] = useState(false);
+    
+    const handleClick = () => {
+        if (nombreStorage.campo !== null && apellidoStorage.campo!== null) {
+            setIsLog(true); 
+        }
+
+    }
+    
+/*     if (nombreStorage.campo && apellidoStorage.campo) {
+            setIsLog(true);        
+    } */
+    
+
+
+   
     useEffect(() => setIsAuthenticatedMenu(props.authenticated), [props.authenticated]);
 
-    return <Menu right>
+    return <Menu right onStateChange={handleClick}>
         <div className='upper-colored-box'>
-            {!isAuthenticatedMenu && <span className='menu'>MENU</span>}
-            {isAuthenticatedMenu && <div>
-                <span>{props.username.split(' ')[0][0] + props.username.split(' ')[1][0]}</span>
-                <p>Hola,</p>
-                <p>{props.username}</p></div>}</div>
+            {!isLog && <span className='menu'>MENU</span>}
+            {isLog && <div>
+                {<span>{/* {nombreStorage.campo.split(' ')[1][0] + apellidoStorage.campo.split(' ')[1][0]} */}</span>}
+                <span>Hola,</span>
+                <p>{nombreStorage.campo}</p></div>}</div>
         <div className="menuConFooter">
         <div className='menu-main'>
             {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/') && <>

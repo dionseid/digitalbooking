@@ -73,7 +73,7 @@ const onSubmit = (e) => {
 
         localStorage.setItem(
             "user",
-            JSON.stringify({ emailStorage: email, passwordStorage: password })
+            JSON.stringify({ nombreStorage: nombre, apellidoStorage: apellido, emailStorage: email, passwordStorage: password })
           );
         
 
