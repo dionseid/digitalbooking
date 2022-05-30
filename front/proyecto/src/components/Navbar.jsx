@@ -20,8 +20,8 @@ const Navbar = () => {
           <p className='parrafoNavBar'>Sentite como en tu hogar</p>
         </div>
         <div className='botones'>
-          <button className='buttonNavBar'>Crear cuenta</button>
-          <button className='buttonNavBar'>Iniciar Sesión</button>
+          <Link to='/account'><button className='buttonNavBar'>Crear cuenta</button></Link>
+          <Link to='/login'><button className='buttonNavBar'>Iniciar Sesión</button></Link>
           {/* <FontAwesomeIcon icon={faBars} className="menu" onClick={() => setShowSidebar(true)} />
           {showSidebar && <Sidebar />} */}
 

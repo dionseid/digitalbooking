@@ -1,7 +1,29 @@
+/* El colorido cuadrado superior del sidebar que contiene el botón para cerrar */
 .upper-colored-box {
-} /* El colorido cuadrado superior del sidebar que contiene el botón para cerrar */
+  background-color:#F0572D;
+  width:300px;
+  height:25vh;
+} 
 
 .menu-main {
+  display: flex;
+  flex-direction: column;
+  margin-right:15px;
+  margin-top: 23px;
+  
+}
+.menu{
+  margin-right: 10px;
+  margin-bottom: 6px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.menu-item{
+  text-decoration: none;
+    color: #383B58;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 /* Position and sizing of burger button */
@@ -32,7 +54,7 @@
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: #bdc3c7;
+  background: #dfe4ea;;
 }
 
 /*
@@ -46,11 +68,18 @@
 
 /* General sidebar styles */
 .bm-menu {
-  background: #373a47;
+  background: #FFFFFF;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
+  padding:0;
 }
 
+.menuConFooter{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between !important;
+  height: 75vh;
+}
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
   fill: #373a47;
@@ -58,13 +87,19 @@
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: #b8b7ad;
+  color: #dfe4ea;;
   padding: 0.8em;
+  padding:0;
+
+  
 }
 
 /* Individual item */
 .bm-item {
-  display: inline-block;
+
+  display: flex !important;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 /* Styling of overlay */
