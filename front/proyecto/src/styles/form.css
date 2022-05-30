@@ -18,6 +18,7 @@ h1{
 
 .titulo{
     color: #F0572D;
+    margin: 15px;
 }
 
 
@@ -31,6 +32,10 @@ h1{
     text-align: start;
     margin: auto;
 
+}
+
+::placeholder{
+    font-style:italic;
 }
 
 button{
@@ -64,7 +69,8 @@ button{
     text-align: center;
 }
 
-.contendor-boton a{
+.contenedorBotonCentrado span, 
+.link{
     text-decoration: none;
     color: #F0572D;
     font-weight: bold;

@@ -11,11 +11,12 @@ const Sidebar = props => {
 
     return <Menu right>
         <div className='upper-colored-box'>
-            {!isAuthenticatedMenu && <span>MENU</span>}
+            {!isAuthenticatedMenu && <span className='menu'>MENU</span>}
             {isAuthenticatedMenu && <div>
                 <span>{props.username.split(' ')[0][0] + props.username.split(' ')[1][0]}</span>
                 <p>Hola,</p>
                 <p>{props.username}</p></div>}</div>
+        <div className="menuConFooter">
         <div className='menu-main'>
             {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/') && <>
                 <a className="menu-item" href="/account">Crear cuenta</a>
@@ -29,7 +30,10 @@ const Sidebar = props => {
             {isAuthenticatedMenu && <>
                 <p>¿Deseas <a className="menu-item" href="/login">cerrar sesión</a>?</p>
                 <br /></>}
-            <SocialIcons /></div></Menu>;
+            <SocialIcons/></div>
+        </div>
+        </Menu>;
+        
 }
 
 export default Sidebar;

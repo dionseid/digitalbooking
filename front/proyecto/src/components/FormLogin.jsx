@@ -82,9 +82,9 @@ return (
                     Credenciales Inválidas
                 </p>
             </MensajeError>}
-            <ContenedorBotonCentrado>
+            <ContenedorBotonCentrado className='contenedorBotonCentrado'>
                 <Boton type="submit">Ingresar</Boton>
-                <p>¿Aún no tenes cuenta? <Link to='/account'><span>Registrate</span></Link></p>
+                <p>¿Aún no tenes cuenta? <Link to='/account' className='link'><span>Registrate</span></Link></p>
             </ContenedorBotonCentrado>
         </Formulario>
         </div>

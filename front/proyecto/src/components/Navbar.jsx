@@ -3,6 +3,7 @@ import "../styles/navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from './Sidebar';
+import { Link } from 'react-router-dom';
 
 
 const image = require("../components/assets/logo.png");
@@ -15,13 +16,12 @@ const Navbar = () => {
     <>
       <div className='navBar'>
         <div className='logoNavBar'>
-          <img src={image} alt='logo' />
+          <Link to='/'><img src={image} alt='logo' /></Link>
           <p className='parrafoNavBar'>Sentite como en tu hogar</p>
         </div>
         <div className='botones'>
-          <div className='buttonCrearCuenta'><button className='buttonNavBar'>Crear cuenta</button></div>
-          
-          <div className='buttonIniciarSesion'><button className='buttonNavBar'>Iniciar Sesión</button></div>
+          <Link to='/account'><button className='buttonNavBar'>Crear cuenta</button></Link>
+          <Link to='/login'><button className='buttonNavBar'>Iniciar Sesión</button></Link>
           {/* <FontAwesomeIcon icon={faBars} className="menu" onClick={() => setShowSidebar(true)} />
           {showSidebar && <Sidebar />} */}
 

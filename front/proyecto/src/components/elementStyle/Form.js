@@ -16,6 +16,7 @@ const Label = styled.label`
 	font-weight: 700;
 	padding: 10px;
 	min-height: 40px;
+	
 	${props => props.valido === 'false' && css`
 		color: ${colores.error};
 	`}
@@ -25,6 +26,7 @@ const GrupoInput = styled.div`
 	width: 100%;
 	position: relative;
 	z-index: 90;
+	margin-top: 5px;
 `;
 
 const Input = styled.input`
@@ -119,6 +121,8 @@ const Boton = styled.button`
 	}
 `;
 
+
+
 const MensajeExito = styled.p`
 	margin-top:10px;
 	height: 45px;
@@ -162,5 +166,6 @@ export {
 	ContenedorBotonCentrado,
 	Boton,
 	MensajeExito,
-	MensajeError
+	MensajeError,
+
 };

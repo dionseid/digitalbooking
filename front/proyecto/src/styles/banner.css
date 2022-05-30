@@ -38,6 +38,25 @@
   display: none;
 }
 
+.daterangepicker td.active,
+.daterangepicker td.in-range{
+  background-color:#F0572D;
+  color:white;
+  font-weight:bold
+}
+.daterangepicker .drp-buttons .btn {
+  margin-left: 0;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 8px;
+  width: 100%;
+}
+
+
+/* .daterangepicker td.start-date{
+  border-radius: 25px;
+} */
+
 th.month {
   /* display: none; */
   /* content: " "; */
