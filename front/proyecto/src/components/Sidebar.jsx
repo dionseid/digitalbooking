@@ -4,50 +4,61 @@ import '../styles/sidebar.css';
 import '../styles/navbar.css';
 import { matchPath } from 'react-router';
 import SocialIconsSidebar from './SocialIconsSidebar';
+import { useLocation } from 'react-router-dom';
 
-const Sidebar = props => {
-    const data = JSON.parse(localStorage.getItem("user"));
-    const { nombreStorage, apellidoStorage } = data;
+const Sidebar = ({authenticated, username}) => {
     const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
+    useEffect(() => setIsAuthenticatedMenu(authenticated), [authenticated]);
+    const { pathname } = useLocation();
 
-       
-    useEffect(() => setIsAuthenticatedMenu(false), [props.authenticated]);
+    const buttonsView = {
+        '/': <>
+            <a className="menu-item" href="/account">Crear cuenta</a>
+            <br />
+            <a className="menu-item" href="/login">Iniciar sesión</a>
+        </>,
+        '/account': <><a className="menu-item" href="/login">Iniciar sesión</a></>,
+        '/login': <>
+            <a className="menu-item" href="/account">Crear cuenta</a></>
+    }
 
-    return <Menu right>
-        <div className='upper-colored-box'>
-            {!isAuthenticatedMenu && <span className='menu'>MENU</span>}
-            {isAuthenticatedMenu && <div className='bienvenida'>
-                {<span>{nombreStorage.campo.charAt(0) + apellidoStorage.campo.charAt(0)}</span>}
-                <span>Hola,</span>
-                <p>{nombreStorage.campo + " " + apellidoStorage.campo}</p></div>}
-        </div>
-        <div className="menuConFooter">
-            <div className='menu-main'>
-                {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/') && 
-                    <>
-                    <a className="menu-item" href="/account">Crear cuenta</a>
-                    <br />
-                    <a className="menu-item" href="/login">Iniciar sesión</a>
-                    </>}
-                {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/account') && <>
-                    <a className="menu-item" href="/login">Iniciar sesión</a></>}
-                {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/login') && 
+    const handleIsAuthMenu = () => {
+        if (isAuthenticatedMenu) {
+            return (
                 <>
-                <a className="menu-item" href="/account">Crear cuenta</a>
-                <br />
-                <a className="menu-item" href="/login">Iniciar sesión</a></>}
-            {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/account') && <>
-                <a className="menu-item" href="/login">Iniciar sesión</a></>}
-            {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/login') && <>
-                <a className="menu-item" href="/account">Crear cuenta</a></>}</div>
-        <div>
-            {isAuthenticatedMenu && <>
-                <p>¿Deseas <a className="menu-item" href="/login">cerrar sesión</a>?</p>
-                <br /></>}
-            <SocialIconsSidebar/></div>
-        </div>
-        </Menu>;
-        
+                    <p>¿Deseas <a className="menu-item" href="/login">cerrar sesión</a>?</p>
+                    <br />
+                </>
+            );
+        } else {
+            return buttonsView[pathname];
+        }
+    }
+
+    return (
+        <Menu right>
+            <div className='upper-colored-box'>
+                {isAuthenticatedMenu ?
+                    <>
+                        <span>{username.slice(2)}</span>
+                        <p>Hola,</p>
+                        <p>{username}</p>
+                    </>
+                    :
+                    <span className='menu'>MENU</span>
+                }
+            </div>
+            <div className="menuConFooter">
+                <div className='menu-main'>
+                    {handleIsAuthMenu()}
+                </div>
+                <div>
+                    <SocialIconsSidebar />
+                </div>
+            </div>
+        </Menu>
+    )
+
 }
 
 export default Sidebar;

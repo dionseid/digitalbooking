@@ -12,13 +12,12 @@ const username = "Bruno Rodríguez" // hardcodeade: Habrá que consultar a la BD
 function App() {
   return (
     <div className="App">
-      <Sidebar pageWrapId={'page-wrap'} authenticated={jWT ? true : false} username={username} />
       <BrowserRouter>
+      <Sidebar pageWrapId={'page-wrap'} authenticated={jWT} username={username} />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/account' element={<Account />} />
-          <Route path='/login' element={<> <Navigate to="/login" /> </>} />
         </Routes>
       </BrowserRouter>
     </div>
