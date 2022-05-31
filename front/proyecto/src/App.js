@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import './styles/App.css';
 import Sidebar from './components/Sidebar';
+import Productos from './pages/Productos';
 
 const jWT = sessionStorage.getItem('jwt');
 const username = "Bruno Rodríguez" // hardcodeade: Habrá que consultar a la BD
@@ -18,6 +19,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/account' element={<Account />} />
+          <Route path='/productos' element={<Productos />} />
         </Routes>
       </BrowserRouter>
     </div>
