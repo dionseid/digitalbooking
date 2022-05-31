@@ -25,7 +25,7 @@
   font-size: 20px;
 }
 
-.buttonNavBar {
+.buttonNavBarAccount, .buttonNavBarLogin {
   background-color: #dfe4ea;
   color: #f0572d;
   padding: 5px 20px;

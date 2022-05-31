@@ -3,37 +3,62 @@ import { slide as Menu } from 'react-burger-menu';
 import '../styles/sidebar.css';
 import '../styles/navbar.css';
 import { matchPath } from 'react-router';
-import SocialIcons from './SocialIcons';
+import SocialIconsSidebar from './SocialIconsSidebar';
+import { useLocation } from 'react-router-dom';
 
-const Sidebar = props => {
+const Sidebar = ({authenticated, username}) => {
     const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
-    useEffect(() => setIsAuthenticatedMenu(props.authenticated), [props.authenticated]);
+    useEffect(() => setIsAuthenticatedMenu(authenticated), [authenticated]);
+    const { pathname } = useLocation();
 
-    return <Menu right>
-        <div className='upper-colored-box'>
-            {!isAuthenticatedMenu && <span className='menu'>MENU</span>}
-            {isAuthenticatedMenu && <div>
-                <span>{props.username.split(' ')[0][0] + props.username.split(' ')[1][0]}</span>
-                <p>Hola,</p>
-                <p>{props.username}</p></div>}</div>
-        <div className="menuConFooter">
-        <div className='menu-main'>
-            {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/') && <>
-                <a className="menu-item" href="/account">Crear cuenta</a>
-                <br />
-                <a className="menu-item" href="/login">Iniciar sesión</a></>}
-            {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/account') && <>
-                <a className="menu-item" href="/login">Iniciar sesión</a></>}
-            {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/login') && <>
-                <a className="menu-item" href="/account">Crear cuenta</a></>}</div>
-        <div>
-            {isAuthenticatedMenu && <>
-                <p>¿Deseas <a className="menu-item" href="/login">cerrar sesión</a>?</p>
-                <br /></>}
-            <SocialIcons/></div>
-        </div>
-        </Menu>;
-        
+    const buttonsView = {
+        '/': <>
+            <a className="menu-item" href="/account">Crear cuenta</a>
+            <br />
+            <a className="menu-item" href="/login">Iniciar sesión</a>
+        </>,
+        '/account': <><a className="menu-item" href="/login">Iniciar sesión</a></>,
+        '/login': <>
+            <a className="menu-item" href="/account">Crear cuenta</a></>
+    }
+
+    const handleIsAuthMenu = () => {
+        if (isAuthenticatedMenu) {
+            return (
+                <>
+                    <p>¿Deseas <a className="menu-item" href="/login">cerrar sesión</a>?</p>
+                    <br />
+                </>
+            );
+        } else {
+            return buttonsView[pathname];
+        }
+    }
+
+    return (
+        <Menu right>
+            <div className='upper-colored-box'>
+                {isAuthenticatedMenu ?
+                    <>
+                        <span>{username.slice(2)}</span>
+                        <p>Hola,</p>
+                        <p>{username}</p>
+                    </>
+                    :
+                    <span className='menu'>MENU</span>
+                }
+            </div>
+            <div className="menuConFooter">
+                <div className='menu-main'>
+                    {handleIsAuthMenu()}
+                </div>
+                <div>
+                    <SocialIconsSidebar />
+                </div>
+            </div>
+        </Menu>
+    )
+
 }
 
 export default Sidebar;
