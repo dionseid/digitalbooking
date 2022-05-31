@@ -51,17 +51,7 @@ const Navbar = ({authenticated, username}) => {
           <p className='parrafoNavBar'>Sentite como en tu hogar</p>
         </div>
         <div className='botones'>
-          {handleIsAuthMenu()}
-          {matchPath(window.location.pathname, '/') &&<>
-          <Link to='/account'><button className='buttonNavBarAccount'>Crear cuenta</button></Link>
-          <Link to='/login'><button className='buttonNavBarLogin'>Iniciar Sesión</button></Link>
-          </>}
-          {matchPath(window.location.pathname, '/account') &&<>
-          <Link to='/login'><button className='buttonNavBarLogin'>Iniciar Sesión</button></Link>
-          </>}
-          {matchPath(window.location.pathname, '/login') &&<>
-          <Link to='/account'><button className='buttonNavBarAccount'>Crear cuenta</button></Link>
-          </>}     
+          {handleIsAuthMenu()}               
           {/* <FontAwesomeIcon icon={faBars} className="menu" onClick={() => setShowSidebar(true)} />
           {showSidebar && <Sidebar />} */}
         </div>
