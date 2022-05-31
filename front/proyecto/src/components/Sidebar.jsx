@@ -4,7 +4,7 @@ import '../styles/sidebar.css';
 import '../styles/navbar.css';
 import { matchPath } from 'react-router';
 import SocialIconsSidebar from './SocialIconsSidebar';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar = ({authenticated, username}) => {
     const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
@@ -13,13 +13,11 @@ const Sidebar = ({authenticated, username}) => {
 
     const buttonsView = {
         '/': <>
-            <a className="menu-item" href="/account">Crear cuenta</a>
-            <br />
-            <a className="menu-item" href="/login">Iniciar sesión</a>
+            <Link to='/account'><button className='buttonNavBarAccount'>Crear cuenta</button></Link>
+            <Link to='/login'><button className='buttonNavBarLogin'>Iniciar Sesión</button></Link>
         </>,
-        '/account': <><a className="menu-item" href="/login">Iniciar sesión</a></>,
-        '/login': <>
-            <a className="menu-item" href="/account">Crear cuenta</a></>
+        '/account': <><Link to='/login'><button className='buttonNavBarLogin'>Iniciar Sesión</button></Link></>,
+        '/login': <><Link to='/account'><button className='buttonNavBarAccount'>Crear cuenta</button></Link></>
     }
 
     const handleIsAuthMenu = () => {
