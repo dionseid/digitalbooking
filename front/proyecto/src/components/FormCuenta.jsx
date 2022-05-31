@@ -6,14 +6,15 @@ import {Formulario, Label, ContenedorBotonCentrado, Boton, MensajeExito, Mensaje
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import ComponenteInput from './ComponenteInput';
+import usuarios from "../helpers/usuarios.json"
 
 const initailForm = [
     {
       id: 1,
-      nombre: "Diana",
-      apellido: "Sauval",
-      email: "dianasauval@hotmail.com",
-      password:"123456"
+      nombre: "",
+      apellido: "",
+      email: "",
+      password:""
     }
   ];
 
@@ -75,6 +76,13 @@ const onSubmit = (e) => {
             "user",
             JSON.stringify({ nombreStorage: nombre, apellidoStorage: apellido, emailStorage: email, passwordStorage: password })
           );
+        
+        setForm({id: 1, nombre: form.nombre,
+            apellido: form.apellido,
+            email: form.email,
+            password:form.password});
+
+        console.log(form);
         
 
         // ... 

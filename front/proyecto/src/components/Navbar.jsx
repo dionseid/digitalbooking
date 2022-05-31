@@ -16,7 +16,7 @@ const Navbar = () => {
     <>
       <div className='navBar'>
         <div className='logoNavBar'>
-          <Link to='/'><img src={image} alt='logo' /></Link>
+          {<Link to='/'><img src={image} alt='logo' /></Link>}
           <p className='parrafoNavBar'>Sentite como en tu hogar</p>
         </div>
         <div className='botones'>

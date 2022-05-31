@@ -107,6 +107,20 @@
   background: rgba(0, 0, 0, 0.3);
 }
 
+.bienvenida{
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}
+
+.redesModal{
+  color: #373a47;
+}
+
+.redesModal span{
+  color: #F0572D;
+}
+
 @media screen and (max-width: 768px) {
   .bm-burger-button {
     visibility: visible;
