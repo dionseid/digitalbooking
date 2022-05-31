@@ -107,7 +107,6 @@
   background: rgba(0, 0, 0, 0.3);
 }
 
-<<<<<<< HEAD
 .bienvenida{
   display: flex;
   flex-direction: column;
@@ -120,7 +119,8 @@
 
 .redesModal span{
   color: #F0572D;
-=======
+}
+
 .redesSidebar{
   padding: 10px;
   font-size: 25px;
@@ -129,7 +129,6 @@
 
 .iconos{
   margin-right: 15px;
->>>>>>> cf7f4877383ab8f422c31695137efe9cf3946e8e
 }
 
 @media screen and (max-width: 768px) {

@@ -77,14 +77,6 @@ const onSubmit = (e) => {
             JSON.stringify({ nombreStorage: nombre, apellidoStorage: apellido, emailStorage: email, passwordStorage: password })
           );
         
-        setForm({id: 1, nombre: form.nombre,
-            apellido: form.apellido,
-            email: form.email,
-            password:form.password});
-
-        console.log(form);
-        
-
         // ... 
     } else {
         cambiarFormularioValido(false);
