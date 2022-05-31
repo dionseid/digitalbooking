@@ -3,10 +3,14 @@ import { slide as Menu } from 'react-burger-menu';
 import '../styles/sidebar.css';
 import '../styles/navbar.css';
 import { matchPath } from 'react-router';
+<<<<<<< HEAD
 import SocialIcons from './SocialIcons';
 import { Link } from 'react-router-dom';
 
 
+=======
+import SocialIconsSidebar from './SocialIconsSidebar';
+>>>>>>> cf7f4877383ab8f422c31695137efe9cf3946e8e
 
 const Sidebar = props => {
     const data = JSON.parse(localStorage.getItem("user"));
@@ -62,6 +66,7 @@ const Sidebar = props => {
                 {!isLog && !!matchPath(window.location.pathname, '/login') && 
                 <>
                 <a className="menu-item" href="/account">Crear cuenta</a>
+<<<<<<< HEAD
                 </>}
             </div>
             <div className='redesModal'>
@@ -73,6 +78,19 @@ const Sidebar = props => {
                 }
                 <SocialIcons/>
             </div>
+=======
+                <br />
+                <a className="menu-item" href="/login">Iniciar sesión</a></>}
+            {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/account') && <>
+                <a className="menu-item" href="/login">Iniciar sesión</a></>}
+            {!isAuthenticatedMenu && !!matchPath(window.location.pathname, '/login') && <>
+                <a className="menu-item" href="/account">Crear cuenta</a></>}</div>
+        <div>
+            {isAuthenticatedMenu && <>
+                <p>¿Deseas <a className="menu-item" href="/login">cerrar sesión</a>?</p>
+                <br /></>}
+            <SocialIconsSidebar/></div>
+>>>>>>> cf7f4877383ab8f422c31695137efe9cf3946e8e
         </div>
         </Menu>;
         
