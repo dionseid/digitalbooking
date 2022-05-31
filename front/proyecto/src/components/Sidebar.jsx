@@ -9,36 +9,11 @@ const Sidebar = props => {
     const data = JSON.parse(localStorage.getItem("user"));
     const { nombreStorage, apellidoStorage } = data;
     const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
-    const [isLog, setIsLog] = useState(false);
-    //const [form, setForm] = useState(initailForm);
-    
-/*     const initailForm = [
-        {
-          nombre: nombreStorage.campo,
-          apellido: apellidoStorage.campo
-        }
-      ]; */
-    
-    
-    const handleChange = () => {
-        if (nombreStorage !== "" && apellidoStorage!== null) {
-            
-            setIsLog(true); 
-        }else{
-            setIsLog(false);
-        }
-    }
-    /* const handleClick = () =>{
-        setForm({nombre: "",
-            apellido: ""});
-
-        setIsLog(false)
-    } */
 
        
     useEffect(() => setIsAuthenticatedMenu(false), [props.authenticated]);
 
-    return <Menu right onStateChange={handleChange}>
+    return <Menu right>
         <div className='upper-colored-box'>
             {!isAuthenticatedMenu && <span className='menu'>MENU</span>}
             {isAuthenticatedMenu && <div className='bienvenida'>
