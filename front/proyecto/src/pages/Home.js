@@ -19,7 +19,7 @@ const Home = () => {
       <body>
         <section className='Alojamiento'>
           <h2>Buscar por tipo de alojamiento</h2>
-          <AjaxHooks />
+          <CardAlojamiento />
         </section>
         <section className='Recomendaciones'>
           <h2>Recomendaciones</h2>

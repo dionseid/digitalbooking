@@ -4,7 +4,7 @@ import Categoria from "../Categoria";
 export default function AjaxHooks() {
   const [categorias, setCategoria] = useState([]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     let url = "http://localhost:8080/categorias";
     fetch(url)
       .then((res) => res.json())
@@ -28,7 +28,7 @@ export default function AjaxHooks() {
         });
       })
       .catch(console.log);
-  }, []);
+  }, []); */
 
 /*   useEffect(() => {
     const setCategoria = async (url) => {
