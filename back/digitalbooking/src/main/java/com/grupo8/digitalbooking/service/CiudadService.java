@@ -22,16 +22,22 @@ public class CiudadService {
         return ciudadRepository.save(ciudad);
     }
 
-    //BUSCAR
+    //BUSCAR POR ID
     //Falta corregir para buscar por nombre de ciudad, no id
-    public Optional<Ciudad> buscarCiudad(Integer id){
+    public Optional<Ciudad> buscarCiudadPorId(Integer id){
         return ciudadRepository.findById(id);
     }
+
+     //BUSCAR POR NOMBRE
+//    public List<Ciudad> buscarCiudadPorNombre(String nombre){
+//         List<Ciudad> ciudades= ciudadRepository.findByName(nombre);
+//        return ciudades;
+//    }
 
     //ELIMINAR
     //Falta cambiar buscar ciudad por nombre
     public void eliminarCiudad (Integer id)throws Exception{
-        Optional<Ciudad> ciudadBuscada = buscarCiudad(id);
+        Optional<Ciudad> ciudadBuscada = buscarCiudadPorId(id);
         if (ciudadBuscada.isPresent())
             ciudadRepository.deleteById(id);
         else

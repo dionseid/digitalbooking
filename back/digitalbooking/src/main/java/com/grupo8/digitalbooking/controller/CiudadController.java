@@ -25,17 +25,24 @@ public class CiudadController {
     //BUSCAR
     //Corregir a buscar por nombre en vez de id
     @GetMapping("/{id}")
-    public ResponseEntity<Ciudad> buscarCiudad(@PathVariable Integer id){
-        Ciudad ciudad = ciudadService.buscarCiudad(id).orElse(null);
+    public ResponseEntity<Ciudad> buscarCiudadPorId(@PathVariable Integer id){
+        Ciudad ciudad = ciudadService.buscarCiudadPorId(id).orElse(null);
         return ResponseEntity.ok(ciudad);
     }
+
+//    @GetMapping("/{nombre}")
+//    public ResponseEntity<Ciudad> buscarCiudadPorNombre(@PathVariable String nombre){
+//        Ciudad ciudad = ciudadService.buscarCiudadPorNombre(nombre).orElse(null);
+//        return ResponseEntity.ok(ciudad);
+//    }
+
 
     //ACTUALIZAR
     @PutMapping()
     public ResponseEntity<Ciudad> actualizarCiudad(@RequestBody Ciudad ciudad){
         ResponseEntity<Ciudad> response;
 
-        if (ciudad.getID()!=null && ciudadService.buscarCiudad(ciudad.getID()).isPresent())
+        if (ciudad.getID()!=null && ciudadService.buscarCiudadPorId(ciudad.getID()).isPresent())
             response= ResponseEntity.ok(ciudadService.actualizarCiudad(ciudad));
         else
             response= ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -49,7 +56,7 @@ public class CiudadController {
 
         ResponseEntity<String> response = null;
 
-        if (ciudadService.buscarCiudad(id).isPresent()) {
+        if (ciudadService.buscarCiudadPorId(id).isPresent()) {
             ciudadService.eliminarCiudad(id);
             response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Se eliminó la categoria correctamente");
         } else {
