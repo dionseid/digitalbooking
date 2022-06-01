@@ -1,30 +1,34 @@
-import React from "react";
+import axios from "axios";
+import React, { useState , useEffect} from "react";
 import data from "../helpers/data.json";
 import "../styles/cards.css";
 
 
 
-class CardAlojamiento extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-        }
-    }
-    render(){
+const CardAlojamiento= () =>{  
+const [dataCategoria, setDataCategoria] = useState([]);
+useEffect( () => {
+    axios.get("http://localhost:8080/categorias")
+    .then(response => {
+       setDataCategoria(response.data)})
+
+}, [])
+
+
         return (
             <div className="cards">
-                {data.informacionAlojamiento.map((card)=>(
-                    <div key={card.id} className="cardAlojamiento">
-                        <div style={{backgroundImage:"url(../img/" + card.URLimg + ")"}} className="fondoImagen"/>
+                {dataCategoria.map((cat)=>(
+                    <div key={cat.id} className="cardAlojamiento">
+                        <div style={{backgroundImage:"url('" + cat.urlImg + "')"}} className="fondoImagen"/>
                         <div className="cardBody">
-                            <h4>{card.titulo}</h4>
-                            <p style={{fontWeight:"700"}}>{card.parrafo}</p>
+                            <h4>{cat.titulo}</h4>
+                            <p style={{fontWeight:"700"}}>{cat.descripcion}</p>
                         </div>
                     </div>
                 ))}
             </div>
         ) 
-    }
+
 
 }
 

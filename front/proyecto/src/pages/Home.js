@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Banner from '../components/Banner';
 import "../styles/pages/home.css";
+import AjaxHooks from '../components/hooks/AjaxHooks';
 
 
 const Home = () => {
