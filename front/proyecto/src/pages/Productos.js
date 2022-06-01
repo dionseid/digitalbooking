@@ -7,6 +7,8 @@ import {
   faLocationDot,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
+import Galeria from "../components/Galeria";
+import "../styles/pages/productos.css"
 
 const Productos = () => {
   return (
@@ -42,7 +44,9 @@ const Productos = () => {
             </div>
           </div>
         </section>
-        <section className="imagenes"></section>
+        <section className="imagenes">
+          <Galeria/>
+        </section>
         <section className="texto">
           <h2>Alójate en el corazón de Buenos Aires</h2>
           <p>
