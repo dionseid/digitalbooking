@@ -1,0 +1,20 @@
+.fechasDisponibles{
+    background-color: #DFE4EA;
+    display: flex;
+}
+
+.contenedorCalendario{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: #FFF;
+}
+
+.botonReservaFecha{
+    width: 90%;
+}
+
+
+

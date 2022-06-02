@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState , useEffect} from "react";
-import data from "../helpers/data.json";
 import "../styles/cards.css";
 
 

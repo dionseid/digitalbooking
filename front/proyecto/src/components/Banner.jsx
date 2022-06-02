@@ -5,7 +5,7 @@ import "../styles/banner.css";
 const Banner = () => {
   return (
     <div className='banner'>
-      <h1>Busca ofertas en hoteles, casas y mucho más</h1>
+      <h1 className='tituloBanner'>Busca ofertas en hoteles, casas y mucho más</h1>
       <div className='buscador'>
         <div className='inputBanner'>
           <Input

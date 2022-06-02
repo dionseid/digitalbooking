@@ -1,0 +1,14 @@
+.botonGaleria{
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: -64px;
+    z-index: 30;
+    width: 90px;
+}
+
+.contendorGaleria{
+    position: relative;
+}
