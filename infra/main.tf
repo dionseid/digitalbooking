@@ -29,4 +29,8 @@ module "web_app" {
   private_subnets  = slice(cidrsubnets(var.main_vpc_cidr, 8, 8, 8, 8, 8, 8), 2, 4)
   database_subnets = slice(cidrsubnets(var.main_vpc_cidr, 8, 8, 8, 8, 8, 8), 4, 6)
   app_name         = var.app_name
+  instance_type    = ["t2.medium", "t2.small", "t2.micro"]
+  public_key       = var.public_key
+  db_pass          = var.db_pass
+  db_user          = "foo"
 }

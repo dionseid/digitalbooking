@@ -30,3 +30,13 @@ variable "main_vpc_cidr" {
   default     = "10.0.0.0/16"
 }
 
+variable "public_key" {
+  description = "locally generated SSH key for the project"
+  type        = string
+}
+
+variable "db_pass" {
+  description = "password for DB"
+  type        = string
+  sensitive   = true
+}
