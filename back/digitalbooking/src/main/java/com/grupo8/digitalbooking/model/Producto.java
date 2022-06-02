@@ -24,17 +24,25 @@ public class Producto {
     private String nombre;
     private String descripcion;
 
+    //un producto tiene una ciudad: one to one
+    @JsonIgnore
     private Ciudad ciudad;
+
+    //un producto tiene una categoria: one to one
+    @JsonIgnore
     private Categoria categoria;
 
     //Set de 5 imágenes por producto
     @JsonIgnore
+    //un producto tiene muchas imágenes : one to many
     private Set<Imagen> imagenes = new HashSet<>();
     //Set de características por prod
     @JsonIgnore
+    //un producto tiene muchas caracteristicas: one to many
     private Set<Caracteristica> caracteristicas = new HashSet<>();
     //Set de politicas por prod(normas, seguridad, cancelacion)
     @JsonIgnore
+    // un producto tiene muchas politicas : one to many
     private Set<PoliticaProd> politicas=new HashSet<>();
 
 
