@@ -37,7 +37,7 @@ public class ProductoController {
     public ResponseEntity<Producto> actualizarProducto(@RequestBody Producto producto){
         ResponseEntity<Producto> response=null;
 
-        if (producto.getID() != null && productoService.buscarProducto(producto.getID()).isPresent())
+        if (producto.getId() != null && productoService.buscarProducto(producto.getId()).isPresent())
             response = ResponseEntity.ok(productoService.actualizarProducto(producto));
         else
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();

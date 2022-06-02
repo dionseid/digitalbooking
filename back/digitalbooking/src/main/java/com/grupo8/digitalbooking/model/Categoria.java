@@ -1,5 +1,7 @@
 package com.grupo8.digitalbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,13 +18,18 @@ import javax.persistence.*;
 @Table(name = "categorias")
 public class Categoria {
     @Id
-    @SequenceGenerator(name = "cateogria_sequence", sequenceName = "categoria_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_sequence")
+    @SequenceGenerator(name = "categorias_sequence", sequenceName = "categorias_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorias_sequence")
     private Integer id;
     private String titulo;
     private String descripcion;
     private String urlImg;
 
+    @JsonIgnore
+    @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "producto_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    private Producto producto;
 
     //constructor vacio
     public Categoria() {

@@ -31,7 +31,7 @@ public class ImagenController {
     @PutMapping()
     public ResponseEntity<Imagen> actualizarImagen(@RequestBody Imagen imagen){
         ResponseEntity<Imagen> response;
-        if (imagen.getID()!=null && imagenService.buscarImagen(imagen.getID()).isPresent())
+        if (imagen.getId()!=null && imagenService.buscarImagen(imagen.getId()).isPresent())
             response = ResponseEntity.ok(imagenService.actualizarImagen(imagen));
         else
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();

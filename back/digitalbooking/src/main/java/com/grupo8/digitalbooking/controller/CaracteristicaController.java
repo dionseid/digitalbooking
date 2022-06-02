@@ -48,7 +48,7 @@ public class CaracteristicaController {
     public ResponseEntity<Caracteristica> actualizarCaracteristica(@RequestBody Caracteristica caracteristica){
         ResponseEntity<Caracteristica> response;
 
-        if (caracteristica.getID()!=null && caracteristicaService.buscarCaracteristica(caracteristica.getID()).isPresent())
+        if (caracteristica.getId()!=null && caracteristicaService.buscarCaracteristica(caracteristica.getId()).isPresent())
             response=ResponseEntity.ok(caracteristicaService.actualizarCarateristica(caracteristica));
         else
             response=ResponseEntity.status(HttpStatus.NOT_FOUND).build();
