@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState, } from 'react';
 import "../styles/navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -6,6 +6,8 @@ import Sidebar from './Sidebar';
 import { Link } from 'react-router-dom';
 import { matchPath } from 'react-router';
 import { useLocation } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+
 
 
 const image = require("../components/assets/logo.png");
@@ -19,15 +21,17 @@ const Navbar = ({authenticated, username}) => {
 
     const buttonsView = {
         '/' : <>
-            <Link to='/account'><button className='buttonNavBarAccount'>Crear cuenta</button></Link>
-            <Link to='/login'><button className='buttonNavBarLogin'>Iniciar Sesión</button></Link>
+            <Link to='/account'><Button variant="secondary" className='buttonNavBarAccount' >Crear cuenta</Button></Link>
+            <Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link>
         </>,
         '/productos': <>
-            <Link to='/account'><button className='buttonNavBarAccount'>Crear cuenta</button></Link>
-            <Link to='/login'><button className='buttonNavBarLogin'>Iniciar Sesión</button></Link>
+            <Link to='/account'><Button variant="secondary" className='buttonNavBarAccount' >Crear cuenta</Button></Link>
+            <Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link>
+            
+            
         </>,
-        '/account': <><Link to='/login'><button className='buttonNavBarLogin'>Iniciar Sesión</button></Link></>,
-        '/login': <><Link to='/account'><button className='buttonNavBarAccount'>Crear cuenta</button></Link></>
+        '/account': <><Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link></>,
+        '/login': <><Link to='/account'><Button variant="secondary" className='buttonNavBarAccount' >Crear cuenta</Button></Link></>
     }
 
     const handleIsAuthMenu = () => {

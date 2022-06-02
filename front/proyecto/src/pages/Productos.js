@@ -8,9 +8,10 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import Galeria from "../components/Galeria";
-import "../styles/pages/productos.css"
+import Calendario from "../components/Calendario";
+import "../styles/pages/productos.css";
 
-const Productos = () => {
+const Productos = () => {  
   return (
     <div id="page-wrap">
       <header>
@@ -45,7 +46,7 @@ const Productos = () => {
           </div>
         </section>
         <section className="imagenes">
-          <Galeria/>
+          <Galeria/>          
         </section>
         <section className="texto">
           <h2>Alójate en el corazón de Buenos Aires</h2>
@@ -63,7 +64,17 @@ const Productos = () => {
             <h2>¿Qué ofrece este lugar?</h2>            
         </section>
         <section className="fechasDisponibles">
-            <h2>Fechas disponibles</h2>            
+            <h2>Fechas disponibles</h2>
+            <div className="contenedorCalendario">              
+                <div>
+                <Calendario/> 
+                </div>             
+                <div>
+                  <p>Agregá tus fechas de viaje para obtener precios exactos</p>
+                  <button className="botonReservaFecha">Iniciar reserva</button>
+                </div> 
+            </div> 
+                       
         </section>
         <section className="contenedorMapa">
             <h2>¿Dónde vas a estar?</h2>            

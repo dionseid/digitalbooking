@@ -1,8 +1,20 @@
-.imagenes{
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    padding: 40px 0;
-    display: grid;
-    grid-template-columns: 3fr 1fr;
+.fechasDisponibles{
+    background-color: #DFE4EA;
+    display: flex;
 }
+
+.contenedorCalendario{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: #FFF;
+}
+
+.botonReservaFecha{
+    width: 90%;
+}
+
+
+

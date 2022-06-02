@@ -1,26 +1,14 @@
-.contenedorImagenes{
-/*     -webkit-column-count: 3;
-    -moz-column-count: 3;
-    column-count: 3;
-    -webkit-column-width: 33%;
-    -moz-column-width: 33%;
-    column-width: 33%;
-    padding: 0 12px; */
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 20px;
+.botonGaleria{
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: -64px;
+    z-index: 30;
+    width: 90px;
 }
 
-.cardImagen{
-/*     -webkit-transition: all 350ms ease;
-    transition: all 350ms ease;
-    cursor: pointer;
-    margin-bottom: 12px; */
-    border-radius: 10px;
-    min-height: 200px;
-    padding: 20px;
+.contendorGaleria{
     position: relative;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center center;
 }

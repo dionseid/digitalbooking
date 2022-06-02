@@ -3,33 +3,10 @@ import React, { useState , useEffect} from "react";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import SimpleReactLightbox, { SRLWrapper } from 'simple-react-lightbox';
-//import "../styles/galeria.css";
+import { Button } from "react-bootstrap";
+import BootstrapModal from "./BootstrapModal";
+import "../styles/galeria.css"
 
-
-
-/* const Galeria= () =>{  
-const [dataImagen, setDataImagen] = useState([]);
-useEffect( () => {
-    axios.get("http://localhost:8080/imagenes")
-    .then(response => {
-        console.log(response.data);
-        setDataImagen(response.data)})
-
-}, [])
-
-
-        return (
-            <div className="contendorImagenes">
-                {dataImagen.map((img)=>(
-                    <div key={img.id} className="cardImagen" style={{backgroundImage:"url('" + img.url + "')"}}>
-                        <img src={img.url} style={{width:'100%'}}/> 
-                    </div>
-                ))}
-            </div>
-        ) 
-}
-
-export default Galeria; */
 
 
 function srcset(image, size, rows = 1, cols = 1) {
@@ -42,6 +19,7 @@ function srcset(image, size, rows = 1, cols = 1) {
 }
 
 const Galeria= () =>{
+    const [modalShow, setModalShow] = useState(false);
     const [dataImagen, setDataImagen] = useState([]);
 useEffect( () => {
     axios.get("http://localhost:8080/imagenes")
@@ -93,6 +71,13 @@ useEffect( () => {
             </ImageListItem>
           ))}
         </ImageList>
+        <div className="contendorGaleria">
+          <Button variant="link" onClick={() => setModalShow(true)} className="botonGaleria">ver más</Button>
+        </div>        
+        <BootstrapModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
       </SRLWrapper>
     </SimpleReactLightbox>
   );
