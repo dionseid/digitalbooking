@@ -1,21 +1,25 @@
 {
     "ciudades":[                
     {
+        "id":1,
         "icono":"../components/assets/location-dot-solid.svg",
         "ciudad":"Buenos Aires",
         "pais":"Argentina"
     },
     {
+        "id":2,
         "icono":"../components/assets/location-dot-solid.svg",
         "ciudad":"San Carlos de Bariloche",
         "pais":"Argentina"
     },
     {
+        "id":3,
         "icono":"../components/assets/location-dot-solid.svg",
         "ciudad":"Mendoza",
         "pais":"Argentina"
     },
     {
+        "id":4,
         "icono":"../components/assets/location-dot-solid.svg",
         "ciudad":"Córdoba",
         "pais":"Argentina"
