@@ -21,15 +21,15 @@ useEffect( () => {
   return (
     <div>
         <Carousel activeIndex={index} onSelect={handleSelect}>
-        {dataImagen.map((item) =>(
+        {dataImagen.map((item, index) =>(
           <Carousel.Item key={item.id}>
           <img
             className="d-block w-100"
             src={item.url}
-            alt={item.nombre}
+            alt={item.nombre}            
           />
           <Carousel.Caption>
-            <p>{item.nombre}</p>
+            <p style={{"textAlign": "end"}}>{(index + 1) + "/" + dataImagen.length}</p>
           </Carousel.Caption>
         </Carousel.Item>
         ))}

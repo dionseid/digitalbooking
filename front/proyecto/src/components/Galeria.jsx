@@ -5,7 +5,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import SimpleReactLightbox, { SRLWrapper } from 'simple-react-lightbox';
 import { Button } from "react-bootstrap";
 import BootstrapModal from "./BootstrapModal";
-import "../styles/galeria.css"
+import "../styles/galeria.css";
 
 
 
@@ -67,6 +67,7 @@ useEffect( () => {
                 )}
                 alt={item.nombre}
                 loading="lazy"
+                className="imagenGaleria"
               />            
             </ImageListItem>
           ))}
@@ -80,7 +81,11 @@ useEffect( () => {
       />
       </SRLWrapper>
     </SimpleReactLightbox>
-  );
+  )
+  
+
+
+  
 }
 
 

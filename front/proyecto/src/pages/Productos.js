@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +10,8 @@ import {
 import Galeria from "../components/Galeria";
 import Calendario from "../components/Calendario";
 import "../styles/pages/productos.css";
+import BootstrapCarousel from "../components/BootstrapCarousel";
+import Media from "react-media";
 
 const Productos = () => {  
   return (
@@ -46,7 +48,13 @@ const Productos = () => {
           </div>
         </section>
         <section className="imagenes">
-          <Galeria/>          
+          <Media query="(max-width:768px)">
+            {matches => {
+              return matches ? 
+              <BootstrapCarousel/> :
+              <Galeria/>
+            }}
+          </Media>                   
         </section>
         <section className="texto">
           <h2>Alójate en el corazón de Buenos Aires</h2>

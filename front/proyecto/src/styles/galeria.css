@@ -12,3 +12,7 @@
 .contendorGaleria{
     position: relative;
 }
+
+.imagenGaleria, .d-block{
+    border-radius: 20px;
+}
