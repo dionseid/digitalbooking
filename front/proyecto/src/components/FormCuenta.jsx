@@ -1,22 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { useForm } from './hooks/useForm';
 import "../styles/form.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {Formulario, Label, ContenedorBotonCentrado, Boton, MensajeExito, MensajeError, Input} from './elementStyle/Form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import ComponenteInput from './ComponenteInput';
 import usuarios from "../helpers/usuarios.json"
 
-const initailForm = [
-    {
-      id: 1,
-      nombre: "",
-      apellido: "",
-      email: "",
-      password:""
-    }
-  ];
 
 
 const FormCuenta = () => {
@@ -27,7 +18,7 @@ const FormCuenta = () => {
 	const [password, cambiarPassword] = useState({campo: '', valido: null});
 	const [password2, cambiarPassword2] = useState({campo: '', valido: null});
 	const [formularioValido, cambiarFormularioValido] = useState(null);
-    const [form, setForm] = useState(initailForm);
+    const navigate = useNavigate();
 
 
 
@@ -51,35 +42,25 @@ const validarPassword2 = () => {
     }
 }
 
-
-
-
+const isFormValid = () => {
+    return nombre.valido && apellido.valido && email.valido && password.valido && password2.valido
+}
 
 const onSubmit = (e) => {
     e.preventDefault();
-
-    if(
-        nombre.valido === 'true' &&
-        apellido.valido === 'true' &&
-        email.valido === 'true' &&
-        password.valido === 'true' &&
-        password2.valido === 'true' 
-    ){
-        cambiarFormularioValido(true);
-        cambiarNombre({campo: '', valido: null});
-        cambiarApellido({campo: '', valido: null});
-        cambiarCorreo({campo: '', valido: null});
-        cambiarPassword({campo: '', valido: null});
-        cambiarPassword2({campo: '', valido: null});
-
-        localStorage.setItem(
-            "user",
-            JSON.stringify({ nombreStorage: nombre, apellidoStorage: apellido, emailStorage: email, passwordStorage: password })
-          );
-        
-        // ... 
-    } else {
+    const { usuarios: userList } = usuarios;
+    const newUser = {
+        nombre: nombre.campo,
+        apellido: apellido.campo,
+        mail: email.campo,
+        password: password.campo
+    }
+    if(isFormValid()){
+        userList.push(newUser);
         cambiarFormularioValido(false);
+        navigate('/login');
+    }else{
+        cambiarFormularioValido(true);
     }
 }
 
@@ -99,8 +80,6 @@ return (
                 name="nombre"
                 parrafoError="El apellido solo puede contener letras y espacios."
                 expresionRegular={expresiones.nombre}
-                value = {form.nombre}
-
                 />
                 </div>
                 <div className='nombre'>
@@ -113,7 +92,6 @@ return (
                 name="apellido"
                 parrafoError="El apellido solo puede contener letras y espacios."
                 expresionRegular={expresiones.nombre}
-                value = {form.apellido}
                 />
                 </div>
             </div>
@@ -126,7 +104,6 @@ return (
                 name="email"
                 parrafoError="Correo inválido"
                 expresionRegular={expresiones.email}
-                value = {form.email}
             /> 
             <ComponenteInput
                 estado={password}
@@ -137,7 +114,6 @@ return (
                 name="password1"
                 parrafoError="La contraseña tiene que tener más de 6 caracteres"
                 expresionRegular={expresiones.password}
-                value = {form.password}
             />
             <ComponenteInput
                 estado={password2}
