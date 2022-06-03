@@ -24,36 +24,25 @@ public class Producto {
     private String nombre;
     private String descripcion;
 
-    //un producto tiene una ciudad: one to one
-    @JsonIgnore
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
-    @OneToOne(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //ANDA
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ciudad_id")
     private Ciudad ciudad;
-
-    //un producto tiene una categoria: one to one
-    @JsonIgnore
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
-    @OneToOne(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //ANDA
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    //Set de 5 imágenes por producto
-    //un producto tiene muchas imágenes : one to many
-    @JsonIgnore
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    //NO ANDA
+    @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY)
+    //@JoinColumn(name = "imagenes_id")
     private Set<Imagen> imagenes = new HashSet<>();
 
-    //Set de características por prod
-    //un producto tiene muchas caracteristicas: many to many (tabla intermedia)
-    @JsonIgnore
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
+
+    //ANDA
     @ManyToMany(mappedBy = "productos")
     private Set<Caracteristica> caracteristicas = new HashSet<>();
-
-    //Set de politicas por prod(normas, seguridad, cancelacion)
-    // un producto tiene muchos tipos de politica de producto : many to many
-    @JsonIgnore
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
+    //ANDA
     @ManyToMany(mappedBy = "productos")
     private Set<TipoDePolitica> tipoDePoliticas = new HashSet<>();
 

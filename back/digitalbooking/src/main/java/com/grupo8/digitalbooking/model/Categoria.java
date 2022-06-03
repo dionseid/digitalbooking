@@ -7,6 +7,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 //Crear una tabla categorias en la base de datos
 @ToString
@@ -25,11 +27,9 @@ public class Categoria {
     private String descripcion;
     private String urlImg;
 
-    @JsonIgnore
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
-    @JoinColumn(name = "producto_id")
-    @OneToOne(fetch = FetchType.LAZY)
-    private Producto producto;
+    //ANDA
+    @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
+    private Set<Producto> productos = new HashSet<>();
 
     //constructor vacio
     public Categoria() {
