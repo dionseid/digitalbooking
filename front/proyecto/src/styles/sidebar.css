@@ -131,6 +131,32 @@
   margin-right: 15px;
 }
 
+.buttonNavBarAccount, .buttonNavBarLogin{
+  background-color: #dfe4ea;
+  color: #f0572d;
+  padding: 5px 20px;
+  font-weight: 700;
+  font-size: 16px;
+  background: #ffffff;
+  border: 1px solid #f0572d;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.buttonNavSideLogin, .buttonSideBarAccount{
+  color: #373a47;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: right;
+  text-decoration: none;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+
+
 @media screen and (max-width: 768px) {
   .bm-burger-button {
     visibility: visible;
