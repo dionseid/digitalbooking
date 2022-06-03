@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import '../styles/calendario.css'
+import React, { useState } from "react";
+import Calendar from "react-calendar";
+import '../styles/calendario.css';
+
 
 const Calendario = () => {
-  const [value, onChange] = useState(new Date());
+  const [date, setDate] = useState(new Date());
+
+  const onChange = date => {
+    setDate(date);
+  };
 
   return (
-    <div className='calendario'>
-      <Calendar 
-      onChange={onChange} 
-      value={value}
-      minDate= {new Date()}
-      selectRange={true}
-      showDoubleView={true}
-      />
+    <div>
+      <Calendar showWeekNumbers onChange={onChange} value={date} />
+      {console.log(date)}
+      {date.toString()}
     </div>
   );
-}
+};
 
 export default Calendario;

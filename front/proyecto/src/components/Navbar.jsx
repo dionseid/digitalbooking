@@ -53,12 +53,8 @@ const Navbar = ({ authenticated, setIsAuthenticated }) => {
         '/account': <><Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link></>,
         '/login': <><Link to='/account'><Button variant="secondary" className='buttonNavBarAccount' >Crear cuenta</Button></Link></>
     }
-
-
-    </>,
-    '/account': <><Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link></>,
-    '/login': <><Link to='/account'><Button variant="secondary" className='buttonNavBarAccount' >Crear cuenta</Button></Link></>
-  }
+   
+  
 
   const handleIsAuthMenu = () => {
     const { nombre, apellido } = JSON.parse(localStorage.getItem('user'));
