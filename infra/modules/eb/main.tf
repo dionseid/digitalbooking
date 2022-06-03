@@ -1,7 +1,7 @@
 # Create Elastic Beanstalk application
 
 resource "aws_elastic_beanstalk_application" "elastic_app" {
-  name = "g8-${var.app_name}"
+  name = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}${var.environment_name != "" ? "-${var.environment_name}" : ""}"
 }
 
 # prerrequisite: IAM instance profile, which may be contained within a role
@@ -33,20 +33,20 @@ resource "aws_iam_role" "ec2_role" { # Must have the right service roles and per
   assume_role_policy  = data.aws_iam_policy_document.assume_policy.json
   managed_policy_arns = ["arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier", "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker", "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier", "arn:aws:iam::aws:policy/EC2InstanceProfileForImageBuilderECRContainerBuilds", "arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkRoleRDS"] # See https://www.youtube.com/watch?v=m2XqEprF0Js&t=1s
   inline_policy {
-    name   = "g8-eb-application-permissions"
+    name   = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-eb-application-permissions${var.environment_name != "" ? "-${var.environment_name}" : ""}"
     policy = data.aws_iam_policy_document.permissions.json
   }
 }
 
 resource "aws_iam_instance_profile" "eb_instance_profile" {
-  name = "g8-instance-profile"
+  name = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-instance-profile${var.environment_name != "" ? "-${var.environment_name}" : ""}"
   role = aws_iam_role.ec2_role.name
 }
 
 # Create Elastic Beanstalk environment
 
 resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
-  name                = "g8-${var.environment_name}"
+  name                = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-env${var.environment_name != "" ? "-${var.environment_name}" : ""}"
   application         = aws_elastic_beanstalk_application.elastic_app.name
   solution_stack_name = "64bit Amazon Linux 2 v3.4.16 running Docker"
 
@@ -63,13 +63,13 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "VPCId"
-    value     = module.vpc.vpc_id
+    value     = var.vpc_id
   }
 
   setting {
     namespace = "aws:ec2:vpc"
     name      = "Subnets"
-    value     = join(",", module.vpc.private_subnets)
+    value     = join(",", var.private_subnets)
   }
 
   # instances --»
@@ -83,7 +83,7 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "EC2KeyName"
-    value     = aws_key_pair.key_public.key_name
+    value     = var.public_key_name
   }
 
   # autoscaling --»
@@ -136,26 +136,22 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
 
   # security groups --»
 
-  depends_on = [
-    aws_security_group.g8_app_sg
-  ]
-
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "SecurityGroups"
-    value     = aws_security_group.g8_app_sg.id
+    value     = var.app_sg_id
   }
 
   setting {
     namespace = "aws:elbv2:loadbalancer"
     name      = "SecurityGroups"
-    value     = aws_security_group.g8_ingress_sg.id
+    value     = var.ingress_sg_id
   }
 
   setting {
     namespace = "aws:elbv2:loadbalancer"
     name      = "ManagedSecurityGroup"
-    value     = aws_security_group.g8_ingress_sg.id
+    value     = var.ingress_sg_id
   }
 
   # DB --»

@@ -1,21 +1,17 @@
 resource "aws_key_pair" "key_public" {
-  key_name   = "g8-key"
+  key_name   = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-key${var.environment_name != "" ? "-${var.environment_name}" : ""}"
   public_key = var.public_key
 }
 
 /* ----------------------------- security groups ---------------------------- */
 
 resource "aws_security_group" "g8_app_sg" {
-  name        = "g8-app-sg"
+  name        = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-app-sg${var.environment_name != "" ? "-${var.environment_name}" : ""}"
   description = "Allow LB, Cloud9, and all outbound traffic"
   vpc_id      = module.vpc.vpc_id
 
   tags = {
-    Application = var.app_name
-    Environment = var.environment_name
-    Owner       = "group 8"
-    Role        = "private"
-    Terraform   = "true"
+    Role = "private"
   }
 }
 
@@ -52,20 +48,16 @@ resource "aws_security_group_rule" "app_egress_to_ngw" { # "At this time you can
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
-  cidr_blocks       = [var.public_subnets[0]]
+  cidr_blocks       = slice(cidrsubnets(var.main_vpc_cidr, 8, 8, 8, 8, 8, 8), 0, 1)
 }
 
 resource "aws_security_group" "g8_rds_sg" {
-  name        = "g8-rds-sg"
+  name        = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-rds-sg${var.environment_name != "" ? "-${var.environment_name}" : ""}"
   description = "private internet connection"
   vpc_id      = module.vpc.vpc_id
 
   tags = {
-    Application = var.app_name
-    Environment = var.environment_name
-    Owner       = "group 8"
-    Role        = "private"
-    Terraform   = "true"
+    Role = "private"
   }
 
   ingress {
@@ -74,25 +66,14 @@ resource "aws_security_group" "g8_rds_sg" {
     protocol        = "tcp"
     security_groups = [aws_security_group.g8_app_sg.id]
   }
-
-  egress { # Shouldn't it have internet outlet for DB actualization? 
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = [var.public_subnets[1]]
-  }
 }
 
 resource "aws_security_group" "g8_ingress_sg" { # We need a slightly different security group for the load balancer
-  name   = "g8-ingress-sg"
+  name   = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-ingress-sg${var.environment_name != "" ? "-${var.environment_name}" : ""}"
   vpc_id = module.vpc.vpc_id
 
   tags = {
-    Application = var.app_name
-    Environment = var.environment_name
-    Owner       = "group 8"
-    Role        = "public"
-    Terraform   = "true"
+    Role = "public"
   }
 
   egress {
@@ -122,15 +103,11 @@ resource "aws_security_group_rule" "lb_https_ingress" {
 }
 
 resource "aws_security_group" "g8_cloud9_sg" { # ❗ Cloud9 automáticamente ya desplegaría su propie SG
-  name   = "g8-cloud9-sg"
+  name   = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-cloud9-sg${var.environment_name != "" ? "-${var.environment_name}" : ""}"
   vpc_id = module.vpc.vpc_id
 
   tags = {
-    Application = var.app_name
-    Environment = var.environment_name
-    Owner       = "group 8"
-    Role        = "public"
-    Terraform   = "true"
+    Role = "public"
   }
 
   egress {

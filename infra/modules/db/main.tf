@@ -1,9 +1,9 @@
 resource "aws_db_subnet_group" "default" {
-  name       = "g8-rds-subnet-group"
-  subnet_ids = module.vpc.database_subnets
+  name       = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-rds-subnet-group${var.environment_name != "" ? "-${var.environment_name}" : ""}"
+  subnet_ids = var.subnet_ids
 
   tags = {
-    Name = "g8-db-layer"
+    Name = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-db-layer${var.environment_name != "" ? "-${var.environment_name}" : ""}"
   }
 }
 
@@ -20,5 +20,5 @@ resource "aws_db_instance" "default" {
   skip_final_snapshot    = true
   multi_az               = true
   db_subnet_group_name   = aws_db_subnet_group.default.name
-  vpc_security_group_ids = [aws_security_group.g8_rds_sg.id]
+  vpc_security_group_ids = [var.rds_sg_id]
 }

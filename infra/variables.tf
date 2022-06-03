@@ -1,25 +1,22 @@
-variable "app_name" {
-  description = "name of the web application"
-  type        = string
-  default     = "web-app"
+variable "team_name" {
+  type    = string
+  default = ""
 }
 
-variable "AWS_named_profile" {
-  description = "named profile specified for AWS CLI config. See ~/.aws/credentials"
-  type        = string
-  default     = "default"
+variable "product_name" {
+  type    = string
+  default = "webapp"
 }
 
 variable "environment_name" {
-  description = "deployment environment (dev/staging/production)"
+  description = "deployment environment (dev/stage/prod)"
   type        = string
-  default     = "dev"
+  default     = ""
 }
 
 variable "region" {
-  description = "provider region"
-  type        = string
-  default     = "us-east-1"
+  type    = string
+  default = "us-east-1"
 }
 
 data "aws_availability_zones" "available" {}
