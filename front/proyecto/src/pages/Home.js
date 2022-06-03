@@ -7,12 +7,12 @@ import Banner from '../components/Banner';
 import "../styles/pages/home.css";
 
 
-const Home = () => {
+const Home = ({authenticated, setIsAuthenticated}) => {
   return (
     <div id="page-wrap">
       <header>
 
-        <Navbar />
+        <Navbar authenticated={authenticated} setIsAuthenticated={setIsAuthenticated}/>
         <Banner />
       </header>
       <body>

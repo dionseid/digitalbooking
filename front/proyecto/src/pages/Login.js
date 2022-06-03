@@ -4,7 +4,7 @@ import FormLogin from '../components/FormLogin';
 import Navbar from '../components/Navbar';
 import "../styles/pages/login.css";
 
-const Login = () => {
+const Login = ({setIsAuthenticated}) => {
 
     return (
         <>
@@ -12,7 +12,7 @@ const Login = () => {
                 <Navbar />
             </header>
             <body>
-                <FormLogin />
+                <FormLogin setIsAuthenticated={setIsAuthenticated} />
             </body>
             <footer>
                 <Footer />
