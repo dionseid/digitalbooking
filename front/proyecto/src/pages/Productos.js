@@ -14,7 +14,7 @@ import BootstrapCarousel from "../components/BootstrapCarousel";
 import Media from "react-media";
 import { Link } from "react-router-dom";
 
-const Productos = () => {  
+const Productos = () => { 
   return (
     <div id="page-wrap">
       
@@ -75,7 +75,7 @@ const Productos = () => {
         </section>
         <section className="fechasDisponibles">
             <h2>Fechas disponibles</h2>
-            <div className="contenedorCalendario">              
+            <div className="contenedorCalendario">            
                 <div>
                 <Calendario/> 
                 </div>             

@@ -115,6 +115,10 @@ th.month::after {
   }
 }
 
+option{
+  color: #282c34;
+}
+
 @media screen and (max-width: 768px) {
   .buscador {
     flex-direction: column;

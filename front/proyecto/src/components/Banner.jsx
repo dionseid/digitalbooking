@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import Input from '../components/Input';
 import "../styles/banner.css";
+import SelectCiudades from './SelectCiudades';
 
 const Banner = () => {
   return (
@@ -8,13 +9,14 @@ const Banner = () => {
       <h1 className='tituloBanner'>Busca ofertas en hoteles, casas y mucho más</h1>
       <div className='buscador'>
         <div className='inputBanner'>
-          <Input
+          <SelectCiudades/>
+{/*           <Input
             attribute={{
               id: "location",
               name: "location",
               type: "text",
               placeholder: " ¿A dónde vamos?"
-            }} isInputWithCalendar={false} />
+            }} isInputWithCalendar={false}/> */}
         </div>
         <div className='inputBanner'>
           <Input
