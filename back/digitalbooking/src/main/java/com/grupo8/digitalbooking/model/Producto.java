@@ -18,8 +18,9 @@ import java.util.Set;
 @Table(name = "productos")
 public class Producto {
     @Id
-    @SequenceGenerator(name = "productos_sequence", sequenceName = "productos_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productos_sequence")
+   // @SequenceGenerator(name = "productos_sequence", sequenceName = "productos_sequence", allocationSize = 1)
+   // @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productos_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre;
     private String descripcion;
@@ -68,6 +69,13 @@ public class Producto {
         this.caracteristicas = caracteristicas;
         this.tipoDePoliticas = tipoDePoliticas;
     }
+
+//    public Producto(String nombre, String descripcion) {
+//        this.nombre = nombre;
+//        this.descripcion = descripcion;
+//
+//    }
+
 
     public Producto() {
     }

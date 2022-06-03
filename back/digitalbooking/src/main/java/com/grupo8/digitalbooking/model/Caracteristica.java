@@ -18,8 +18,10 @@ import java.util.Set;
 @Table(name = "caractProd")
 public class Caracteristica {
     @Id
-    @SequenceGenerator(name = "caractProd_sequence", sequenceName = "caractProd_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "caractProd_sequence")
+//    @SequenceGenerator(name = "caractProd_sequence", sequenceName = "caractProd_sequence", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "caractProd_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id;
     private String nombre;
     private String icono;

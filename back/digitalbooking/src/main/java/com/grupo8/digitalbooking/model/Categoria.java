@@ -20,8 +20,10 @@ import java.util.Set;
 @Table(name = "categorias")
 public class Categoria {
     @Id
-    @SequenceGenerator(name = "categorias_sequence", sequenceName = "categorias_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorias_sequence")
+//    @SequenceGenerator(name = "categorias_sequence", sequenceName = "categorias_sequence", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorias_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id;
     private String titulo;
     private String descripcion;

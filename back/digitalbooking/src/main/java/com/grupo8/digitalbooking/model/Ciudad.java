@@ -18,8 +18,10 @@ import java.util.Set;
 @Table(name="ciudad")
 public class Ciudad {
     @Id
-    @SequenceGenerator(name = "ciudades_sequence", sequenceName = "ciudades_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ciudades_sequence")
+//    @SequenceGenerator(name = "ciudades_sequence", sequenceName = "ciudades_sequence", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ciudades_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id;
     private String Nombre;
     private String Provincia;

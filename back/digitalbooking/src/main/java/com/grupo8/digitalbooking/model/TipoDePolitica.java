@@ -18,8 +18,9 @@ import java.util.Set;
 public class TipoDePolitica {
 
     @Id
-    @SequenceGenerator(name = "tipoDePoliticas_sequence", sequenceName = "tipoDePoliticas_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipoDePoliticas_sequence")
+//    @SequenceGenerator(name = "tipoDePoliticas_sequence", sequenceName = "tipoDePoliticas_sequence", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipoDePoliticas_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Integer id;
     private String titulo;
