@@ -1,3 +1,49 @@
+.headerProducto{
+    padding-top: 25px;
+    background-color: #31363F;
+    color: #DFE4EA;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.headerProducto div{
+    padding-left: 15px;
+}
+
+.headerProducto p{
+    margin-top:60px;
+    font-size: 14px;
+    line-height: 18px;    
+    color: #DFE4EA;
+}
+
+.iconoVolver{
+    font-size: 40px;
+    padding: 15px;
+    color: #DFE4EA;    
+}
+
+.ubicacion{
+    background-color: #DFE4EA;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.calificacion{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .fechasDisponibles{
     background-color: #DFE4EA;
     display: flex;
@@ -13,7 +59,6 @@
 }
 
 .botonReservaFecha{
-    width: 90%;
 }
 
 

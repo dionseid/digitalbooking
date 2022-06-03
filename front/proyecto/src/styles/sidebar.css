@@ -10,8 +10,9 @@
   flex-direction: column;
   margin-right:15px;
   margin-top: 23px;
-  
+  color: #31363F;  
 }
+
 .menu{
   margin-right: 10px;
   margin-bottom: 6px;
@@ -131,10 +132,82 @@
   margin-right: 15px;
 }
 
+.buttonNavBarAccount, .buttonNavBarLogin{
+  background-color: #dfe4ea;
+  color: #f0572d;
+  padding: 5px 20px;
+  font-weight: 700;
+  font-size: 16px;
+  background: #ffffff;
+  border: 1px solid #f0572d;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.buttonNavSideLogin, .buttonSideBarAccount{
+  color: #373a47;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: right;
+  text-decoration: none;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.SidebarBienvenida{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: end;
+  color:#31363F;
+}
+
+.SidebarBienvenida span{
+  background-color: #31363F;
+  padding: 3px;
+  border: solid 6px #31363F;
+  border-radius: 50%;
+  font-weight: bolder;
+  font-size: 20px;
+  color: #DFE4EA;
+}
+
+.SidebarBienvenida p{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  margin: 7px;
+}
+
+.nombreCompletoMenu{
+  color: #F0572D;
+}
+
+.cruz{
+  align-self: start;
+}
+
+
+
 @media screen and (max-width: 768px) {
   .bm-burger-button {
     visibility: visible;
     font-size: 25px;
     margin-right: 15px;
+  }
+
+  .SidebarBienvenida{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: end;
+    color: #DFE4EA;
+  }
+
+  .nombreCompletoMenu{
+    color: #31363F;
   }
 }

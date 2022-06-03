@@ -1,24 +1,45 @@
 {
-    "usuarios":[{
-        "id":1,
-        "mail": "dianasauval@hotmail.com",
-        "password": "123456"
-  },
-  {
-        "id": 2,
-        "mail": "alepantano@hotmail.com",
-        "password": "123456"
-  },
-  {
-        "id": 3,
-        "mail": "sofiamonasterio@hotmail.com",
-        "password": "123456"
-  },
-  {
-        "id": 4,
-        "mail": "dion.seid@hotmail.com",
-        "password": "123456"
-  }
-
-    ]
+      "usuarios": [
+            {
+                  "id": 1,
+                  "nombre": "Diana",
+                  "apellido": "Sauval",
+                  "mail": "dianasauval@hotmail.com",
+                  "password": "123456"
+            },
+            {
+                  "id": 2,
+                  "nombre": "Diana",
+                  "apellido": "Sauval",
+                  "mail": "alepantano@hotmail.com",
+                  "password": "123456"
+            },
+            {
+                  "id": 3,
+                  "nombre": "Diana",
+                  "apellido": "Sauval",
+                  "mail": "sofiamonasterio@hotmail.com",
+                  "password": "123456"
+            },
+            {
+                  "id": 4,
+                  "nombre": "Diana",
+                  "apellido": "Sauval",
+                  "mail": "dion.seid@hotmail.com",
+                  "password": "123456"
+            },
+            {
+                  "id": 5,
+                  "nombre": "Daniel",
+                  "apellido": "Villajuan",
+                  "mail": "dvillajuan@digitalhouse.com",
+                  "password": "123456"
+            },{
+                  "id": 6,
+                  "nombre": "Test",
+                  "apellido": "Test",
+                  "mail": "asd@asd.com",
+                  "password": "123456"
+            }
+      ]
 }

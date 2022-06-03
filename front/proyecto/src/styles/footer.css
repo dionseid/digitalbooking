@@ -8,6 +8,7 @@ footer{
     width: 100vw;
     bottom: 0px;
     height:58px;
+    z-index: 50;
   }
   
 

@@ -12,31 +12,32 @@ import Calendario from "../components/Calendario";
 import "../styles/pages/productos.css";
 import BootstrapCarousel from "../components/BootstrapCarousel";
 import Media from "react-media";
+import { Link } from "react-router-dom";
 
 const Productos = () => {  
   return (
     <div id="page-wrap">
-      <header>
+      
+      <header >
         <Navbar />
+        <div className="headerProducto">
+          <div>
+            <p>HOTEL</p>
+            <h2>Hermitage Hotel</h2>
+          </div>
+          <Link to="/"><FontAwesomeIcon icon={faAngleLeft} className="iconoVolver"/></Link>          
+        </div>                
       </header>
       <body>
-        <section className="bannerTitulo">
-          <div>
-            <h3>HOTEL</h3>
-            <h1>Hermitage Hotel</h1>
-          </div>
-          <FontAwesomeIcon icon={faAngleLeft} />
-        </section>
         <section className="ubicacion">
           <div>
             <p>
-              <FontAwesomeIcon icon={faLocationDot} />
-              Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina A 940 m
-              del centro{" "}
+              <FontAwesomeIcon icon={faLocationDot} style={{"paddingRight":"5px"}}/>
+              Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina.
             </p>
+            <p>A 940 m del centro</p>
           </div>
-          <div className="calificacion">
-            <span className="puntaje">8</span>
+          <div className="calificacion">            
             <div>
               <p style={{ fontWeight: "700" }}>Muy bueno</p>
               <FontAwesomeIcon icon={faStar} className="estrella" />
@@ -45,6 +46,7 @@ const Productos = () => {
               <FontAwesomeIcon icon={faStar} className="estrella" />
               <FontAwesomeIcon icon={faStar} className="estrella" />
             </div>
+            <span className="puntaje">8</span>
           </div>
         </section>
         <section className="imagenes">

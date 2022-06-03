@@ -7,17 +7,19 @@ import './styles/App.css';
 import Sidebar from './components/Sidebar';
 import Productos from './pages/Productos';
 
-const jWT = sessionStorage.getItem('jwt');
-const username = "Bruno Rodríguez" // hardcodeade: Habrá que consultar a la BD
 
 function App() {
+
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+
+
   return (
     <div className="App">
       <BrowserRouter>
-      <Sidebar pageWrapId={'page-wrap'} authenticated={jWT} username={username} />
+      <Sidebar pageWrapId={'page-wrap'} authenticated={isAuthenticated} />
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/' element={<Home  authenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>} />
+          <Route path='/login' element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
           <Route path='/account' element={<Account />} />
           <Route path='/productos' element={<Productos />} />
         </Routes>
