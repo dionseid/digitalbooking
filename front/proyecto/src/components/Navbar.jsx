@@ -1,10 +1,10 @@
-import React, {useEffect, useState, } from 'react';
+import React, { useEffect, useState, } from 'react';
 import "../styles/navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from './Sidebar';
-import { Link } from 'react-router-dom';
-import { matchPath } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
+import { matchPath, Navigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
@@ -13,38 +13,44 @@ import { Button } from 'react-bootstrap';
 const image = require("../components/assets/logo.png");
 
 
-const Navbar = ({authenticated, username}) => {
+const Navbar = ({ authenticated, setIsAuthenticated }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
   useEffect(() => setIsAuthenticatedMenu(authenticated), [authenticated]);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
-    const buttonsView = {
-        '/' : <>
-            <Link to='/account'><Button variant="secondary" className='buttonNavBarAccount' >Crear cuenta</Button></Link>
-            <Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link>
-        </>,
-        '/productos': <>
-            <Link to='/account'><Button variant="secondary" className='buttonNavBarAccount' >Crear cuenta</Button></Link>
-            <Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link>
-            
-            
-        </>,
-        '/account': <><Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link></>,
-        '/login': <><Link to='/account'><Button variant="secondary" className='buttonNavBarAccount' >Crear cuenta</Button></Link></>
-    }
+  const buttonsView = {
+    '/': <>
+      <Link to='/account'><Button variant="secondary" className='buttonNavBarAccount' >Crear cuenta</Button></Link>
+      <Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link>
+    </>,
+    '/productos': <>
+      <Link to='/account'><Button variant="secondary" className='buttonNavBarAccount' >Crear cuenta</Button></Link>
+      <Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link>
 
-    const handleIsAuthMenu = () => {
-      if (isAuthenticatedMenu) {
-          return (
-              <>
-                  <p>¿Deseas <a className="menu-item" href="/login">cerrar sesión</a>?</p>
-                  <br />
-              </>
-          );
-      } else {
-          return buttonsView[pathname];
-      }
+
+    </>,
+    '/account': <><Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link></>,
+    '/login': <><Link to='/account'><Button variant="secondary" className='buttonNavBarAccount' >Crear cuenta</Button></Link></>
+  }
+
+  const handleIsAuthMenu = () => {
+    const { nombre, apellido } = JSON.parse(localStorage.getItem('user'));
+    return (isAuthenticatedMenu ?
+      <>
+        <p>Hola,</p>
+        <p>{`${nombre} ${apellido}`}</p>
+        <p>¿Deseas <Button variant="primary" className="buttonNavBarAccount" onClick={handleClick}>cerrar sesión</Button>?</p>
+        <br />
+      </> : buttonsView[pathname]
+    );
+  }
+
+  const handleClick = () => {
+    localStorage.setItem('user', JSON.stringify({nombre:' ', apellido:' '}));
+    navigate('/');
+    setIsAuthenticated(false);
   }
 
   return (
@@ -55,7 +61,7 @@ const Navbar = ({authenticated, username}) => {
           <p className='parrafoNavBar'>Sentite como en tu hogar</p>
         </div>
         <div className='botones'>
-          {handleIsAuthMenu()}               
+          {handleIsAuthMenu()}
           {/* <FontAwesomeIcon icon={faBars} className="menu" onClick={() => setShowSidebar(true)} />
           {showSidebar && <Sidebar />} */}
         </div>
