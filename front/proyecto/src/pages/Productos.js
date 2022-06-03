@@ -17,13 +17,16 @@ import { Link } from "react-router-dom";
 const Productos = () => {  
   return (
     <div id="page-wrap">
-      <Navbar />
-      <header className="headerProducto">
-        <div>
-          <p>HOTEL</p>
-          <h2>Hermitage Hotel</h2>
-        </div>
-        <Link to="/"><FontAwesomeIcon icon={faAngleLeft} className="iconoVolver"/></Link>        
+      
+      <header >
+        <Navbar />
+        <div className="headerProducto">
+          <div>
+            <p>HOTEL</p>
+            <h2>Hermitage Hotel</h2>
+          </div>
+          <Link to="/"><FontAwesomeIcon icon={faAngleLeft} className="iconoVolver"/></Link>          
+        </div>                
       </header>
       <body>
         <section className="ubicacion">

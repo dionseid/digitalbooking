@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import '../styles/sidebar.css';
-import '../styles/navbar.css';
 import { matchPath } from 'react-router';
 import SocialIconsSidebar from './SocialIconsSidebar';
 import { Link, useLocation } from 'react-router-dom';
@@ -14,11 +13,17 @@ const Sidebar = ({authenticated, username}) => {
 
     const buttonsView = {
         '/': <>
-            <Link to='/account'><Button variant="secondary" className='buttonNavBarAccount'>Crear cuenta</Button></Link>
-            <Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link>
+            <Link to='/account' className='buttonSideBarAccount'>Crear cuenta</Link>
+            <Link to='/login' className='buttonNavSideLogin'>Iniciar Sesión</Link>
+
         </>,
-        '/account': <><Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link></>,
-        '/login': <><Link to='/account'><Button variant="secondary" className='buttonNavBarAccount'>Crear cuenta</Button></Link></>
+        '/account': <>
+            <Link to='/login' className='buttonNavSideLogin'>Iniciar Sesión</Link>
+
+        </>,
+        '/login': <>
+            <Link to='/account' className='buttonSideBarAccount'>Crear cuenta</Link>
+        </>
     }
 
     const handleIsAuthMenu = () => {

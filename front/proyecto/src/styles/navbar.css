@@ -25,18 +25,6 @@
   font-size: 20px;
 }
 
-.buttonNavBarAccount, .buttonNavBarLogin {
-  background-color: #dfe4ea;
-  color: #f0572d;
-  padding: 5px 20px;
-  font-weight: 700;
-  font-size: 16px;
-  background: #ffffff;
-  border: 1px solid #f0572d;
-  border-radius: 5px;
-  margin: 5px;
-}
-
 
 .botones {
   display: flex;
@@ -51,6 +39,8 @@ img {
 .menu {
   visibility: hidden;
 } /* Quizás se podría sacar, ya que el menú hamburguesa ya no le usa */
+
+
 
 @media screen and (max-width: 768px) {
   .parrafoNavBar {
