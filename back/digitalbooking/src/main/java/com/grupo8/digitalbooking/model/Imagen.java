@@ -20,7 +20,7 @@ public class Imagen {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "imagenes_sequence")
     private Integer id;
     private String nombre;
-    private String URL;
+    private String url;
 
     @JsonIgnore
     @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
@@ -29,15 +29,15 @@ public class Imagen {
     private Producto producto;
 
 
-    public Imagen(Integer id, String nombre, String URL) {
+    public Imagen(Integer id, String nombre, String url) {
         this.id = id;
         this.nombre = nombre;
-        this.URL = URL;
+        this.url = url;
     }
 
-    public Imagen(String nombre, String URL) {
+    public Imagen(String nombre, String url) {
         this.nombre = nombre;
-        this.URL = URL;
+        this.url = url;
     }
 
     public Imagen() {
