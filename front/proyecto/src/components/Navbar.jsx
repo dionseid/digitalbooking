@@ -59,12 +59,22 @@ const Navbar = ({ authenticated, setIsAuthenticated }) => {
   const handleIsAuthMenu = () => {
     const { nombre, apellido } = JSON.parse(localStorage.getItem('user'));
     return (isAuthenticatedMenu ?
-      <>
+      <div className='SidebarBienvenida'>
+        <div><span>{nombre[0] + apellido[0]}</span></div>        
+        <div>
+          <p>Hola,</p>
+          <p className='nombreCompletoMenu'>{`${nombre} ${apellido}`}</p>
+        </div>
+        <p className='cruz' onClick={handleClick}>X</p>        
+      </div>
+/*       <>
         <p>Hola,</p>
         <p>{`${nombre} ${apellido}`}</p>
         <p>¿Deseas <Button variant="primary" className="buttonNavBarAccount" onClick={handleClick}>cerrar sesión</Button>?</p>
         <br />
-      </> : buttonsView[pathname]
+      </> */ 
+      : 
+      buttonsView[pathname]
     );
   }
 
