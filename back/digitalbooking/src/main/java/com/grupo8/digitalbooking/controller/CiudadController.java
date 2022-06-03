@@ -42,7 +42,7 @@ public class CiudadController {
     public ResponseEntity<Ciudad> actualizarCiudad(@RequestBody Ciudad ciudad){
         ResponseEntity<Ciudad> response;
 
-        if (ciudad.getID()!=null && ciudadService.buscarCiudadPorId(ciudad.getID()).isPresent())
+        if (ciudad.getId()!=null && ciudadService.buscarCiudadPorId(ciudad.getId()).isPresent())
             response= ResponseEntity.ok(ciudadService.actualizarCiudad(ciudad));
         else
             response= ResponseEntity.status(HttpStatus.NOT_FOUND).build();

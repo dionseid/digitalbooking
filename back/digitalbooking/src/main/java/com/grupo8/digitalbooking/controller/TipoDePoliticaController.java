@@ -1,7 +1,7 @@
-package com.grupo8.digitalbooking.controller.Politicas;
+package com.grupo8.digitalbooking.controller;
 
-import com.grupo8.digitalbooking.model.Politicas.TipoDePolitica;
-import com.grupo8.digitalbooking.service.Politicas.TipoDePoliticaService;
+import com.grupo8.digitalbooking.model.TipoDePolitica;
+import com.grupo8.digitalbooking.service.TipoDePoliticaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
