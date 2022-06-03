@@ -6,7 +6,7 @@ import SocialIconsSidebar from './SocialIconsSidebar';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-const Sidebar = ({authenticated, username}) => {
+const Sidebar = ({authenticated}) => {
     const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
     useEffect(() => setIsAuthenticatedMenu(authenticated), [authenticated]);
     const { pathname } = useLocation();
@@ -38,19 +38,22 @@ const Sidebar = ({authenticated, username}) => {
             return buttonsView[pathname];
         }
     }
+    const handleAuthenticated = () => {
+        const { nombre , apellido } = JSON.parse(localStorage.getItem('user'));
+        return isAuthenticatedMenu ?
+            <>
+                <span>{nombre[0] + apellido[0]}</span>
+                <p>Hola,</p>
+                <p>{`${nombre} ${apellido}`}</p>
+            </>
+            :
+            <span className='menu'>MENU</span>        
+    }
 
     return (
         <Menu right>
             <div className='upper-colored-box'>
-                {isAuthenticatedMenu ?
-                    <>
-                        <span>{username.slice(2)}</span>
-                        <p>Hola,</p>
-                        <p>{username}</p>
-                    </>
-                    :
-                    <span className='menu'>MENU</span>
-                }
+                {handleAuthenticated()}
             </div>
             <div className="menuConFooter">
                 <div className='menu-main'>

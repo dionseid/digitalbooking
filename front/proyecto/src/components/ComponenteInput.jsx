@@ -4,7 +4,8 @@ import { GrupoInput, IconoValidacion, Input, Label, ParrafoError } from './eleme
 
 const ComponenteInput = ({estado, cambiarEstado, tipo, label, placeholder, name, parrafoError, expresionRegular, funcion}) => {
 	const onChange = (e) => {
-		cambiarEstado({...estado, campo: e.target.value});
+		const { value } = e.target
+		cambiarEstado({ valido: value !== '' , campo: value});
 	}
 
 	const validacion = () => {
