@@ -31,6 +31,7 @@ module "web_app" {
   app_name         = var.app_name
   instance_type    = ["t2.medium", "t2.small", "t2.micro"]
   public_key       = var.public_key
+  db_name          = "g8dbdigitalbooking"
+  db_user          = "g8digitalbooking"
   db_pass          = var.db_pass
-  db_user          = "foo"
 }

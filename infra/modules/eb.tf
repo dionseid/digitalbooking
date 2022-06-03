@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "permissions" {
 resource "aws_iam_role" "ec2_role" { # Must have the right service roles and permissions to assume
   name                = "g8-elastic-beanstalk-role"
   assume_role_policy  = data.aws_iam_policy_document.assume_policy.json
-  managed_policy_arns = ["arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier", "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker", "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier", "arn:aws:iam::aws:policy/EC2InstanceProfileForImageBuilderECRContainerBuilds"] # See https://www.youtube.com/watch?v=m2XqEprF0Js&t=1s
+  managed_policy_arns = ["arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier", "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker", "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier", "arn:aws:iam::aws:policy/EC2InstanceProfileForImageBuilderECRContainerBuilds", "arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkRoleRDS"] # See https://www.youtube.com/watch?v=m2XqEprF0Js&t=1s
   inline_policy {
     name   = "g8-eb-application-permissions"
     policy = data.aws_iam_policy_document.permissions.json
@@ -72,12 +72,6 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     value     = join(",", module.vpc.private_subnets)
   }
 
-  setting {
-    namespace = "aws:ec2:vpc"
-    name      = "DBSubnets"
-    value     = join(",", module.vpc.database_subnets)
-  }
-
   # instances --»
 
   setting {
@@ -85,16 +79,6 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     name      = "InstanceTypes"
     value     = join(",", var.instance_type)
   }
-
-  /* -------------------------------------------------------------------------- */
-  /*             Deberíamos especificar la siguiente configuración?             */
-  /* -------------------------------------------------------------------------- */
-
-  # setting {
-  #   namespace = "aws:ec2:instances"
-  #   name      = "SupportedArchitectures"
-  #   value     = #None
-  # }
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
@@ -174,33 +158,11 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     value     = aws_security_group.g8_ingress_sg.id
   }
 
-  /* -------------------------------------------------------------------------- */
-  /*                   Falta asignar SG a las instancias de BD                  */
-  /* -------------------------------------------------------------------------- */
-
   # DB --»
 
   setting {
-    namespace = "aws:rds:dbinstance"
     name      = "HasCoupledDatabase"
-    value     = true
-  }
-
-  setting {
     namespace = "aws:rds:dbinstance"
-    name      = "DBPassword"
-    value     = var.db_pass
-  }
-
-  setting {
-    namespace = "aws:rds:dbinstance"
-    name      = "DBUser"
-    value     = var.db_pass
-  }
-
-  setting {
-    namespace = "aws:rds:dbinstance"
-    name      = "MultiAZDatabase"
-    value     = true
+    value     = "false"
   }
 }
