@@ -22,9 +22,9 @@ public class Imagen {
     private String nombre;
     private String url;
 
-    @JsonIgnore
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
-    @ManyToOne()
+
+    //ANDA
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "producto_id")
     private Producto producto;
 

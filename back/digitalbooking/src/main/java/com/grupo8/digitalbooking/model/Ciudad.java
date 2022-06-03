@@ -7,13 +7,15 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @ToString
 @Getter
 @Setter
 
 @Entity
-@Table(name="ciudades")
+@Table(name="ciudad")
 public class Ciudad {
     @Id
     @SequenceGenerator(name = "ciudades_sequence", sequenceName = "ciudades_sequence", allocationSize = 1)
@@ -23,11 +25,9 @@ public class Ciudad {
     private String Provincia;
     private String Pais;
 
-    @JsonIgnore
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
-    @JoinColumn(name = "producto_id")
-    @OneToOne(fetch = FetchType.LAZY)
-    private Producto producto;
+
+    @OneToMany(mappedBy = "ciudad", fetch = FetchType.LAZY)
+    private Set<Producto> productos = new HashSet<>();
 
     public Ciudad(Integer id, String nombre, String provincia, String pais) {
         this.id = id;

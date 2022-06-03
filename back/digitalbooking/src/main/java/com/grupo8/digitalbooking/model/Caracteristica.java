@@ -24,14 +24,9 @@ public class Caracteristica {
     private String nombre;
     private String icono;
 
-    @JsonIgnore
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name = "caractProd_producto",
-            joinColumns = {@JoinColumn(name = "caractProd_id")},
+
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinTable(name = "caractProd_producto",joinColumns = {@JoinColumn(name = "caractProd_id")},
             inverseJoinColumns = {@JoinColumn(name = "producto_id")})
     private Set<Producto> productos= new HashSet<>();
 

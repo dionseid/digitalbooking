@@ -25,13 +25,9 @@ public class TipoDePolitica {
     private String titulo;
     private String descripcion;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
-    @JoinTable(name = "tipoDePolitica_producto",
-            joinColumns = {@JoinColumn(name = "tipoDePolitica_id")},
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    //@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
+    @JoinTable(name = "tipoDePolitica_producto",joinColumns = {@JoinColumn(name = "tipoDePolitica_id")},
             inverseJoinColumns = {@JoinColumn(name = "producto_id")})
     private Set<Producto> productos;
 
