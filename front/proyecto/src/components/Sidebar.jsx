@@ -5,6 +5,7 @@ import '../styles/navbar.css';
 import { matchPath } from 'react-router';
 import SocialIconsSidebar from './SocialIconsSidebar';
 import { Link, useLocation } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 const Sidebar = ({authenticated, username}) => {
     const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
@@ -13,11 +14,11 @@ const Sidebar = ({authenticated, username}) => {
 
     const buttonsView = {
         '/': <>
-            <Link to='/account'><button className='buttonNavBarAccount'>Crear cuenta</button></Link>
-            <Link to='/login'><button className='buttonNavBarLogin'>Iniciar Sesión</button></Link>
+            <Link to='/account'><Button variant="secondary" className='buttonNavBarAccount'>Crear cuenta</Button></Link>
+            <Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link>
         </>,
-        '/account': <><Link to='/login'><button className='buttonNavBarLogin'>Iniciar Sesión</button></Link></>,
-        '/login': <><Link to='/account'><button className='buttonNavBarAccount'>Crear cuenta</button></Link></>
+        '/account': <><Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link></>,
+        '/login': <><Link to='/account'><Button variant="secondary" className='buttonNavBarAccount'>Crear cuenta</Button></Link></>
     }
 
     const handleIsAuthMenu = () => {

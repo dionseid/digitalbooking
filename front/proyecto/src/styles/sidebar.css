@@ -131,6 +131,11 @@
   margin-right: 15px;
 }
 
+.buttonNavBarAccount, .buttonNavBarLogin{
+  color: #373a47;
+  background-color: #F0572D;
+}
+
 @media screen and (max-width: 768px) {
   .bm-burger-button {
     visibility: visible;
