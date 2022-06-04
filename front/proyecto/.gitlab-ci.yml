@@ -52,7 +52,7 @@ build docker image:
       #- ssh -T -p 26 -L 5050:gl.deitech.online:5050 user@gl.deitech.online
       #- echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
       #- docker build -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$CI_PIPELINE_IID front/proyecto
-      - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+      - aws ecr get-login-password --region "us-west-2" | docker login --username AWS --password-stdin $DOCKER_REGISTRY
       - docker build -t $DOCKER_REGISTRY/$REPOSITORY_NAME:$CI_PIPELINE_IID front/proyecto
       - docker image ls
       - docker push --all-tags $DOCKER_REGISTRY/$REPOSITORY_NAME:$CI_PIPELINE_IID
