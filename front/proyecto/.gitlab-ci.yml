@@ -36,7 +36,7 @@ build docker image:
       - echo $CI_REGISTRY
       - echo $CI_REGISTRY_USER
       - echo $CI_REGISTRY_PASSWORD
-      - ssh -p 26 -L 5050:gitlab.gl.deitech.online:5050 user@gitlab.gl.deitech.online
+      - ssh -p 26 -L 5050:gl.deitech.online:5050 user@gl.deitech.online
       - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
       - docker build -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$CI_PIPELINE_IID front/proyecto
       - docker image ls
