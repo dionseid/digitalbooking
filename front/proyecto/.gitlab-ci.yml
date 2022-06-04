@@ -1,4 +1,4 @@
-image: node:15
+# image: node:15
 
 variables:
       # When using dind service we need to instruct docker, to talk with
@@ -37,6 +37,7 @@ stages:
   - deploy
 
 test project:
+  image: node:15
   stage: test
   script:
     - cd front/proyecto
@@ -44,6 +45,7 @@ test project:
     - npm test
 
 build project:
+  image: node:15
   stage: build
   script:
     - cd front/proyecto
