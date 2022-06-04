@@ -1,9 +1,10 @@
+image: node:8.9.0
+
 build project:
-  image: node
   script:
     - npm install
     #- npm test
-    - npm run-script build
+    - npm run build
 
 
 
