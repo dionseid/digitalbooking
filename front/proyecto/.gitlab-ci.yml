@@ -39,7 +39,7 @@ build docker image:
     services:
       - docker:dind
     before_script:
-      - docker info
+      #- docker info
       - amazon-linux-extras install docker
       - aws --version
       - docker --version
