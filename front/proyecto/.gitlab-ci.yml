@@ -1,9 +1,9 @@
 build project:
   image: node:15
   script:
-    - yarn install
-    - yarn test
-    - yarn build
+    - npm install
+    - npm test
+    - npm run build
 
 
 
