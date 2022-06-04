@@ -1,0 +1,83 @@
+# stages:
+#   - infra
+#   - compile
+#   - docker
+#   - test
+#   - deploy
+
+# variables:
+#   APP_VERSION: $CI_PIPELINE_IID
+#   TF_ROOT: ${CI_PROJECT_DIR}/infra  # The relative path to the root directory of the Terraform project
+#   # ---------------------------------------------------------------------------- #
+#   #                  Pero tengo backend de Terraform en S3                       #
+#   # ---------------------------------------------------------------------------- #
+#   TF_STATE_NAME: ${TF_STATE_NAME:-default}
+
+# cache:
+#   key: "${TF_ROOT}"
+#   paths:
+#     - ${TF_ROOT}/.terraform/
+
+# compile backend:
+#   stage: compile
+#   script: 
+
+# compile frontend:  
+#   stage: compile
+#   image: node:10  
+#   script:   
+#     - npm install ./front/proyecto/
+#     - npm build ./front/proyecto/package.json
+#     - echo $APP_VERSION > ./front/proyecto/build/version.html
+#   artifacts:    
+#     paths:      
+#       - ./front/proyecto/build
+#   only:    
+#     refs:      
+#       - main
+
+# build docker image:
+#   stage: docker
+#   image: adoptopenjdk/openjdk11:alpine-jre
+#   script:
+#     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+#     - docker build -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$APP_VERSION ./back/digitalbooking/ # The first tag points to our latest image
+#     - docker image ls
+#     - docker push --all-tags $CI_REGISTRY_IMAGE
+
+# test docker image: 
+#   stage: test 
+#   image: curlimages/curl 
+#   services: 
+#     - name: $CI_REGISTRY_IMAGE:$APP_VERSION 
+#       alias: frontend 
+#   script: 
+#     - curl http://frontend/version.html | grep $APP_VERSION
+
+# deploy to production:
+#   image:
+#     name: amazon/aws-cli:2.4.11
+#     entrypoint: [""]
+#   stage: deploy
+#   #environment: production
+#   script:
+#     - aws --version
+#     - yum install -y gettext
+#     - export DEPLOY_TOKEN=$(echo $GITLAB_DEPLOY_TOKEN | tr -d "\n" | base64)
+#     - envsubst < eb-templates/Dockerrun.aws.json > Dockerrun.aws.json
+#     - envsubst < eb-templates/auth.json > auth.json
+#     - cat Dockerrun.aws.json
+#     - cat auth.json
+#     - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
+#     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
+
+stages:
+  - triggers
+
+trigger_a:
+  stage: triggers
+  trigger:
+    include: front/proyecto/.gitlab-ci.yml
+  rules:
+    - changes:
+        - front/proyecto/*
