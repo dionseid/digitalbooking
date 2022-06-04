@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import '../styles/calendario.css';
+import 'react-calendar/dist/Calendar.css';
 
 
 const Calendario = () => {
-  const [date, setDate] = useState(new Date());
+  const [value, onChange] = useState(new Date());
 
-  const onChange = date => {
-    setDate(date);
-  };
 
   return (
     <div>
-      <Calendar showWeekNumbers onChange={onChange} value={date} />
-      {console.log(date)}
-      {date.toString()}
+      <Calendar onChange={onChange} value={value} showDoubleView={true}/>
     </div>
   );
 };

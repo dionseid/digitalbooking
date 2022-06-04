@@ -3,11 +3,10 @@ footer{
     background-color: #F0572D;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     position: fixed;
     width: 100vw;
     bottom: 0px;
-    height:58px;
     z-index: 50;
   }
   
@@ -16,13 +15,13 @@ footer p{
   color: #DFE4EA;
   margin-left: 40px;
   font-size: 14px;
-  padding: 15px;
 }
 
 .redes{
   padding: 10px;
   font-size: 25px;
   color: #DFE4EA;
+  text-align: center;
 }
 
 .iconos{

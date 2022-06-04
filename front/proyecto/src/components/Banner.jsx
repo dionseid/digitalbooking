@@ -10,13 +10,6 @@ const Banner = () => {
       <div className='buscador'>
         <div className='inputBanner'>
           <SelectCiudades/>
-{/*           <Input
-            attribute={{
-              id: "location",
-              name: "location",
-              type: "text",
-              placeholder: " ¿A dónde vamos?"
-            }} isInputWithCalendar={false}/> */}
         </div>
         <div className='inputBanner'>
           <Input

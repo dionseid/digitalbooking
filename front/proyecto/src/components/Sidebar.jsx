@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import '../styles/sidebar.css';
-import { matchPath } from 'react-router';
+import { matchPath, useNavigate } from 'react-router';
 import SocialIconsSidebar from './SocialIconsSidebar';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-const Sidebar = ({authenticated}) => {
+const Sidebar = ({authenticated, setIsAuthenticated}) => {
     const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
     useEffect(() => setIsAuthenticatedMenu(authenticated), [authenticated]);
     const { pathname } = useLocation();
+
+    const handleClick = () => {
+        localStorage.setItem('user', JSON.stringify({nombre:' ', apellido:' '}));
+        setIsAuthenticated(false);
+      }
+
 
     const buttonsView = {
         '/': <>
@@ -30,7 +36,7 @@ const Sidebar = ({authenticated}) => {
         if (isAuthenticatedMenu) {
             return (
                 <>
-                    <p>¿Deseas <a className="menu-item" href="/login">cerrar sesión</a>?</p>
+                    <p>¿Deseas <Link className="menu-item" to="/login" onClick={handleClick}>cerrar sesión</Link>?</p>
                     <br />
                 </>
             );
