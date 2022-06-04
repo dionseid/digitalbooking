@@ -7,6 +7,7 @@ cache:
 stages:
   - test
   - build
+  - package
   - deploy
 
 test project:
@@ -26,6 +27,24 @@ build project:
     paths:      
       - front/proyecto/build
 
+build docker image:
+    stage: package
+    image: docker:20.10.12
+    services:
+      - docker:20.10.12-dind
+    script:
+      - docker build -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$CI_PIPELINE_IID front/proyecto
+      - docker image ls
+      #- docker push --all-tags $CI_REGISTRY_IMAGE
+
+# build docker image:
+#   stage: docker
+#   image: adoptopenjdk/openjdk11:alpine-jre
+#   script:
+#     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+#     - docker build -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$APP_VERSION ./back/digitalbooking/ # The first tag points to our latest image
+#     - docker image ls
+#     - docker push --all-tags $CI_REGISTRY_IMAGE
 
 
 # .npm_build:  
