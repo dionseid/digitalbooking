@@ -21,7 +21,7 @@ build project:
   script:
     - cd front/proyecto
     - CI=false npm run build
-    - echo $CI_PIPELINE_IID > build/version.html
+    - echo $CI_PIPELINE_IID > front/proyecto/build/version.html
   artifacts:    
     paths:      
       - front/proyecto/build
