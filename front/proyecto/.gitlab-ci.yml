@@ -29,9 +29,9 @@ build project:
 
 build docker image:
     stage: package
-    image: docker:20.10.12
+    image: docker #:20.10.12
     services:
-      - docker:20.10.12-dind
+      - docker:dind #docker:20.10.12-dind
     script:
       - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
       - docker build -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$CI_PIPELINE_IID front/proyecto
