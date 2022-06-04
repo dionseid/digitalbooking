@@ -20,8 +20,11 @@ build project:
   stage: build
   script:
     - cd front/proyecto
-    #- npm install
     - CI=false npm run build
+    - echo $CI_PIPELINE_IID > build/version.html
+  artifacts:    
+    paths:      
+      - front/proyecto/build
 
 
 
