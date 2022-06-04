@@ -1,13 +1,11 @@
 package com.grupo8.digitalbooking.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @ToString
 @Getter
@@ -15,22 +13,19 @@ import java.util.Set;
 
 //nombre de la tabla en la bd
 @Entity
-@Table(name = "tipoDePoliticas")
+@Table(name = "tiposDePolitica")
 public class TipoDePolitica {
 
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Id
-    @SequenceGenerator(name = "tipoDePoliticas_sequence", sequenceName = "tipoDePoliticas_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipoDePoliticas_sequence")
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String titulo;
     private String descripcion;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "producto_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
 

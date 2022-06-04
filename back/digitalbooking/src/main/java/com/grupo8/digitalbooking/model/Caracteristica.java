@@ -1,36 +1,30 @@
 package com.grupo8.digitalbooking.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
 @ToString
 @Entity
-@Table(name = "caractProd")
+@Table(name = "caracteristicas")
 public class Caracteristica {
-    //   @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
-    @SequenceGenerator(name = "caractProd_sequence", sequenceName = "caractProd_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "caractProd_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre;
     private String icono;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "producto_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Producto producto;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinColumn(name = "producto_id")
+    private Producto producto;
 
 
 //    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})

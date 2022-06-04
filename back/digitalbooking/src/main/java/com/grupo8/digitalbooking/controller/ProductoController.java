@@ -17,23 +17,23 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
 
-    @GetMapping
+    @GetMapping("/traerTodos")
     public ResponseEntity<List<Producto>> buscarTodosLosProductos(){
         return ResponseEntity.ok(productoService.listarProductos());
     }
 
-    @PostMapping
+    @PostMapping("/agregarProducto")
     public ResponseEntity<Producto> agregarProducto(@RequestBody Producto producto){
         return ResponseEntity.ok(productoService.agregarProducto(producto));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/buscarProductoPorId/{id}")
     public ResponseEntity<Optional<Producto>> buscarProducto (@PathVariable Integer id){
         Optional<Producto> producto = productoService.buscarProducto(id);
         return ResponseEntity.ok(producto);
     }
 
-    @PutMapping()
+    @PutMapping("/actualizarProd")
     public ResponseEntity<Producto> actualizarProducto(@RequestBody Producto producto){
         ResponseEntity<Producto> response=null;
 
@@ -49,6 +49,16 @@ public class ProductoController {
     public ResponseEntity<String> eliminarProducto(@PathVariable Integer id) throws Exception {
         productoService.eliminarProducto(id);
         return ResponseEntity.ok("Se eliminó el producto correctamente");
+    }
+
+    @GetMapping("/filtroCategoria/{idCategoria}")
+    public ResponseEntity<List<Producto>> buscarPorCategoria(@PathVariable Integer id){
+        return ResponseEntity.ok(productoService.buscarPorCategoria(id));
+    }
+
+    @GetMapping("/filtroCiudad/{idCiudad}")
+    public ResponseEntity<List<Producto>> buscarPorCiudad(@PathVariable Integer idCiudad){
+        return ResponseEntity.ok(productoService.buscarPorCiudad(idCiudad));
     }
 
 }

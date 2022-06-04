@@ -1,7 +1,5 @@
 package com.grupo8.digitalbooking.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -11,39 +9,35 @@ import javax.persistence.*;
 @Getter
 @Setter
 
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
-
 @Entity
 @Table(name = "imagenes")
 public class Imagen {
-    //   @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @SequenceGenerator(name = "imagenes_sequence", sequenceName = "imagenes_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "imagenes_sequence")
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre;
     private String url;
 
-
     //ANDA
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "producto_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
 
-    public Imagen(Integer id, String nombre, String url) {
+    public Imagen(Integer id, String nombre, String url, Producto producto) {
         this.id = id;
         this.nombre = nombre;
         this.url = url;
+        this.producto= producto;
     }
 
-    public Imagen(String nombre, String url) {
+    public Imagen(String nombre, String url, Producto producto) {
         this.nombre = nombre;
         this.url = url;
+        this.producto= producto;
+
     }
 
     public Imagen() {
