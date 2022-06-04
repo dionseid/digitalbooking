@@ -1,30 +1,8 @@
-# image: node:15
+variables: 
+  DOCKER_REGISTRY: 145504712931.dkr.ecr.us-west-2.amazonaws.com
+  REPOSITORY_NAME: remo-front
 
-variables:
-      # When using dind service we need to instruct docker, to talk with
-      # the daemon started inside of the service. The daemon is
-      # available with a network connection instead of the default
-      # /var/run/docker.sock socket. docker:19.03-dind does this
-      # automatically by setting the DOCKER_HOST in
-      # https://github.com/docker-library/docker/blob/d45051476babc297257df490d22cbd806f1b11e4/19.03/docker-entrypoint.sh#L23-L29
-      #
-      # The 'docker' hostname is the alias of the service container as described at
-      # https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#accessing-the-services.
-      #
-      # Note that if you're using the Kubernetes executor, the variable should be set to
-      # tcp://localhost:2376/ because of how the Kubernetes executor connects services
-      # to the job container
-      # DOCKER_HOST: tcp://localhost:2376/
-      #
-      # When using dind, it's wise to use the overlayfs driver for
-      # improved performance.
-      DOCKER_DRIVER: overlay2
-      # Specify to Docker where to create the certificates, Docker will
-      # create them automatically on boot, and will create
-      # `/certs/client` that will be shared between the service and
-      # build container.
-      DOCKER_TLS_CERTDIR: "/certs"
-
+image: node:15
 
 cache:
   paths:
@@ -37,7 +15,6 @@ stages:
   - deploy
 
 test project:
-  image: node:15
   stage: test
   script:
     - cd front/proyecto
@@ -45,7 +22,6 @@ test project:
     - npm test
 
 build project:
-  image: node:15
   stage: build
   script:
     - cd front/proyecto
@@ -57,22 +33,30 @@ build project:
 
 build docker image:
     stage: package
-    image: docker:19.03
+    image:
+      name: amazon/aws-cli
+      entrypoint: [""]
     services:
-      - docker:19.03-dind
+      - docker:dind
     before_script:
       - docker info
+      - amazon-linux-extras install docker
+      - aws --version
+      - docker --version
     script:
       - echo $CI_REGISTRY
       - echo $CI_REGISTRY_USER
       - echo $CI_REGISTRY_PASSWORD
       - echo $CI_REGISTRY_IMAGE
-      - docker login gl.deitech.online:5050 -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-      - ssh -T -p 26 -L 5050:gl.deitech.online:5050 user@gl.deitech.online
-      - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-      - docker build -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$CI_PIPELINE_IID front/proyecto
+      #- docker login gl.deitech.online:5050 -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+      #- ssh -T -p 26 -L 5050:gl.deitech.online:5050 user@gl.deitech.online
+      #- echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+      #- docker build -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$CI_PIPELINE_IID front/proyecto
+      - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+      - docker build -t $DOCKER_REGISTRY/$REPOSITORY_NAME:$CI_PIPELINE_IID front/proyecto
       - docker image ls
-      - docker push --all-tags $CI_REGISTRY_IMAGE
+      - docker push --all-tags $DOCKER_REGISTRY/$REPOSITORY_NAME:$CI_PIPELINE_IID
+      #- docker push --all-tags $CI_REGISTRY_IMAGE
 
 # build docker image:
 #   stage: docker
