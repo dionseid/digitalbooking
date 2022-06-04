@@ -2,6 +2,7 @@ image: node:8.9.0
 
 build project:
   script:
+    - cd front/proyecto
     - npm install
     #- npm test
     - npm run build
