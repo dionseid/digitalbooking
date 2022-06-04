@@ -1,0 +1,51 @@
+image: node:15
+
+stages:
+  - test
+  - build
+
+test project:
+  stage: test
+  script:
+    - cd front/proyecto
+    - npm install
+    - npm test
+
+build project:
+  stage: build
+  script:
+    - cd front/proyecto
+    - npm install
+    - CI=false npm run build
+
+
+
+# .npm_build:  
+#   image: node:10  
+#   script:   
+#     - npm install # Install all dependencies    
+#     - npm build # yarn build:${APP_ENV} # Build command  
+#   artifacts:    
+#     paths:      
+#       - ./build
+#   only:    
+#     refs:      
+#       - main
+
+# yarn_dev:  
+#   extends: .yarn_build  
+#   stage: build  
+#   before_script:    
+#     - export APP_ENV="dev"  
+#   only:    
+#     refs:      
+#       - develop
+
+# yarn_prod:  
+#   extends: .yarn_build  
+#   stage: build  
+#   before_script:    
+#     - export APP_ENV="prod"  
+#   only:    
+#     refs:      
+#       - master
