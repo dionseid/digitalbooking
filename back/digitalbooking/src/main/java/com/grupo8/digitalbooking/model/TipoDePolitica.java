@@ -1,6 +1,7 @@
 package com.grupo8.digitalbooking.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,20 +18,27 @@ import java.util.Set;
 @Table(name = "tipoDePoliticas")
 public class TipoDePolitica {
 
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
-//    @SequenceGenerator(name = "tipoDePoliticas_sequence", sequenceName = "tipoDePoliticas_sequence", allocationSize = 1)
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipoDePoliticas_sequence")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "tipoDePoliticas_sequence", sequenceName = "tipoDePoliticas_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipoDePoliticas_sequence")
 
     private Integer id;
     private String titulo;
     private String descripcion;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    //@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
-    @JoinTable(name = "tipoDePolitica_producto",joinColumns = {@JoinColumn(name = "tipoDePolitica_id")},
-            inverseJoinColumns = {@JoinColumn(name = "producto_id")})
-    private Set<Producto> productos;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "producto_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Producto producto;
+
+
+//    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+//    //@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
+//    @JoinTable(name = "tipoDePolitica_producto",joinColumns = {@JoinColumn(name = "tipoDePolitica_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "producto_id")})
+//    private Set<Producto> productos;
 
 
 //    @ManyToOne()
@@ -42,15 +50,18 @@ public class TipoDePolitica {
     }
 
     //constructor SIN id
-    public TipoDePolitica(String titulo, String descripcion) {
+    public TipoDePolitica(String titulo, String descripcion, Producto producto) {
         this.titulo = titulo;
         this.descripcion = descripcion;
+        this.producto= producto;
     }
 
     //constructor CON id
-    public TipoDePolitica(Integer id, String titulo, String descripcion) {
+    public TipoDePolitica(Integer id, String titulo, String descripcion, Producto producto) {
         this.titulo = titulo;
         this.descripcion = descripcion;
+        this.producto= producto;
+
 
     }
 

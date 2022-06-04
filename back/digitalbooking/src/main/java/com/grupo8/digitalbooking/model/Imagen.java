@@ -11,17 +11,17 @@ import javax.persistence.*;
 @Getter
 @Setter
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
 
 @Entity
 @Table(name = "imagenes")
 public class Imagen {
+    //   @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-//    @SequenceGenerator(name = "imagenes_sequence", sequenceName = "imagenes_sequence", allocationSize = 1)
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "imagenes_sequence")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "imagenes_sequence", sequenceName = "imagenes_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "imagenes_sequence")
 
     private Integer id;
     private String nombre;
@@ -35,17 +35,17 @@ public class Imagen {
     private Producto producto;
 
 
-//    public Imagen(Integer id, String nombre, String url) {
-//        this.id = id;
-//        this.nombre = nombre;
-//        this.url = url;
-//    }
-//
-//    public Imagen(String nombre, String url) {
-//        this.nombre = nombre;
-//        this.url = url;
-//    }
-//
-//    public Imagen() {
-//    }
+    public Imagen(Integer id, String nombre, String url) {
+        this.id = id;
+        this.nombre = nombre;
+        this.url = url;
+    }
+
+    public Imagen(String nombre, String url) {
+        this.nombre = nombre;
+        this.url = url;
+    }
+
+    public Imagen() {
+    }
 }
