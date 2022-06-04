@@ -1,6 +1,8 @@
 variables: 
-  DOCKER_REGISTRY: 145504712931.dkr.ecr.us-west-1.amazonaws.com
-  REPOSITORY_NAME: remo-front
+  DOCKER_REGISTRY: 145504712931.dkr.ecr.us-west-2.amazonaws.com
+  REPOSITORY_NAME: digitalbooking
+  TEAM: remo
+  APP: front
 
 image: node:15
 
@@ -52,8 +54,8 @@ build docker image:
       #- ssh -T -p 26 -L 5050:gl.deitech.online:5050 user@gl.deitech.online
       #- echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
       #- docker build -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$CI_PIPELINE_IID front/proyecto
-      - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY #--region us-west-2
-      - docker build -t $DOCKER_REGISTRY/$REPOSITORY_NAME:latest -t $DOCKER_REGISTRY/$REPOSITORY_NAME:$CI_PIPELINE_IID front/proyecto
+      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $DOCKER_REGISTRY #--region us-west-2
+      - docker build -t $DOCKER_REGISTRY/$REPOSITORY_NAME:$TEAM:$APP:latest -t $DOCKER_REGISTRY/$REPOSITORY_NAME:$TEAM:$APP:$CI_PIPELINE_IID front/proyecto
       - docker image ls
       - docker push --all-tags $DOCKER_REGISTRY/$REPOSITORY_NAME #$DOCKER_REGISTRY/$REPOSITORY_NAME:$CI_PIPELINE_IID
       #- docker push --all-tags $CI_REGISTRY_IMAGE
