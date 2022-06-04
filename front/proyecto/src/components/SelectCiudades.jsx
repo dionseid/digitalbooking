@@ -22,7 +22,7 @@ export default function SelectCiudades() {
   return (
     <div>
             <Select 
-            placeholder={<div><FontAwesomeIcon icon={faLocationDot} style={{marginRight:"4px"}}/>¿A dónde vamos?</div>} 
+            placeholder={<div className='placeholderSelect'><FontAwesomeIcon icon={faLocationDot} style={{marginRight:"4px"}}/>¿A dónde vamos?</div>} 
             className='inputBanner'
             options={dataCiudades.map( ciudad =>(
               {label: <div className='contenedorLabel'>

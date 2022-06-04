@@ -8,7 +8,7 @@ const selectStyles = {
       fontWeight: '700',
       fontSize: '16px',
       lineHeight: '19px',
-      display:'flex',
+      display:'flex'
     }),
     singleValue: (provided, state) => {
       const opacity = state.isDisabled ? 0.5 : 1;

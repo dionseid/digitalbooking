@@ -12,5 +12,13 @@
     margin-right: 8px;
     color:#31363F;
     font-size: 25px;
+}
 
+.placeholderSelect{
+    font-family: "Font Awesome 5 Free";
+    font-style:normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    margin-left: 12px;
 }
