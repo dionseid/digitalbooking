@@ -3,7 +3,7 @@ build project:
   script:
     - cd front/proyecto
     - npm install
-    - npm test
+    - npm test --passWithNoTests
     - CI=false npm run build
 
 
