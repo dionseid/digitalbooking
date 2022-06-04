@@ -19,19 +19,18 @@ import java.util.Set;
 @Entity
 @Table(name = "categorias")
 public class Categoria {
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-//    @SequenceGenerator(name = "categorias_sequence", sequenceName = "categorias_sequence", allocationSize = 1)
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorias_sequence")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @SequenceGenerator(name = "categorias_sequence", sequenceName = "categorias_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorias_sequence")
     private Integer id;
     private String titulo;
     private String descripcion;
     private String urlImg;
 
     //ANDA
-    @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
-    private Set<Producto> productos = new HashSet<>();
+   // @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
+   // private Set<Producto> productos = new HashSet<>();
 
     //constructor vacio
     public Categoria() {
