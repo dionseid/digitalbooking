@@ -1,5 +1,5 @@
 variables: 
-  DOCKER_REGISTRY: 145504712931.dkr.ecr.us-west-2.amazonaws.com
+  DOCKER_REGISTRY: 145504712931.dkr.ecr.us-west-1.amazonaws.com
   REPOSITORY_NAME: remo-front
 
 image: node:15
