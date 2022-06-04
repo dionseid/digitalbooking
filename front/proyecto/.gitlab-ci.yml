@@ -1,8 +1,13 @@
 image: node:15
 
+cache:
+  paths:
+    - front/proyecto/node_modules
+
 stages:
   - test
   - build
+  - deploy
 
 test project:
   stage: test
@@ -15,8 +20,11 @@ build project:
   stage: build
   script:
     - cd front/proyecto
-    - npm install
     - CI=false npm run build
+    - echo $CI_PIPELINE_IID > front/proyecto/build/version.html
+  artifacts:    
+    paths:      
+      - front/proyecto/build
 
 
 
