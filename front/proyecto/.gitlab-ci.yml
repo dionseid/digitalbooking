@@ -1,5 +1,31 @@
 image: node:15
 
+variables:
+      # When using dind service we need to instruct docker, to talk with
+      # the daemon started inside of the service. The daemon is
+      # available with a network connection instead of the default
+      # /var/run/docker.sock socket. docker:19.03-dind does this
+      # automatically by setting the DOCKER_HOST in
+      # https://github.com/docker-library/docker/blob/d45051476babc297257df490d22cbd806f1b11e4/19.03/docker-entrypoint.sh#L23-L29
+      #
+      # The 'docker' hostname is the alias of the service container as described at
+      # https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#accessing-the-services.
+      #
+      # Note that if you're using the Kubernetes executor, the variable should be set to
+      # tcp://localhost:2376/ because of how the Kubernetes executor connects services
+      # to the job container
+      # DOCKER_HOST: tcp://localhost:2376/
+      #
+      # When using dind, it's wise to use the overlayfs driver for
+      # improved performance.
+      DOCKER_DRIVER: overlay2
+      # Specify to Docker where to create the certificates, Docker will
+      # create them automatically on boot, and will create
+      # `/certs/client` that will be shared between the service and
+      # build container.
+      DOCKER_TLS_CERTDIR: "/certs"
+
+
 cache:
   paths:
     - front/proyecto/node_modules
@@ -29,9 +55,11 @@ build project:
 
 build docker image:
     stage: package
-    image: docker:20.10.16
+    image: docker:19.03
     services:
-      - docker:20.10.16-dind
+      - docker:19.03-dind
+    before_script:
+      - docker info
     script:
       - echo $CI_REGISTRY
       - echo $CI_REGISTRY_USER
