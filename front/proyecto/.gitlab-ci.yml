@@ -24,7 +24,7 @@ build project:
     - echo $CI_PIPELINE_IID > build/version.html
   artifacts:    
     paths:      
-      - build
+      - ./build
 
 
 
