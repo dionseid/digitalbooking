@@ -10,7 +10,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.0"
+      version = "> 3.0"
     }
   }
 }
@@ -95,4 +95,13 @@ module "database" {
   db_name    = "${var.team_name}${var.product_name}${var.environment_name}"
   db_user    = var.team_name
   db_pass    = var.db_pass
+}
+
+module "storage" {
+  source = "./modules/storage"
+
+  team_name        = var.team_name
+  product_name     = var.product_name
+  environment_name = var.environment_name
+  bucket_name      = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-public-bucket${var.environment_name != "" ? "-${var.environment_name}" : ""}"
 }
