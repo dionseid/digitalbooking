@@ -31,7 +31,7 @@ build docker image:
     stage: package
     image: docker:20.10.16
     services:
-      - docker:20.10.16-dind-alpine3.16-dind
+      - docker:20.10.16-dind
     script:
       - echo $CI_REGISTRY
       - echo $CI_REGISTRY_USER
