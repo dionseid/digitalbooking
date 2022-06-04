@@ -1,14 +1,10 @@
 package com.grupo8.digitalbooking.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 //Crear una tabla categorias en la base de datos
 @ToString
@@ -19,10 +15,9 @@ import java.util.Set;
 @Entity
 @Table(name = "categorias")
 public class Categoria {
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
-    @SequenceGenerator(name = "categorias_sequence", sequenceName = "categorias_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorias_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String titulo;
     private String descripcion;

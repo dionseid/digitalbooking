@@ -46,4 +46,14 @@ public class ProductoService {
             throw new Exception("Producto con id: "+id+" no encontrado");
 
     }
+    //Buscar productos por categoria
+    public List<Producto> buscarPorCategoria(Integer id){
+        return productoRepository.findByCategoria(id);
+    }
+
+    //Buscar productos por ciudad
+    public List<Producto> buscarPorCiudad(Integer id){
+        return productoRepository.findByCiudad(id);
+    }
+
 }

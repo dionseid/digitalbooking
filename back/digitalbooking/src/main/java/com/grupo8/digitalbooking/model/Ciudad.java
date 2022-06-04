@@ -1,15 +1,10 @@
 package com.grupo8.digitalbooking.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
-
 
 @ToString
 @Getter
@@ -18,10 +13,9 @@ import java.util.Set;
 @Entity
 @Table(name="ciudades")
 public class Ciudad {
-    //   @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
-    @SequenceGenerator(name = "ciudades_sequence", sequenceName = "ciudades_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ciudades_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String Nombre;
     private String Provincia;
