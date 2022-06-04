@@ -1,5 +1,5 @@
 build project:
-  image: node:15
+  image: node
   script:
     - npm install
     #- npm test
