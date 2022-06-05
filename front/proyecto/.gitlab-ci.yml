@@ -31,6 +31,8 @@ test project:
     - cd front/proyecto
     - npm install
     - npm test
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule"
 
 build project:
   stage: build
@@ -42,6 +44,8 @@ build project:
   artifacts:    
     paths:      
       - front/proyecto/build
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule"
 
 build docker image:
     stage: package
@@ -59,6 +63,8 @@ build docker image:
       - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID front/proyecto
       - docker image ls
       - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
+    rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule"
 
 update token:
   stage: package
