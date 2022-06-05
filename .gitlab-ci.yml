@@ -71,11 +71,9 @@
 #     - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
 #     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
 
-update ECR token:
+update ecr token:
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule" 
-    - changes:
-      - front/*
   trigger:
     include: front/.gitlab-ci.yml
 

@@ -4,21 +4,13 @@ update token:
     entrypoint: [""]
   before_script:
     - aws --version
-#    - yum install -y libtool.x86_64
   rules:
     - if: $CI_PIPELINE_SOURCE == "parent_pipeline" 
   script:
-    - echo $AWS_ECR_AUTH
     - USER=AWS
     - TOKEN=$(aws ecr get-login-password --region us-west-2)
-    - echo $TOKEN
     - AUTH=$(echo "$USER:$TOKEN" | base64 | tr -d "\n")
-    - echo $AUTH
-    - echo $GITLAB_PERSONAL_ACCESS_TOKEN
     - |
       curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
       --silent --output /dev/null --show-error --fail \
       "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH" --form "value=$AUTH"
-    #--header 'Authorization: Bearer MWQBJQwxhGu-KBhj9zuQ' \
-    #--header 'Content-Type: application/x-www-form-urlencoded' \
-    #--data-urlencode 'value=$AUTH'
