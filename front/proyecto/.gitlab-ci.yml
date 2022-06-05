@@ -14,7 +14,7 @@ stages:
   - test package
   - deploy
 
-.test project:
+test project:
   stage: test
   image: node:16-alpine
   script:
@@ -22,7 +22,7 @@ stages:
     - npm install
     - npm test
 
-.build project:
+build project:
   stage: build
   image: node:16-alpine
   script:
@@ -33,7 +33,7 @@ stages:
     paths:      
       - front/proyecto/build
 
-.build docker image:
+build docker image:
     stage: package
     image:
       name: amazon/aws-cli
@@ -50,7 +50,7 @@ stages:
       - docker image ls
       - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
 
-.test docker image:
+test docker image:
   stage: test package
   image: curlimages/curl
   services:
@@ -64,6 +64,9 @@ deploy to production:
     name: amazon/aws-cli:2.4.11
     entrypoint: [""]
   stage: deploy
+  variables:
+    APP_NAME: remo-digitalbooking-prod
+    APP_ENV_NAME: remo-digitalbooking-env-prod
   #environment: production
   script:
     - aws --version
@@ -74,6 +77,8 @@ deploy to production:
     - cat front/proyecto/auth.json
     - aws s3 cp front/proyecto/Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
     - aws s3 cp front/proyecto/auth.json s3://$AWS_S3_BUCKET/auth.json
+    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $CI_PIPELINE_IID --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=Dockerrun.aws.json
+    - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME
 
 
 # build docker image:
