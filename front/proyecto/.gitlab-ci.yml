@@ -90,6 +90,8 @@ test docker image:
       alias: frontend
   script:
     - curl http://frontend/version.html | grep $CI_PIPELINE_IID
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule"
 
 
 # build docker image:
