@@ -78,8 +78,8 @@ trigger_a:
   stage: frontend
   trigger:
     include: front/proyecto/.gitlab-ci.yml
-    forward:
-      pipeline_variables: true
+    # forward:
+    #   pipeline_variables: true
   rules:
     - changes:
       - front/proyecto/*
