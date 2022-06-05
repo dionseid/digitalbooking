@@ -87,5 +87,6 @@ trigger_a:
   trigger:
     include: front/proyecto/.gitlab-ci.yml
   rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule" 
     - changes:
       - front/proyecto/*
