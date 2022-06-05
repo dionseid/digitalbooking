@@ -1,5 +1,4 @@
 variables: 
-  DOCKER_REGISTRY: 145504712931.dkr.ecr.us-west-2.amazonaws.com
   REPOSITORY_NAME: digitalbooking
   TEAM: remo
   APP: front
@@ -56,20 +55,31 @@ build docker image:
       - aws --version
       - docker --version
     script:
-      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $DOCKER_REGISTRY
-      - docker build -t $DOCKER_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $DOCKER_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID front/proyecto
+      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
+      - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID front/proyecto
       - docker image ls
-      - docker push --all-tags $DOCKER_REGISTRY/$REPOSITORY_NAME
+      - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
+
+get token:
+  stage: package
+  image: 
+    name: amazon/aws-cli
+    entrypoint: [""]
+  before_script:
+    - aws --version 
+  script:
+    - TOKEN=$(aws ecr get-login-password)
+    - echo $TOKEN
 
 test docker image:
   stage: test package
   image: curlimages/curl
   # env:
     # AWS_REGION: us-west-2
-  variables:
-    AWS_DEFAULT_REGION: us-west-2
+  # variables:
+  #   AWS_DEFAULT_REGION: us-west-2
   services:
-    - name: $DOCKER_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID
+    - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID
       alias: frontend
   script:
     - curl http://frontend/version.html | grep $CI_PIPELINE_IID
