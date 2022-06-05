@@ -4,7 +4,7 @@ variables:
   TEAM: remo
   APP: front
 
-image: node:15 # I could retry with node:16-alpine
+image: node:16-alpine #node:15
 
 cache:
   paths:
