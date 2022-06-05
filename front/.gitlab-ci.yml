@@ -4,7 +4,7 @@ update token:
     entrypoint: [""]
   before_script:
     - aws --version
-    - yum install libtool.x86_64
+    - yum install -y libtool.x86_64
   rules:
     - if: $CI_PIPELINE_SOURCE == "parent_pipeline" 
   script:

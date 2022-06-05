@@ -79,6 +79,8 @@ update ECR token:
   stage: updates
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule" 
+    - changes:
+      - front/*
   trigger:
     include: front/.gitlab-ci.yml
 
