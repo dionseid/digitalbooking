@@ -67,8 +67,8 @@ update token:
     entrypoint: [""]
   before_script:
     - aws --version
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" 
+  # rules:
+  #   - if: $CI_PIPELINE_SOURCE == "schedule" 
   script:
     - USER=AWS
     - TOKEN=$(aws ecr get-login-password --region us-west-2)
