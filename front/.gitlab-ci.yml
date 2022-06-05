@@ -19,4 +19,4 @@ update token:
       curl --location --request PUT 'https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH' --silent --output /dev/null --show-error --fail \
       --header 'Authorization: Bearer $GITLAB_PERSONAL_ACCESS_TOKEN' \
       --header 'Content-Type: application/x-www-form-urlencoded' \
-      --data-urlencode 'value=$AUTH' \
+      --data-urlencode 'value=$AUTH'
