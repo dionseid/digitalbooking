@@ -79,10 +79,13 @@ update token:
     - USER=AWS
     - TOKEN=$(aws ecr get-login-password --region us-west-2)
     - AUTH=$(echo "$USER:$TOKEN" | base64 | tr -d "\n")
+    - echo $GITLAB_PERSONAL_ACCESS_TOKEN
+    - echo $CI_PROJECT_ID
+    - echo $AWS_ECR_AUTH
     - |
       curl --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
       --silent --output /dev/null --show-error --fail \
-      "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTHE" --form "value=$AUTH"
+      "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH" --form "value=$AUTH"
     #/projects/:$CI_PROJECT_ID/variables/:$AWS_ECR_AUTH --form "value=$AUTH"
     #"https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH" --form "value=$AUTH"
 
