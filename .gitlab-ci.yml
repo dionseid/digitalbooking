@@ -72,10 +72,10 @@
 #     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
 
 stages:
-  - triggers
+  - frontend
 
 trigger_a:
-  stage: triggers
+  stage: frontend
   trigger:
     include: front/proyecto/.gitlab-ci.yml
     forward:
