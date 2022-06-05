@@ -60,18 +60,23 @@ build docker image:
       - docker image ls
       - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
 
-get token:
+update token:
   stage: package
   image: 
     name: amazon/aws-cli
     entrypoint: [""]
   before_script:
-    - aws --version 
+    - aws --version
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" 
   script:
     - USER=AWS
     - TOKEN=$(aws ecr get-login-password --region us-west-2)
     - AUTH=$(echo "$USER:$TOKEN" | base64 | tr -d "\n")
-    - echo $AUTH
+    - |
+      curl --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
+      --silent --output /dev/null --show-error --fail \
+      "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH" --form "value=$AUTH"
 
 test docker image:
   stage: test package
