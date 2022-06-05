@@ -82,7 +82,8 @@ update token:
     - |
       curl --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
       --silent --output /dev/null --show-error --fail \
-      /projects/:$CI_PROJECT_ID/variables/:$AWS_ECR_AUTH --form "value=$AUTH"
+      "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTHE" --form "value=$AUTH"
+    #/projects/:$CI_PROJECT_ID/variables/:$AWS_ECR_AUTH --form "value=$AUTH"
     #"https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH" --form "value=$AUTH"
 
 test docker image:
