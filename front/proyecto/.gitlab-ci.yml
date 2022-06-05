@@ -4,7 +4,7 @@ variables:
   TEAM: remo
   APP: front
 
-image: node:15
+image: node:15 # I could retry with node:16-alpine
 
 cache:
   paths:
@@ -14,6 +14,7 @@ stages:
   - test
   - build
   - package
+  - test package
   - deploy
 
 test project:
@@ -41,24 +42,24 @@ build docker image:
     services:
       - docker:dind
     before_script:
-      #- docker info
       - amazon-linux-extras install docker
       - aws --version
       - docker --version
     script:
-      - echo $CI_REGISTRY
-      - echo $CI_REGISTRY_USER
-      - echo $CI_REGISTRY_PASSWORD
-      - echo $CI_REGISTRY_IMAGE
-      #- docker login gl.deitech.online:5050 -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-      #- ssh -T -p 26 -L 5050:gl.deitech.online:5050 user@gl.deitech.online
-      #- echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-      #- docker build -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$CI_PIPELINE_IID front/proyecto
-      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $DOCKER_REGISTRY #--region us-west-2
+      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $DOCKER_REGISTRY
       - docker build -t $DOCKER_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $DOCKER_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID front/proyecto
       - docker image ls
-      - docker push --all-tags $DOCKER_REGISTRY/$REPOSITORY_NAME #$DOCKER_REGISTRY/$REPOSITORY_NAME:$CI_PIPELINE_IID
-      #- docker push --all-tags $CI_REGISTRY_IMAGE
+      - docker push --all-tags $DOCKER_REGISTRY/$REPOSITORY_NAME
+
+test docker image:
+  stage: test package
+  image: curlimages/curl
+  services:
+    - name: $DOCKER_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID
+      alias: frontend
+  script:
+    - curl http://frontend/version.html | grep $CI_PIPELINE_IID
+
 
 # build docker image:
 #   stage: docker
