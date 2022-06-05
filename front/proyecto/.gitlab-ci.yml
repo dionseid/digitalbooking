@@ -14,7 +14,7 @@ stages:
   - test package
   - deploy
 
-test project:
+.test project:
   stage: test
   image: node:16-alpine
   script:
@@ -22,7 +22,7 @@ test project:
     - npm install
     - npm test
 
-build project:
+.build project:
   stage: build
   image: node:16-alpine
   script:
@@ -33,7 +33,7 @@ build project:
     paths:      
       - front/proyecto/build
 
-build docker image:
+.build docker image:
     stage: package
     image:
       name: amazon/aws-cli
@@ -50,7 +50,7 @@ build docker image:
       - docker image ls
       - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
 
-test docker image:
+.test docker image:
   stage: test package
   image: curlimages/curl
   services:
@@ -58,6 +58,22 @@ test docker image:
       alias: frontend
   script:
     - curl http://frontend/version.html | grep $CI_PIPELINE_IID
+
+deploy to production:
+  image:
+    name: amazon/aws-cli:2.4.11
+    entrypoint: [""]
+  stage: deploy
+  #environment: production
+  script:
+    - aws --version
+    - yum install -y gettext
+    - envsubst < eb-templates/Dockerrun.aws.json > Dockerrun.aws.json
+    - envsubst < eb-templates/auth.json > auth.json
+    - cat Dockerrun.aws.json
+    - cat auth.json
+    - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
+    - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
 
 
 # build docker image:
