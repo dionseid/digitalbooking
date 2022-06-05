@@ -79,6 +79,7 @@ update token:
     - USER=AWS
     - TOKEN=$(aws ecr get-login-password --region us-west-2)
     - AUTH=$(echo "$USER:$TOKEN" | base64 | tr -d "\n")
+    - echo $AUTH
     - echo $GITLAB_PERSONAL_ACCESS_TOKEN
     - echo $CI_PROJECT_ID
     - echo $AWS_ECR_AUTH
