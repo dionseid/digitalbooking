@@ -1,0 +1,15 @@
+{
+    "AWSEBDockerrunVersion": "1",
+    "Image": {
+        "Name": "$AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID"
+    },
+    "Authentication": {
+        "Bucket": "$AWS_S3_BUCKET",
+        "Key": "auth.json"
+    },
+    "Ports": [
+        {
+            "ContainerPort": 80
+        }
+    ]
+} 
