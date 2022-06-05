@@ -64,8 +64,10 @@ build docker image:
 test docker image:
   stage: test package
   image: curlimages/curl
-  env:
-    AWS_REGION: us-west-2
+  # env:
+    # AWS_REGION: us-west-2
+  variables: 
+    - AWS_DEFAULT_REGION: us-west-2
   services:
     - name: $DOCKER_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID
       alias: frontend
