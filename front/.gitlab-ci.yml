@@ -1,0 +1,18 @@
+update token:
+  image: 
+    name: amazon/aws-cli
+    entrypoint: [""]
+  before_script:
+    - aws --version
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "parent_pipeline" 
+  script:
+    - USER=AWS
+    - TOKEN=$(aws ecr get-login-password --region us-west-2)
+    - AUTH=$(echo "$USER:$TOKEN" | base64 | tr -d "\n")
+    - |
+      curl --location --request PUT 'https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH' \
+      --header 'Authorization: Bearer $GITLAB_PERSONAL_ACCESS_TOKEN' \
+      --header 'Content-Type: application/x-www-form-urlencoded' \
+      --data-urlencode 'value=$AUTH'
+      --silent --output /dev/null --show-error --fail \

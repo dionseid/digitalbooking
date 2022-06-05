@@ -72,14 +72,20 @@
 #     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
 
 stages:
+  - updates
   - triggers
+
+update ECR token:
+  stage: updates
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" 
+  trigger:
+    include: front/.gitlab-ci.yml
 
 trigger_a:
   stage: triggers
   trigger:
     include: front/proyecto/.gitlab-ci.yml
-    forward:
-      pipeline_variables: true
   rules:
     - changes:
-        - front/proyecto/*
+      - front/proyecto/*

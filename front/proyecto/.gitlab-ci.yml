@@ -50,30 +50,6 @@ build docker image:
       - docker image ls
       - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
 
-update token:
-  stage: package
-  image: 
-    name: amazon/aws-cli
-    entrypoint: [""]
-  before_script:
-    - aws --version
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" 
-  script:
-    - USER=AWS
-    - TOKEN=$(aws ecr get-login-password --region us-west-2)
-    - AUTH=$(echo "$USER:$TOKEN" | base64 | tr -d "\n")
-    - echo $AUTH
-    - echo $GITLAB_PERSONAL_ACCESS_TOKEN
-    - echo $CI_PROJECT_ID
-    - echo $AWS_ECR_AUTH
-    - |
-      curl --location --request PUT 'https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH' \
-      --header 'Authorization: Bearer $GITLAB_PERSONAL_ACCESS_TOKEN' \
-      --header 'Content-Type: application/x-www-form-urlencoded' \
-      --data-urlencode 'value=$AUTH'
-      --silent --output /dev/null --show-error --fail \
-
 test docker image:
   stage: test package
   image: curlimages/curl
@@ -82,8 +58,6 @@ test docker image:
       alias: frontend
   script:
     - curl http://frontend/version.html | grep $CI_PIPELINE_IID
-  rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule"
 
 
 # build docker image:
