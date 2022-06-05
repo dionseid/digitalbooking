@@ -80,4 +80,6 @@ trigger_a:
     include: front/proyecto/.gitlab-ci.yml
   rules:
     - changes:
-        - front/proyecto/*
+      - front/proyecto/*
+  forward:
+    pipeline_variables: true

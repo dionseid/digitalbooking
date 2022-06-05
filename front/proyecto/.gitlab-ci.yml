@@ -59,7 +59,6 @@ update token:
     - aws --version
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule" 
-      when: never
   script:
     - USER=AWS
     - TOKEN=$(aws ecr get-login-password --region us-west-2)
