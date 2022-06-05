@@ -71,13 +71,16 @@
 #     - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
 #     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
 
-stages:
-  - triggers
+update ecr token:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" 
+  trigger:
+    include: front/.gitlab-ci.yml
 
 trigger_a:
-  stage: triggers
   trigger:
     include: front/proyecto/.gitlab-ci.yml
   rules:
-    - changes:
-        - front/proyecto/*
+    - if: $CI_PIPELINE_SOURCE != "schedule" 
+    # - changes:
+    #   - front/proyecto/*
