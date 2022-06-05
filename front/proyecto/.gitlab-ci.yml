@@ -68,12 +68,12 @@ deploy to production:
   script:
     - aws --version
     - yum install -y gettext
-    - envsubst < eb-templates/Dockerrun.aws.json > Dockerrun.aws.json
-    - envsubst < eb-templates/auth.json > auth.json
-    - cat Dockerrun.aws.json
-    - cat auth.json
-    - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
-    - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
+    - envsubst < front/proyecto/eb-templates/Dockerrun.aws.json > front/proyecto/Dockerrun.aws.json
+    - envsubst < front/proyecto/eb-templates/auth.json > front/proyecto/auth.json
+    - cat front/proyecto/Dockerrun.aws.json
+    - cat front/proyecto/auth.json
+    - aws s3 cp front/proyecto/Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
+    - aws s3 cp front/proyecto/auth.json s3://$AWS_S3_BUCKET/auth.json
 
 
 # build docker image:
