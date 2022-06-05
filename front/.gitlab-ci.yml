@@ -4,7 +4,7 @@ update token:
     entrypoint: [""]
   before_script:
     - aws --version
-    - yum install -y libtool.x86_64
+#    - yum install -y libtool.x86_64
   rules:
     - if: $CI_PIPELINE_SOURCE == "parent_pipeline" 
   script:
@@ -16,4 +16,4 @@ update token:
       --header 'Authorization: Bearer $GITLAB_PERSONAL_ACCESS_TOKEN' \
       --header 'Content-Type: application/x-www-form-urlencoded' \
       --data-urlencode 'value=$AUTH'
-      --silent --output /dev/null --show-error --fail \
+    #--silent --output /dev/null --show-error --fail \
