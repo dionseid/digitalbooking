@@ -68,8 +68,10 @@ get token:
   before_script:
     - aws --version 
   script:
+    - USER=AWS
     - TOKEN=$(aws ecr get-login-password)
-    - echo $TOKEN
+    - AUTH=$(echo "$USER:$TOKEN" | base64 | tr -d "\n")
+    - echo $AUTH
 
 test docker image:
   stage: test package
