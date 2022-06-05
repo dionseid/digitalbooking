@@ -69,7 +69,7 @@ get token:
     - aws --version 
   script:
     - USER=AWS
-    - TOKEN=$(aws ecr get-login-password)
+    - TOKEN=$(aws ecr get-login-password --region us-west-2)
     - AUTH=$(echo "$USER:$TOKEN" | base64 | tr -d "\n")
     - echo $AUTH
 
