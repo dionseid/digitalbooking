@@ -84,3 +84,9 @@ trigger_a:
     - if: $CI_PIPELINE_SOURCE != "schedule" 
     # - changes:
     #   - front/proyecto/*
+
+trigger_b:
+  trigger:
+    include: back/digitalbooking/.gitlab-ci.yml
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule"
