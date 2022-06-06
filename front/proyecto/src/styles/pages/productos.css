@@ -8,17 +8,15 @@
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
-    line-height: 28px;
+    margin-top: 55px;
 }
 
 .headerProducto div{
-    padding-left: 15px;
+    margin-left: 10px;
 }
 
 .headerProducto p{
-    margin-top:60px;
-    font-size: 14px;
-    line-height: 18px;    
+    font-size: 14px;   
     color: #DFE4EA;
 }
 
@@ -34,14 +32,30 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
 }
 
-.calificacion{
+.ubicacion div dd{
+    margin-left: 15px;
+}
+
+.ubicacion div dt, .ubicacion div dd{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.calificacionProductos{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    height: 55px;
+}
+
+.iconosLike{
+    font-size: 25px;
+    padding: 5px;
 }
 
 .fechasDisponibles{

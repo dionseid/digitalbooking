@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
   faLocationDot,
   faStar,
+  faShareNodes,
+  faHeart
 } from "@fortawesome/free-solid-svg-icons";
 import Galeria from "../components/Galeria";
 import Calendario from "../components/Calendario";
@@ -13,6 +16,7 @@ import "../styles/pages/productos.css";
 import BootstrapCarousel from "../components/BootstrapCarousel";
 import Media from "react-media";
 import { Link } from "react-router-dom";
+import Caracteristicas from "../components/Caracteristicas";
 
 const Productos = () => { 
   return (
@@ -31,25 +35,26 @@ const Productos = () => {
       <body>
         <section className="ubicacion">
           <div>
-            <p>
+            <dt>
               <FontAwesomeIcon icon={faLocationDot} style={{"paddingRight":"5px"}}/>
               Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina.
-            </p>
-            <p>A 940 m del centro</p>
+            </dt>
+            <dd>A 940 m del centro</dd>
           </div>
-          <div className="calificacion">            
-            <div>
-              <p style={{ fontWeight: "700" }}>Muy bueno</p>
+          <div className="calificacionProductos">            
+            <div className="contenedorEstrellas">
+              <dt style={{ fontWeight: "700" }}>Muy bueno</dt>
+              <dd><FontAwesomeIcon icon={faStar} className="estrella" />
               <FontAwesomeIcon icon={faStar} className="estrella" />
               <FontAwesomeIcon icon={faStar} className="estrella" />
               <FontAwesomeIcon icon={faStar} className="estrella" />
-              <FontAwesomeIcon icon={faStar} className="estrella" />
-              <FontAwesomeIcon icon={faStar} className="estrella" />
+              <FontAwesomeIcon icon={faStar} className="estrella" /></dd>             
             </div>
             <span className="puntaje">8</span>
           </div>
         </section>
         <section className="imagenes">
+          <p><FontAwesomeIcon icon={faShareNodes} className='iconosLike'/><FontAwesomeIcon icon={faHeart} className='iconosLike'/></p>
           <Media query="(max-width:768px)">
             {matches => {
               return matches ? 
@@ -70,8 +75,8 @@ const Productos = () => {
             elementum metus non justo luctus iaculis.
           </p>
         </section>
-        <section className="contenedorCaracteristicas">
-            <h2>¿Qué ofrece este lugar?</h2>            
+        <section>
+            <Caracteristicas/>            
         </section>
         <section className="fechasDisponibles">
             <h2>Fechas disponibles</h2>
