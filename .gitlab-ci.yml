@@ -72,10 +72,12 @@
 #     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
 
 stages:
+  - update
   - build
   - deploy
 
 update ecr token:
+  stage: update
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule" 
   trigger:
