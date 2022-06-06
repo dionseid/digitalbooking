@@ -1,13 +1,26 @@
 .contendorCaracteristicas{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 30px;
+    justify-content: start;
+    align-items: start;
+    flex-wrap:wrap;
+    align-content: space-around;
+    gap: 140px;
+    max-width: 70%;
+    padding: 30px;
 }
 
 .caracteristica{
     display: flex;
     gap: 7px;
+}
 
+/*Responsive*/
+@media screen and (max-width: 768px){
+    .contendorCaracteristicas{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 5px;
+    }
+
+    
 }

@@ -34,10 +34,10 @@ const Productos = () => {
       </header>
       <body>
         <section className="ubicacion">
-          <div>
+          <div className="contenedorDireccion">
             <dt>
               <FontAwesomeIcon icon={faLocationDot} style={{"paddingRight":"5px"}}/>
-              Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina.
+              <p>Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina.</p>
             </dt>
             <dd>A 940 m del centro</dd>
           </div>
@@ -84,9 +84,9 @@ const Productos = () => {
                 <div>
                 <Calendario/> 
                 </div>             
-                <div>
+                <div className="contendorReserva">
                   <p>Agregá tus fechas de viaje para obtener precios exactos</p>
-                  <button className="botonReservaFecha">Iniciar reserva</button>
+                  <button className="buttonCard">Iniciar reserva</button>
                 </div> 
             </div> 
                        

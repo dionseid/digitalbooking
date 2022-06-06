@@ -34,6 +34,10 @@
     align-items: center;
 }
 
+.ubicacion div dt{
+    display: flex;
+}
+
 .ubicacion div dd{
     margin-left: 15px;
 }
@@ -45,10 +49,17 @@
     line-height: 16px;
 }
 
+.contenedorEstrellas{
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+   padding-right: 8px;
+}
+
 .calificacionProductos{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     height: 55px;
 }
@@ -61,19 +72,53 @@
 .fechasDisponibles{
     background-color: #DFE4EA;
     display: flex;
+    padding: 40px;
 }
 
 .contenedorCalendario{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
     text-align: center;
+    gap:100px;
+    
+}
+
+.contendorReserva{
+    max-width: 500px;
     background-color: #FFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);    
 }
 
-.botonReservaFecha{
-}
 
+@media screen and (max-width: 768px){
+    .ubicacion{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: space-between;
+    }
+
+    .contenedorDireccion dd{
+        display: none;
+    }
+
+    .contenedorCalendario{
+        flex-direction: column;
+        gap: 15px;
+        text-align: start;
+    }
+
+    .contendorReserva{
+        max-width: 100%;
+        background-color: #DFE4EA;
+        padding: 0px;
+        border-radius: none;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.12);    
+    }
+    
+}
 
 
