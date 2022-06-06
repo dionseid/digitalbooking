@@ -2,6 +2,7 @@ stages:
   - build
   - test
   - package
+  - image
   - deploy
 
 variables:
@@ -37,7 +38,7 @@ package job:
     - mvn package
 
 build docker image:
-  stage: package
+  stage: image
   image:
     name: amazon/aws-cli
     entrypoint: [""]
