@@ -82,11 +82,13 @@ update ecr token:
     - if: $CI_PIPELINE_SOURCE == "schedule" 
   trigger:
     include: front/.gitlab-ci.yml
+    strategy: depend
 
 trigger_a:
   stage: build
   trigger:
     include: front/proyecto/.gitlab-ci.yml
+    strategy: depend
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" 
     # - changes: #Descomentar
@@ -96,6 +98,7 @@ trigger_b:
   stage: build
   trigger:
     include: back/digitalbooking/.gitlab-ci.yml
+    strategy: depend
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule"
 
