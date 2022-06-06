@@ -71,6 +71,10 @@
 #     - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
 #     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
 
+stages:
+  - build
+  - deploy
+
 update ecr token:
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule" 
@@ -78,6 +82,7 @@ update ecr token:
     include: front/.gitlab-ci.yml
 
 trigger_a:
+  stage: build
   trigger:
     include: front/proyecto/.gitlab-ci.yml
   rules:
@@ -86,7 +91,32 @@ trigger_a:
     #   - front/proyecto/*
 
 trigger_b:
+  stage: build
   trigger:
     include: back/digitalbooking/.gitlab-ci.yml
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule"
+
+deploy to production:
+  stage: deploy
+  image:
+    name: amazon/aws-cli:2.4.11
+    entrypoint: [""]
+  stage: deploy
+  variables:
+    APP_NAME: remo-digitalbooking-prod
+    APP_ENV_NAME: remo-digitalbooking-env-prod
+  environment: production
+  script:
+    - aws --version
+    - yum install -y gettext
+    - envsubst < eb-templates/Dockerrun.aws.json > Dockerrun.aws.json
+    - envsubst < eb-templates/auth.json > auth.json
+    - cat Dockerrun.aws.json
+    - cat auth.json
+    - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/Dockerrun.aws.json
+    - aws s3 cp auth.json s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/auth.json
+    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $CI_PIPELINE_IID --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/Dockerrun.aws.json
+    - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME
+    - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME
+    - curl $CI_ENVIRONMENT_URL/version.html | grep $CI_PIPELINE_IID # Sole prueba que frontend funciona
