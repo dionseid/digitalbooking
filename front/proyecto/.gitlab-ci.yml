@@ -27,7 +27,7 @@ build project:
   image: node:16-alpine
   script:
     - cd front/proyecto
-    - CI=false npm run build
+    - CI=false npm run build # Investigar 'CI=false'
     - echo $CI_PIPELINE_IID > build/version.html
   artifacts:
     paths:
