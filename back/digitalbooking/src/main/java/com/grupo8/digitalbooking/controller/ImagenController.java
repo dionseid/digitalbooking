@@ -16,7 +16,6 @@ public class ImagenController {
     private ImagenService imagenService;
 
 
-    //corregir -> en postman guarda la url como "null"
     @PostMapping
     public ResponseEntity<Imagen> agregarImagen(@RequestBody Imagen imagen){
         return ResponseEntity.ok(imagenService.agregarImagen(imagen));

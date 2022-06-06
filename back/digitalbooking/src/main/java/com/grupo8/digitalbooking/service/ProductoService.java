@@ -36,6 +36,10 @@ public class ProductoService {
 
     //Actualizar producto
     public Producto actualizarProducto(Producto producto){
+        Optional<Ciudad> ciudad =  ciudadRepository.findById(producto.getCiudad().getId());
+        producto.setCiudad(ciudad.get());
+        Optional<Categoria> categoria =  categoriaRepository.findById(producto.getCategoria().getId());
+        producto.setCategoria(categoria.get());
         return productoRepository.save(producto);
     }
 

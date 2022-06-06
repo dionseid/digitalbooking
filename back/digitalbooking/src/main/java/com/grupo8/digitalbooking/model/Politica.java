@@ -13,14 +13,12 @@ import javax.persistence.*;
 
 //nombre de la tabla en la bd
 @Entity
-@Table(name = "tiposDePolitica")
-public class TipoDePolitica {
-
-
+@Table(name = "Politicas")
+public class Politica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String titulo;
+    private String tipo;
     private String descripcion;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -41,19 +39,19 @@ public class TipoDePolitica {
 //    private PoliticaProd politicaProd;
 
     //constructor vacio
-    public TipoDePolitica() {
+    public Politica() {
     }
 
     //constructor SIN id
-    public TipoDePolitica(String titulo, String descripcion, Producto producto) {
-        this.titulo = titulo;
+    public Politica(String tipo, String descripcion, Producto producto) {
+        this.tipo = tipo;
         this.descripcion = descripcion;
         this.producto= producto;
     }
 
     //constructor CON id
-    public TipoDePolitica(Integer id, String titulo, String descripcion, Producto producto) {
-        this.titulo = titulo;
+    public Politica(Integer id, String tipo, String descripcion, Producto producto) {
+        this.tipo = tipo;
         this.descripcion = descripcion;
         this.producto= producto;
 

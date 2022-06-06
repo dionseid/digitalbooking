@@ -16,24 +16,15 @@ import java.util.List;
 @Entity
 @Table(name = "productos")
 public class Producto {
-
-//    @SequenceGenerator(name = "productos_sequence", sequenceName = "productos_sequence", allocationSize = 1)
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productos_sequence")
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre;
     private String descripcion;
-
-    //ANDA
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JoinColumn(name = "ciudades_id")
     private Ciudad ciudad;
-
-
-    //ANDA
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JoinColumn(name = "categorias_id")
@@ -72,9 +63,6 @@ public class Producto {
         this.descripcion = descripcion;
         this.ciudad = ciudad;
         this.categoria = categoria;
-//        this.imagenes = imagenes;
-//        this.caracteristicas = caracteristicas;
-//        this.tiposDePolitica = tiposDePolitica;
     }
 
     public Producto(String nombre, String descripcion, Ciudad ciudad, Categoria categoria) {
@@ -82,9 +70,6 @@ public class Producto {
         this.descripcion = descripcion;
         this.ciudad = ciudad;
         this.categoria = categoria;
-//        this.imagenes = imagenes;
-//        this.caracteristicas = caracteristicas;
-//        this.tiposDePolitica = tiposDePolitica;
     }
 
     public Producto() {
