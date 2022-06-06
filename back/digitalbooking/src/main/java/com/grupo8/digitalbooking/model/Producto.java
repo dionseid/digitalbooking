@@ -23,13 +23,13 @@ public class Producto {
     private String nombre;
     private String descripcion;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "ciudades_id")
     private Ciudad ciudad;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JoinColumn(name = "categorias_id")
