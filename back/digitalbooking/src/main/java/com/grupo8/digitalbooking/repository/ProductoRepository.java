@@ -9,10 +9,10 @@ import java.util.List;
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
     @Query(value="SELECT * FROM productos p WHERE p.categorias_id = ?1", nativeQuery = true)
-    List<Producto> findByCategoria(Integer id);
+    List<Producto> findByCategoria(Integer categorias_id);
 
     @Query(value="SELECT * FROM productos p WHERE p.ciudades_id = ?1", nativeQuery = true)
-    List<Producto> findByCiudad(Integer id);
+    List<Producto> findByCiudad(Integer ciudades_id);
 
 
 }

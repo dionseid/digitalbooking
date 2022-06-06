@@ -1,6 +1,10 @@
 package com.grupo8.digitalbooking.service;
 
+import com.grupo8.digitalbooking.model.Categoria;
+import com.grupo8.digitalbooking.model.Ciudad;
 import com.grupo8.digitalbooking.model.Producto;
+import com.grupo8.digitalbooking.repository.CategoriaRepository;
+import com.grupo8.digitalbooking.repository.CiudadRepository;
 import com.grupo8.digitalbooking.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,19 +15,31 @@ import java.util.Optional;
 @Service
 public class ProductoService {
     private final ProductoRepository productoRepository;
+    private final CiudadRepository ciudadRepository;
+    private final CategoriaRepository categoriaRepository;
 
     @Autowired
-    public ProductoService(ProductoRepository productoRepository) {
+    public ProductoService(ProductoRepository productoRepository, CiudadRepository ciudadRepository, CategoriaRepository categoriaRepository) {
         this.productoRepository = productoRepository;
+        this.ciudadRepository = ciudadRepository;
+        this.categoriaRepository = categoriaRepository;
     }
 
     //Agregar producto
     public Producto agregarProducto(Producto producto){
+        Optional<Ciudad> ciudad =  ciudadRepository.findById(producto.getCiudad().getId());
+        producto.setCiudad(ciudad.get());
+        Optional<Categoria> categoria =  categoriaRepository.findById(producto.getCategoria().getId());
+        producto.setCategoria(categoria.get());
         return productoRepository.save(producto);
     }
 
     //Actualizar producto
     public Producto actualizarProducto(Producto producto){
+        Optional<Ciudad> ciudad =  ciudadRepository.findById(producto.getCiudad().getId());
+        producto.setCiudad(ciudad.get());
+        Optional<Categoria> categoria =  categoriaRepository.findById(producto.getCategoria().getId());
+        producto.setCategoria(categoria.get());
         return productoRepository.save(producto);
     }
 

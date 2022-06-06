@@ -1,5 +1,6 @@
 package com.grupo8.digitalbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,18 +14,16 @@ import javax.persistence.*;
 
 //nombre de la tabla en la bd
 @Entity
-@Table(name = "tiposDePolitica")
-public class TipoDePolitica {
-
-
+@Table(name = "Politicas")
+public class Politica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String titulo;
+    private Integer tipo;
     private String descripcion;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
@@ -41,19 +40,19 @@ public class TipoDePolitica {
 //    private PoliticaProd politicaProd;
 
     //constructor vacio
-    public TipoDePolitica() {
+    public Politica() {
     }
 
     //constructor SIN id
-    public TipoDePolitica(String titulo, String descripcion, Producto producto) {
-        this.titulo = titulo;
+    public Politica(Integer tipo, String descripcion, Producto producto) {
+        this.tipo = tipo;
         this.descripcion = descripcion;
         this.producto= producto;
     }
 
     //constructor CON id
-    public TipoDePolitica(Integer id, String titulo, String descripcion, Producto producto) {
-        this.titulo = titulo;
+    public Politica(Integer id, Integer tipo, String descripcion, Producto producto) {
+        this.tipo = tipo;
         this.descripcion = descripcion;
         this.producto= producto;
 
