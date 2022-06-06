@@ -21,23 +21,10 @@ public class Politica {
     private Integer id;
     private Integer tipo;
     private String descripcion;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "producto_id")
     private Producto producto;
-
-
-//    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-//    //@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
-//    @JoinTable(name = "tipoDePolitica_producto",joinColumns = {@JoinColumn(name = "tipoDePolitica_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "producto_id")})
-//    private Set<Producto> productos;
-
-
-//    @ManyToOne()
-//    @JoinColumn(name = "politicaProd_tipoDePoliticas")
-//    private PoliticaProd politicaProd;
 
     //constructor vacio
     public Politica() {

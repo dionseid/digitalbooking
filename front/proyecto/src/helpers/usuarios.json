@@ -9,22 +9,22 @@
             },
             {
                   "id": 2,
-                  "nombre": "Diana",
-                  "apellido": "Sauval",
+                  "nombre": "Alejandra",
+                  "apellido": "Pantano",
                   "mail": "alepantano@hotmail.com",
                   "password": "123456"
             },
             {
                   "id": 3,
-                  "nombre": "Diana",
-                  "apellido": "Sauval",
+                  "nombre": "Sofia",
+                  "apellido": "Monasterio",
                   "mail": "sofiamonasterio@hotmail.com",
                   "password": "123456"
             },
             {
                   "id": 4,
-                  "nombre": "Diana",
-                  "apellido": "Sauval",
+                  "nombre": "Dionis",
+                  "apellido": "Seid",
                   "mail": "dion.seid@hotmail.com",
                   "password": "123456"
             },

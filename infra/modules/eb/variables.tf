@@ -24,6 +24,11 @@ variable "vpc_id" {
   type = string
 }
 
+variable "public_subnets" {
+  description = "IDs de las subredes públicas para configurar conexión en VPC con EB y el exterior"
+  type        = list(string)
+}
+
 variable "private_subnets" {
   description = "IDs de las subredes privadas para uso del ASG"
   type        = list(string)
