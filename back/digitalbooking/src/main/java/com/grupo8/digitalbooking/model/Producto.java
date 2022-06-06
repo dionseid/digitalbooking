@@ -44,16 +44,16 @@ public class Producto {
     //@JoinColumn(name = "imagenes_id")
     //private Set<Imagen> imagenes = new HashSet<>();
 
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    private List<Imagen> imagenes = new ArrayList<>();
-
-
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    private List<TipoDePolitica> tiposDePolitica = new ArrayList<>();
-
-
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    private List<Caracteristica> caracteristicas = new ArrayList<>();
+//    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+//    private List<Imagen> imagenes = new ArrayList<>();
+//
+//
+//    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+//    private List<TipoDePolitica> tiposDePolitica = new ArrayList<>();
+//
+//
+//    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+//    private List<Caracteristica> caracteristicas = new ArrayList<>();
 
     //ANDA
     //@ManyToMany(mappedBy = "productos")
@@ -66,25 +66,25 @@ public class Producto {
 //    private Set<TipoDePolitica> tipoDePoliticas = new HashSet<>();
 
 
-    public Producto(Integer id, String nombre, String descripcion, Ciudad ciudad, Categoria categoria, List<Imagen> imagenes, List<Caracteristica> caracteristicas, List<TipoDePolitica> tiposDePolitica) {
+    public Producto(Integer id, String nombre, String descripcion, Ciudad ciudad, Categoria categoria) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.ciudad = ciudad;
         this.categoria = categoria;
-        this.imagenes = imagenes;
-        this.caracteristicas = caracteristicas;
-        this.tiposDePolitica = tiposDePolitica;
+//        this.imagenes = imagenes;
+//        this.caracteristicas = caracteristicas;
+//        this.tiposDePolitica = tiposDePolitica;
     }
 
-    public Producto(String nombre, String descripcion, Ciudad ciudad, Categoria categoria, List<Imagen> imagenes, List<Caracteristica> caracteristicas, List<TipoDePolitica> tiposDePolitica) {
+    public Producto(String nombre, String descripcion, Ciudad ciudad, Categoria categoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.ciudad = ciudad;
         this.categoria = categoria;
-        this.imagenes = imagenes;
-        this.caracteristicas = caracteristicas;
-        this.tiposDePolitica = tiposDePolitica;
+//        this.imagenes = imagenes;
+//        this.caracteristicas = caracteristicas;
+//        this.tiposDePolitica = tiposDePolitica;
     }
 
     public Producto() {
