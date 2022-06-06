@@ -72,6 +72,14 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     value     = join(",", var.private_subnets)
   }
 
+  # LB --»
+
+  setting {
+    namespace = "aws:ec2:vpc"
+    name      = "ELBSubnets"
+    value     = join(",", var.public_subnets)
+  }
+
   # instances --»
 
   setting {

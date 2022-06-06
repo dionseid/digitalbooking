@@ -80,6 +80,7 @@ module "elastic_beanstalk_app" {
   product_name     = var.product_name
   environment_name = var.environment_name
   instance_type    = ["t2.medium", "t2.small", "t2.micro"]
+  public_subnets   = module.vpc.public_subnets
   private_subnets  = module.vpc.private_subnets
   public_key_name  = aws_key_pair.key_public.key_name
   vpc_id           = module.vpc.vpc_id
