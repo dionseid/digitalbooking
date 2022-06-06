@@ -17,6 +17,7 @@ import BootstrapCarousel from "../components/BootstrapCarousel";
 import Media from "react-media";
 import { Link } from "react-router-dom";
 import Caracteristicas from "../components/Caracteristicas";
+import Reglas from "../components/Reglas";
 
 const Productos = () => { 
   return (
@@ -96,32 +97,7 @@ const Productos = () => {
         </section>
         <section>
             <h2>¿Qué tenes que saber?</h2>
-            <div className="contenedorNormas">
-                <div>
-                    <h5>Normas de la casa</h5>
-                    <ul>
-                        <li>norma 1</li>
-                        <li>norma 2</li>
-                        <li>norma 3</li>
-                    </ul>
-                </div>
-                <div>
-                    <h5>Salud y seguridad</h5>
-                    <ul>
-                        <li>norma 1</li>
-                        <li>norma 2</li>
-                        <li>norma 3</li>
-                    </ul>
-                </div>
-                <div>
-                    <h5>Política de cancelación</h5>
-                    <ul>
-                        <li>norma 1</li>
-                        <li>norma 2</li>
-                        <li>norma 3</li>
-                    </ul>
-                </div>                
-            </div>            
+            <Reglas/>
         </section>
       </body>
       <footer>

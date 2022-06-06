@@ -40,7 +40,15 @@ img {
   visibility: hidden;
 } /* Quizás se podría sacar, ya que el menú hamburguesa ya no le usa */
 
+.buttonNavBarAccount, .buttonNavBarLogin{
+  transition: .1s ease all;
+}
 
+.buttonNavBarAccount:hover, .buttonNavBarLogin:hover {
+  background: #F0572D;
+  color: #FFFFFF;
+  padding: 7px 20px;
+}
 
 @media screen and (max-width: 768px) {
   .parrafoNavBar {

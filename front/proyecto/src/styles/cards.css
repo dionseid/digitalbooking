@@ -43,6 +43,13 @@
     font-size: 16px;
     line-height: 19px;
     text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+	  cursor: pointer;
+	  transition: .1s ease all;    
+  }
+
+  .buttonCard:hover {
+    box-shadow: 3px 0px 30px rgba(163,163,163, 1);
   }
 
   .hotel{
