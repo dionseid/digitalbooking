@@ -1,4 +1,4 @@
-variables: 
+variables:
   REPOSITORY_NAME: digitalbooking
   TEAM: remo
   APP: front
@@ -29,26 +29,26 @@ build project:
     - cd front/proyecto
     - CI=false npm run build
     - echo $CI_PIPELINE_IID > build/version.html
-  artifacts:    
-    paths:      
+  artifacts:
+    paths:
       - front/proyecto/build
 
 build docker image:
-    stage: package
-    image:
-      name: amazon/aws-cli
-      entrypoint: [""]
-    services:
-      - docker:dind
-    before_script:
-      - amazon-linux-extras install docker
-      - aws --version
-      - docker --version
-    script:
-      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
-      - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID front/proyecto
-      - docker image ls
-      - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
+  stage: package
+  image:
+    name: amazon/aws-cli
+    entrypoint: [""]
+  services:
+    - docker:dind
+  before_script:
+    - amazon-linux-extras install docker
+    - aws --version
+    - docker --version
+  script:
+    - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
+    - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID front/proyecto
+    - docker image ls
+    - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
 
 test docker image:
   stage: test package
@@ -77,10 +77,8 @@ deploy to production:
     - cat front/proyecto/auth.json
     - aws s3 cp front/proyecto/Dockerrun.aws.json s3://$AWS_S3_BUCKET/remo/digitalbooking/front/dev/Dockerrun.aws.json
     - aws s3 cp front/proyecto/auth.json s3://$AWS_S3_BUCKET/remo/digitalbooking/front/dev/auth.json
-    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $CI_PIPELINE_IID --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/front/devDockerrun.aws.json
+    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $CI_PIPELINE_IID --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/front/dev/Dockerrun.aws.json
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME
-
-
 # build docker image:
 #   stage: docker
 #   image: adoptopenjdk/openjdk11:alpine-jre
@@ -90,33 +88,32 @@ deploy to production:
 #     - docker image ls
 #     - docker push --all-tags $CI_REGISTRY_IMAGE
 
-
-# .npm_build:  
-#   image: node:10  
-#   script:   
-#     - npm install # Install all dependencies    
-#     - npm build # yarn build:${APP_ENV} # Build command  
-#   artifacts:    
-#     paths:      
+# .npm_build:
+#   image: node:10
+#   script:
+#     - npm install # Install all dependencies
+#     - npm build # yarn build:${APP_ENV} # Build command
+#   artifacts:
+#     paths:
 #       - ./build
-#   only:    
-#     refs:      
+#   only:
+#     refs:
 #       - main
 
-# yarn_dev:  
-#   extends: .yarn_build  
-#   stage: build  
-#   before_script:    
-#     - export APP_ENV="dev"  
-#   only:    
-#     refs:      
+# yarn_dev:
+#   extends: .yarn_build
+#   stage: build
+#   before_script:
+#     - export APP_ENV="dev"
+#   only:
+#     refs:
 #       - develop
 
-# yarn_prod:  
-#   extends: .yarn_build  
-#   stage: build  
-#   before_script:    
-#     - export APP_ENV="prod"  
-#   only:    
-#     refs:      
+# yarn_prod:
+#   extends: .yarn_build
+#   stage: build
+#   before_script:
+#     - export APP_ENV="prod"
+#   only:
+#     refs:
 #       - master
