@@ -118,6 +118,10 @@
         border-radius: none;
         box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.12);    
     }
+
+    .headerProducto{
+        padding-top: 35px;
+    }
     
 }
 
