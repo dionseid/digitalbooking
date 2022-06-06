@@ -5,7 +5,7 @@
     },
     "Authentication": {
         "Bucket": "$AWS_S3_BUCKET",
-        "Key": "auth.json"
+        "Key": "remo/digitalbooking/front/dev/auth.json"
     },
     "Ports": [
         {

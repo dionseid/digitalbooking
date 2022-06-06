@@ -67,7 +67,7 @@ deploy to production:
   variables:
     APP_NAME: remo-digitalbooking-prod
     APP_ENV_NAME: remo-digitalbooking-env-prod
-  #environment: production
+  environment: production
   script:
     - aws --version
     - yum install -y gettext
@@ -79,6 +79,9 @@ deploy to production:
     - aws s3 cp front/proyecto/auth.json s3://$AWS_S3_BUCKET/remo/digitalbooking/front/dev/auth.json
     - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $CI_PIPELINE_IID --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/front/dev/Dockerrun.aws.json
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME
+    - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME
+    - curl $CI_ENVIRONMENT_URL/version.html | grep $CI_PIPELINE_IID
+
 # build docker image:
 #   stage: docker
 #   image: adoptopenjdk/openjdk11:alpine-jre
