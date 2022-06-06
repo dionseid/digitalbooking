@@ -10,12 +10,16 @@ const colores = {
 const Formulario = styled.form`
 	display:flex;
 	flex-direction: column;
+	margin-bottom: 55px;
+	margin-top: 70px;
 `;
 
 const Label = styled.label`
-	font-weight: 700;
+	margin-top:9px;
 	padding: 10px;
 	min-height: 40px;
+	font-weight: 500;
+	font-size: 12px;
 	
 	${props => props.valido === 'false' && css`
 		color: ${colores.error};
@@ -26,7 +30,6 @@ const GrupoInput = styled.div`
 	width: 100%;
 	position: relative;
 	z-index: 90;
-	margin-top: 5px;
 `;
 
 const Input = styled.input`
@@ -35,7 +38,6 @@ const Input = styled.input`
 	border-radius: 5px;
 	padding: 0px 10px 0px 20px;
 	box-sizing: border-box;
-	margin-bottom: 10px;
 	width: 100%;
 	height: 35px;
 	border:none;
@@ -98,6 +100,7 @@ const ContenedorBotonCentrado = styled.div`
 	align-items: center;
 	justify-content: center;
 	margin-top: 20px;
+	margin-bottom: 35px;
 `;
 
 const Boton = styled.button`

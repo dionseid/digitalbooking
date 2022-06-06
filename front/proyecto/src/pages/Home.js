@@ -11,7 +11,6 @@ const Home = ({authenticated, setIsAuthenticated}) => {
   return (
     <div id="page-wrap">
       <header>
-
         <Navbar authenticated={authenticated} setIsAuthenticated={setIsAuthenticated}/>
         <Banner />
       </header>

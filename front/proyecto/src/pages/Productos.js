@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
   faLocationDot,
   faStar,
+  faShareNodes,
+  faHeart
 } from "@fortawesome/free-solid-svg-icons";
 import Galeria from "../components/Galeria";
 import Calendario from "../components/Calendario";
@@ -13,8 +16,10 @@ import "../styles/pages/productos.css";
 import BootstrapCarousel from "../components/BootstrapCarousel";
 import Media from "react-media";
 import { Link } from "react-router-dom";
+import Caracteristicas from "../components/Caracteristicas";
+import Reglas from "../components/Reglas";
 
-const Productos = () => {  
+const Productos = () => { 
   return (
     <div id="page-wrap">
       
@@ -30,26 +35,27 @@ const Productos = () => {
       </header>
       <body>
         <section className="ubicacion">
-          <div>
-            <p>
+          <div className="contenedorDireccion">
+            <dt>
               <FontAwesomeIcon icon={faLocationDot} style={{"paddingRight":"5px"}}/>
-              Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina.
-            </p>
-            <p>A 940 m del centro</p>
+              <p>Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina.</p>
+            </dt>
+            <dd>A 940 m del centro</dd>
           </div>
-          <div className="calificacion">            
-            <div>
-              <p style={{ fontWeight: "700" }}>Muy bueno</p>
+          <div className="calificacionProductos">            
+            <div className="contenedorEstrellas">
+              <dt style={{ fontWeight: "700" }}>Muy bueno</dt>
+              <dd><FontAwesomeIcon icon={faStar} className="estrella" />
               <FontAwesomeIcon icon={faStar} className="estrella" />
               <FontAwesomeIcon icon={faStar} className="estrella" />
               <FontAwesomeIcon icon={faStar} className="estrella" />
-              <FontAwesomeIcon icon={faStar} className="estrella" />
-              <FontAwesomeIcon icon={faStar} className="estrella" />
+              <FontAwesomeIcon icon={faStar} className="estrella" /></dd>             
             </div>
             <span className="puntaje">8</span>
           </div>
         </section>
         <section className="imagenes">
+          <p><FontAwesomeIcon icon={faShareNodes} className='iconosLike'/><FontAwesomeIcon icon={faHeart} className='iconosLike'/></p>
           <Media query="(max-width:768px)">
             {matches => {
               return matches ? 
@@ -70,18 +76,18 @@ const Productos = () => {
             elementum metus non justo luctus iaculis.
           </p>
         </section>
-        <section className="contenedorCaracteristicas">
-            <h2>¿Qué ofrece este lugar?</h2>            
+        <section>
+            <Caracteristicas/>            
         </section>
         <section className="fechasDisponibles">
             <h2>Fechas disponibles</h2>
-            <div className="contenedorCalendario">              
+            <div className="contenedorCalendario">            
                 <div>
                 <Calendario/> 
                 </div>             
-                <div>
+                <div className="contendorReserva">
                   <p>Agregá tus fechas de viaje para obtener precios exactos</p>
-                  <button className="botonReservaFecha">Iniciar reserva</button>
+                  <button className="buttonCard">Iniciar reserva</button>
                 </div> 
             </div> 
                        
@@ -91,32 +97,7 @@ const Productos = () => {
         </section>
         <section>
             <h2>¿Qué tenes que saber?</h2>
-            <div className="contenedorNormas">
-                <div>
-                    <h5>Normas de la casa</h5>
-                    <ul>
-                        <li>norma 1</li>
-                        <li>norma 2</li>
-                        <li>norma 3</li>
-                    </ul>
-                </div>
-                <div>
-                    <h5>Salud y seguridad</h5>
-                    <ul>
-                        <li>norma 1</li>
-                        <li>norma 2</li>
-                        <li>norma 3</li>
-                    </ul>
-                </div>
-                <div>
-                    <h5>Política de cancelación</h5>
-                    <ul>
-                        <li>norma 1</li>
-                        <li>norma 2</li>
-                        <li>norma 3</li>
-                    </ul>
-                </div>                
-            </div>            
+            <Reglas/>
         </section>
       </body>
       <footer>
