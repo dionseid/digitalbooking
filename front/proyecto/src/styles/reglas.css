@@ -16,3 +16,12 @@ ul{
 .contenedorReglas ul li{
     margin: 15px 0px;
 }
+
+@media screen and (max-width: 768px){
+    .contenedorTodasReglas{
+        grid-template-columns: 1fr;
+
+    }
+
+    
+}

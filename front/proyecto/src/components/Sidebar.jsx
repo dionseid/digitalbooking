@@ -45,15 +45,19 @@ const Sidebar = ({authenticated, setIsAuthenticated}) => {
         }
     }
     const handleAuthenticated = () => {
-        const { nombre , apellido } = JSON.parse(localStorage.getItem('user'));
-        return isAuthenticatedMenu ?
-            <div className='SidebarBienvenida'>
-                <span>{nombre[0] + apellido[0]}</span>
-                <p>Hola,</p>
-                <p className='nombreCompletoMenu'>{`${nombre} ${apellido}`}</p>
-            </div>
-            :
-            <span className='menu'>MENU</span>        
+        if(isAuthenticatedMenu){
+            const { nombre , apellido } = JSON.parse(localStorage.getItem('user'));
+            return(
+                <div className='SidebarBienvenida'>
+                    <span>{nombre[0] + apellido[0]}</span>
+                    <p>Hola,</p>
+                    <p className='nombreCompletoMenu'>{`${nombre} ${apellido}`}</p>
+                </div>
+            )
+        }else{
+            return <span className='menu'>MENU</span>
+        }
+             
     }
 
     return (
