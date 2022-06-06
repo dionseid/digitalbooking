@@ -14,7 +14,13 @@
         {
             "name": "back-app",
             "image": "$AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-$CI_PIPELINE_IID",
-            "links": ["front-app"]
+            "links": ["front-app"],
+            "portMappings": [
+                {
+                    "hostPort": 8080,
+                    "containerPort": 8080
+                }
+            ]
         }
     ],
     "authentication": {
