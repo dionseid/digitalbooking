@@ -1,13 +1,12 @@
 package com.grupo8.digitalbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @ToString
 @Getter
@@ -19,14 +18,19 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nombre;
     private String descripcion;
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @JsonIgnore
     @JoinColumn(name = "ciudades_id")
     private Ciudad ciudad;
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @JsonIgnore
     @JoinColumn(name = "categorias_id")
     private Categoria categoria;
 

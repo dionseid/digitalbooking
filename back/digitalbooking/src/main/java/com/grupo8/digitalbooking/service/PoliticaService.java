@@ -1,7 +1,9 @@
 package com.grupo8.digitalbooking.service;
 
 import com.grupo8.digitalbooking.model.Politica;
+import com.grupo8.digitalbooking.model.Producto;
 import com.grupo8.digitalbooking.repository.PoliticaRepository;
+import com.grupo8.digitalbooking.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,40 +14,44 @@ import java.util.Optional;
 
 public class PoliticaService {
     private final PoliticaRepository politicaRepository;
+    private final ProductoRepository productoRepository;
 
     @Autowired
-    public PoliticaService(PoliticaRepository politicaRepository) {
+    public PoliticaService(PoliticaRepository politicaRepository, ProductoRepository productoRepository) {
         this.politicaRepository = politicaRepository;
+        this.productoRepository = productoRepository;
     }
 
-    //Agregar tipo de politica
-    public Politica agregarTipoDePolitica(Politica politica){
+    //Agregar politica
+    public Politica agregarPolitica(Politica politica){
+        Optional<Producto> producto = productoRepository.findById(politica.getProducto().getId());
+        politica.setProducto(producto.get());
         return politicaRepository.save(politica);
     }
 
     //Buscar tipo de politica
-    public Optional<Politica> buscarTipoDePolitica(Integer id){
+    public Optional<Politica> buscarPolitica(Integer id){
         return politicaRepository.findById(id);
     }
 
     //actualizar tipo de politica
-    public Politica actualizarTipoDePolitica(Politica politica){
+    public Politica actualizarPolitica(Politica politica){
         return politicaRepository.save(politica);
     }
 
     //eliminar tipo de politica
-    public void eliminarTipoDePolitica (Integer id) throws Exception {
-        Optional<Politica> tipoDePoliticaBuscada = buscarTipoDePolitica(id);
-        if (tipoDePoliticaBuscada.isPresent())
+    public void eliminarPolitica (Integer id) throws Exception {
+        Optional<Politica> politicaBuscada = buscarPolitica(id);
+        if (politicaBuscada.isPresent())
             politicaRepository.deleteById(id);
         else
-            throw new Exception("tipo de politica no encontrada");
+            throw new Exception("politica no encontrada");
     }
 
     //traer todos los tipos de politica
-    public List<Politica> listarTiposDePolitica(){
-        List<Politica> tiposDePolitica= politicaRepository.findAll();
-        return tiposDePolitica;
+    public List<Politica> listarPoliticas(){
+        List<Politica> politicas= politicaRepository.findAll();
+        return politicas;
     }
 }
 

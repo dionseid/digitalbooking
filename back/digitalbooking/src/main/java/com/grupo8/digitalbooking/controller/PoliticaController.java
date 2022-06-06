@@ -17,46 +17,43 @@ public class PoliticaController {
     private PoliticaService politicaService;
 
     @PostMapping
-    public ResponseEntity<Politica> agregarTipoDePolitica(@RequestBody Politica politica){
-        return ResponseEntity.ok(politicaService.agregarTipoDePolitica(politica));
+    public ResponseEntity<Politica> agregarPolitica(@RequestBody Politica politica){
+        return ResponseEntity.ok(politicaService.agregarPolitica(politica));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Politica> buscarTipoDePolitica (@PathVariable Integer id){
-        Politica tipoDepolitica= politicaService.buscarTipoDePolitica(id).orElse(null);
-        return  ResponseEntity.ok(tipoDepolitica);
+    public ResponseEntity<Politica> buscarPolitica (@PathVariable Integer id){
+        Politica politica= politicaService.buscarPolitica(id).orElse(null);
+        return  ResponseEntity.ok(politica);
     }
 
     @PutMapping()
-    public ResponseEntity<Politica> actualizarTipoDePolitica(@RequestBody Politica politica){
+    public ResponseEntity<Politica> actualizarPolitica(@RequestBody Politica politica){
         ResponseEntity<Politica> response;
 
-        if (politica.getId()!=null && politicaService.buscarTipoDePolitica(politica.getId()).isPresent())
-            response= ResponseEntity.ok(politicaService.actualizarTipoDePolitica(politica));
+        if (politica.getId()!=null && politicaService.buscarPolitica(politica.getId()).isPresent())
+            response= ResponseEntity.ok(politicaService.actualizarPolitica(politica));
         else
             response= ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return response;
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarTipoDePolitica(@PathVariable Integer id) throws Exception {
+    public ResponseEntity<String> eliminarPolitica(@PathVariable Integer id) throws Exception {
 
         ResponseEntity<String> response = null;
 
-        if (politicaService.buscarTipoDePolitica(id).isPresent()) {
-            politicaService.eliminarTipoDePolitica(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Se eliminó el Tipo De politica correctamente");
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: no se encontró el id");
-        }
-
+        if (politicaService.buscarPolitica(id).isPresent())
+            politicaService.eliminarPolitica(id);
+        else
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return response;
 
     }
 
     @GetMapping()
-    public ResponseEntity<Collection<Politica>> listarTiposDePolitica(){
-        return ResponseEntity.ok(politicaService.listarTiposDePolitica());
+    public ResponseEntity<Collection<Politica>> listarPoliticas(){
+        return ResponseEntity.ok(politicaService.listarPoliticas());
     }
 
 }
