@@ -31,8 +31,11 @@
 ::placeholder,
 .calendar-input {
   font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-}
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  }
+
 
 .hide {
   display: none;
@@ -67,11 +70,12 @@ th.month::after {
 }
 
 .tituloBanner {
-  padding: 25px;
+  padding: 10px;
   font-style: normal;
   font-weight: 700;
   font-size: 36px;
   color: #dfe4ea;
+  margin-top: 15px;
 }
 
 .buscador {
@@ -79,7 +83,6 @@ th.month::after {
   align-items: center;
   justify-content: center;
   padding: 15px 10px 25px 10px;
-  max-width: 85%;
 }
 
 @media screen and (max-width: 768px) {
@@ -88,8 +91,8 @@ th.month::after {
   }
 
   .banner {
-    height: 263px;
     margin-top: 93px;
+    margin-bottom: 10px;
   }
 
   h1 {
@@ -98,8 +101,8 @@ th.month::after {
   }
 
   .inputBanner ::placeholder {
-    font: "Quicksand";
-    font-weight: normal;
+    font-style: normal;
+    font-weight: 500;
   }
 
   .botonBanner {
@@ -111,8 +114,12 @@ th.month::after {
     align-items: center;
     justify-content: center;
     padding: 15px 10px 25px 10px;
-    max-width: 85%;
+    max-width: 90%;
   }
+}
+
+option{
+  color: #282c34;
 }
 
 @media screen and (max-width: 768px) {
@@ -123,13 +130,15 @@ th.month::after {
   }
 
   .banner {
-    height: 263px;
+    height: 330px;
     margin-top: 93px;
   }
 
   h1 {
+    font-weight: 700;
     font-size: 30px;
-    padding: 5px;
+    line-height: 35px;
+    text-align: center;
   }
 
   .inputBanner {

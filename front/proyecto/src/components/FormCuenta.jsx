@@ -67,7 +67,7 @@ const onSubmit = (e) => {
 return (
     <div className='contenedor'>
         <div className='contenido'>
-        <Formulario action="" onSubmit={onSubmit}>
+        <Formulario action="" onSubmit={onSubmit} className='formularioCuenta'>
             <h1 className='titulo'>Crear Cuenta</h1>
             <div className='nombreCompleto'>
                 <div className='nombre'>
