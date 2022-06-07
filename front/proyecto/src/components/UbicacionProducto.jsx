@@ -18,7 +18,7 @@ export default function UbicacionProducto() {
     axios.get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
     .then(response => {
         console.log(response.data);
-        setDataUbicacion(response.data)})
+        setDataUbicacion(response.data.ciudad)})
 
 }, [])
 
@@ -27,7 +27,7 @@ export default function UbicacionProducto() {
         <div className="contenedorDireccion">
             <dt>
               <FontAwesomeIcon icon={faLocationDot} style={{"paddingRight":"5px"}}/>
-              <p>{dataUbicacion.ciudad.provincia}, {dataUbicacion.ciudad.nombre}, {dataUbicacion.ciudad.pais}.</p>
+              <p>{dataUbicacion.provincia}, {dataUbicacion.nombre}, {dataUbicacion.pais}.</p>
             </dt>
             <dd>A 940 m del centro</dd>
           </div>
