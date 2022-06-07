@@ -1,15 +1,30 @@
 {
-    "AWSEBDockerrunVersion": "1",
-    "Image": {
-        "Name": "$AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID"
-    },
-    "Authentication": {
-        "Bucket": "$AWS_S3_BUCKET",
-        "Key": "remo/digitalbooking/front/dev/auth.json"
-    },
-    "Ports": [
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
         {
-            "ContainerPort": 80
+            "name": "front-app",
+            "image": "$AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-front-$CI_PIPELINE_IID",
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ]
+        },
+        {
+            "name": "back-app",
+            "image": "$AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-$CI_PIPELINE_IID",
+            "links": ["front-app"],
+            "portMappings": [
+                {
+                    "hostPort": 8080,
+                    "containerPort": 8080
+                }
+            ]
         }
-    ]
-} 
+    ],
+    "authentication": {
+        "bucket": "$AWS_S3_BUCKET",
+        "key": "remo/digitalbooking/dev/auth.json"
+    }
+}

@@ -91,11 +91,14 @@ module "elastic_beanstalk_app" {
 module "database" {
   source = "./modules/db"
 
-  subnet_ids = module.vpc.database_subnets
-  rds_sg_id  = aws_security_group.g8_rds_sg.id
-  db_name    = "${var.team_name}${var.product_name}${var.environment_name}"
-  db_user    = var.team_name
-  db_pass    = var.db_pass
+  team_name        = var.team_name
+  product_name     = var.product_name
+  environment_name = var.environment_name
+  subnet_ids       = module.vpc.database_subnets
+  rds_sg_id        = aws_security_group.g8_rds_sg.id
+  db_name          = "${var.team_name}${var.product_name}${var.environment_name}"
+  db_user          = var.team_name
+  db_pass          = var.db_pass
 }
 
 module "storage" {

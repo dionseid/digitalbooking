@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  react app frontend:
+    container_name: reactfrontend
+    ports:
+      80:80
+      443:443
+    image: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-front-$CI_PIPELINE_IID"
+  spring boot backend:
+    container_name: springbootbackend
+    ports:
+      8080:8080
+    image: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-$CI_PIPELINE_IID"
