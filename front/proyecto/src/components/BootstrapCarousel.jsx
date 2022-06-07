@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useState , useEffect} from "react";
 import { Carousel } from 'react-bootstrap';
+import { useParams } from "react-router-dom";
 
 
 
 export default function BootstrapCarousel() {
   const [index, setIndex] = useState(0);
+  const {id} = useParams();
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -21,7 +23,8 @@ useEffect( () => {
   return (
     <div>
         <Carousel activeIndex={index} onSelect={handleSelect}>
-        {dataImagen.map((item, index) =>(
+        {dataImagen.filter((imagen)=>imagen.producto.id == id)
+        .map((item, index) =>(
           <Carousel.Item key={item.id}>
           <img
             className="d-block w-100"

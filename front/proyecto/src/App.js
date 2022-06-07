@@ -21,7 +21,7 @@ function App() {
           <Route path='/' element={<Home  authenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>} />
           <Route path='/login' element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
           <Route path='/account' element={<Account />} />
-          <Route path='/productos' element={<Productos />} />
+          <Route path='/productos/:id' element={<Productos />} />
         </Routes>
       </BrowserRouter>
     </div>
