@@ -3,9 +3,9 @@ variables:
   TEAM: remo
   APP: front
 
-cache:
-  paths:
-    - front/proyecto/node_modules
+# cache:
+#   paths:
+#     - front/proyecto/node_modules
 
 stages:
   - test
@@ -21,6 +21,9 @@ test project:
     - cd front/proyecto
     - npm install
     - npm test
+  artifacts:
+    paths:
+      - front/proyecto/node_modules
 
 build project:
   stage: build
