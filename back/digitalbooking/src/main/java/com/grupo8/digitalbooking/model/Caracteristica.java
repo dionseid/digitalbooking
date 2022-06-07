@@ -22,7 +22,7 @@ public class Caracteristica {
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(name = "producto_id")
+    @JoinColumn(name = "productos_id")
     private Producto producto;
 
 

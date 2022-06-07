@@ -22,7 +22,7 @@ public class Politica {
     private String descripcion;
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(name = "producto_id")
+    @JoinColumn(name = "productos_id")
     private Producto producto;
 
     //constructor vacio
