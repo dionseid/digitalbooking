@@ -451,7 +451,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"tipo\": \"Norma\",\r\n    \"descripcion\": \"Prohibido fumar en todo el establecimiento\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"tipo\":1,\r\n    \"descripcion\": \"Prohibido fumar en todo el establecimiento\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -478,7 +478,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/politicas/3",
+							"raw": "http://localhost:8080/politicas/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -486,7 +486,7 @@
 							"port": "8080",
 							"path": [
 								"politicas",
-								"3"
+								"2"
 							]
 						}
 					},
@@ -571,7 +571,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"id\": 2,\r\n        \"nombre\": \"Casa\",\r\n        \"url\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYQ5EZMVw43r0-HVrjHR4fMjOz_WU0itIHZlejslJuJtA-qOfywav_h9gdaO3TOUBoxOw&usqp=CAU\",\r\n        \"producto\":{\r\n            \"id\":3\r\n        }\r\n    }",
+							"raw": "{\r\n        \"id\": 2,\r\n        \"nombre\": \"Casa\",\r\n        \"url\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYQ5EZMVw43r0-HVrjHR4fMjOz_WU0itIHZlejslJuJtA-qOfywav_h9gdaO3TOUBoxOw&usqp=CAU\",\r\n        \"producto\":{\r\n            \"id\":1\r\n        }\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -624,7 +624,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"Microondas\",\r\n    \"icono\":\"unicono\",\r\n        \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n",
+							"raw": "{\r\n    \"nombre\":\"Microondas\",\r\n    \"icono\":\"unicono\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -691,7 +691,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":1,\r\n    \"nombre\":\"secador de cabello\",\r\n    \"icono\":\"unicono\"\r\n}\r\n",
+							"raw": "{\r\n    \"id\":1,\r\n    \"nombre\":\"secador de cabello\",\r\n    \"icono\":\"unicono\",\r\n        \"producto\":{\r\n        \"id\":2\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -744,7 +744,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"departamento\",\r\n    \"descripcion\":\"gran departamento en excelente zona centrica\",\r\n    \"ciudad\":{\r\n        \"id\": 2\r\n            },\r\n    \"categoria\":{\r\n        \"id\": 2\r\n    }\r\n    }\r\n",
+							"raw": "{\r\n    \"nombre\":\"departamento\",\r\n    \"descripcion\":\"gran departamento en excelente zona centrica\",\r\n    \"ciudad\":{\r\n        \"id\": 1\r\n            },\r\n    \"categoria\":{\r\n        \"id\": 1\r\n    }\r\n    }\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -810,11 +810,11 @@
 				{
 					"name": "Actualizar Producto",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":2,\r\n    \"nombre\":\"casa\",\r\n    \"descripcion\":\"gran casa en excelente zona centrica\",\r\n    \"ciudad\":{\r\n        \"id\": 1\r\n    },\r\n    \"categoria\":{\r\n        \"id\": 1\r\n    }\r\n}\r\n",
+							"raw": "{\r\n    \"id\":1,\r\n    \"nombre\":\"departamento\",\r\n    \"descripcion\":\"gran departamento en excelente zona centrica\",\r\n    \"ciudad\":{\r\n        \"id\": 2\r\n            },\r\n    \"categoria\":{\r\n        \"id\": 1\r\n    }\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -842,7 +842,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/productos/5",
+							"raw": "http://localhost:8080/productos/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -850,7 +850,7 @@
 							"port": "8080",
 							"path": [
 								"productos",
-								"5"
+								"2"
 							]
 						}
 					},
@@ -862,7 +862,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/productos/filtroCategoria/2",
+							"raw": "http://localhost:8080/productos/filtroCategoria/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -871,7 +871,28 @@
 							"path": [
 								"productos",
 								"filtroCategoria",
-								"2"
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por Ciudad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/productos/filtroCiudad/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"filtroCiudad",
+								"1"
 							]
 						}
 					},

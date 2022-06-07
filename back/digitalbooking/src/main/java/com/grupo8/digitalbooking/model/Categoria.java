@@ -22,10 +22,6 @@ public class Categoria {
     private String descripcion;
     private String urlImg;
 
-    //ANDA
-   // @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
-   // private Set<Producto> productos = new HashSet<>();
-
     //constructor vacio
     public Categoria() {
     }

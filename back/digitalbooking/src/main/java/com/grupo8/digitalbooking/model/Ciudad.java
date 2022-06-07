@@ -21,10 +21,6 @@ public class Ciudad {
     private String Provincia;
     private String Pais;
 
-
-   // @OneToMany(mappedBy = "ciudad", fetch = FetchType.LAZY)
-    //private Set<Producto> productos = new HashSet<>();
-
     public Ciudad(Integer id, String nombre, String provincia, String pais) {
         this.id = id;
         Nombre = nombre;

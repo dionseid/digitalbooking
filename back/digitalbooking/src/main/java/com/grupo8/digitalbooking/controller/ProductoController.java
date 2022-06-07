@@ -51,14 +51,14 @@ public class ProductoController {
         return ResponseEntity.ok("Se eliminó el producto correctamente");
     }
 
-    @GetMapping("/filtroCategoria/{idCategoria}")
+    @GetMapping("/filtroCategoria/{id}")
     public ResponseEntity<List<Producto>> buscarPorCategoria(@PathVariable Integer id){
         return ResponseEntity.ok(productoService.buscarPorCategoria(id));
     }
 
-    @GetMapping("/filtroCiudad/{idCiudad}")
-    public ResponseEntity<List<Producto>> buscarPorCiudad(@PathVariable Integer idCiudad){
-        return ResponseEntity.ok(productoService.buscarPorCiudad(idCiudad));
+    @GetMapping("/filtroCiudad/{id}")
+    public ResponseEntity<List<Producto>> buscarPorCiudad(@PathVariable Integer id){
+        return ResponseEntity.ok(productoService.buscarPorCiudad(id));
     }
 
 }

@@ -25,19 +25,12 @@ public class CiudadService {
     }
 
     //BUSCAR POR ID
-    //Falta corregir para buscar por nombre de ciudad, no id
     public Optional<Ciudad> buscarCiudadPorId(Integer id){
         return ciudadRepository.findById(id);
     }
 
-     //BUSCAR POR NOMBRE
-//    public List<Ciudad> buscarCiudadPorNombre(String nombre){
-//         List<Ciudad> ciudades= ciudadRepository.findByName(nombre);
-//        return ciudades;
-//    }
 
     //ELIMINAR
-    //Falta cambiar buscar ciudad por nombre
     public void eliminarCiudad (Integer id)throws Exception{
         Optional<Ciudad> ciudadBuscada = buscarCiudadPorId(id);
         if (ciudadBuscada.isPresent())
@@ -47,7 +40,6 @@ public class CiudadService {
     }
 
     //ACTUALIZAR
-    //Falta corregir para que primero checkee que este la ciudad (buscar por nombre) y recien ahi la actualice
     public Ciudad actualizarCiudad(Ciudad ciudad){
         return ciudadRepository.save(ciudad);
     }

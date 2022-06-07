@@ -26,8 +26,6 @@ public class Caracteristica {
     private Producto producto;
 
 
-
-
     public Caracteristica(Integer id, String nombre, String icono, Producto producto) {
         this.id = id;
         this.nombre = nombre;

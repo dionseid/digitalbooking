@@ -64,12 +64,12 @@ public class ProductoService {
     }
     //Buscar productos por categoria
     public List<Producto> buscarPorCategoria(Integer id){
-        return productoRepository.findByCategoria(id);
+        return productoRepository.findByCategoriaId(id);
     }
 
     //Buscar productos por ciudad
     public List<Producto> buscarPorCiudad(Integer id){
-        return productoRepository.findByCiudad(id);
+        return productoRepository.findByCiudadId(id);
     }
 
 }
