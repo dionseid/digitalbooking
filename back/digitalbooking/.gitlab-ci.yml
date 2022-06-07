@@ -45,9 +45,10 @@ build docker image:
   services:
     - docker:dind
   before_script:
-    - amazon-linux-extras install docker
     - aws --version
     - docker --version
+    - docker system prune
+    - amazon-linux-extras install docker
   script:
     - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
     - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID back/digitalbooking
