@@ -112,9 +112,11 @@ deploy to production:
     APP_NAME: remo-digitalbooking-prod
     APP_ENV_NAME: remo-digitalbooking-env-prod
   environment: production
-  script:
+  before_script:
     - aws --version
     - yum install -y gettext
+    - yum install -y zip
+  script:
     - envsubst < eb-templates/docker-compose.yml > docker-compose.yml
     - envsubst < eb-templates/Dockerrun.aws.json > Dockerrun.aws.json
     - envsubst < eb-templates/config.json > config.json

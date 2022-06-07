@@ -22,11 +22,11 @@ build job:
     - cd back/digitalbooking
     - mvn compile
 
-test job:
-  stage: test
-  script:
-    - cd back/digitalbooking
-    - mvn test #mvn clean test
+# test job:
+#   stage: test
+#   script:
+#     - cd back/digitalbooking
+#     - mvn test #mvn clean test
 
 package job:
   stage: package
