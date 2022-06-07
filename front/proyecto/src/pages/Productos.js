@@ -5,8 +5,6 @@ import Navbar from "../components/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
-  faLocationDot,
-  faStar,
   faShareNodes,
   faHeart
 } from "@fortawesome/free-solid-svg-icons";
@@ -40,7 +38,7 @@ const Productos = () => {
       </header>
       <body>
         <section className="ubicacion">
-          <UbicacionProducto idProducto={id}/>
+          <UbicacionProducto/>
         </section>
         <section className="imagenes">
           <p><FontAwesomeIcon icon={faShareNodes} className='iconosLike'/><FontAwesomeIcon icon={faHeart} className='iconosLike'/></p>
@@ -75,7 +73,7 @@ const Productos = () => {
         </section>
         <section>
             <h2>¿Qué tenes que saber?</h2>
-            <Reglas idProducto={id}/>
+            <Reglas/>
         </section>
       </body>
       <footer>

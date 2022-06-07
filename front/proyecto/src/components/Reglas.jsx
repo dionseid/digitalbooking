@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import "../styles/reglas.css";
 
 
 
-export default function Reglas({idProducto}) {
+export default function Reglas() {
     const [dataReglas, setDataReglas] = useState([]);
+    const {id} = useParams();
         
     useEffect( () => {
     axios.get("http://localhost:8080/politicas")
@@ -20,7 +21,7 @@ export default function Reglas({idProducto}) {
     <div className='contenedorTodasReglas'>
         <div className='contenedorReglas'>
             <h4>Normas de la casa</h4>
-            {dataReglas.filter((regla)=>regla.tipo === 1 && regla.producto.id == idProducto)
+            {dataReglas.filter((regla)=>regla.tipo === 1 && regla.producto.id == id)
               .map((regla)=>(
                       <ul>
                           <li>{regla.descripcion}</li>
@@ -29,7 +30,7 @@ export default function Reglas({idProducto}) {
         </div>
         <div className='contenedorReglas'>
             <h4>Salud y Seguridad</h4>
-            {dataReglas.filter((regla)=>regla.tipo === 2 && regla.producto.id == idProducto)
+            {dataReglas.filter((regla)=>regla.tipo === 2 && regla.producto.id == id)
               .map((regla)=>(
                       <ul>
                           <li>{regla.descripcion}</li>
@@ -38,7 +39,7 @@ export default function Reglas({idProducto}) {
         </div>
         <div className='contenedorReglas'>
             <h4>Politicas de cancelación</h4>
-            {dataReglas.filter((regla)=>regla.tipo === 3 && regla.producto.id == idProducto)
+            {dataReglas.filter((regla)=>regla.tipo === 3 && regla.producto.id == id)
               .map((regla)=>(
                     <ul>
                         <li>{regla.descripcion}</li>

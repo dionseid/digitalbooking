@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import "../styles/reglas.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,12 +10,12 @@ import {
 
 
 
-export default function UbicacionProducto({idProducto}) {
+export default function UbicacionProducto() {
     const [dataUbicacion, setDataUbicacion] = useState([]);
     const {id} = useParams();
         
     useEffect( () => {
-    axios.get(`http://localhost:8080/productos/buscarProductoPorId/${idProducto}`)
+    axios.get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
     .then(response => {
         console.log(response.data);
         setDataUbicacion(response.data)})
