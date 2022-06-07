@@ -123,5 +123,5 @@ deploy to production:
     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/auth.json
     - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $CI_PIPELINE_IID --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/Dockerrun.aws.json
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME
-    - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME --page-size 60
+    - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME --max-items 100
     - curl $CI_ENVIRONMENT_URL/version.html | grep $CI_PIPELINE_IID # Sole prueba que frontend funciona
