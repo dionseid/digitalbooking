@@ -18,6 +18,7 @@ import Caracteristicas from "../components/Caracteristicas";
 import Reglas from "../components/Reglas";
 import DescripcionProducto from "../components/DescripcionProducto";
 import UbicacionProducto from "../components/UbicacionProducto";
+import TituloProducto from "../components/TituloProducto";
 
 const Productos = () => {
   const {id} = useParams();
@@ -28,13 +29,7 @@ const Productos = () => {
       
       <header >
         <Navbar />
-        <div className="headerProducto">
-          <div>
-            <p>HOTEL</p>
-            <h2>Hermitage Hotel</h2>
-          </div>
-          <Link to="/"><FontAwesomeIcon icon={faAngleLeft} className="iconoVolver"/></Link>          
-        </div>                
+        <TituloProducto/>                
       </header>
       <body>
         <section className="ubicacion">
