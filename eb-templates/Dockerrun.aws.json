@@ -1,36 +1,7 @@
 {
-  "AWSEBDockerrunVersion": "2",
-  "containerDefinitions": [
-    {
-      "name": "service-api",
-      "image": "$AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-$CI_PIPELINE_IID",
-      "essential": true,
-      "memory": 128,
-      "portMappings": [
-        {
-          "hostPort": 8080,
-          "containerPort": 8080
-        }
-      ]
-    },
-    {
-      "name": "react-frontend",
-      "image": "$AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-front-$CI_PIPELINE_IID",
-      "memory": 128,
-      "portMappings": [
-        {
-          "hostPort": 80,
-          "containerPort": 80
-        },
-        {
-          "hostPort": 443,
-          "containerPort": 443
-        }
-      ]
+    "AWSEBDockerrunVersion": "3",
+    "Authentication": {
+        "Bucket": "$AWS_S3_BUCKET",
+        "Key": "remo/digitalbooking/dev/.dockercfg"
     }
-  ],
-  "authentication": {
-    "bucket": "$AWS_S3_BUCKET",
-    "key": "remo/digitalbooking/dev/.dockercfg"
-  }
 }
