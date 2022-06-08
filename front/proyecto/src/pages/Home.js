@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CardRecomendacion from '../components/CardRecomendaciones';
 import CardAlojamiento from '../components/CardAlojamiento';
 import Footer from '../components/Footer';
@@ -21,7 +21,7 @@ const Home = ({authenticated, setIsAuthenticated}) => {
         </section>
         <section className='Recomendaciones'>
           <h2>Recomendaciones</h2>
-          <CardRecomendacion />
+          <CardRecomendacion selectCiudad={2}/>
         </section>
       </body>
       <footer>

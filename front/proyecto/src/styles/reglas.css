@@ -7,11 +7,19 @@
     margin-bottom: 40px;
 }
 
+/* .contenedorReglas{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+} */
+
+
 ul{
     list-style-type: none;
     margin: 0px;
     padding: 0px;
 }
+
+
 
 .contenedorReglas ul li{
     margin: 15px 0px;

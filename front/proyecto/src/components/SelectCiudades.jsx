@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Select from 'react-select';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLocationDot} from "@fortawesome/free-solid-svg-icons";
 import "../styles/selectCiudades.css";
@@ -10,6 +10,11 @@ import selectStyles from './elementStyle/selectStyles';
 
 export default function SelectCiudades() {
     const [dataCiudades, setDataCiudades] = useState([]);
+    const [selectedCiudad, setSelectedCiudad] = useState();
+    
+
+/*     console.log("select del banner");
+    console.log(selectedCiudad.value); */ 
         
     useEffect( () => {
     axios.get("http://localhost:8080/ciudades")
@@ -18,6 +23,8 @@ export default function SelectCiudades() {
         setDataCiudades(response.data)})
 
 }, [])
+
+
 
   return (
     <div>
@@ -34,6 +41,8 @@ export default function SelectCiudades() {
                       </div>, 
               value: ciudad.id}))}  
             styles={selectStyles}
+            onChange={setSelectedCiudad}
+                        
             />
     </div>
   )

@@ -1,9 +1,11 @@
-import { React, useState } from 'react';
+import axios from 'axios';
+import { React, useEffect, useMemo, useState } from 'react';
 import Input from '../components/Input';
+import CardRecomendacion from './CardRecomendaciones';
 import "../styles/banner.css";
 import SelectCiudades from './SelectCiudades';
 
-const Banner = () => {
+const Banner = () => { 
   return (
     <div className='banner'>
       <h1 className='tituloBanner'>Busca ofertas en hoteles, casas y mucho más</h1>
@@ -22,7 +24,7 @@ const Banner = () => {
             isInputWithCalendar={true} />
         </div>
         <div>
-          <button className='botonBanner'>Buscar</button>
+          <button className='botonBanner' >Buscar</button>
         </div>
       </div>
     </div>
