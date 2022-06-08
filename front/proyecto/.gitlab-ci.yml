@@ -43,6 +43,8 @@ build docker image:
     - docker image ls
     - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
     - echo $APP_VERSION
+  variables:
+    DOCKER_DRIVER: overlay
 
 # test docker image:
 #   stage: test
