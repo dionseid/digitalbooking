@@ -6,13 +6,17 @@ const selectStyles = {
       color: '#000000',
       fontStyle: 'normal',
       fontWeight: '700',
-      fontSize: '16px',
+      fontSize: '14px',
       lineHeight: '19px',
       display:'flex'
+    }),
+    input:()=>({
+      fontSize: '8px',
     }),
     singleValue: (provided, state) => {
       const opacity = state.isDisabled ? 0.5 : 1;
       const transition = 'opacity 300ms';
+      
   
       return { ...provided, opacity, transition };
     }

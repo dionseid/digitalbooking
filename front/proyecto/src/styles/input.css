@@ -11,10 +11,11 @@
     box-sizing: border-box;
     margin-bottom: 15px;
     width: 100%;
-    height: 35px;
+    height: 38px;
     border:none;
     outline: none;
     transition: .3s ease all;
+    
 }
 
 .regular-style ::-moz-focus-inner{
