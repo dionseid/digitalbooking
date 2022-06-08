@@ -10,14 +10,15 @@ const selectStyles = {
       lineHeight: '19px',
       display:'flex'
     }),
-    input:()=>({
-      fontSize: '8px',
+    control:()=>({
+      height: '2px',
+      textAlign:'start',
+      backgroundColor: 'red'
     }),
     singleValue: (provided, state) => {
       const opacity = state.isDisabled ? 0.5 : 1;
       const transition = 'opacity 300ms';
-      
-  
+        
       return { ...provided, opacity, transition };
     }
   }

@@ -1,15 +1,17 @@
 .contenedorTodasReglas{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 40px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: start;
+    gap: 100px;
+    padding: 20px;
+    margin-bottom: 30px;
 }
 
-/* .contenedorReglas{
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-} */
+.contenedorReglas{
+    display: flex;
+    flex-direction: column;
+}
 
 
 ul{
@@ -18,17 +20,21 @@ ul{
     padding: 0px;
 }
 
-
+.listaReglas{
+    max-width: 100%;
+}
 
 .contenedorReglas ul li{
-    margin: 15px 0px;
+    margin: 10px 5px;
 }
 
 @media screen and (max-width: 768px){
     .contenedorTodasReglas{
+        display: grid;
         grid-template-columns: 1fr;
-
-    }
-
-    
+        gap: 25px;
+        font-size: 14px;
+        padding: 10px;
+        margin-bottom: 30px;
+    }    
 }

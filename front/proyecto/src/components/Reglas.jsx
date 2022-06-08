@@ -23,39 +23,45 @@ export default function Reglas() {
           <div>
             <h4>Normas de la casa</h4>
           </div>
-          <div>
+          <div className='listaReglas'>
+          <ul>
             {dataReglas.filter((regla)=>regla.tipo === 1 && regla.producto.id == id)
               .map((regla)=>(
-                      <ul>
-                          <li>{regla.descripcion}</li>
-                      </ul>    
+                
+                <li key={regla.id}>{regla.descripcion}</li>
+                          
               ))}
+          </ul>
           </div>
         </div>
         <div className='contenedorReglas'>
           <div>
             <h4>Salud y Seguridad</h4>
           </div>
-          <div>
+          <div className='listaReglas'>
+          <ul>
             {dataReglas.filter((regla)=>regla.tipo === 2 && regla.producto.id == id)
               .map((regla)=>(
-                      <ul>
-                          <li>{regla.descripcion}</li>
-                      </ul>     
+                
+                <li key={regla.id}>{regla.descripcion}</li>
+                          
               ))}
+          </ul>
           </div>
         </div>
         <div className='contenedorReglas'>
           <div>
             <h4>Politicas de cancelación</h4>
           </div>
-          <div>
+          <div className='listaReglas'>
+          <ul>
             {dataReglas.filter((regla)=>regla.tipo === 3 && regla.producto.id == id)
               .map((regla)=>(
-                    <ul>
-                        <li>{regla.descripcion}</li>
-                    </ul>      
+                
+                <li key={regla.id}>{regla.descripcion}</li>
+                          
               ))}
+          </ul>
           </div>
         </div>            
     </div>

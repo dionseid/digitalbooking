@@ -8,16 +8,18 @@ import "../styles/pages/home.css";
 
 
 const Home = ({authenticated, setIsAuthenticated}) => {
-  const [serch, setSerch] = useState();
+  const [search, setSearch] = useState(0);
+  const [filter,setFilter] = useState(0);
 
-  const handleOnClick = (e) =>{
-      setSerch(e.value)
+  const handleClick = () =>{
+    setFilter(search)
   }
+
   return (
     <div id="page-wrap">
       <header>
         <Navbar authenticated={authenticated} setIsAuthenticated={setIsAuthenticated}/>
-        <Banner handleOnClick={handleOnClick}/>
+        <Banner onChange={setSearch} onClick={handleClick}/>
       </header>
       <body>
         <section className='Alojamiento'>
@@ -26,7 +28,7 @@ const Home = ({authenticated, setIsAuthenticated}) => {
         </section>
         <section className='Recomendaciones'>
           <h2>Recomendaciones</h2>
-          <CardRecomendacion selectCiudad={serch} />
+          <CardRecomendacion selectCiudad={filter}/>
         </section>
       </body>
       <footer>

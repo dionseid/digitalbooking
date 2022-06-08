@@ -15,7 +15,6 @@
     border:none;
     outline: none;
     transition: .3s ease all;
-    
 }
 
 .regular-style ::-moz-focus-inner{
