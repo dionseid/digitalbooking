@@ -79,13 +79,23 @@ stages:
   - build
   - deploy
 
-update ecr token:
+update token:
   stage: update
+  image: 
+    name: amazon/aws-cli
+    entrypoint: [""]
+  before_script:
+    - aws --version
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule" 
-  trigger:
-    include: front/.gitlab-ci.yml
-    strategy: depend
+  script:
+    - USER=AWS
+    - TOKEN=$(aws ecr get-login-password --region us-west-2)
+    - AUTH=$(echo "$USER:$TOKEN" | base64 | tr -d "\n")
+    - |
+      curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
+      --silent --output /dev/null --show-error --fail \
+      "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH" --form "value=$AUTH"
 
 trigger_a:
   stage: build
