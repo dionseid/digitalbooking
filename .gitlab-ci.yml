@@ -71,6 +71,9 @@
 #     - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
 #     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
 
+variables: 
+  APP_VERSION: $CI_PIPELINE_IID
+
 stages:
   - update
   - build
@@ -94,7 +97,7 @@ trigger_a:
     # - changes: #Descomentar
     #   - front/proyecto/*
   variables:
-    PARENT_PIPELINE_ID: $CI_PIPELINE_ID
+    PARENT_PIPELINE_ID: $APP_VERSION
 
 trigger_b:
   stage: build
@@ -104,7 +107,7 @@ trigger_b:
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule"
   variables:
-    PARENT_PIPELINE_ID: $CI_PIPELINE_ID
+    PARENT_PIPELINE_ID: $APP_VERSION
 
 deploy to production:
   stage: deploy
