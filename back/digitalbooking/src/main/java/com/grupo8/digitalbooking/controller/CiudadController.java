@@ -23,19 +23,11 @@ public class CiudadController {
     }
 
     //BUSCAR
-    //Corregir a buscar por nombre en vez de id
     @GetMapping("/{id}")
     public ResponseEntity<Ciudad> buscarCiudadPorId(@PathVariable Integer id){
         Ciudad ciudad = ciudadService.buscarCiudadPorId(id).orElse(null);
         return ResponseEntity.ok(ciudad);
     }
-
-//    @GetMapping("/{nombre}")
-//    public ResponseEntity<Ciudad> buscarCiudadPorNombre(@PathVariable String nombre){
-//        Ciudad ciudad = ciudadService.buscarCiudadPorNombre(nombre).orElse(null);
-//        return ResponseEntity.ok(ciudad);
-//    }
-
 
     //ACTUALIZAR
     @PutMapping()
@@ -50,7 +42,6 @@ public class CiudadController {
     }
 
     //ELIMINAR
-    //Corregir a eliminar por nombre en vez de id
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarCiudad(@PathVariable Integer id) throws Exception {
 

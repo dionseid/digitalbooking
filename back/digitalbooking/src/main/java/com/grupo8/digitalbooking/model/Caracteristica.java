@@ -1,7 +1,6 @@
 package com.grupo8.digitalbooking.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,7 +13,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "caracteristicas")
 public class Caracteristica {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,16 +20,10 @@ public class Caracteristica {
     private String icono;
 
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(name = "producto_id")
+    @JoinColumn(name = "productos_id")
     private Producto producto;
-
-
-//    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-//    @JoinTable(name = "caractProd_producto",joinColumns = {@JoinColumn(name = "caractProd_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "producto_id")})
-//    private Set<Producto> productos= new HashSet<>();
 
 
     public Caracteristica(Integer id, String nombre, String icono, Producto producto) {

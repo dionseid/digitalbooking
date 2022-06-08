@@ -6,6 +6,7 @@ import SimpleReactLightbox, { SRLWrapper } from 'simple-react-lightbox';
 import { Button } from "react-bootstrap";
 import BootstrapModal from "./BootstrapModal";
 import "../styles/galeria.css";
+import { useParams } from "react-router-dom";
 
 
 
@@ -21,6 +22,8 @@ function srcset(image, size, rows = 1, cols = 1) {
 const Galeria= () =>{
     const [modalShow, setModalShow] = useState(false);
     const [dataImagen, setDataImagen] = useState([]);
+    const {id} = useParams();
+
 useEffect( () => {
     axios.get("http://localhost:8080/imagenes")
     .then(response => {
@@ -33,7 +36,8 @@ useEffect( () => {
     <SimpleReactLightbox>
       <SRLWrapper>
         <ImageList variant="quilted" cols={4} rowHeight={200}>
-          {dataImagen.map((item, index) => (
+          {dataImagen.filter((imagen)=>imagen.producto.id == id)
+          .map((item, index) => (
             <ImageListItem
               key={item.id}
               cols={

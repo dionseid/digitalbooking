@@ -1,46 +1,50 @@
-import React from "react";
-import data from "../helpers/data.json"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar, faLocationDot, faWifi, faPersonSwimming} from "@fortawesome/free-solid-svg-icons"
+import axios from "axios";
+import React, { useState , useEffect} from "react";
 import "../styles/cards.css";
+import { Link } from "react-router-dom";
 
-class CardRecomendacion extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-        }
-    }
-    render(){
-        return(
+
+const CardRecomendacion= () =>{  
+const [dataProducto, setDataProducto] = useState([]);
+useEffect( () => {
+    axios.get("http://localhost:8080/productos/traerTodos")
+    .then(response => {
+        setDataProducto(response.data)})
+
+}, [])
+
+
+        return (
             <div className="cards">
-                {data.informacionRecomendacion.map((card)=>(
+                {dataProducto.map((card)=>(
                     <div key={card.id} className="cardRecomendacion">
-                        <div style={{backgroundImage:"url(../img/" + card.URLimg + ")"}} className="fondoImagen"/>
+                        <div style={{backgroundImage:"url('" + card.categoria.urlImg + "')"}} className="fondoImagen"/>
                         <div className="cardBody">
                             <div className="presentacion">
                                 <div>
-                                    <p className="hotel">HOTEL <FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/></p>
-                                    <h3 className="nombreHotel">{card.titulo}</h3>
+                                    <p className="hotel">{card.categoria.titulo} <FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/><FontAwesomeIcon icon={faStar} className="estrella"/></p>
+                                    <h3 className="nombreHotel">{card.nombre}</h3>
                                 </div>
                                 <div className="calificacion">
-                                    <span className="puntaje">{card.puntaje}</span>
-                                    <p style={{fontWeight: "700"}}>{card.calificacion}</p>
+                                    <span className="puntaje">8</span>
+                                    <p style={{fontWeight: "700"}}>Muy Bueno</p>
                                 </div>
                             </div>
                             <div className="infoHotel">                            
-                            <p><FontAwesomeIcon icon={faLocationDot} style={{marginRight:"4px"}}/>{card.ubicacion} <span className="mostrarMapa">MOSTRAR EN EL MAPA</span></p>
+                            <p><FontAwesomeIcon icon={faLocationDot} style={{marginRight:"4px"}}/>{card.ciudad.nombre} <span className="mostrarMapa">MOSTRAR EN EL MAPA</span></p>
                             <p className="iconosInfoHotel"><FontAwesomeIcon icon={faWifi} style={{marginRight:"8px"}}/><FontAwesomeIcon icon={faPersonSwimming}/></p>
                             </div>
-                            <p>{card.parrafo} <span className="mas">más...</span></p>
-                            <button className="buttonCard">ver más</button>
+                            <p>{card.descripcion} <span className="mas">más...</span></p>
+                            <Link to={`/productos/${card.id}`}><button className="buttonCard">ver más</button></Link>
                         </div>
                     </div>
                 ))}
             </div>
+        ) 
 
-        )
+
     }
-
-}
 
 export default CardRecomendacion;

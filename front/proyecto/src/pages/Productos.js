@@ -5,8 +5,6 @@ import Navbar from "../components/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
-  faLocationDot,
-  faStar,
   faShareNodes,
   faHeart
 } from "@fortawesome/free-solid-svg-icons";
@@ -15,11 +13,16 @@ import Calendario from "../components/Calendario";
 import "../styles/pages/productos.css";
 import BootstrapCarousel from "../components/BootstrapCarousel";
 import Media from "react-media";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Caracteristicas from "../components/Caracteristicas";
 import Reglas from "../components/Reglas";
+import DescripcionProducto from "../components/DescripcionProducto";
+import UbicacionProducto from "../components/UbicacionProducto";
 
-const Productos = () => { 
+const Productos = () => {
+  const {id} = useParams();
+  console.log(id);
+   
   return (
     <div id="page-wrap">
       
@@ -35,24 +38,7 @@ const Productos = () => {
       </header>
       <body>
         <section className="ubicacion">
-          <div className="contenedorDireccion">
-            <dt>
-              <FontAwesomeIcon icon={faLocationDot} style={{"paddingRight":"5px"}}/>
-              <p>Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina.</p>
-            </dt>
-            <dd>A 940 m del centro</dd>
-          </div>
-          <div className="calificacionProductos">            
-            <div className="contenedorEstrellas">
-              <dt style={{ fontWeight: "700" }}>Muy bueno</dt>
-              <dd><FontAwesomeIcon icon={faStar} className="estrella" />
-              <FontAwesomeIcon icon={faStar} className="estrella" />
-              <FontAwesomeIcon icon={faStar} className="estrella" />
-              <FontAwesomeIcon icon={faStar} className="estrella" />
-              <FontAwesomeIcon icon={faStar} className="estrella" /></dd>             
-            </div>
-            <span className="puntaje">8</span>
-          </div>
+          <UbicacionProducto/>
         </section>
         <section className="imagenes">
           <p><FontAwesomeIcon icon={faShareNodes} className='iconosLike'/><FontAwesomeIcon icon={faHeart} className='iconosLike'/></p>
@@ -64,17 +50,8 @@ const Productos = () => {
             }}
           </Media>                   
         </section>
-        <section className="texto">
-          <h2>Alójate en el corazón de Buenos Aires</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-            ornare sapien ac nibh vulputate feugiat. Morbi euismod velit sit
-            amet libero volutpat ultrices in quis sem. Sed sit amet placerat
-            sem. Curabitur vitae lectus nec purus accumsan faucibus. Donec vitae
-            volutpat tortor. Suspendisse tempor rutrum urna, in consequat est
-            tincidunt vitae. Cras et ligula at felis placerat tempor. Fusce
-            elementum metus non justo luctus iaculis.
-          </p>
+        <section className="texto">          
+            <DescripcionProducto/>
         </section>
         <section>
             <Caracteristicas/>            
@@ -89,8 +66,7 @@ const Productos = () => {
                   <p>Agregá tus fechas de viaje para obtener precios exactos</p>
                   <button className="buttonCard">Iniciar reserva</button>
                 </div> 
-            </div> 
-                       
+            </div>                        
         </section>
         <section className="contenedorMapa">
             <h2>¿Dónde vas a estar?</h2>            

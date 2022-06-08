@@ -85,7 +85,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/categorias/102",
+							"raw": "http://localhost:8080/categorias/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -93,7 +93,7 @@
 							"port": "8080",
 							"path": [
 								"categorias",
-								"102"
+								"1"
 							]
 						}
 					},
@@ -299,7 +299,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":2,\r\n    \"nombre\":\"La Plata\",\r\n    \"provincia\":\"Buenos Aires\",\r\n    \"pais\":\"Argentina\"\r\n}",
+							"raw": "{\r\n    \"id\":2,\r\n    \"nombre\":\"Banfield\",\r\n    \"provincia\":\"Buenos Aires\",\r\n    \"pais\":\"Argentina\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -363,16 +363,16 @@
 			]
 		},
 		{
-			"name": "Tipos de Politica del Producto",
+			"name": "Politicas del Producto",
 			"item": [
 				{
-					"name": "Agregar Tipo de Politica",
+					"name": "Agregar Politica",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"titulo\":\"Seguridad\",\r\n    \"descripcion\":\"Ciudados del COVID segun reglamentación vigente\"\r\n}\r\n\r\n\r\n",
+							"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Ciudados del COVID segun reglamentación vigente\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -380,40 +380,40 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/tiposDePoliticaDelProducto",
+							"raw": "http://localhost:8080/politicas",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"tiposDePoliticaDelProducto"
+								"politicas"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Listar Tipos de Politica",
+					"name": "Listar Politicas",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/tiposDePoliticaDelProducto",
+							"raw": "http://localhost:8080/politicas",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"tiposDePoliticaDelProducto"
+								"politicas"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Buscar Tipo de Politica",
+					"name": "Buscar Politica",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -430,14 +430,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/tiposDePoliticaDelProducto/1",
+							"raw": "http://localhost:8080/politicas/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"tiposDePoliticaDelProducto",
+								"politicas",
 								"1"
 							]
 						}
@@ -445,13 +445,13 @@
 					"response": []
 				},
 				{
-					"name": "Actualizar Tipo de Politica",
+					"name": "Actualizar Politica",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"titulo\": \"Norma\",\r\n    \"descripcion\": \"Prohibido fumar en todo el establecimiento\",\r\n    \"productos\": []\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"tipo\":1,\r\n    \"descripcion\": \"Prohibido fumar en todo el establecimiento\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -459,34 +459,33 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/tiposDePoliticaDelProducto/",
+							"raw": "http://localhost:8080/politicas",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"tiposDePoliticaDelProducto",
-								""
+								"politicas"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Eliminar Tipo de Politica",
+					"name": "Eliminar Politica",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/tiposDePoliticaDelProducto/2",
+							"raw": "http://localhost:8080/politicas/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"tiposDePoliticaDelProducto",
+								"politicas",
 								"2"
 							]
 						}
@@ -505,7 +504,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"Casa\",\r\n    \"url\":\"https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?fit=2500%2C1666\"\r\n}\r\n",
+							"raw": "{\r\n    \"nombre\":\"Casa\",\r\n    \"url\":\"https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?fit=2500%2C1666\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -530,7 +529,19 @@
 					"name": "Buscar Imagen",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/imagenes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"imagenes",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -560,7 +571,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"id\": 2,\r\n        \"nombre\": \"Casa\",\r\n        \"url\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYQ5EZMVw43r0-HVrjHR4fMjOz_WU0itIHZlejslJuJtA-qOfywav_h9gdaO3TOUBoxOw&usqp=CAU\"\r\n    }",
+							"raw": "{\r\n        \"id\": 2,\r\n        \"nombre\": \"Casa\",\r\n        \"url\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYQ5EZMVw43r0-HVrjHR4fMjOz_WU0itIHZlejslJuJtA-qOfywav_h9gdaO3TOUBoxOw&usqp=CAU\",\r\n        \"producto\":{\r\n            \"id\":1\r\n        }\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -613,7 +624,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"Microondas\",\r\n    \"icono\":\"unicono\"\r\n}\r\n",
+							"raw": "{\r\n    \"nombre\":\"Microondas\",\r\n    \"icono\":\"unicono\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -680,7 +691,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":1,\r\n    \"nombre\":\"secador de cabello\",\r\n    \"icono\":\"unicono\"\r\n}\r\n",
+							"raw": "{\r\n    \"id\":1,\r\n    \"nombre\":\"secador de cabello\",\r\n    \"icono\":\"unicono\",\r\n        \"producto\":{\r\n        \"id\":2\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -733,7 +744,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"departamento\",\r\n    \"descripcion\":\"gran departamento en excelente zona centrica\",\r\n    \"ciudad\":{\r\n        \"id\": 2,\r\n        \"nombre\": \"Caba\",\r\n        \"provincia\": \"Buenos Aires\",\r\n        \"pais\": \"Argentina\"\r\n    },\r\n    \"categoria\": {\r\n        \"id\": 171,\r\n        \"titulo\": \"Casa\",\r\n        \"descripcion\": \"Excelente\",\r\n        \"urlImg\": \"https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?fit=2500%2C1666\"\r\n    },\r\n    \"imagenes\":[\r\n    {\r\n        \"id\": 1,\r\n        \"nombre\": \"Casa\",\r\n        \"url\": \"https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?fit=2500%2C1666\"\r\n    },\r\n     {\r\n        \"id\": 3,\r\n        \"nombre\": \"Casa\",\r\n        \"url\": \"https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?fit=2500%2C1666\"\r\n    }],\r\n    \"caracteristicas\":[\r\n         {\r\n        \"id\": 3,\r\n        \"nombre\": \"Balcon\",\r\n        \"icono\": \"unicono\"\r\n    },\r\n    {\r\n        \"id\": 4,\r\n        \"nombre\": \"Microondas\",\r\n        \"icono\": \"unicono\"\r\n    }],\r\n    \"tipoDePoliticas\":[\r\n        {\r\n        \"id\": 1,\r\n        \"titulo\": \"Norma\",\r\n        \"descripcion\": \"Prohibido fumar en todo el establecimiento\"\r\n    }]\r\n    }\r\n",
+							"raw": "{\r\n    \"nombre\":\"departamento\",\r\n    \"descripcion\":\"gran departamento en excelente zona centrica\",\r\n    \"ciudad\":{\r\n        \"id\": 1\r\n            },\r\n    \"categoria\":{\r\n        \"id\": 1\r\n    }\r\n    }\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -741,14 +752,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/productos",
+							"raw": "http://localhost:8080/productos/agregarProducto",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"productos"
+								"productos",
+								"agregarProducto"
 							]
 						}
 					},
@@ -760,7 +772,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/productos/1",
+							"raw": "http://localhost:8080/productos/buscarProductoPorId/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -768,6 +780,7 @@
 							"port": "8080",
 							"path": [
 								"productos",
+								"buscarProductoPorId",
 								"1"
 							]
 						}
@@ -780,14 +793,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/productos",
+							"raw": "http://localhost:8080/productos/traerTodos",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"productos"
+								"productos",
+								"traerTodos"
 							]
 						}
 					},
@@ -796,11 +810,11 @@
 				{
 					"name": "Actualizar Producto",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":1,\r\n    \"nombre\":\"casa\",\r\n    \"descripcion\":\"gran casa en excelente zona centrica\",\r\n    \"ciudad\":{\r\n        \"id\": 2,\r\n        \"nombre\": \"Caba\",\r\n        \"provincia\": \"Buenos Aires\",\r\n        \"pais\": \"Argentina\"\r\n    },\r\n    \"categoria\": {\r\n        \"id\": 171,\r\n        \"titulo\": \"Casa\",\r\n        \"descripcion\": \"Excelente\",\r\n        \"urlImg\": \"https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?fit=2500%2C1666\"\r\n    },\r\n    \"imagenes\":[\r\n    {\r\n        \"id\": 1,\r\n        \"nombre\": \"Casa\",\r\n        \"url\": \"https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?fit=2500%2C1666\"\r\n    },\r\n     {\r\n        \"id\": 3,\r\n        \"nombre\": \"Casa\",\r\n        \"url\": \"https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?fit=2500%2C1666\"\r\n    }],\r\n    \"caracteristicas\":[\r\n         {\r\n        \"id\": 3,\r\n        \"nombre\": \"Balcon\",\r\n        \"icono\": \"unicono\"\r\n    },\r\n    {\r\n        \"id\": 4,\r\n        \"nombre\": \"Microondas\",\r\n        \"icono\": \"unicono\"\r\n    }],\r\n    \"tipoDePoliticas\":[\r\n        {\r\n        \"id\": 1,\r\n        \"titulo\": \"Norma\",\r\n        \"descripcion\": \"Prohibido fumar en todo el establecimiento\"\r\n    }]\r\n    }\r\n",
+							"raw": "{\r\n    \"id\":1,\r\n    \"nombre\":\"departamento\",\r\n    \"descripcion\":\"gran departamento en excelente zona centrica\",\r\n    \"ciudad\":{\r\n        \"id\": 2\r\n            },\r\n    \"categoria\":{\r\n        \"id\": 1\r\n    }\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -808,14 +822,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/productos",
+							"raw": "http://localhost:8080/productos/actualizarProd",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"productos"
+								"productos",
+								"actualizarProd"
 							]
 						}
 					},
@@ -836,6 +851,48 @@
 							"path": [
 								"productos",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/productos/filtroCategoria/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"filtroCategoria",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por Ciudad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/productos/filtroCiudad/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"filtroCiudad",
+								"1"
 							]
 						}
 					},
