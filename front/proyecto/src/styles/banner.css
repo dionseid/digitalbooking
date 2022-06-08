@@ -23,9 +23,11 @@
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
   width: 422px;
-  height: 40px;
+  height: 38px;
   margin-right: 8px;
   font-weight: 500;
+  text-align: start;
+  font-size: 20px;;
 }
 
 ::placeholder,

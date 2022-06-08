@@ -22,3 +22,11 @@
     line-height: 16px;
     margin-left: 12px;
 }
+
+.select{
+    font-size: 14px;
+}
+
+.elegido{
+    background-color: red;
+}
