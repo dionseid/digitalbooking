@@ -128,7 +128,7 @@ deploy to production:
     #- envsubst < eb-templates/Dockerrun.aws.json > Dockerrun.aws.json
     - envsubst < eb-templates/config.json > config.json
     #- envsubst < eb-templates/.dockercfg > .dockercfg
-    - cp -r .platform/ ../
+    - cp -r eb-templates/.platform/ ../
     - cat docker-compose.yml
     #- cat Dockerrun.aws.json
     - cat config.json
