@@ -1,0 +1,7 @@
+{
+    "AWSEBDockerrunVersion": "3",
+    "Authentication": {
+      "bucket": "$AWS_S3_BUCKET",
+      "key": "remo/digitalbooking/dev/.dockercfg"
+    }
+  } 

@@ -48,7 +48,7 @@ resource "aws_iam_instance_profile" "eb_instance_profile" {
 resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
   name                = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-env${var.environment_name != "" ? "-${var.environment_name}" : ""}"
   application         = aws_elastic_beanstalk_application.elastic_app.name
-  solution_stack_name = "64bit Amazon Linux 2 v3.4.16 running Docker"
+  solution_stack_name = "64bit Amazon Linux 2 v3.4.16 running Docker" #"64bit Amazon Linux 2 v2.14.3 running Docker"
 
   # EB environment --»
 
