@@ -93,6 +93,8 @@ trigger_a:
     - if: $CI_PIPELINE_SOURCE != "schedule" 
     # - changes: #Descomentar
     #   - front/proyecto/*
+  variables:
+    PARENT_PIPELINE_ID: $CI_PIPELINE_ID
 
 trigger_b:
   stage: build
@@ -101,6 +103,8 @@ trigger_b:
     strategy: depend
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule"
+  variables:
+    PARENT_PIPELINE_ID: $CI_PIPELINE_ID
 
 deploy to production:
   stage: deploy
