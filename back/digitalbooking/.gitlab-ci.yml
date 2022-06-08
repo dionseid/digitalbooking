@@ -7,7 +7,7 @@ stages:
 
 variables:
   MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
-  REPOSITORY_NAME: digitalbooking
+  REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
   APP: back
 

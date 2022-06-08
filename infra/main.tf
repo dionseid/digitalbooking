@@ -109,3 +109,11 @@ module "storage" {
   environment_name = var.environment_name
   bucket_name      = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-public-bucket${var.environment_name != "" ? "-${var.environment_name}" : ""}"
 }
+
+module "ecr" {
+  source = "./modules/ecr"
+
+  team_name        = var.team_name
+  product_name     = var.product_name
+  environment_name = var.environment_name
+}
