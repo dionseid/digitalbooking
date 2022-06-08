@@ -130,9 +130,7 @@ deploy to production:
   variables:
     APP_NAME: remo-digitalbooking-prod
     APP_ENV_NAME: remo-digitalbooking-env-prod
-  environment: 
-    name: production
-    url: http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com
+  environment: production
   before_script:
     - aws --version
     - yum install -y gettext
@@ -158,6 +156,6 @@ deploy to production:
     #- aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/Dockerrun.aws.json
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
     - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
-    - curl $CI_ENVIRONMENT_URL/version.html | grep $APP_VERSION # Sole prueba que frontend funciona
+    - curl http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/version.html | grep $APP_VERSION # Sole prueba que frontend funciona
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule"
