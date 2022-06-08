@@ -1,13 +1,15 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar, faLocationDot, faWifi, faPersonSwimming} from "@fortawesome/free-solid-svg-icons"
 import axios from "axios";
-import React, { useState , useEffect} from "react";
+import React, { useState , useEffect, useMemo} from "react";
 import "../styles/cards.css";
 import { Link } from "react-router-dom";
 
 
-const CardRecomendacion= () =>{  
+const CardRecomendacion= ({selectCiudad}) =>{  
 const [dataProducto, setDataProducto] = useState([]);
+const [selectedCiudad, setSelectedCiudad] = useState(selectCiudad);
+
 useEffect( () => {
     axios.get("http://localhost:8080/productos/traerTodos")
     .then(response => {
@@ -16,9 +18,22 @@ useEffect( () => {
 }, [])
 
 
+
+function getFilteredList() {
+    // Avoid filter when selectedCategory is null
+    if (!setSelectedCiudad) {
+      return dataProducto;
+    }
+    return dataProducto.filter((prod) => prod.ciudad.id == selectedCiudad);
+  }
+
+  // Avoid duplicate function calls with useMemo
+  var filteredList = useMemo(getFilteredList, [selectedCiudad, dataProducto]);
+
+
         return (
             <div className="cards">
-                {dataProducto.map((card)=>(
+                {filteredList.map((card)=>(
                     <div key={card.id} className="cardRecomendacion">
                         <div style={{backgroundImage:"url('" + card.categoria.urlImg + "')"}} className="fondoImagen"/>
                         <div className="cardBody">

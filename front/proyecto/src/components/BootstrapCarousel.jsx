@@ -32,7 +32,7 @@ useEffect( () => {
             alt={item.nombre}            
           />
           <Carousel.Caption>
-            <p style={{"textAlign": "end"}}>{(index + 1) + "/" + dataImagen.length}</p>
+            <p style={{"textAlign": "end"}}>{(index + 1) + "/" + dataImagen.filter((imagen)=>imagen.producto.id == id).length}</p>
           </Carousel.Caption>
         </Carousel.Item>
         ))}
