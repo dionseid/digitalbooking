@@ -130,12 +130,12 @@ deploy to production:
     - cat docker-compose.yml
     #- cat Dockerrun.aws.json
     - cat config.json
-    - zip -r remo-digitalbooking-eb-app-dev.zip config.json docker-compose.yml eb-templates/.platform
-    - aws s3 cp remo-digitalbooking-eb-app-dev.zip s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev.zip
+    - zip -r remo-digitalbooking-eb-app-dev-$APP_VERSION.zip config.json docker-compose.yml eb-templates/.platform
+    - aws s3 cp remo-digitalbooking-eb-app-dev-$APP_VERSION.zip s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev-$APP_VERSION.zip
     #- aws s3 cp docker-compose.yml s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/docker-compose.yml
     #- aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/Dockerrun.aws.json
     #- aws s3 cp config.json s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/config.json
-    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $CI_PIPELINE_IID --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev.zip
+    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $CI_PIPELINE_IID --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev-$APP_VERSION.zip
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME
     - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME
     - curl $CI_ENVIRONMENT_URL/version.html | grep $CI_PIPELINE_IID # Sole prueba que frontend funciona
