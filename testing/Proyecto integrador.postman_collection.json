@@ -29,7 +29,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"titulo\":\"Bed and breakfast\",\r\n    \"descripcion\":\"Excelente\",\r\n    \"urlImg\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYQ5EZMVw43r0-HVrjHR4fMjOz_WU0itIHZlejslJuJtA-qOfywav_h9gdaO3TOUBoxOw&usqp=CAU\"\r\n}\r\n\r\n",
+							"raw": "{\r\n    \"titulo\":\"Bed and breakfast\",\r\n    \"descripcion\":\"45 Habitaciones\",\r\n    \"urlImg\":\"https://hotelpropeller.com/wp-content/uploads/2013/04/Bed-and-Breakfast-Facebook-Page.jpg\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -67,7 +67,7 @@
 									"});\r",
 									"pm.test(\"Titulo value is in valid list\", () => {\r",
 									"  pm.expect(pm.response.json().titulo)\r",
-									"    .to.be.oneOf([\"Departamento\", \"Cabaña\", \"Habitación\",\"Casa\",\"Bed and breakfast\", \"Hotel\"]);\r",
+									"    .to.be.oneOf([\"Departamento\", \"Casa\", \"Habitación\", \"Bed and breakfast\"]);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -119,7 +119,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":2,\r\n    \"titulo\":\"Casa\",\r\n    \"descripcion\":\"excelente\",\r\n    \"urlImg\":\"https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?fit=2500%2C1666\"\r\n}",
+							"raw": "{\r\n    \"id\":5,\r\n    \"titulo\":\"Bed and breakfast\",\r\n    \"descripcion\":\"50 Habitaciones\",\r\n    \"urlImg\":\"https://hotelpropeller.com/wp-content/uploads/2013/04/Bed-and-Breakfast-Facebook-Page.jpg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -163,7 +163,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/categorias/2",
+							"raw": "http://localhost:8080/categorias/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -171,7 +171,7 @@
 							"port": "8080",
 							"path": [
 								"categorias",
-								"2"
+								"5"
 							]
 						}
 					},
@@ -246,12 +246,25 @@
 			"item": [
 				{
 					"name": "Agregar Ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"La Pata\",\r\n    \"provincia\":\"Buenos Aires\",\r\n    \"pais\":\"Argentina\"\r\n}\r\n\r\n",
+							"raw": "{\r\n    \"nombre\":\"La Plata\",\r\n    \"provincia\":\"Buenos Aires\",\r\n    \"pais\":\"Argentina\"\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -274,6 +287,25 @@
 				},
 				{
 					"name": "Buscar Ciudad por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The response has all properties\", () => {\r",
+									"    //parse the response JSON and test three properties\r",
+									"    const responseJson = pm.response.json();\r",
+									"        pm.expect(responseJson.id).to.be.a('number');\r",
+									"     pm.expect(responseJson.nombre).to.be.a('string');\r",
+									"     pm.expect(responseJson.provincia).to.be.a('string');\r",
+									"        pm.expect(responseJson.pais).to.be.a('string');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -294,12 +326,25 @@
 				},
 				{
 					"name": "Actualizar Ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":2,\r\n    \"nombre\":\"Banfield\",\r\n    \"provincia\":\"Buenos Aires\",\r\n    \"pais\":\"Argentina\"\r\n}",
+							"raw": "{\r\n    \"id\":5,\r\n    \"nombre\":\"Tigre\",\r\n    \"provincia\":\"Buenos Aires\",\r\n    \"pais\":\"Argentina\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -323,11 +368,24 @@
 				},
 				{
 					"name": "Borrar Ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"  pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/ciudades/2",
+							"raw": "http://localhost:8080/ciudades/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -335,7 +393,7 @@
 							"port": "8080",
 							"path": [
 								"ciudades",
-								"2"
+								"5"
 							]
 						}
 					},
@@ -343,6 +401,20 @@
 				},
 				{
 					"name": "Listar Ciudades",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"    pm.expect(jsonData).to.be.an(\"array\");\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -363,6 +435,272 @@
 			]
 		},
 		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "Agregar Producto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Departamento en ciudad de La Plata\",\r\n    \"descripcion\":\"gran departamento en excelente zona céntrica\",\r\n    \"ciudad\":{\r\n        \"id\": 1\r\n            },\r\n    \"categoria\":{\r\n        \"id\": 2\r\n    }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/productos/agregarProducto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"agregarProducto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Producto por Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The response has all properties\", () => {\r",
+									"    //parse the response JSON and test three properties\r",
+									"    const responseJson = pm.response.json();\r",
+									"        pm.expect(responseJson.id).to.be.a('number');\r",
+									"        pm.expect(responseJson.nombre).to.be.a('string');\r",
+									"        pm.expect(responseJson.descripcion).to.be.a('string');\r",
+									"        pm.expect(responseJson.ciudad).to.be.a('object');\r",
+									"        pm.expect(responseJson.categoria).to.be.a('object');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/productos/buscarProductoPorId/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"buscarProductoPorId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Producto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":5,\r\n    \"nombre\":\"Departamento en ciudad del Tigre\",\r\n    \"descripcion\":\"gran departamento en excelente zona céntrica\",\r\n    \"ciudad\":{\r\n        \"id\": 1\r\n            },\r\n    \"categoria\":{\r\n        \"id\": 2\r\n    }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/productos/actualizarProd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"actualizarProd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar Producto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", () => {\r",
+									"pm.expect(pm.response.code).to.be.oneOf([200,204]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/productos/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"    pm.expect(jsonData).to.be.an(\"array\");\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/productos/filtroCategoria/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"filtroCategoria",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por Ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"    pm.expect(jsonData).to.be.an(\"array\");\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/productos/filtroCiudad/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"filtroCiudad",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Productos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"    pm.expect(jsonData).to.be.an(\"array\");\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/productos/traerTodos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"traerTodos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Politicas del Producto",
 			"item": [
 				{
@@ -372,7 +710,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Ciudados del COVID segun reglamentación vigente\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n\r\n\r\n",
+							"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Ciudados del COVID segun reglamentación vigente\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -451,7 +789,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"tipo\":1,\r\n    \"descripcion\": \"Prohibido fumar en todo el establecimiento\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+							"raw": "{\r\n    \"id\": 19,\r\n    \"tipo\":1,\r\n    \"descripcion\": \"Prohibido fumar en todo el establecimiento\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -478,7 +816,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/politicas/2",
+							"raw": "http://localhost:8080/politicas/19",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -486,7 +824,7 @@
 							"port": "8080",
 							"path": [
 								"politicas",
-								"2"
+								"19"
 							]
 						}
 					},
@@ -499,12 +837,25 @@
 			"item": [
 				{
 					"name": "Agregar Imagen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"Casa\",\r\n    \"url\":\"https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?fit=2500%2C1666\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n",
+							"raw": "{\r\n    \"nombre\":\"Comedor\",\r\n    \"url\":\"https://www.viajo.org/wp-content/uploads/2016/07/departamento-roma-airbnb-1024x683.jpg\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -527,11 +878,29 @@
 				},
 				{
 					"name": "Buscar Imagen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The response has all properties\", () => {\r",
+									"    //parse the response JSON and test three properties\r",
+									"    const responseJson = pm.response.json();\r",
+									"        pm.expect(responseJson.id).to.be.a('number');\r",
+									"     pm.expect(responseJson.nombre).to.be.a('string');\r",
+									"     pm.expect(responseJson.url).to.be.a('string');\r",
+									"        pm.expect(responseJson.producto).to.be.a('object');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/imagenes/1",
+							"raw": "http://localhost:8080/imagenes/21",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -539,7 +908,7 @@
 							"port": "8080",
 							"path": [
 								"imagenes",
-								"1"
+								"21"
 							]
 						}
 					},
@@ -547,6 +916,20 @@
 				},
 				{
 					"name": "Listar Imagenes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"    pm.expect(jsonData).to.be.an(\"array\");\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -566,12 +949,25 @@
 				},
 				{
 					"name": "Actualizar Imagen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"id\": 2,\r\n        \"nombre\": \"Casa\",\r\n        \"url\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYQ5EZMVw43r0-HVrjHR4fMjOz_WU0itIHZlejslJuJtA-qOfywav_h9gdaO3TOUBoxOw&usqp=CAU\",\r\n        \"producto\":{\r\n            \"id\":1\r\n        }\r\n    }",
+							"raw": "{\r\n    \"id\": 21,\r\n    \"nombre\":\"Comedor\",\r\n    \"url\":\"https://www.viajo.org/wp-content/uploads/2016/07/departamento-roma-airbnb-1024x683.jpg\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -594,11 +990,24 @@
 				},
 				{
 					"name": "Eliminar Imagen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", () => {\r",
+									"pm.expect(pm.response.code).to.be.oneOf([200,204]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/imagenes/2",
+							"raw": "http://localhost:8080/imagenes/21",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -606,7 +1015,7 @@
 							"port": "8080",
 							"path": [
 								"imagenes",
-								"2"
+								"21"
 							]
 						}
 					},
@@ -619,12 +1028,25 @@
 			"item": [
 				{
 					"name": "Agregar Caracteristica",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"Microondas\",\r\n    \"icono\":\"unicono\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n",
+							"raw": "{\r\n    \"nombre\":\"Microondas\",\r\n    \"icono\":\"microwave\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -647,11 +1069,29 @@
 				},
 				{
 					"name": "Buscar Caracteristica",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The response has all properties\", () => {\r",
+									"    //parse the response JSON and test three properties\r",
+									"    const responseJson = pm.response.json();\r",
+									"        pm.expect(responseJson.id).to.be.a('number');\r",
+									"     pm.expect(responseJson.nombre).to.be.a('string');\r",
+									"     pm.expect(responseJson.icono).to.be.a('string');\r",
+									"        pm.expect(responseJson.producto).to.be.a('object');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/caracteristicas/1",
+							"raw": "http://localhost:8080/caracteristicas/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -659,26 +1099,7 @@
 							"port": "8080",
 							"path": [
 								"caracteristicas",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Listar Caracteristicas",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/caracteristicas",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"caracteristicas"
+								"5"
 							]
 						}
 					},
@@ -686,12 +1107,25 @@
 				},
 				{
 					"name": "Actualizar Caracteristica",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":1,\r\n    \"nombre\":\"secador de cabello\",\r\n    \"icono\":\"unicono\",\r\n        \"producto\":{\r\n        \"id\":2\r\n    }\r\n}\r\n",
+							"raw": "{\r\n    \"id\":16,\r\n    \"nombre\":\"Microondas\",\r\n    \"icono\":\"microwave\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -714,11 +1148,24 @@
 				},
 				{
 					"name": "Borrar Caracteristica",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"  pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/caracteristicas/2",
+							"raw": "http://localhost:8080/caracteristicas/16",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -726,179 +1173,68 @@
 							"port": "8080",
 							"path": [
 								"caracteristicas",
-								"2"
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Caracteristicas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"    pm.expect(jsonData).to.be.an(\"array\");\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/caracteristicas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"caracteristicas"
 							]
 						}
 					},
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "Productos",
-			"item": [
-				{
-					"name": "Agregar Producto",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"departamento\",\r\n    \"descripcion\":\"gran departamento en excelente zona centrica\",\r\n    \"ciudad\":{\r\n        \"id\": 1\r\n            },\r\n    \"categoria\":{\r\n        \"id\": 1\r\n    }\r\n    }\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/productos/agregarProducto",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"productos",
-								"agregarProducto"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar Producto",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/productos/buscarProductoPorId/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"productos",
-								"buscarProductoPorId",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Listar Productos",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/productos/traerTodos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"productos",
-								"traerTodos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar Producto",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\":1,\r\n    \"nombre\":\"departamento\",\r\n    \"descripcion\":\"gran departamento en excelente zona centrica\",\r\n    \"ciudad\":{\r\n        \"id\": 2\r\n            },\r\n    \"categoria\":{\r\n        \"id\": 1\r\n    }\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/productos/actualizarProd",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"productos",
-								"actualizarProd"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Borrar Producto",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/productos/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"productos",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar por categoria",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/productos/filtroCategoria/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"productos",
-								"filtroCategoria",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar por Ciudad",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/productos/filtroCiudad/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"productos",
-								"filtroCiudad",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200 or 204\", () => {",
+					"pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+					"});"
+				]
+			}
 		}
 	]
 }
