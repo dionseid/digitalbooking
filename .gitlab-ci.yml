@@ -130,7 +130,9 @@ deploy to production:
   variables:
     APP_NAME: remo-digitalbooking-prod
     APP_ENV_NAME: remo-digitalbooking-env-prod
-  environment: production
+  environment: 
+    name: production
+    url: http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com
   before_script:
     - aws --version
     - yum install -y gettext
