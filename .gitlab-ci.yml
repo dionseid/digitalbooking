@@ -125,12 +125,12 @@ deploy to production:
     - yum install -y zip
   script:
     - envsubst < eb-templates/docker-compose.yml > docker-compose.yml
-    - envsubst < eb-templates/Dockerrun.aws.json > Dockerrun.aws.json
+    #- envsubst < eb-templates/Dockerrun.aws.json > Dockerrun.aws.json
     - envsubst < eb-templates/config.json > config.json
     - cat docker-compose.yml
-    - cat Dockerrun.aws.json
+    #- cat Dockerrun.aws.json
     - cat config.json
-    - zip remo-digitalbooking-eb-app-dev.zip docker-compose.yml Dockerrun.aws.json config.json
+    - zip -r remo-digitalbooking-eb-app-dev.zip eb-templates
     - aws s3 cp remo-digitalbooking-eb-app-dev.zip s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev.zip
     #- aws s3 cp docker-compose.yml s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/docker-compose.yml
     #- aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/Dockerrun.aws.json
