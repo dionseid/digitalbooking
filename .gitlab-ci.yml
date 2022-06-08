@@ -74,6 +74,7 @@
 variables: 
   APP_VERSION: $CI_PIPELINE_IID
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
+  TEAM: remo
 
 stages:
   - update
