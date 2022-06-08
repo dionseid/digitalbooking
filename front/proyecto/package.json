@@ -65,5 +65,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/:8080"
+  "proxy": "http://localhost:8080"
 }
