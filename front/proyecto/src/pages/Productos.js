@@ -18,23 +18,16 @@ import Caracteristicas from "../components/Caracteristicas";
 import Reglas from "../components/Reglas";
 import DescripcionProducto from "../components/DescripcionProducto";
 import UbicacionProducto from "../components/UbicacionProducto";
+import TituloProducto from "../components/TituloProducto";
+import GoogleMaps from "../components/GoogleMaps";
 
-const Productos = () => {
-  const {id} = useParams();
-  console.log(id);
-   
+const Productos = () => {   
   return (
     <div id="page-wrap">
       
       <header >
         <Navbar />
-        <div className="headerProducto">
-          <div>
-            <p>HOTEL</p>
-            <h2>Hermitage Hotel</h2>
-          </div>
-          <Link to="/"><FontAwesomeIcon icon={faAngleLeft} className="iconoVolver"/></Link>          
-        </div>                
+        <TituloProducto/>                
       </header>
       <body>
         <section className="ubicacion">
@@ -69,7 +62,8 @@ const Productos = () => {
             </div>                        
         </section>
         <section className="contenedorMapa">
-            <h2>¿Dónde vas a estar?</h2>            
+            <h2>¿Dónde vas a estar?</h2>
+            <GoogleMaps/>            
         </section>
         <section>
             <h2>¿Qué tenes que saber?</h2>

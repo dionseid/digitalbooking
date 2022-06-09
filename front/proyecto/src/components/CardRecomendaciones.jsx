@@ -1,25 +1,27 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faLocationDot, faWifi, faPersonSwimming } from "@fortawesome/free-solid-svg-icons"
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "../styles/cards.css";
 import { Link } from "react-router-dom";
 
 
-const CardRecomendacion = () => {
+const CardRecomendacion = ({ selectCiudad }) => {
     const [dataProducto, setDataProducto] = useState([]);
+    const [selectedCiudad, setSelectedCiudad] = useState(selectCiudad);
+
     useEffect(() => {
         axios.get("http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com:8080/productos/traerTodos")
             .then(response => {
                 setDataProducto(response.data)
             })
-
     }, [])
 
+    const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
 
     return (
         <div className="cards">
-            {dataProducto.map((card) => (
+            {getFilteredList().map((card) => (
                 <div key={card.id} className="cardRecomendacion">
                     <div style={{ backgroundImage: "url('" + card.categoria.urlImg + "')" }} className="fondoImagen" />
                     <div className="cardBody">
@@ -47,5 +49,4 @@ const CardRecomendacion = () => {
 
 
 }
-
 export default CardRecomendacion;
