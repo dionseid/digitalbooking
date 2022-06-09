@@ -135,6 +135,7 @@ deploy to production:
     - aws --version
     - yum install -y gettext
     - yum install -y zip
+    - yum install -y grep
   script:
     - envsubst < eb-templates/docker-compose.yml > docker-compose.yml
     - envsubst < eb-templates/Dockerrun.aws.json > Dockerrun.aws.json

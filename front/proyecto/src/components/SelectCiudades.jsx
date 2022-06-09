@@ -12,7 +12,10 @@ import selectStyles from './elementStyle/selectStyles';
 export default function SelectCiudades({ onChange }) {
   const [dataCiudades, setDataCiudades] = useState([]);
   useEffect(() => {
-    axios.get("http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com:8080/ciudades")
+    axios.get({
+      baseURL: "http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com:8080/ciudades",
+      headers: { "Access-Control-Allow-Origin": "*" }
+    })
       .then(response => {
         setDataCiudades(response.data)
       })
