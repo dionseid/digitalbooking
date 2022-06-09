@@ -15,7 +15,7 @@ export default function UbicacionProducto() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://awseb-AWSEB-19H8QAMA3KCJ1-539654579.us-west-1.elb.amazonaws.com:8080/productos/buscarProductoPorId/${id}`)
+    axios.get(`http://awseb-AWSEB-19H8QAMA3KCJ1-539654579.us-west-1.elb.amazonaws.com:5000/productos/buscarProductoPorId/${id}`)
       .then(response => {
         console.log(response.data);
         setDataUbicacion(response.data.ciudad)

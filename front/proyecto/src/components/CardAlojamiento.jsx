@@ -7,7 +7,7 @@ import "../styles/cards.css";
 const CardAlojamiento = () => {
     const [dataCategoria, setDataCategoria] = useState([]);
     useEffect(() => {
-        axios.get("http://awseb-AWSEB-19H8QAMA3KCJ1-539654579.us-west-1.elb.amazonaws.com:8080/categorias")
+        axios.get("http://awseb-AWSEB-19H8QAMA3KCJ1-539654579.us-west-1.elb.amazonaws.com:5000/categorias")
             .then(response => {
                 setDataCategoria(response.data)
             })
