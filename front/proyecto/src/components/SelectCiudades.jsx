@@ -12,7 +12,7 @@ export default function SelectCiudades() {
   const [dataCiudades, setDataCiudades] = useState([]);
 
   useEffect(() => {
-    axios.get("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com:8080/ciudades")
+    axios.get("http://awseb-AWSEB-19H8QAMA3KCJ1-539654579.us-west-1.elb.amazonaws.com:8080/ciudades")
       .then(response => {
         console.log(response.data);
         setDataCiudades(response.data)
