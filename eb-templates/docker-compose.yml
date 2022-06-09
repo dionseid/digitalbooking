@@ -9,5 +9,5 @@ services:
       - "backend"
   backend:
     ports:
-      - "5000:5000"
+      - "8080:8080"
     image: "$AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-$CI_PIPELINE_IID"

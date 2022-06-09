@@ -12,7 +12,7 @@ export default function SelectCiudades() {
   const [dataCiudades, setDataCiudades] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/ciudades")
+    axios.get("http://localhost:8080/ciudades")
       .then(response => {
         console.log(response.data);
         setDataCiudades(response.data)
