@@ -9,10 +9,7 @@ export default function Caracteristicas() {
     const [dataCaracteristicas, setDataCaracteristicas] = useState([]);
     const { id } = useParams();
     useEffect(() => {
-        axios.get({
-            baseURL: "http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com:8080/caracteristicas",
-            headers: { "Access-Control-Allow-Origin": "*" }
-        })
+        axios.get("http://backend:8080/caracteristicas")
             .then(response => {
                 setDataCaracteristicas(response.data)
             })

@@ -14,10 +14,7 @@ export default function BootstrapCarousel() {
   };
   const [dataImagen, setDataImagen] = useState([]);
   useEffect(() => {
-    axios.get({
-      baseURL: "http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com:8080/imagenes",
-      headers: { "Access-Control-Allow-Origin": "*" }
-    })
+    axios.get("http://backend:8080/imagenes")
       .then(response => {
         console.log(response.data);
         setDataImagen(response.data)

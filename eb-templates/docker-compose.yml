@@ -5,10 +5,10 @@ services:
       - "80:80"
       - "443:443"
     image: "$AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-front-$CI_PIPELINE_IID"
-    links:
-      - "backend"
     networks:
       - fullstack
+    links:
+      - backend
   backend:
     ports:
       - "8080:8080"

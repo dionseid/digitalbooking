@@ -11,10 +11,7 @@ const CardRecomendacion = ({ selectCiudad }) => {
     const [selectedCiudad, setSelectedCiudad] = useState(selectCiudad);
 
     useEffect(() => {
-        axios.get({
-            baseURL: "http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com:8080/productos/traerTodos",
-            headers: { "Access-Control-Allow-Origin": "*" }
-        })
+        axios.get("http://backend:8080/productos/traerTodos")
             .then(response => {
                 setDataProducto(response.data)
             })
