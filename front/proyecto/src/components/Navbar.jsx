@@ -3,7 +3,7 @@ import "../styles/navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from './Sidebar';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { matchPath, Navigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
@@ -37,6 +37,7 @@ const Navbar = ({ authenticated, setIsAuthenticated }) => {
   useEffect(() => setIsAuthenticatedMenu(authenticated), [authenticated]);
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const {id} = useParams();
 
     const buttonsView = {      
         '/' : <>

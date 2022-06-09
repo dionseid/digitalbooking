@@ -19,11 +19,9 @@ import Reglas from "../components/Reglas";
 import DescripcionProducto from "../components/DescripcionProducto";
 import UbicacionProducto from "../components/UbicacionProducto";
 import TituloProducto from "../components/TituloProducto";
+import GoogleMaps from "../components/GoogleMaps";
 
-const Productos = () => {
-  const {id} = useParams();
-  console.log(id);
-   
+const Productos = () => {   
   return (
     <div id="page-wrap">
       
@@ -64,7 +62,8 @@ const Productos = () => {
             </div>                        
         </section>
         <section className="contenedorMapa">
-            <h2>¿Dónde vas a estar?</h2>            
+            <h2>¿Dónde vas a estar?</h2>
+            <GoogleMaps/>            
         </section>
         <section>
             <h2>¿Qué tenes que saber?</h2>
