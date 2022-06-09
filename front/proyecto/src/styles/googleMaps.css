@@ -1,5 +1,6 @@
 #map{
     padding: 30px;
+    z-index: 80;
 }
 
 .leaflet-container{

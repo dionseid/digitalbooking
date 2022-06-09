@@ -12,7 +12,6 @@ export default function Reglas() {
     useEffect( () => {
     axios.get("http://localhost:8080/politicas")
     .then(response => {
-        console.log(response.data);
         setDataReglas(response.data)})
 
 }, [])

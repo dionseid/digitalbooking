@@ -4,6 +4,7 @@
     justify-content: space-around;
     align-items: center;
     padding-top: 20px;
+    margin-bottom: 30px;
   }
   
   .cardAlojamiento{
@@ -27,6 +28,7 @@
     background-color: #F3F3F3;
     border-radius:8px;
     height:320px;
+    
     
   }
 
@@ -115,9 +117,11 @@
       flex-direction: column;
       height:500px;
       width: 90vw;
-      margin-bottom: 35px;      
+      margin-bottom: 35px; 
+           
     }
 
+    
     .buttonCard{
       width: 100%;
       margin-top: 10px;
@@ -126,15 +130,18 @@
     .iconosInfoHotel{
       display:none;
     }
+
   }
 
 @media screen and (min-width: 769px){
   .cardRecomendacion{
     width: 635px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
   }
 
   .cardAlojamiento{
     width: 20vw;
   }
+
+ 
 }

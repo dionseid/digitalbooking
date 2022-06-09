@@ -24,7 +24,6 @@ useEffect( () => {
                 <> 
                     <div className="headerProducto">
                         <div>
-                            <p>Hotel</p>
                             <h2>{dataTitulo.nombre}</h2>      
                         </div>
                         <Link to="/"><FontAwesomeIcon icon={faAngleLeft} className="iconoVolver"/></Link>          

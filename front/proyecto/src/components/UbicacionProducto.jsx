@@ -17,7 +17,7 @@ export default function UbicacionProducto() {
     useEffect( () => {
     axios.get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
     .then(response => {
-        console.log(response.data);
+        
         setDataUbicacion(response.data.ciudad)})
 
 }, [])
