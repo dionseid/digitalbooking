@@ -21,10 +21,7 @@ import UbicacionProducto from "../components/UbicacionProducto";
 import TituloProducto from "../components/TituloProducto";
 import GoogleMaps from "../components/GoogleMaps";
 
-const Productos = () => {
-  const {id} = useParams();
-  console.log(id);
-   
+const Productos = () => {   
   return (
     <div id="page-wrap">
       

@@ -27,7 +27,6 @@ const Galeria= () =>{
 useEffect( () => {
     axios.get("http://localhost:8080/imagenes")
     .then(response => {
-        console.log(response.data);
         setDataImagen(response.data)})
 
 }, [])

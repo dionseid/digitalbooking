@@ -11,9 +11,11 @@ const selectStyles = {
       display:'flex'
     }),
     control:()=>({
-      height: '2px',
+      display:'flex',
+      height: '38px',
       textAlign:'start',
-      backgroundColor: 'red'
+      justifyContent: 'space-between',
+      alignItems: 'center'
     }),
     singleValue: (provided, state) => {
       const opacity = state.isDisabled ? 0.5 : 1;
