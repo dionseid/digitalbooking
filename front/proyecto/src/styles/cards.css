@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    height: 230px;
+    height: 250px;
     width: 310px;
     margin:20px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -28,7 +28,6 @@
     background-color: #F3F3F3;
     border-radius:8px;
     height:320px;
-    
     
   }
 
@@ -114,11 +113,29 @@
   /*Responsive*/
   @media screen and (max-width: 768px){
     .cardRecomendacion{
-      flex-direction: column;
-      height:500px;
+      flex-direction: row;
+      height: 350px;
       width: 90vw;
       margin-bottom: 35px; 
            
+    }
+
+    .cardAlojamiento{
+      width: 310px;
+      height: 220px;
+      padding: 0px;
+      margin: 0px;      
+    }
+
+    .cardAlojamiento .cardBody{
+      height: 90px;
+    }
+
+
+    .cards{
+      justify-content:space-evenly;
+      width: 100%;
+      gap: 20px;
     }
 
     
@@ -133,15 +150,12 @@
 
   }
 
-@media screen and (min-width: 769px){
+@media screen and (max-width: 460px){
   .cardRecomendacion{
+    flex-direction: column;
     width: 635px;
+    height: 500px;
     margin-bottom: 30px;
   }
-
-  .cardAlojamiento{
-    width: 20vw;
-  }
-
  
 }

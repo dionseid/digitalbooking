@@ -12,7 +12,7 @@ const Calendario = () => {
 
   return (
     <CalendarStyle>
-      <Media query="(max-width:768px)">
+      <Media query="(max-width:460px)">
         {matches => {
         return matches ? 
         <Calendar onChange={onChange} value={value} showDoubleView={false} className="calendarStyle"/>:

@@ -21,7 +21,7 @@ export default function SelectCiudades({onChange}) {
 
 
 return (
-  <div>
+  <div className='contenedorSelect'>
           <Select 
           placeholder={<div className='placeholderSelect'><FontAwesomeIcon icon={faLocationDot} style={{marginRight:"4px"}}/>¿A dónde vamos?</div>} 
           className='inputBanner'
