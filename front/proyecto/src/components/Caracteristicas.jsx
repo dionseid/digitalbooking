@@ -9,7 +9,7 @@ export default function Caracteristicas() {
     const [dataCaracteristicas, setDataCaracteristicas] = useState([]);
     const { id } = useParams();
     useEffect(() => {
-        axios.get("http://awseb-AWSEB-19H8QAMA3KCJ1-539654579.us-west-1.elb.amazonaws.com:5000/caracteristicas")
+        axios.get("http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com:8080/caracteristicas")
             .then(response => {
                 setDataCaracteristicas(response.data)
             })

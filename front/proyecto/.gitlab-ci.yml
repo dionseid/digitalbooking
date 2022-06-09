@@ -46,14 +46,14 @@ build docker image:
   variables:
     DOCKER_DRIVER: overlay
 
-# test docker image:
-#   stage: test
-#   image: curlimages/curl
-#   services:
-#     - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID
-#       alias: frontend
-#   script:
-#     - curl http://frontend/version.html | grep $CI_PIPELINE_IID
+test docker image:
+  stage: test
+  image: curlimages/curl
+  services:
+    - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID
+      alias: frontend
+  script:
+    - curl http://frontend/version.html | grep $CI_PIPELINE_IID
 
 # deploy to production:
 #   image:
