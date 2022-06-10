@@ -10,11 +10,19 @@ import "../styles/pages/home.css";
 const Home = ({authenticated, setIsAuthenticated}) => {
   const [search, setSearch] = useState(0);
   const [filter,setFilter] = useState(0);
+  const [searchCategoria, setSearchCategoria] = useState(0);
+  const [filterCategoria,setFilterCategoria] = useState(0);
+
 
   const handleClick = () =>{
     setFilter(search)
+    console.log(search);
   }
 
+  const onDoubleClick = () =>{
+    setFilterCategoria(searchCategoria)
+
+  }
   return (
     <div id="page-wrap">
       <header>
@@ -24,11 +32,11 @@ const Home = ({authenticated, setIsAuthenticated}) => {
       <body>
         <section className='Alojamiento'>
           <h2>Buscar por tipo de alojamiento</h2>
-          <CardAlojamiento />
+          <CardAlojamiento onDoubleClickCapture={setSearchCategoria} onDoubleClick={onDoubleClick}/>
         </section>
         <section className='Recomendaciones'>
           <h2>Recomendaciones</h2>
-          <CardRecomendacion selectCiudad={filter}/>
+          <CardRecomendacion selectCiudad={filter} selectCategoria={filterCategoria}/>
         </section>
       </body>
       <footer>

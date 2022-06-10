@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 
 @ToString
 @Getter
@@ -20,6 +21,8 @@ public class Producto {
 
     private String nombre;
     private String descripcion;
+    private Double latitud;
+    private Double longitud;
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

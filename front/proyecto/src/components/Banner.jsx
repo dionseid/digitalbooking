@@ -10,9 +10,7 @@ const Banner = ({onChange, onClick}) => {
     <div className='banner'>
       <h1 className='tituloBanner'>Busca ofertas en hoteles, casas y mucho más</h1>
       <div className='buscador'>
-        <div className='inputBanner'>
           <SelectCiudades onChange={onChange}/>
-        </div>
         <div className='inputBanner'>
           <Input
             attribute={{

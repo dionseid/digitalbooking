@@ -30,6 +30,26 @@ ul{
 
 @media screen and (max-width: 768px){
     .contenedorTodasReglas{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        justify-content: start;
+        gap: 40px;        
+        padding: 5px;
+        margin-bottom: 30px;
+    }
+
+    .contenedorReglas{
+        margin-right: 64px;
+        margin-bottom: 10px;
+        
+    }
+
+  }
+
+@media screen and (max-width: 460px){
+    .contenedorTodasReglas{
         display: grid;
         grid-template-columns: 1fr;
         gap: 25px;
