@@ -6,22 +6,46 @@ import "../styles/cards.css";
 import { Link } from "react-router-dom";
 
 
-const CardRecomendacion = ({ selectCiudad }) => {
+const CardRecomendacion = ({ selectCiudad , selectCategoria}) => {
     const [dataProducto, setDataProducto] = useState([]);
-    const [selectedCiudad, setSelectedCiudad] = useState(selectCiudad);
+    const [dataListCiudad, setListCiudad] = useState([]);
+    const [dataListCategoria, setListCategoria] = useState([]);
+
+
+const getUrl = () => selectCiudad ? `http://localhost:8080/productos/filtroCiudad/${selectCiudad}` :'http://localhost:8080/productos/traerTodos'
 
     useEffect(() => {
-        axios.get("http://localhost:8080/productos/traerTodos")
+        axios.get(getUrl())
             .then(response => {
                 setDataProducto(response.data)
             })
-    }, [])
 
-    const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
+    }, [selectCiudad])
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/productos/filtroCategoria/${selectCategoria}`)
+            .then(response => {
+                setDataProducto(response.data)
+            })
+            
+    }, [selectCategoria])
+
+    const filteredList = useMemo(() => {
+        if (!selectCiudad) { // Cuando "country" es "todos" entonces no filtrar
+          return dataProducto
+        }
+        return dataProducto.filter((prod) => prod.categoria.id == selectCategoria)
+      }, [dataProducto, selectCiudad])
+
+    //const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
     
+    //const getFilteredCategoryList = () => selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
+
+
+
     return (
         <div className="cards">
-            {getFilteredList().map((card) => (
+            {filteredList.map((card) => (
                 <div key={card.id} className="cardRecomendacion">
                     <div style={{ backgroundImage: "url('" + card.categoria.urlImg + "')" }} className="fondoImagen" />
                     <div className="cardBody">

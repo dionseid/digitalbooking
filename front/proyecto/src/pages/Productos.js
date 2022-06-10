@@ -63,7 +63,7 @@ const Productos = () => {
         </section>
         <section className="contenedorMapa">
             <h2>¿Dónde vas a estar?</h2>
-            <GoogleMaps/>            
+            {<GoogleMaps/>}            
         </section>
         <section>
             <h2>¿Qué tenes que saber?</h2>
