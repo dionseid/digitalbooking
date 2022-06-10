@@ -20,7 +20,7 @@ export default function UbicacionProducto() {
 
         setDataUbicacion(response.data.ciudad)
       })
-  })
+  }, [])
 
   return (
     <>

@@ -14,7 +14,7 @@ export default function Reglas() {
       .then(response => {
         setDataReglas(response.data)
       })
-  })
+  }, [])
 
 
   return (

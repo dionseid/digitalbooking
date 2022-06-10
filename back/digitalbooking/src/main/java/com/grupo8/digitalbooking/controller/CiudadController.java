@@ -12,7 +12,6 @@ import java.util.Collection;
 //Conexión con la bd
 @RestController
 @RequestMapping("/ciudades")
-// @CrossOrigin(origins = "http://18.144.111.204:8080")
 public class CiudadController {
     @Autowired
     private CiudadService ciudadService;
