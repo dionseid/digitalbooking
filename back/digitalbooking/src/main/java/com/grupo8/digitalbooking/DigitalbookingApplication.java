@@ -35,7 +35,9 @@ public class DigitalbookingApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedHeaders("*");
+				registry.addMapping("/**")
+						.allowedOrigins("http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com")
+						.allowedHeaders("*");
 			}
 		};
 	}
