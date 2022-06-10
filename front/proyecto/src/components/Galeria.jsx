@@ -24,7 +24,7 @@ const Galeria = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get("http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com:8080/imagenes")
+    axios.get("http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com/imagenes")
       .then(response => {
         setDataImagen(response.data)
       })
