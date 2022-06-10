@@ -12,36 +12,37 @@ import java.util.Collection;
 //Conexión con la bd
 @RestController
 @RequestMapping("/ciudades")
+@CrossOrigin(origins = "http://18.144.111.204:8080")
 public class CiudadController {
     @Autowired
     private CiudadService ciudadService;
 
-    //AGREGAR
+    // AGREGAR
     @PostMapping
-    public ResponseEntity<Ciudad> agregarCiudad(@RequestBody Ciudad ciudad){
+    public ResponseEntity<Ciudad> agregarCiudad(@RequestBody Ciudad ciudad) {
         return ResponseEntity.ok(ciudadService.agregarCiudad(ciudad));
     }
 
-    //BUSCAR
+    // BUSCAR
     @GetMapping("/{id}")
-    public ResponseEntity<Ciudad> buscarCiudadPorId(@PathVariable Integer id){
+    public ResponseEntity<Ciudad> buscarCiudadPorId(@PathVariable Integer id) {
         Ciudad ciudad = ciudadService.buscarCiudadPorId(id).orElse(null);
         return ResponseEntity.ok(ciudad);
     }
 
-    //ACTUALIZAR
+    // ACTUALIZAR
     @PutMapping()
-    public ResponseEntity<Ciudad> actualizarCiudad(@RequestBody Ciudad ciudad){
+    public ResponseEntity<Ciudad> actualizarCiudad(@RequestBody Ciudad ciudad) {
         ResponseEntity<Ciudad> response;
 
-        if (ciudad.getId()!=null && ciudadService.buscarCiudadPorId(ciudad.getId()).isPresent())
-            response= ResponseEntity.ok(ciudadService.actualizarCiudad(ciudad));
+        if (ciudad.getId() != null && ciudadService.buscarCiudadPorId(ciudad.getId()).isPresent())
+            response = ResponseEntity.ok(ciudadService.actualizarCiudad(ciudad));
         else
-            response= ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return response;
     }
 
-    //ELIMINAR
+    // ELIMINAR
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarCiudad(@PathVariable Integer id) throws Exception {
 
@@ -57,9 +58,9 @@ public class CiudadController {
         return response;
     }
 
-    //LISTAR TODAS LAS CIUDADES
+    // LISTAR TODAS LAS CIUDADES
     @GetMapping()
-    public ResponseEntity<Collection<Ciudad>> listarCiudades(){
+    public ResponseEntity<Collection<Ciudad>> listarCiudades() {
         return ResponseEntity.ok(ciudadService.listarCiudades());
     }
 }
