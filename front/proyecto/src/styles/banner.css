@@ -88,35 +88,30 @@ th.month::after {
 }
 
 @media screen and (max-width: 768px) {
-  .buscador {
-    flex-direction: column;
+  .buscador{
+    flex-direction: row;    
   }
 
-  .banner {
-    margin-top: 93px;
-    margin-bottom: 10px;
-  }
-
-  h1 {
-    font-size: 30px;
-    padding: 5px;
-  }
-
-  .inputBanner ::placeholder {
-    font-style: normal;
-    font-weight: 500;
+  .inputBanner{
+    width: 254px;
   }
 
   .botonBanner {
-    width: 100%;
+    width:166px;
+  }
+  .input-contenedor{
+    width: 254px;
+    
+  }
+  
+  h1 {
+    font-size: 30px;
+    padding: 8px;
   }
 
   .buscador {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 10px 25px 10px;
     max-width: 90%;
+    gap: 10px;
   }
 }
 
@@ -124,11 +119,16 @@ option{
   color: #282c34;
 }
 
-@media screen and (max-width: 768px) {
+
+@media screen and (max-width: 460px) {
   .buscador {
     flex-direction: column;
     width: 100%;
     align-items: stretch;
+  }
+
+  .contenedorSelect{
+    width: 100%;
   }
 
   .banner {
