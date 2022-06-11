@@ -31,11 +31,17 @@ const getUrl = () => selectCiudad ? `http://localhost:8080/productos/filtroCiuda
     }, [selectCategoria])
 
     const filteredList = useMemo(() => {
-        if (!selectCiudad) { // Cuando "country" es "todos" entonces no filtrar
-          return dataProducto
+        if (!selectCiudad) { // Cuando selectCiudad es null entonces no filtrar
+          return selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
+        }else{
+            if(!selectCategoria){   //cuando selectCategoria es null no filtrar por categoria, solo ciudad
+                return dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) 
+            } 
+            return dataProducto.filter((prod) => prod.ciudad.id == selectCiudad && prod.categoria.id == selectCategoria)
         }
-        return dataProducto.filter((prod) => prod.categoria.id == selectCategoria)
-      }, [dataProducto, selectCiudad])
+        return dataProducto;
+        
+      }, [dataProducto, selectCategoria, selectCiudad])
 
     //const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
     

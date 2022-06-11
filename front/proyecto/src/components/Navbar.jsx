@@ -31,7 +31,7 @@ border-radius: 5px;
 </>
 
 
-const Navbar = ({ authenticated, setIsAuthenticated }) => {
+const Navbar = ({ authenticated, setIsAuthenticated , onClick}) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
   useEffect(() => setIsAuthenticatedMenu(authenticated), [authenticated]);
@@ -86,7 +86,7 @@ const Navbar = ({ authenticated, setIsAuthenticated }) => {
     <>
       <div className='navBar'>
         <div className='logoNavBar'>
-          {<Link to='/'><img src={image} alt='logo' /></Link>}
+          {<Link to='/'><img src={image} alt='logo' onClick={onClick}/></Link>}
           <p className='parrafoNavBar'>Sentite como en tu hogar</p>
         </div>
         <div className='botones'>

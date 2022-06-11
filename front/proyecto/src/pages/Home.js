@@ -10,7 +10,6 @@ import "../styles/pages/home.css";
 const Home = ({authenticated, setIsAuthenticated}) => {
   const [search, setSearch] = useState(0);
   const [filter,setFilter] = useState(0);
-  const [searchCategoria, setSearchCategoria] = useState(0);
   const [filterCategoria,setFilterCategoria] = useState(0);
 
 
@@ -19,20 +18,25 @@ const Home = ({authenticated, setIsAuthenticated}) => {
     console.log(search);
   }
 
-  const onDoubleClick = () =>{
+  const onDoubleClick = (searchCategoria, e) =>{
     setFilterCategoria(searchCategoria)
+}
 
+  const onClick = () =>{
+    setFilterCategoria(null)
+    setFilter(null)
   }
+
   return (
     <div id="page-wrap">
       <header>
-        <Navbar authenticated={authenticated} setIsAuthenticated={setIsAuthenticated}/>
+        <Navbar authenticated={authenticated} setIsAuthenticated={setIsAuthenticated} onClick={onClick}/>
         <Banner onChange={setSearch} onClick={handleClick}/>
       </header>
       <body>
         <section className='Alojamiento'>
           <h2>Buscar por tipo de alojamiento</h2>
-          <CardAlojamiento onDoubleClickCapture={setSearchCategoria} onDoubleClick={onDoubleClick}/>
+          <CardAlojamiento idCategoria={filterCategoria} setIdCategoria={setFilterCategoria} onDoubleClick={onDoubleClick}/>
         </section>
         <section className='Recomendaciones'>
           <h2>Recomendaciones</h2>
