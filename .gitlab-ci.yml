@@ -105,13 +105,11 @@ trigger_a:
     include: front/proyecto/.gitlab-ci.yml
     strategy: depend
   rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop")
-      changes:
-        - front/proyecto/*
-      when: always
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-      when: never
-    - when: manual
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop"
+      when: manual
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+    changes:
+      - front/proyecto/*
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
 
