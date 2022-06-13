@@ -108,6 +108,8 @@ trigger_a:
     - if: $CI_PIPELINE_SOURCE != "schedule" 
       changes:
         - front/proyecto/*
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH != "develop"
+      when: manual
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
 
@@ -120,6 +122,8 @@ trigger_b:
     - if: $CI_PIPELINE_SOURCE != "schedule"
       changes:
         - back/digitalbooking/*
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH != "develop"
+      when: manual
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
 
