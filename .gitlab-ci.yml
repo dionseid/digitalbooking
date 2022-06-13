@@ -106,10 +106,9 @@ trigger_a:
     strategy: depend
   rules:
     - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop"
-      when: manual
-    - if: $CI_PIPELINE_SOURCE != "schedule"
-    changes:
+      changes:
       - front/proyecto/*
+    - if: $CI_PIPELINE_SOURCE != "schedule"
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
 
