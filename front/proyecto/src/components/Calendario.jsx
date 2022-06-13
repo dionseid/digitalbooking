@@ -10,7 +10,7 @@ const Calendario = () => {
   const [value, onChange] = useState(new Date());
 
 
-  return (
+  return (    
     <CalendarStyle>
       <Media query="(max-width:460px)">
         {matches => {
@@ -19,6 +19,7 @@ const Calendario = () => {
         <Calendar onChange={onChange} value={value} showDoubleView={true} className="calendarStyle" selectRange={true}/>
         }}
       </Media> 
+
       
       
     </CalendarStyle>

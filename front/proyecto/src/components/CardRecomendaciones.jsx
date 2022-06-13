@@ -1,15 +1,20 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faStar, faLocationDot, faWifi, faPersonSwimming} from "@fortawesome/free-solid-svg-icons"
+import {faStar, faLocationDot, faWifi, faPersonSwimming, faHeart} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import React, { useState , useEffect, useMemo} from "react";
+import React, { useState , useEffect, useMemo, useContext} from "react";
 import "../styles/cards.css";
 import { Link } from "react-router-dom";
+import { useAccordionButton, Card } from "react-bootstrap";
+import Accordion from 'react-bootstrap/Accordion'
 
 
 const CardRecomendacion = ({ selectCiudad , selectCategoria}) => {
     const [dataProducto, setDataProducto] = useState([]);
-    const [dataListCiudad, setListCiudad] = useState([]);
-    const [dataListCategoria, setListCategoria] = useState([]);
+    const [dataImagen, setImagen] = useState([]);
+    const [idProducto, setIdProducto] = useState([]);
+    const [verMas, setVerMas] = useState(false);
+
+    
 
 
 const getUrl = () => selectCiudad ? `http://localhost:8080/productos/filtroCiudad/${selectCiudad}` :'http://localhost:8080/productos/traerTodos'
@@ -23,12 +28,22 @@ const getUrl = () => selectCiudad ? `http://localhost:8080/productos/filtroCiuda
     }, [selectCiudad])
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/productos/filtroCategoria/${selectCategoria}`)
+        axios.get(`http://localhost:8080/imagenes${idProducto}`)
             .then(response => {
-                setDataProducto(response.data)
-            })
-            
-    }, [selectCategoria])
+                setImagen(response.data)
+            })            
+    }, [])
+    
+/*     const getImagen = useMemo((id) => {
+        setIdProducto(id)
+        axios.get(`http://localhost:8080/imagenes/${idProducto}`)
+        .then(response => {
+            setImagen(response.data)
+        })
+
+        return dataImagen.url;
+    }, [idProducto]) */
+
 
     const filteredList = useMemo(() => {
         if (!selectCiudad) { // Cuando selectCiudad es null entonces no filtrar
@@ -46,9 +61,6 @@ const getUrl = () => selectCiudad ? `http://localhost:8080/productos/filtroCiuda
     //const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
     
     //const getFilteredCategoryList = () => selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
-
-
-
     return (
         <div className="cards">
             {filteredList.map((card) => (
@@ -69,7 +81,8 @@ const getUrl = () => selectCiudad ? `http://localhost:8080/productos/filtroCiuda
                             <p><FontAwesomeIcon icon={faLocationDot} style={{ marginRight: "4px" }} />{card.ciudad.nombre} <span className="mostrarMapa">MOSTRAR EN EL MAPA</span></p>
                             <p className="iconosInfoHotel"><FontAwesomeIcon icon={faWifi} style={{ marginRight: "8px" }} /><FontAwesomeIcon icon={faPersonSwimming} /></p>
                         </div>
-                        <p>{card.descripcion} <span className="mas">más...</span></p>
+                        <p>{verMas ? card.descripcion  : card.descripcion.split(' ', 8).join(" ")}<span className="mas" onClick={() => setVerMas(!verMas)}>
+                            {verMas ? " ver menos" : " ver más..."}</span></p>
                         <Link to={`/productos/${card.id}`}><button className="buttonCard">ver más</button></Link>
                     </div>
                 </div>
@@ -80,3 +93,5 @@ const getUrl = () => selectCiudad ? `http://localhost:8080/productos/filtroCiuda
 
 }
 export default CardRecomendacion;
+
+
