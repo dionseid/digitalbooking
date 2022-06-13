@@ -106,7 +106,7 @@ trigger_a:
     strategy: depend
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" 
-    - if: $CI_COMMIT_REF_NAME == "main" || $CI_COMMIT_REF_NAME == "develop"
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop"
       when: always
     - when: manual
     - changes:
@@ -121,7 +121,7 @@ trigger_b:
     strategy: depend
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule"
-    - if: $CI_COMMIT_REF_NAME == "main" || $CI_COMMIT_REF_NAME == "develop"
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop"
       when: always
     - when: manual
     - changes:
