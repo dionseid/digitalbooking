@@ -159,7 +159,7 @@ deploy to production:
     #- aws s3 cp docker-compose.yml s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/docker-compose.yml
     #- aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/Dockerrun.aws.json
     #- aws s3 cp config.json s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/config.json
-    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev-$APP_VERSION.zip
+    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --auto-create-application --version-label $APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev-$APP_VERSION.zip
     #- aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/Dockerrun.aws.json
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
     - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
