@@ -1,15 +1,20 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faLocationDot, faWifi, faPersonSwimming } from "@fortawesome/free-solid-svg-icons"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faStar, faLocationDot, faWifi, faPersonSwimming, faHeart} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState , useEffect, useMemo, useContext} from "react";
 import "../styles/cards.css";
 import { Link } from "react-router-dom";
+import { useAccordionButton, Card } from "react-bootstrap";
+import Accordion from 'react-bootstrap/Accordion'
 
 
 const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
     const [dataProducto, setDataProducto] = useState([]);
-    const [dataListCiudad, setListCiudad] = useState([]);
-    const [dataListCategoria, setListCategoria] = useState([]);
+    const [dataImagen, setImagen] = useState([]);
+    const [idProducto, setIdProducto] = useState([]);
+    const [verMas, setVerMas] = useState(false);
+
+    
 
     const getUrl = () => selectCiudad ? `http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com/productos/filtroCiudad/${selectCiudad}` : "http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com/productos/traerTodos"
 
@@ -45,9 +50,6 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
     //const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
 
     //const getFilteredCategoryList = () => selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
-
-
-
     return (
         <div className="cards">
             {filteredList.map((card) => (
@@ -68,7 +70,8 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
                             <p><FontAwesomeIcon icon={faLocationDot} style={{ marginRight: "4px" }} />{card.ciudad.nombre} <span className="mostrarMapa">MOSTRAR EN EL MAPA</span></p>
                             <p className="iconosInfoHotel"><FontAwesomeIcon icon={faWifi} style={{ marginRight: "8px" }} /><FontAwesomeIcon icon={faPersonSwimming} /></p>
                         </div>
-                        <p>{card.descripcion} <span className="mas">más...</span></p>
+                        <p>{verMas ? card.descripcion  : card.descripcion.split(' ', 8).join(" ")}<span className="mas" onClick={() => setVerMas(!verMas)}>
+                            {verMas ? " ver menos" : " ver más..."}</span></p>
                         <Link to={`/productos/${card.id}`}><button className="buttonCard">ver más</button></Link>
                     </div>
                 </div>
@@ -79,3 +82,5 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
 
 }
 export default CardRecomendacion;
+
+
