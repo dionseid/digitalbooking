@@ -1,0 +1,26 @@
+.tablasDeInformacion{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    padding: 30px;
+}
+
+.completarDatos{
+    width: 70%;
+}
+
+
+.contenedorHorario{
+    display: flex;
+    flex-direction: column;
+}
+
+.placeholderSelect{
+    font-family: "Font Awesome 5 Free";
+    font-style:normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    margin-left: 12px;    
+}

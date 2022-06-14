@@ -14,13 +14,8 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria}) => {
     const [idProducto, setIdProducto] = useState([]);
     const [verMas, setVerMas] = useState(false);
 
-    
-
-
-const getUrl = () => selectCiudad ? `http://localhost:8080/productos/filtroCiudad/${selectCiudad}` :'http://localhost:8080/productos/traerTodos'
-
     useEffect(() => {
-        axios.get(getUrl())
+        axios.get('http://localhost:8080/productos/traerTodos')
             .then(response => {
                 setDataProducto(response.data)
             })
@@ -34,7 +29,7 @@ const getUrl = () => selectCiudad ? `http://localhost:8080/productos/filtroCiuda
             })            
     }, [])
     
-/*     const getImagen = useMemo((id) => {
+    const getImagen = useMemo((id) => {
         setIdProducto(id)
         axios.get(`http://localhost:8080/imagenes/${idProducto}`)
         .then(response => {
@@ -42,7 +37,7 @@ const getUrl = () => selectCiudad ? `http://localhost:8080/productos/filtroCiuda
         })
 
         return dataImagen.url;
-    }, [idProducto]) */
+    }, [idProducto])
 
 
     const filteredList = useMemo(() => {
