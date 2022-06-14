@@ -21,7 +21,7 @@ public class RolUsuarioService {
     }
 
     //Agregar rol
-    public Categoria agregarRol(RolUsuario rolUsuario){
+    public RolUsuario agregarRol(RolUsuario rolUsuario){
         return rolUsuarioRepository.save(rolUsuario);
     }
 
