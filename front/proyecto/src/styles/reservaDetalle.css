@@ -1,0 +1,27 @@
+.fondoImagen{
+    height:300px;
+    width: 100%;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contenedorEstrellas{
+    display: flex;
+    flex-direction: row;
+    padding-right: 8px;
+}
+
+.linea {
+    border-top: 1px solid #F0572D;
+    height: 2px;
+    width: 90%;
+    padding: 0;
+    margin: 20px auto 0 auto;
+}
+
+.check{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

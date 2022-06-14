@@ -31,7 +31,7 @@ return (
                       <div>
                         <dt>{ciudad.nombre}</dt>
                         <dd style={{fontSize:"14px", lineHeight:"16px", color:"#31363F"}}>{ciudad.pais}</dd>
-                      </div>
+                      </div>                      
                     </div>, 
             value: ciudad.id}))}  
           styles={selectStyles}

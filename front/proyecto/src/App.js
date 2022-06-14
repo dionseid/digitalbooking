@@ -24,9 +24,8 @@ function App() {
           <Route path='/' element={<Home  authenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>} />
           <Route path='/login' element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
           <Route path='/account' element={<Account />} />
-          
             <Route path='/productos/:id' element={<Productos />} />
-            <Route path='/reserva' element={<Reserva/>} />          
+            <Route path='/producto/:id/reserva' element={<Reserva/>} />
         </Routes>
         </IdProductoContextProvider>
       </BrowserRouter>

@@ -26,10 +26,9 @@ const GoogleMaps = () => {
       return false      
     }else{
       return true
-    }
-
-    
+    }    
   }
+  
   return (
     <>
       <div id="map">

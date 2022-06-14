@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Calendar from 'react-calendar';
+import { useParams } from 'react-router';
 import Calendario from '../components/Calendario';
+import IdProductoContextProvider from '../components/context/IdProductoContext';
 import DatosUsuario from '../components/DatosUsuario';
+import DetallesReserva from '../components/DetallesReserva';
 import Footer from '../components/Footer'
 import HorarioLlegada from '../components/HorarioLlegada';
 import Navbar from '../components/Navbar'
@@ -10,10 +13,19 @@ import TituloProducto from '../components/TituloProducto';
 import UbicacionProducto from '../components/UbicacionProducto';
 import "../styles/pages/reserva.css";
 
-export default function Reserva({id}) {
-  //const [loading, setloading] = useState(false);
-  const [idProducto, setIdProducto ]= useState(id);
+export default function Reserva() {
+  const {id} = useParams
+/*   const [idP, setIdP ]= useState([]);
+  const {idProducto} = useContext(IdProductoContextProvider);
+  console.log("reserva: ", idProducto);
+  useEffect(() => {
+    setIdP(idProducto);
+    
+    
+  }, [idProducto]) */
 
+
+  
   return (
     <>
     <header>
@@ -31,7 +43,7 @@ export default function Reserva({id}) {
           <HorarioLlegada/>
         </div>
         <div>
-          <h2>Detalle de la reserva</h2>
+          {/* <DetallesReserva/> */}
         </div>
       </div>
       <section>

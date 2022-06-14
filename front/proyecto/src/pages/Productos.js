@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { IdProductoContextProvider } from "../components/context/IdProductoContext";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,11 +19,14 @@ import DescripcionProducto from "../components/DescripcionProducto";
 import UbicacionProducto from "../components/UbicacionProducto";
 import TituloProducto from "../components/TituloProducto";
 import GoogleMaps from "../components/GoogleMaps";
+import IdProductoContextProvider from "../components/context/IdProductoContext";
 
 const Productos = () => { 
   const {id} = useParams();
-  const idP = useContext(IdProductoContextProvider);
-  console.log(idP);
+/*   const {idProducto, setIdProducto} = useContext(IdProductoContextProvider);
+  console.log(idProducto);
+  setIdProducto(id)
+  console.log(idProducto); */
 
   return (
     <div id="page-wrap">
@@ -61,7 +63,7 @@ const Productos = () => {
                 </div>             
                 <div className="contendorReserva">
                   <p>Agregá tus fechas de viaje para obtener precios exactos</p>
-                  <Link to="/reserva"><button className="buttonCard">Iniciar reserva</button></Link>
+                  <Link to={`/producto/${id}/reserva`}><button className="buttonCard">Iniciar reserva</button></Link>
                 </div> 
             </div>                        
         </section>
