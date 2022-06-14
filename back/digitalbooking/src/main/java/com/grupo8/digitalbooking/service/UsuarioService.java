@@ -1,30 +1,51 @@
 package com.grupo8.digitalbooking.service;
 
-import com.grupo8.digitalbooking.model.Ciudad;
+import com.grupo8.digitalbooking.model.RolUsuario;
 import com.grupo8.digitalbooking.model.Usuario;
-import com.grupo8.digitalbooking.repository.CiudadRepository;
+import com.grupo8.digitalbooking.repository.RolUsuarioRepository;
 import com.grupo8.digitalbooking.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
-    private final CiudadRepository ciudadRepository;
+    private final RolUsuarioRepository rolUsuarioRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, CiudadRepository ciudadRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, RolUsuarioRepository rolUsuarioRepository) {
         this.usuarioRepository = usuarioRepository;
-        this.ciudadRepository = ciudadRepository;
+        this.rolUsuarioRepository = rolUsuarioRepository;
     }
 
     public Usuario agregarUsuario(Usuario usuario){
-        Optional<Ciudad> ciudad =  ciudadRepository.findById(usuario.getCiudadUsuario().getId());
-        usuario.setCiudadUsuario(ciudad.get());
+        Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
+        usuario.setRol(rolUsuario.get());
         return usuarioRepository.save(usuario);
     }
     //listar todos los usuarios
+    public List<Usuario> listarUsuarios(){
+        return usuarioRepository.findAll();
+    }
+
     //actualizar usuario
+    public Usuario actualizarUsuario(Usuario usuario){
+        Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
+        usuario.setRol(rolUsuario.get());
+        return usuarioRepository.save(usuario);
+    }
     //eliminar usuario
+    public void eliminarUsuario(Integer id) throws Exception{
+        Optional<Usuario> usuarioBuscado = buscarUsuario(id);
+        if (usuarioBuscado.isPresent())
+            usuarioRepository.deleteById(id);
+        else
+            throw new Exception("El usuario con id: "+id+" no fué encontrado");
+    }
+
     //buscar usuario
+    public Optional<Usuario> buscarUsuario(Integer id){
+        return usuarioRepository.findById(id);
+    }
 }
