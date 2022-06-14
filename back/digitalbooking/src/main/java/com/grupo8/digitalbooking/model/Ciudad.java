@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Entity
 @Table(name="ciudades")
 public class Ciudad {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
