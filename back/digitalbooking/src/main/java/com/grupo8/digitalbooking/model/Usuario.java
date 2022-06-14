@@ -1,4 +1,4 @@
-package com.grupo8.digitalbooking.security;
+package com.grupo8.digitalbooking.model;
 
 import com.grupo8.digitalbooking.model.Ciudad;
 import lombok.Getter;
