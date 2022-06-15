@@ -1,32 +1,36 @@
 import axios from "axios";
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styles/cards.css";
 
 
 
-const CardAlojamiento= () =>{  
-const [dataCategoria, setDataCategoria] = useState([]);
-useEffect( () => {
-    axios.get("http://localhost:8080/categorias")
-    .then(response => {
-       setDataCategoria(response.data)})
+const CardAlojamiento = ({ idCategoria, setIdCategoria, onDoubleClick }) => {
+    const [dataCategoria, setDataCategoria] = useState([]);
+    //const [idCategoria, setIdCategoria] = useState([]);
 
-}, [])
+    useEffect(() => {
+        axios.get("http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com/categorias")
+            .then(response => {
+                setDataCategoria(response.data)
+            })
+
+    }, [])
 
 
-        return (
-            <div className="cards">
-                {dataCategoria.map((cat)=>(
-                    <div key={cat.id} className="cardAlojamiento">
-                        <div style={{backgroundImage:"url('" + cat.urlImg + "')"}} className="fondoImagen"/>
-                        <div className="cardBody">
-                            <h4>{cat.titulo}</h4>
-                            <p style={{fontWeight:"700"}}>{cat.descripcion}</p>
-                        </div>
+
+    return (
+        <div className="cards" >
+            {dataCategoria.map((cat) => (
+                <div key={cat.id} className="cardAlojamiento" onDoubleClick={(e) => { onDoubleClick(cat.id, e) }}>
+                    <div style={{ backgroundImage: "url('" + cat.urlImg + "')" }} className="fondoImagen" />
+                    <div className="cardBody">
+                        <h4>{cat.titulo}</h4>
+                        <p style={{ fontWeight: "700" }}>{cat.descripcion}</p>
                     </div>
-                ))}
-            </div>
-        ) 
+                </div>
+            ))}
+        </div >
+    )
 
 
 }

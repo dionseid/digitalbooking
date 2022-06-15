@@ -2,10 +2,14 @@ stages:
   - build
   - test
   - package
+  - image
   - deploy
 
 variables:
   MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
+  REPOSITORY_NAME: remo-digitalbooking-repo-prod
+  TEAM: remo
+  APP: back
 
 cache:
   paths:
@@ -18,11 +22,11 @@ build job:
     - cd back/digitalbooking
     - mvn compile
 
-test job:
-  stage: test
-  script:
-    - cd back/digitalbooking
-    - mvn test #mvn clean test
+# test job:
+#   stage: test
+#   script:
+#     - cd back/digitalbooking
+#     - mvn test #mvn clean test
 
 package job:
   stage: package
@@ -32,6 +36,28 @@ package job:
   script:
     - cd back/digitalbooking
     - mvn package
+
+build docker image:
+  stage: image
+  image:
+    name: amazon/aws-cli
+    entrypoint: [""]
+  services:
+    - docker:dind
+  before_script:
+    #- docker system prune
+    - amazon-linux-extras install docker
+    - aws --version
+    - docker --version
+  script:
+    - aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
+    - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$APP_VERSION --cache-from $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest back/digitalbooking
+    - docker image ls
+    - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
+    - echo $APP_VERSION
+  variables:
+    DOCKER_DRIVER: overlay
+
 
 # deploy job:
 #     stage: deploy

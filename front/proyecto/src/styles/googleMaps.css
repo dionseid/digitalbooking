@@ -1,0 +1,29 @@
+#map{
+    padding: 30px;
+    z-index: 80;
+}
+
+.leaflet-container{
+    width: 100%;
+    height: 500px;
+}
+
+@media screen and (max-width: 768px){
+    .leaflet-container{
+        width: 100%;
+        height: 320px;
+    }
+
+  }
+
+@media screen and (max-width: 460px){
+    .leaflet-container{
+        width: 100%;
+        height: 210px;
+    }
+
+    #map{
+        padding: 10px;
+    }    
+}
+

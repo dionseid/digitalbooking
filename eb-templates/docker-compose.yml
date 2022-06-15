@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  frontend:
+    ports:
+      - "80:80"
+      - "443:443"
+    image: "$AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-front-$CI_PIPELINE_IID"
+    networks:
+      - fullstack
+    links:
+      - backend
+  backend:
+    ports:
+      - "8080:8080"
+    image: "$AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-$CI_PIPELINE_IID"
+    networks:
+      - fullstack
+networks:
+  fullstack:

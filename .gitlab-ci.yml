@@ -71,22 +71,101 @@
 #     - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
 #     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
 
-update ecr token:
+variables: 
+  APP_VERSION: $CI_PIPELINE_IID
+  REPOSITORY_NAME: remo-digitalbooking-repo-prod
+  TEAM: remo
+
+stages:
+  - update
+  - build
+  - deploy
+
+update token:
+  stage: update
+  image: 
+    name: amazon/aws-cli
+    entrypoint: [""]
+  before_script:
+    - aws --version
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule" 
-  trigger:
-    include: front/.gitlab-ci.yml
+  script:
+    - USER=AWS
+    - TOKEN=$(aws ecr get-login-password --region us-west-2)
+    - AUTH=$(echo "$USER:$TOKEN" | base64 | tr -d "\n")
+    - |
+      curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
+      --silent --output /dev/null --show-error --fail \
+      "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH" --form "value=$AUTH"
 
 trigger_a:
+  stage: build
   trigger:
     include: front/proyecto/.gitlab-ci.yml
+    strategy: depend
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" 
-    # - changes:
-    #   - front/proyecto/*
+      changes:
+        - front/proyecto/*
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH != "develop"
+      when: manual
+  variables:
+    PARENT_PIPELINE_ID: $APP_VERSION
 
 trigger_b:
+  stage: build
   trigger:
     include: back/digitalbooking/.gitlab-ci.yml
+    strategy: depend
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule"
+      changes:
+        - back/digitalbooking/*
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH != "develop"
+      when: manual
+  variables:
+    PARENT_PIPELINE_ID: $APP_VERSION
+
+deploy to production:
+  stage: deploy
+  image:
+    name: amazon/aws-cli:2.4.11
+    entrypoint: [""]
+  stage: deploy
+  variables:
+    APP_NAME: remo-digitalbooking-prod
+    APP_ENV_NAME: remo-digitalbooking-env-prod
+  environment: production
+  before_script:
+    - aws --version
+    - yum install -y gettext
+    - yum install -y zip
+    - yum install -y grep
+  script:
+    - envsubst < eb-templates/docker-compose.yml > docker-compose.yml
+    - envsubst < eb-templates/Dockerrun.aws.json > Dockerrun.aws.json
+    #- envsubst < eb-templates/config.json > config.json
+    - envsubst < eb-templates/.dockercfg > .dockercfg
+    #- cp -r eb-templates/.platform/ ../
+    - cat docker-compose.yml
+    - cat Dockerrun.aws.json
+    #- cat config.json
+    - cat .dockercfg
+    - zip remo-digitalbooking-eb-app-dev-$APP_VERSION.zip docker-compose.yml Dockerrun.aws.json
+    #- zip -r remo-digitalbooking-eb-app-dev-$APP_VERSION.zip docker-compose.yml .platform
+    - aws s3 cp .dockercfg s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/.dockercfg
+    - aws s3 cp remo-digitalbooking-eb-app-dev-$APP_VERSION.zip s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev-$APP_VERSION.zip
+    #- aws s3 cp docker-compose.yml s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/docker-compose.yml
+    #- aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/Dockerrun.aws.json
+    #- aws s3 cp config.json s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/config.json
+    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --auto-create-application --version-label $APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev-$APP_VERSION.zip
+    #- aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/Dockerrun.aws.json
+    - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
+    - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
+    - curl http://awseb-AWSEB-19H8QAMA3KCJ1-539654579.us-west-1.elb.amazonaws.com/version.html | grep $APP_VERSION # Sole prueba que frontend funciona #Capaz no reconoce la variable
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      changes:
+        - front/proyecto/*
+        - back/digitalbooking/*

@@ -1,32 +1,25 @@
 variables:
-  REPOSITORY_NAME: digitalbooking
+  REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
   APP: front
 
-cache:
-  paths:
-    - front/proyecto/node_modules
+# cache:
+#   paths:
+#     - front/proyecto/node_modules
 
 stages:
-  - test
   - build
   - package
-  - test package
+  - test
   - deploy
-
-test project:
-  stage: test
-  image: node:16-alpine
-  script:
-    - cd front/proyecto
-    - npm install
-    - npm test
 
 build project:
   stage: build
   image: node:16-alpine
   script:
     - cd front/proyecto
+    - npm install --force
+    - npm test
     - CI=false npm run build # Investigar 'CI=false'
     - echo $CI_PIPELINE_IID > build/version.html
   artifacts:
@@ -45,42 +38,45 @@ build docker image:
     - aws --version
     - docker --version
   script:
-    - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
-    - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID front/proyecto
+    - aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
+    - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$APP_VERSION --cache-from $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest front/proyecto
     - docker image ls
     - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
-
-test docker image:
-  stage: test package
-  image: curlimages/curl
-  services:
-    - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID
-      alias: frontend
-  script:
-    - curl http://frontend/version.html | grep $CI_PIPELINE_IID
-
-deploy to production:
-  image:
-    name: amazon/aws-cli:2.4.11
-    entrypoint: [""]
-  stage: deploy
+    - echo $APP_VERSION
   variables:
-    APP_NAME: remo-digitalbooking-prod
-    APP_ENV_NAME: remo-digitalbooking-env-prod
-  environment: production
-  script:
-    - aws --version
-    - yum install -y gettext
-    - envsubst < front/proyecto/eb-templates/Dockerrun.aws.json > front/proyecto/Dockerrun.aws.json
-    - envsubst < front/proyecto/eb-templates/auth.json > front/proyecto/auth.json
-    - cat front/proyecto/Dockerrun.aws.json
-    - cat front/proyecto/auth.json
-    - aws s3 cp front/proyecto/Dockerrun.aws.json s3://$AWS_S3_BUCKET/remo/digitalbooking/front/dev/Dockerrun.aws.json
-    - aws s3 cp front/proyecto/auth.json s3://$AWS_S3_BUCKET/remo/digitalbooking/front/dev/auth.json
-    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $CI_PIPELINE_IID --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/front/dev/Dockerrun.aws.json
-    - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME
-    - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME
-    - curl $CI_ENVIRONMENT_URL/version.html | grep $CI_PIPELINE_IID
+    DOCKER_DRIVER: overlay
+
+# test docker image:
+#   stage: test
+#   image: curlimages/curl
+#   services:
+#     - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$CI_PIPELINE_IID
+#       alias: frontend
+#   script:
+#     - curl http://frontend/version.html | grep $CI_PIPELINE_IID
+
+# deploy to production:
+#   image:
+#     name: amazon/aws-cli:2.4.11
+#     entrypoint: [""]
+#   stage: deploy
+#   variables:
+#     APP_NAME: remo-digitalbooking-prod
+#     APP_ENV_NAME: remo-digitalbooking-env-prod
+#   environment: production
+#   script:
+#     - aws --version
+#     - yum install -y gettext
+#     - envsubst < front/proyecto/eb-templates/Dockerrun.aws.json > front/proyecto/Dockerrun.aws.json
+#     - envsubst < front/proyecto/eb-templates/auth.json > front/proyecto/auth.json
+#     - cat front/proyecto/Dockerrun.aws.json
+#     - cat front/proyecto/auth.json
+#     - aws s3 cp front/proyecto/Dockerrun.aws.json s3://$AWS_S3_BUCKET/remo/digitalbooking/front/dev/Dockerrun.aws.json
+#     - aws s3 cp front/proyecto/auth.json s3://$AWS_S3_BUCKET/remo/digitalbooking/front/dev/auth.json
+#     - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $CI_PIPELINE_IID --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/front/dev/Dockerrun.aws.json
+#     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME
+#     - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $CI_PIPELINE_IID --environment-name $APP_ENV_NAME
+#     - curl $CI_ENVIRONMENT_URL/version.html | grep $CI_PIPELINE_IID
 
 # build docker image:
 #   stage: docker

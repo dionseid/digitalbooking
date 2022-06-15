@@ -10,15 +10,16 @@ const Calendario = () => {
   const [value, onChange] = useState(new Date());
 
 
-  return (
+  return (    
     <CalendarStyle>
-      <Media query="(max-width:768px)">
+      <Media query="(max-width:460px)">
         {matches => {
         return matches ? 
-        <Calendar onChange={onChange} value={value} showDoubleView={false} className="calendarStyle"/>:
-        <Calendar onChange={onChange} value={value} showDoubleView={true} className="calendarStyle"/>
+        <Calendar onChange={onChange} value={value} showDoubleView={false} className="calendarStyle" selectRange={true}/>:
+        <Calendar onChange={onChange} value={value} showDoubleView={true} className="calendarStyle" selectRange={true}/>
         }}
       </Media> 
+
       
       
     </CalendarStyle>

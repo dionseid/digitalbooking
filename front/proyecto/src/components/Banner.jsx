@@ -1,16 +1,17 @@
-import { React, useState } from 'react';
+import axios from 'axios';
+import { React, useEffect, useMemo, useState } from 'react';
 import Input from '../components/Input';
-import "../styles/banner.css";
+import CardRecomendacion from './CardRecomendaciones';
 import SelectCiudades from './SelectCiudades';
+import { Button } from 'react-bootstrap';
+import "../styles/banner.css";
 
-const Banner = () => {
+const Banner = ({onChange, onClick}) => { 
   return (
     <div className='banner'>
       <h1 className='tituloBanner'>Busca ofertas en hoteles, casas y mucho más</h1>
       <div className='buscador'>
-        <div className='inputBanner'>
-          <SelectCiudades/>
-        </div>
+          <SelectCiudades onChange={onChange}/>
         <div className='inputBanner'>
           <Input
             attribute={{
@@ -22,7 +23,7 @@ const Banner = () => {
             isInputWithCalendar={true} />
         </div>
         <div>
-          <button className='botonBanner'>Buscar</button>
+          <Button className='botonBanner' onClick={onClick}>Buscar</Button>
         </div>
       </div>
     </div>
