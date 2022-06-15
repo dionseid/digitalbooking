@@ -20,6 +20,7 @@ const Label = styled.label`
 	min-height: 40px;
 	font-weight: 500;
 	font-size: 12px;
+	font-style: normal;
 	
 	${props => props.valido === 'false' && css`
 		color: ${colores.error};
@@ -43,6 +44,7 @@ const Input = styled.input`
 	border:none;
 	outline: none;
 	width: 100%;
+	opacity: 0.75;
 	line-height: 35px;
 	transition: .3s ease all;
 	border: 3px solid transparent;

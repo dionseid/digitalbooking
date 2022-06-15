@@ -43,7 +43,7 @@ export default function Reserva() {
           <HorarioLlegada/>
         </div>
         <div>
-          {/* <DetallesReserva/> */}
+          <DetallesReserva/>
         </div>
       </div>
       <section>

@@ -4,12 +4,13 @@ import { Label } from './elementStyle/Form'
 import selectStyles from './elementStyle/selectStyles';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleCheck} from "@fortawesome/free-solid-svg-icons";
+import "../styles/horarioLlegada.css"
 
 export default function HorarioLlegada() {
   return (
     <>
         <h2>Tu horario de llegada</h2>
-        <div className='tablaDatos'>
+        <div className='tablaHorarioLlegada'>
             <p>Tu habitación va a estar lista para el check-in entre las 10:00 AM y las 11:00 PM</p>
             <div className='contenedorHorario'>
                 <Label htmlFor="horario"><FontAwesomeIcon icon={faCircleCheck} style={{marginRight:"4px"}}/>Indica tu horario estimado de llegada</Label>

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,11 +8,13 @@ import {
   faLocationDot
 } from "@fortawesome/free-solid-svg-icons";
 import "../styles/reservaDetalle.css";
+import { Button } from 'react-bootstrap';
+import { Boton } from './elementStyle/Form';
 
 
 export default function DetallesReserva() {
     const [dataProducto, setDataProducto] = useState([]);
-    const [dataImagen, setDataImagen] = useState([]);
+    //const [dataImagen, setDataImagen] = useState([]);
     const {id} = useParams();
     
     useEffect( () => {
@@ -24,44 +26,49 @@ export default function DetallesReserva() {
     }, [])
 
     const isProducto = () =>{
-        if (dataProducto !== null) {
+        if (dataProducto.length === 0) {
           return false      
         }else{
           return true
         }
     }
-    
+
+
+
 
   return (
-    <>   
-    {!isProducto() && ( <>    
-        <h2>Detalle de la reserva</h2>
+    <div className='tablaDatos'>  
+    {isProducto() && ( <div className='contenedorTablaDetalle'>    
+        <h2 className='tituloDetalleReserva'>Detalle de la reserva</h2>
         <div style={{ backgroundImage: "url('" + dataProducto.categoria.urlImg + "')" }} className="fondoImagen" />
-        <p>{dataProducto.categoria.titulo}</p>
-        <h3>{dataProducto.nombre}</h3>
-        <div className='contenedorEstrellas'>
+        <div className='contenedorDetalle'>
+          <span>{dataProducto.categoria.titulo}</span>
+          <h2>{dataProducto.nombre}</h2>
+          <div className='contenedorEstrellas'>
             <FontAwesomeIcon icon={faStar} className="estrella" />
             <FontAwesomeIcon icon={faStar} className="estrella" />
             <FontAwesomeIcon icon={faStar} className="estrella" />
             <FontAwesomeIcon icon={faStar} className="estrella" />
             <FontAwesomeIcon icon={faStar} className="estrella" />
-        </div>
-        <p><FontAwesomeIcon icon={faLocationDot} style={{"paddingRight":"5px"}}/>{dataProducto.ciudad.provincia}, {dataProducto.ciudad.nombre}, {dataProducto.ciudad.pais}.</p>
-        <div className='linea'/>
-        <div className='check'>
+          </div>
+          <p><FontAwesomeIcon icon={faLocationDot} style={{"paddingRight":"5px"}}/>{dataProducto.ciudad.provincia}, {dataProducto.ciudad.nombre}, {dataProducto.ciudad.pais}.</p>
+          <div className='linea'/>
+          <div className='check'>
             <p>Check in</p>
             <p>fecha</p>
-        </div>
-        <div className='linea'/>
-        <div className='check'>
+          </div>
+          <div className='linea'/>
+          <div className='check'>
             <p>Check out</p>
             <p>fecha</p>
+          </div>
+          <button className='confirmarReserva'>Confirmar reserva</button>
         </div>
         
-        </>
+        </div>
     )}
 
-    </>
+    </div>
     
   )
 }

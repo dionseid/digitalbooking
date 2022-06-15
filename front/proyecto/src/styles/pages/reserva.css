@@ -10,18 +10,10 @@
     width: 70%;
 }
 
-
-.contenedorHorario{
-    display: flex;
-    flex-direction: column;
-}
-
-.placeholderSelect{
-    font-family: "Font Awesome 5 Free";
-    font-style:normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
-    margin-left: 12px;    
+h2{
+    font-weight: 700;
+    font-size: 24px;
+    color: #31363F;
+    padding: 8px;
 }
 
