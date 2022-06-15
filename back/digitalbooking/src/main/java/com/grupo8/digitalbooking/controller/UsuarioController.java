@@ -15,20 +15,20 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/agregarUsuario")
-    public ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario){
-    //  return (ResponseEntity<Usuario>) ResponseEntity.ok(usuarioService.agregarUsuario(usuario)).status(HttpStatus.CREATED);
-        return ResponseEntity.ok(usuarioService.agregarUsuario(usuario));
-    }
-
-    @GetMapping("/listarTodos")
-    public ResponseEntity<List<Usuario>> listarTodosLosUsuarios(){
-        return ResponseEntity.ok(usuarioService.listarUsuarios());
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarUsuario(@PathVariable Integer id) throws Exception{
-        usuarioService.eliminarUsuario(id);
-        return ResponseEntity.ok("Se eliminó el usuario correctamente");
-    }
+//    @PostMapping("/agregarUsuario")
+//    public ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario){
+//    //  return (ResponseEntity<Usuario>) ResponseEntity.ok(usuarioService.agregarUsuario(usuario)).status(HttpStatus.CREATED);
+//        return ResponseEntity.ok(usuarioService.agregarUsuario(usuario));
+//    }
+//
+//    @GetMapping("/listarTodos")
+//    public ResponseEntity<List<Usuario>> listarTodosLosUsuarios(){
+//        return ResponseEntity.ok(usuarioService.listarUsuarios());
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<String> eliminarUsuario(@PathVariable Integer id) throws Exception{
+//        usuarioService.eliminarUsuario(id);
+//        return ResponseEntity.ok("Se eliminó el usuario correctamente");
+//    }
 }
