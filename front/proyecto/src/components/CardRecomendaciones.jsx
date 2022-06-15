@@ -11,8 +11,10 @@ import Accordion from 'react-bootstrap/Accordion'
 const CardRecomendacion = ({ selectCiudad , selectCategoria}) => {
     const [dataProducto, setDataProducto] = useState([]);
     const [dataImagen, setImagen] = useState([]);
+    const [dataCaracteristicas, setCaracteristicas] = useState([]);
     const [idProducto, setIdProducto] = useState([]);
     const [verMas, setVerMas] = useState(false);
+    
 
     useEffect(() => {
         axios.get('http://localhost:8080/productos/traerTodos')
@@ -23,9 +25,16 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria}) => {
     }, [selectCiudad])
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/imagenes${idProducto}`)
+        axios.get(`http://localhost:8080/imagenes`)
             .then(response => {
                 setImagen(response.data)
+            })            
+    }, [])
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/caracteristicas`)
+            .then(response => {
+                setCaracteristicas(response.data)
             })            
     }, [])
     
@@ -34,7 +43,12 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria}) => {
         const imagenes = dataImagen.filter((img) => img.producto.id == card.id);
         console.log("imagenes: ", imagenes);
         return imagenes[0].url      
-      }
+    }
+    
+    const getCaracteristicas = (card) =>{
+        const caracteristicas = dataCaracteristicas.filter((c) => c.producto.id == card.id);
+        return caracteristicas      
+    }
 
 
     const filteredList = useMemo(() => {
@@ -71,7 +85,12 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria}) => {
                         </div>
                         <div className="infoHotel">
                             <p><FontAwesomeIcon icon={faLocationDot} style={{ marginRight: "4px" }} />{card.ciudad.nombre} <span className="mostrarMapa">MOSTRAR EN EL MAPA</span></p>
-                            <p className="iconosInfoHotel"><FontAwesomeIcon icon={faWifi} style={{ marginRight: "8px" }} /><FontAwesomeIcon icon={faPersonSwimming} /></p>
+                            <p className="iconosInfoHotel">
+                                {dataCaracteristicas.filter((c)=>c.producto.id == card.id)
+                                    .map((cat)=>(                            
+                                            <span class="material-symbols-outlined">{cat.icono}</span>
+                                    ))}
+                            </p>
                         </div>
                         <p>{verMas ? card.descripcion  : card.descripcion.split(' ', 8).join(" ")}<span className="mas" onClick={() => setVerMas(!verMas)}>
                             {verMas ? " ver menos" : " ver más..."}</span></p>
