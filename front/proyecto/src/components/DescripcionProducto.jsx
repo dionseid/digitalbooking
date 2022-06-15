@@ -9,7 +9,7 @@ const DescripcionProducto = () => {
         const [dataDescripcion, setDataDescripcion] = useState([]);
         const { id } = useParams();
         useEffect(() => {
-                axios.get(`http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com:8080/productos/buscarProductoPorId/${id}`)
+                axios.get(`http://awseb-awseb-185hfl68ks755-374311792.us-west-1.elb.amazonaws.com:8080/productos/buscarProductoPorId/${id}`)
                         .then(response => {
                                 setDataDescripcion(response.data)
                         })

@@ -99,7 +99,7 @@ update token:
       --silent --output /dev/null --show-error --fail \
       "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH" --form "value=$AUTH"
 
-trigger_a:
+frontend:
   stage: build
   trigger:
     include: front/proyecto/.gitlab-ci.yml
@@ -113,7 +113,7 @@ trigger_a:
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
 
-trigger_b:
+backend:
   stage: build
   trigger:
     include: back/digitalbooking/.gitlab-ci.yml

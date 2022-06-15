@@ -27,7 +27,7 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
     }, [selectCiudad])
 
     useEffect(() => {
-        axios.get(`http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com:8080/productos/filtroCategoria/${selectCategoria}`)
+        axios.get(`http://awseb-awseb-185hfl68ks755-374311792.us-west-1.elb.amazonaws.com:8080/productos/filtroCategoria/${selectCategoria}`)
             .then(response => {
                 setDataProducto(response.data)
             })
