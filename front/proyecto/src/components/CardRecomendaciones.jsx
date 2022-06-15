@@ -29,15 +29,12 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria}) => {
             })            
     }, [])
     
-    const getImagen = useMemo((id) => {
-        setIdProducto(id)
-        axios.get(`http://localhost:8080/imagenes/${idProducto}`)
-        .then(response => {
-            setImagen(response.data)
-        })
 
-        return dataImagen.url;
-    }, [idProducto])
+    const getImage = (card) =>{
+        const imagenes = dataImagen.filter((img) => img.producto.id == card.id);
+        console.log("imagenes: ", imagenes);
+        return imagenes[0].url      
+      }
 
 
     const filteredList = useMemo(() => {
@@ -60,7 +57,7 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria}) => {
         <div className="cards">
             {filteredList.map((card) => (
                 <div key={card.id} className="cardRecomendacion">
-                    <div style={{ backgroundImage: "url('" + card.categoria.urlImg + "')" }} className="fondoImagen" />
+                    <div style={{ backgroundImage: "url('" + getImage(card) + "')" }} className="fondoImagen" />
                     <div className="cardBody">
                         <div className="presentacion">
                             <div>

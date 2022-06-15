@@ -14,16 +14,28 @@ import { Boton } from './elementStyle/Form';
 
 export default function DetallesReserva() {
     const [dataProducto, setDataProducto] = useState([]);
-    //const [dataImagen, setDataImagen] = useState([]);
+    const [dataImagen, setDataImagen] = useState([]);
     const {id} = useParams();
     
     useEffect( () => {
         axios.get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
         .then(response => {
             setDataProducto(response.data)})
-            console.log(dataProducto);
-
     }, [])
+
+    useEffect( () => {
+      axios.get(`http://localhost:8080/imagenes`)
+      .then(response => {
+        setDataImagen(response.data)})
+
+  }, [])
+
+  const getImage = () =>{
+      const imagenes = dataImagen.filter((img) => img.producto.id == id);
+      console.log("imagenes: ", imagenes);
+      return imagenes[0].url      
+    }
+  
 
     const isProducto = () =>{
         if (dataProducto.length === 0) {
@@ -40,7 +52,7 @@ export default function DetallesReserva() {
     <div className='tablaDatos'>  
     {isProducto() && ( <div className='contenedorTablaDetalle'>    
         <h2 className='tituloDetalleReserva'>Detalle de la reserva</h2>
-        <div style={{ backgroundImage: "url('" + dataProducto.categoria.urlImg + "')" }} className="fondoImagen" />
+        <div style={{ backgroundImage: "url('" + getImage() + "')" }} className="fondoImagen" />
         <div className='contenedorDetalle'>
           <span>{dataProducto.categoria.titulo}</span>
           <h2>{dataProducto.nombre}</h2>
