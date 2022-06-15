@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
@@ -74,7 +74,7 @@ export default function DetallesReserva() {
             <p>Check out</p>
             <p>fecha</p>
           </div>
-          <button className='confirmarReserva'>Confirmar reserva</button>
+          <Link to='/reservaExitosa'><button className='confirmarReserva'>Confirmar reserva</button></Link>
         </div>
         
         </div>

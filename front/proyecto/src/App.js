@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar';
 import Productos from './pages/Productos';
 import Reserva from './pages/Reserva';
 import { IdProductoContextProvider } from './components/context/IdProductoContext';
+import ReservaExitosa from './pages/ReservaExitosa';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path='/account' element={<Account />} />
             <Route path='/productos/:id' element={<Productos />} />
             <Route path='/producto/:id/reserva' element={<Reserva/>} />
+            <Route path='/reservaExitosa' element={<ReservaExitosa/>} />
         </Routes>
         </IdProductoContextProvider>
       </BrowserRouter>

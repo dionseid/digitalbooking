@@ -45,7 +45,7 @@ const Navbar = ({ authenticated, setIsAuthenticated , onClick}) => {
             <Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link>   
   
         </>,
-        '/reserva' : <>
+        "/reservaExitosa" : <>
             <Link to='/account'><Button variant="secondary" className='buttonNavBarAccount' >Crear cuenta</Button></Link>
             <Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link>   
       

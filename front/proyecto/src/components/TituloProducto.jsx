@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState , useEffect} from "react";
 import { Link, useParams } from "react-router-dom";
-import "../styles/cards.css";
+import "../styles/pages/productos.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft
@@ -17,7 +17,7 @@ useEffect( () => {
     .then(response => {
         setDataTitulo(response.data)})
 
-}, [])
+}, [id])
 
 
         return (
