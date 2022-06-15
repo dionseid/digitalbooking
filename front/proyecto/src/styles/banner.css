@@ -13,9 +13,17 @@
   background-color: #f0572d;
   width: 206px;
   height: 40px;
+  border: none;
   border-radius: 8px;
   font-weight: 700;
   font-size: 16px;
+  transition: 0.5s ease all;
+}
+
+.botonBanner:hover{
+  background:#dfe4ea;
+  color: #F0572D;
+  padding: 7px 20px;
 }
 
 .inputBanner {
@@ -98,7 +106,8 @@ th.month::after {
 
   .botonBanner {
     width:166px;
-  }
+  }    
+
   .input-contenedor{
     width: 254px;
     

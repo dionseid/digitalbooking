@@ -2,8 +2,9 @@ import axios from 'axios';
 import { React, useEffect, useMemo, useState } from 'react';
 import Input from '../components/Input';
 import CardRecomendacion from './CardRecomendaciones';
-import "../styles/banner.css";
 import SelectCiudades from './SelectCiudades';
+import { Button } from 'react-bootstrap';
+import "../styles/banner.css";
 
 const Banner = ({onChange, onClick}) => { 
   return (
@@ -22,7 +23,7 @@ const Banner = ({onChange, onClick}) => {
             isInputWithCalendar={true} />
         </div>
         <div>
-          <button className='botonBanner' onClick={onClick}>Buscar</button>
+          <Button className='botonBanner' onClick={onClick}>Buscar</Button>
         </div>
       </div>
     </div>
