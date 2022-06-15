@@ -1,7 +1,7 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faStar, faLocationDot, faWifi, faPersonSwimming, faHeart} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faLocationDot, faWifi, faPersonSwimming, faHeart } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import React, { useState , useEffect, useMemo, useContext} from "react";
+import React, { useState, useEffect, useMemo, useContext } from "react";
 import "../styles/cards.css";
 import { Link } from "react-router-dom";
 import { useAccordionButton, Card } from "react-bootstrap";
@@ -14,7 +14,7 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
     const [idProducto, setIdProducto] = useState([]);
     const [verMas, setVerMas] = useState(false);
 
-    
+
 
     const getUrl = () => selectCiudad ? `http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com/productos/filtroCiudad/${selectCiudad}` : "http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com/productos/traerTodos"
 
@@ -27,7 +27,7 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
     }, [selectCiudad])
 
     useEffect(() => {
-        axios.get(`http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com/productos/filtroCategoria/${selectCategoria}`)
+        axios.get(`http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com:8080/productos/filtroCategoria/${selectCategoria}`)
             .then(response => {
                 setDataProducto(response.data)
             })
@@ -36,16 +36,16 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
 
     const filteredList = useMemo(() => {
         if (!selectCiudad) { // Cuando selectCiudad es null entonces no filtrar
-          return selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
-        }else{
-            if(!selectCategoria){   //cuando selectCategoria es null no filtrar por categoria, solo ciudad
-                return dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) 
-            } 
+            return selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
+        } else {
+            if (!selectCategoria) {   //cuando selectCategoria es null no filtrar por categoria, solo ciudad
+                return dataProducto.filter((prod) => prod.ciudad.id == selectCiudad)
+            }
             return dataProducto.filter((prod) => prod.ciudad.id == selectCiudad && prod.categoria.id == selectCategoria)
         }
         return dataProducto;
-        
-      }, [dataProducto, selectCategoria, selectCiudad])
+
+    }, [dataProducto, selectCategoria, selectCiudad])
 
     //const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
 
@@ -70,7 +70,7 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
                             <p><FontAwesomeIcon icon={faLocationDot} style={{ marginRight: "4px" }} />{card.ciudad.nombre} <span className="mostrarMapa">MOSTRAR EN EL MAPA</span></p>
                             <p className="iconosInfoHotel"><FontAwesomeIcon icon={faWifi} style={{ marginRight: "8px" }} /><FontAwesomeIcon icon={faPersonSwimming} /></p>
                         </div>
-                        <p>{verMas ? card.descripcion  : card.descripcion.split(' ', 8).join(" ")}<span className="mas" onClick={() => setVerMas(!verMas)}>
+                        <p>{verMas ? card.descripcion : card.descripcion.split(' ', 8).join(" ")}<span className="mas" onClick={() => setVerMas(!verMas)}>
                             {verMas ? " ver menos" : " ver más..."}</span></p>
                         <Link to={`/productos/${card.id}`}><button className="buttonCard">ver más</button></Link>
                     </div>
