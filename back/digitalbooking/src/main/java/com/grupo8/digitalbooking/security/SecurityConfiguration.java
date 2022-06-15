@@ -37,19 +37,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 http.csrf()
         .disable()
         .authorizeRequests()
-        .antMatchers("/turnos/**")
-        .hasAuthority("USER")
-        .antMatchers( "/odontologos/**", "/pacientes/**")
+        .antMatchers("/categorias/**")
         .hasAuthority("ADMIN")
-        .antMatchers("/turnoAlta.html",
-                "/turnoList.html")
-        .hasAuthority("USER")
-        .antMatchers("/odontologoAlta.html",
-                "/pacienteAlta.html",
-                "/usuarioAdd.html",
-                "/odontologoList.html",
-                "/pacienteList.html")
-        .hasAuthority("ADMIN")
+//        .antMatchers( "/odontologos/**", "/pacientes/**")
+//        .hasAuthority("ADMIN")
+//        .antMatchers("/turnoAlta.html",
+//                "/turnoList.html")
+//        .hasAuthority("USER")
+//        .antMatchers("/odontologoAlta.html",
+//                "/pacienteAlta.html",
+//                "/usuarioAdd.html",
+//                "/odontologoList.html",
+//                "/pacienteList.html")
+//        .hasAuthority("ADMIN")
         .anyRequest().authenticated()
         .and()
         .formLogin()
