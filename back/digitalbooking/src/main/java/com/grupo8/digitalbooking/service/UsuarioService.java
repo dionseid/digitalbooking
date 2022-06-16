@@ -1,5 +1,6 @@
 package com.grupo8.digitalbooking.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo8.digitalbooking.model.RolUsuario;
 import com.grupo8.digitalbooking.model.Usuario;
 import com.grupo8.digitalbooking.repository.RolUsuarioRepository;
@@ -16,15 +17,19 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     @Autowired
     private final RolUsuarioRepository rolUsuarioRepository;
+    @Autowired
+    ObjectMapper mapper;
 
+    @Autowired
     public UsuarioService(UsuarioRepository usuarioRepository, RolUsuarioRepository rolUsuarioRepository) {
         this.usuarioRepository = usuarioRepository;
         this.rolUsuarioRepository = rolUsuarioRepository;
     }
 
     public Usuario agregarUsuario(Usuario usuario){
-        Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
-        usuario.setRol(rolUsuario.get());
+        RolUsuario rolUsuario = rolUsuarioRepository.findById(usuario.getRol().getId()).get();
+        usuario.setRol(rolUsuario);
+        //Usuario usuario1= mapper.convertValue(usuario, Usuario.class);
         return usuarioRepository.save(usuario);
     }
     //listar todos los usuarios
@@ -34,9 +39,10 @@ public class UsuarioService {
 
     //actualizar usuario
     public Usuario actualizarUsuario(Usuario usuario){
-        Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
-        usuario.setRol(rolUsuario.get());
-        return usuarioRepository.save(usuario);
+        RolUsuario rolUsuario = rolUsuarioRepository.findById(usuario.getRol().getId()).get();
+        usuario.setRol(rolUsuario);
+        Usuario usuario1= mapper.convertValue(usuario, Usuario.class);
+        return usuarioRepository.save(usuario1);
     }
     //eliminar usuario
     public void eliminarUsuario(Integer id) throws Exception{
