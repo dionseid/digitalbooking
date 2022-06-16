@@ -58,6 +58,7 @@ public class CiudadController {
     }
 
     // LISTAR TODAS LAS CIUDADES
+    @CrossOrigin(origins = "http://awseb-AWSEB-185HFL68KS755-374311792.us-west-1.elb.amazonaws.com:8080")
     @GetMapping()
     public ResponseEntity<Collection<Ciudad>> listarCiudades() {
         return ResponseEntity.ok(ciudadService.listarCiudades());
