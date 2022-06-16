@@ -108,6 +108,8 @@ avoid remaining:
   script:
     - echo "This job will cancel the pipeline"
     - cancel_pipeline
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
 
 frontend:
   stage: build
