@@ -176,6 +176,6 @@ deploy to production:
     - curl http://awseb-AWSEB-185HFL68KS755-374311792.us-west-1.elb.amazonaws.com/version.html | grep $APP_VERSION # Sole prueba que frontend funciona #Capaz no reconoce la variable
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH != "develop")
-      changes:
-        - front/proyecto/* || back/digitalbooking/*
       when: manual
+    changes:
+      - front/proyecto/* || back/digitalbooking/*
