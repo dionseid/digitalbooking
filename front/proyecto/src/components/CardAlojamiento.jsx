@@ -9,7 +9,7 @@ const CardAlojamiento = ({ idCategoria, setIdCategoria, onDoubleClick }) => {
     //const [idCategoria, setIdCategoria] = useState([]);
 
     useEffect(() => {
-        axios.get("http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com/categorias")
+        axios.get("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/categorias")
             .then(response => {
                 setDataCategoria(response.data)
             })

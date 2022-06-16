@@ -15,7 +15,7 @@ export default function UbicacionProducto() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com/productos/buscarProductoPorId/${id}`)
+    axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/buscarProductoPorId/${id}`)
       .then(response => {
 
         setDataUbicacion(response.data.ciudad)

@@ -10,7 +10,7 @@ export default function Reglas() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get("http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com/politicas")
+    axios.get("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/politicas")
       .then(response => {
         setDataReglas(response.data)
       })
