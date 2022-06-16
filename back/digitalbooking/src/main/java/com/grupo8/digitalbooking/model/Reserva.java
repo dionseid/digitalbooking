@@ -35,18 +35,18 @@ public class Reserva {
     private Usuario usuario;
 
     public Reserva(Time hora, LocalDate fechaInicial, LocalDate fechaFinal, Producto producto, Usuario usuario) {
-        hora = hora;
-        fechaInicial = fechaInicial;
-        fechaFinal = fechaFinal;
+        this.hora = hora;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
         this.producto = producto;
         this.usuario = usuario;
     }
 
     public Reserva(Integer id, Time hora, LocalDate fechaInicial, LocalDate fechaFinal, Producto producto, Usuario usuario) {
         this.id = id;
-        hora = hora;
-        fechaInicial = fechaInicial;
-        fechaFinal = fechaFinal;
+        this.hora = hora;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
         this.producto = producto;
         this.usuario = usuario;
     }
