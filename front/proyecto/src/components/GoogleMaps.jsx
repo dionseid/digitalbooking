@@ -13,7 +13,7 @@ const GoogleMaps = () => {
 
 
   useEffect(() => {
-    fetch(`http://awseb-awseb-185hfl68ks755-374311792.us-west-1.elb.amazonaws.com:8080/productos/buscarProductoPorId/${id}`)
+    fetch(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/buscarProductoPorId/${id}`)
       .then((res) => res.json())
       .then((res) => setDataLocacion([res.latitud, res.longitud]));
   }, []);

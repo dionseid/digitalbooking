@@ -24,7 +24,7 @@ const Galeria = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get("http://awseb-awseb-185hfl68ks755-374311792.us-west-1.elb.amazonaws.com:8080/imagenes")
+    axios.get("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/imagenes")
       .then(response => {
         setDataImagen(response.data)
       })

@@ -16,7 +16,7 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
 
 
 
-    const getUrl = () => selectCiudad ? `http://awseb-awseb-185hfl68ks755-374311792.us-west-1.elb.amazonaws.com:8080/productos/filtroCiudad/${selectCiudad}` : "http://awseb-awseb-185hfl68ks755-374311792.us-west-1.elb.amazonaws.com:8080/productos/traerTodos"
+    const getUrl = () => selectCiudad ? `http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/filtroCiudad/${selectCiudad}` : "http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/traerTodos"
 
     useEffect(() => {
         axios.get(getUrl())
@@ -27,7 +27,7 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
     }, [selectCiudad])
 
     useEffect(() => {
-        axios.get(`http://awseb-awseb-185hfl68ks755-374311792.us-west-1.elb.amazonaws.com:8080/productos/filtroCategoria/${selectCategoria}`)
+        axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/filtroCategoria/${selectCategoria}`)
             .then(response => {
                 setDataProducto(response.data)
             })
