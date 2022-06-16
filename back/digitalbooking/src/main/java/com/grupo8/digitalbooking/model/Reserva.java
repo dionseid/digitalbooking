@@ -20,33 +20,33 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Time Hora;
-    private LocalDate FechaInicial;
-    private LocalDate FechaFinal;
+    private Time hora;
+    private LocalDate fechaInicial;
+    private LocalDate fechaFinal;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "productos_id")
     private Producto producto;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "usuarios_id")
     private Usuario usuario;
 
     public Reserva(Time hora, LocalDate fechaInicial, LocalDate fechaFinal, Producto producto, Usuario usuario) {
-        Hora = hora;
-        FechaInicial = fechaInicial;
-        FechaFinal = fechaFinal;
+        hora = hora;
+        fechaInicial = fechaInicial;
+        fechaFinal = fechaFinal;
         this.producto = producto;
         this.usuario = usuario;
     }
 
     public Reserva(Integer id, Time hora, LocalDate fechaInicial, LocalDate fechaFinal, Producto producto, Usuario usuario) {
         this.id = id;
-        Hora = hora;
-        FechaInicial = fechaInicial;
-        FechaFinal = fechaFinal;
+        hora = hora;
+        fechaInicial = fechaInicial;
+        fechaFinal = fechaFinal;
         this.producto = producto;
         this.usuario = usuario;
     }
