@@ -1,5 +1,5 @@
 package com.grupo8.digitalbooking.model;
 
-public enum UsuarioRoles {
+public enum UserRoles {
     USUARIO, ADMIN, PUBLICO
 }

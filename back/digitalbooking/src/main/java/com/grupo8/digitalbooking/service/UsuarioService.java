@@ -6,13 +6,16 @@ import com.grupo8.digitalbooking.model.Usuario;
 import com.grupo8.digitalbooking.repository.RolUsuarioRepository;
 import com.grupo8.digitalbooking.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements UserDetailsService {
     @Autowired
     private final UsuarioRepository usuarioRepository;
     @Autowired
@@ -56,5 +59,10 @@ public class UsuarioService {
     //buscar usuario
     public Optional<Usuario> buscarUsuario(Integer id){
         return usuarioRepository.findById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username){
+        return usuarioRepository.findByEmail(username).get();
     }
 }
