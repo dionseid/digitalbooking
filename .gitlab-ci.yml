@@ -76,8 +76,11 @@ variables:
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
 
+include: cancel_pipeline_functions.yml
+
 stages:
   - update
+  - cancel if update
   - build
   - deploy
 
@@ -99,16 +102,22 @@ update token:
       --silent --output /dev/null --show-error --fail \
       "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH" --form "value=$AUTH"
 
+avoid remaining:
+  stage: cancel if update
+  extends: .cancel_pipeline_template
+  script:
+    - echo "This job will cancel the pipeline"
+    - cancel_pipeline
+
 frontend:
   stage: build
   trigger:
     include: front/proyecto/.gitlab-ci.yml
     strategy: depend
   rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule" 
+    - if: $CI_PIPELINE_SOURCE != "schedule" && (CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH != "develop")
       changes:
         - front/proyecto/*
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH != "develop"
       when: manual
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
@@ -119,10 +128,9 @@ backend:
     include: back/digitalbooking/.gitlab-ci.yml
     strategy: depend
   rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule"
+    - if: $CI_PIPELINE_SOURCE != "schedule" && (CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH != "develop")
       changes:
         - back/digitalbooking/*
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH != "develop"
       when: manual
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
@@ -165,9 +173,8 @@ deploy to production:
     - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
     - curl http://awseb-AWSEB-185HFL68KS755-374311792.us-west-1.elb.amazonaws.com/version.html | grep $APP_VERSION # Sole prueba que frontend funciona #Capaz no reconoce la variable
   rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule"
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH != "develop")
       # changes:
       #   - front/proyecto/*
       #   - back/digitalbooking/*
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH != "develop"
       when: manual
