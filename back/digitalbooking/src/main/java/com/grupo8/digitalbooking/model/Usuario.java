@@ -5,7 +5,7 @@ import com.grupo8.digitalbooking.model.Ciudad;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 

@@ -4,6 +4,7 @@ import com.grupo8.digitalbooking.model.RolUsuario;
 import com.grupo8.digitalbooking.model.Usuario;
 import com.grupo8.digitalbooking.repository.RolUsuarioRepository;
 import com.grupo8.digitalbooking.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,9 @@ import java.util.Optional;
 
 @Service
 public class UsuarioService {
+    @Autowired
     private final UsuarioRepository usuarioRepository;
+    @Autowired
     private final RolUsuarioRepository rolUsuarioRepository;
 
     public UsuarioService(UsuarioRepository usuarioRepository, RolUsuarioRepository rolUsuarioRepository) {

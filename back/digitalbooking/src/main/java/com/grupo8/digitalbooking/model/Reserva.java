@@ -31,7 +31,7 @@ public class Reserva {
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuarios_id")
     private Usuario usuario;
 
     public Reserva(Time hora, LocalDate fechaInicial, LocalDate fechaFinal, Producto producto, Usuario usuario) {

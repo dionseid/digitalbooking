@@ -15,7 +15,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/agregarUsuario")
+    @PostMapping
     public ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario){
     //  return (ResponseEntity<Usuario>) ResponseEntity.ok(usuarioService.agregarUsuario(usuario)).status(HttpStatus.CREATED);
         return ResponseEntity.ok(usuarioService.agregarUsuario(usuario));
