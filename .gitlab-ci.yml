@@ -163,7 +163,7 @@ deploy to production:
     #- aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/Dockerrun.aws.json
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
     - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
-    - curl http://awseb-AWSEB-19H8QAMA3KCJ1-539654579.us-west-1.elb.amazonaws.com/version.html | grep $APP_VERSION # Sole prueba que frontend funciona #Capaz no reconoce la variable
+    - curl http://awseb-AWSEB-185HFL68KS755-374311792.us-west-1.elb.amazonaws.com/version.html | grep $APP_VERSION # Sole prueba que frontend funciona #Capaz no reconoce la variable
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule"
       # changes:
