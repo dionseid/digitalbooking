@@ -1,4 +1,4 @@
-package com.grupo8.digitalbooking.security;
+/*package com.grupo8.digitalbooking.security;
 
 import com.grupo8.digitalbooking.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +24,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     UsuarioService usuarioService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-//    @Autowired
-//    private UserDetailsService myUserDetailsService;
-//
-//    @Autowired
-//    private JwtRequestFilter jwtRequestFilter;
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.csrf().disable()
             .authorizeRequests()
-                //.antMatchers("/login").permitAll()
+                .antMatchers("/login").permitAll()
                 .antMatchers("/**").hasAnyRole("PUBLICO","USUARIO", "ADMIN")
                 .antMatchers("/categorias/**","/ciudades/**","/productos/**","/politicas/**","/caracteristicas/**","/imagenes/**")
                 .hasAuthority("ADMIN")
@@ -47,20 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
-//          .antMatchers( "/odontologos/**", "/pacientes/**")
-//          .hasAuthority("ADMIN")
-//          .antMatchers("/turnoAlta.html",
-//                       "/turnoList.html")
-//          .hasAuthority("USER")
-//          .antMatchers("/odontologoAlta.html",
-//                       "/pacienteAlta.html",
-//                       "/usuarioAdd.html",
-//                       "/odontologoList.html",
-//                       "/pacienteList.html")
-//          .hasAuthority("ADMIN")
 
-//            .and()
-//            .exceptionHandling().accessDeniedPage("/acceso_denegado.html");
     }
 
     @Override
@@ -77,4 +59,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
-}
+}*/
