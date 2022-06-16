@@ -177,6 +177,6 @@ deploy to production:
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH != "develop")
       when: manual
-    changes:
-      - front/proyecto/*
-      - back/digitalbooking/*
+    # changes:
+    #   - front/proyecto/*
+    #   - back/digitalbooking/*
