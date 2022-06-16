@@ -22,55 +22,59 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UsuarioService usuarioService;
-
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 //    @Autowired
 //    private UserDetailsService myUserDetailsService;
 //
 //    @Autowired
 //    private JwtRequestFilter jwtRequestFilter;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-@Override
+    @Override
     protected void configure(HttpSecurity http) throws Exception{
-http.csrf()
-        .disable()
-        .authorizeRequests()
-        .antMatchers("/categorias/**")
-        .hasAuthority("ADMIN")
-//        .antMatchers( "/odontologos/**", "/pacientes/**")
-//        .hasAuthority("ADMIN")
-//        .antMatchers("/turnoAlta.html",
-//                "/turnoList.html")
-//        .hasAuthority("USER")
-//        .antMatchers("/odontologoAlta.html",
-//                "/pacienteAlta.html",
-//                "/usuarioAdd.html",
-//                "/odontologoList.html",
-//                "/pacienteList.html")
-//        .hasAuthority("ADMIN")
-        .anyRequest().authenticated()
-        .and()
-        .formLogin()
-        .permitAll()
-        .and()
-        .exceptionHandling().accessDeniedPage("/acceso_denegado.html");
+        http.csrf().disable()
+            .authorizeRequests()
+                //.antMatchers("/login").permitAll()
+                .antMatchers("/**").hasAnyRole("PUBLICO","USUARIO", "ADMIN")
+                .antMatchers("/categorias/**","/ciudades/**","/productos/**","/politicas/**","/caracteristicas/**","/imagenes/**")
+                .hasAuthority("ADMIN")
+                .antMatchers("/productos/traerTodos")
+                .hasAuthority("USER").anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
+//          .antMatchers( "/odontologos/**", "/pacientes/**")
+//          .hasAuthority("ADMIN")
+//          .antMatchers("/turnoAlta.html",
+//                       "/turnoList.html")
+//          .hasAuthority("USER")
+//          .antMatchers("/odontologoAlta.html",
+//                       "/pacienteAlta.html",
+//                       "/usuarioAdd.html",
+//                       "/odontologoList.html",
+//                       "/pacienteList.html")
+//          .hasAuthority("ADMIN")
 
-}
+//            .and()
+//            .exceptionHandling().accessDeniedPage("/acceso_denegado.html");
+    }
 
-@Override
+    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
     auth.authenticationProvider(daoAuthenticationProvider());
-}
-@Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider(){
+    }
 
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider(){
     DaoAuthenticationProvider provider= new DaoAuthenticationProvider();
     provider.setPasswordEncoder(bCryptPasswordEncoder);
     provider.setUserDetailsService(usuarioService);
     return provider;
-}
+    }
 
 
 }
