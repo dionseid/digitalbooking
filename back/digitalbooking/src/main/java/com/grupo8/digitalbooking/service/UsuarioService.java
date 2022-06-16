@@ -1,5 +1,6 @@
 package com.grupo8.digitalbooking.service;
 
+import com.grupo8.digitalbooking.model.Reserva;
 import com.grupo8.digitalbooking.model.RolUsuario;
 import com.grupo8.digitalbooking.model.Usuario;
 import com.grupo8.digitalbooking.repository.RolUsuarioRepository;
@@ -23,10 +24,17 @@ public class UsuarioService {
     }
 
     public Usuario agregarUsuario(Usuario usuario){
-        Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
-        usuario.setRol(rolUsuario.get());
+        /*Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
+        usuario.setRol(rolUsuario.get());*/
+        RolUsuario rolUsuario = rolUsuarioRepository.findById(usuario.getRol().getId()).get();
+        usuario.setRol(rolUsuario);
         return usuarioRepository.save(usuario);
     }
+
+    public Usuario newUsuario(Usuario usuario) {
+        return agregarUsuario(usuario);
+    }
+
     //listar todos los usuarios
     public List<Usuario> listarUsuarios(){
         return usuarioRepository.findAll();
