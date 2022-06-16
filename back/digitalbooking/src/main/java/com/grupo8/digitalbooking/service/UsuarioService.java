@@ -29,6 +29,8 @@ public class UsuarioService implements UserDetailsService {
         this.rolUsuarioRepository = rolUsuarioRepository;
     }
 
+    //agregar lógica de password encoder
+    //agregar rol(1 o 2)
     public Usuario agregarUsuario(Usuario usuario){
         RolUsuario rolUsuario = rolUsuarioRepository.findById(usuario.getRol().getId()).get();
         usuario.setRol(rolUsuario);

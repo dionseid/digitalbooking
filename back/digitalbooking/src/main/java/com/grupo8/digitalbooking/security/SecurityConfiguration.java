@@ -26,14 +26,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
+//permitir todo y despues empezar a limitar accesos
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.csrf().disable()
             .authorizeRequests()
                 .antMatchers("/categorias/**","/ciudades/**","/productos/**","/politicas/**","/caracteristicas/**","/imagenes/**")
                 .hasAuthority("ADMIN")
-                .antMatchers("/productos/traerTodos")
-                .hasAuthority("USER").anyRequest().authenticated()
+                .antMatchers("/reserva/nuevaReserva")
+                .hasAuthority("USER").anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .permitAll();

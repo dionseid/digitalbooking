@@ -34,6 +34,7 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "roles_id")
     private RolUsuario rol;
 
+    //no va
     @Enumerated(EnumType.STRING)
     private UserRoles userRoles;
 

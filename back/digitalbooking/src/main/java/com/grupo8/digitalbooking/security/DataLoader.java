@@ -17,13 +17,13 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         BCryptPasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
-        String pass= passwordEncoder.encode("admin1");
-        String pass2= passwordEncoder.encode("user1");
-
-        usuarioRepository.save(new Usuario("sofia", "monasterio", "sofim@gmail.com",pass,"Yerba Buena", new RolUsuario("ADMIN"), UserRoles.ADMIN));
+        //String pass= passwordEncoder.encode(usuario.getPassword);
+        //usuarioRepository.save(new Usuario("sofia", "monasterio", "sofim@gmail.com",pass,"Yerba Buena", new RolUsuario("ADMIN"), UserRoles.ADMIN));
 
     }
 }
