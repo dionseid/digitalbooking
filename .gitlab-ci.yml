@@ -119,7 +119,7 @@ frontend:
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH != "develop")
       changes:
-        - front/proyecto/**
+        - front/proyecto/*
       when: manual
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
@@ -132,7 +132,7 @@ backend:
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH != "develop")
       changes:
-        - back/digitalbooking/*
+        - back/digitalbooking/**
       when: manual
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
