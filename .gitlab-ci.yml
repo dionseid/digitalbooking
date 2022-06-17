@@ -130,9 +130,9 @@ backend:
     include: back/digitalbooking/.gitlab-ci.yml
     strategy: depend
   rules:
+    changes:
+      - back/digitalbooking/*
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH != "develop")
-      changes:
-        - back/digitalbooking/*
       when: manual
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
