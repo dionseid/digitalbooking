@@ -30,4 +30,7 @@ public class UsuarioController {
         usuarioService.eliminarUsuario(id);
         return ResponseEntity.ok("Se eliminó el usuario correctamente");
     }
+
+    //hacer post login
+    //@PostMapping("/login")
 }

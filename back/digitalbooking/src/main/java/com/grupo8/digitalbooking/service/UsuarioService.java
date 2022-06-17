@@ -64,7 +64,7 @@ public class UsuarioService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username){
-        return usuarioRepository.findByEmail(username).get();
+    public UserDetails loadUserByUsername(String email){
+        return usuarioRepository.findByEmail(email).get();
     }
 }

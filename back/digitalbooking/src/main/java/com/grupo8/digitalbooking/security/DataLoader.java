@@ -1,7 +1,7 @@
 package com.grupo8.digitalbooking.security;
 
 import com.grupo8.digitalbooking.model.RolUsuario;
-import com.grupo8.digitalbooking.model.UserRoles;
+
 import com.grupo8.digitalbooking.model.Usuario;
 import com.grupo8.digitalbooking.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
