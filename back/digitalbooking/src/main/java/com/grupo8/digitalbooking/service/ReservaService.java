@@ -15,10 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 public class ReservaService {
@@ -70,4 +68,9 @@ public class ReservaService {
         return reservas1;
     }
 
+    public List<Reserva> buscarPorFechas(LocalDate fechaInicial, LocalDate fechaFinal){
+        List<Reserva> reservas = reservaRepository.findByBetweenFechaInicialAndFechaFinal(fechaInicial, fechaFinal);
+        return reservas;
+
+    }
 }

@@ -31,10 +31,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http.csrf().disable()
             .authorizeRequests()
-                .antMatchers("/categorias/**","/ciudades/**","/productos/**","/politicas/**","/caracteristicas/**","/imagenes/**")
-                .hasAuthority("ADMIN")
-                .antMatchers("/reserva/nuevaReserva")
-                .hasAuthority("USER").anyRequest().permitAll()
+    //            .antMatchers("/categorias/**","/ciudades/**","/productos/**","/politicas/**","/caracteristicas/**","/imagenes/**")
+      //          .hasAuthority("USER")
+    //            .antMatchers("/reserva/nuevaReserva")
+    //            .hasAuthority("USER").anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .permitAll();

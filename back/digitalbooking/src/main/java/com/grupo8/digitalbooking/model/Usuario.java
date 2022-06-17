@@ -34,26 +34,25 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "roles_id")
     private RolUsuario rol;
 
-    //no va
-    @Enumerated(EnumType.STRING)
-    private UserRoles userRoles;
+
+
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String email, String password, String ciudadUsuario, RolUsuario rol, UserRoles userRoles) {
+    public Usuario(String nombre, String apellido, String email, String password, String ciudadUsuario, RolUsuario rol) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
         this.ciudadUsuario = ciudadUsuario;
         this.rol = rol;
-        this.userRoles = userRoles;
+
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(userRoles.name());
+        SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(rol.getNombre());
         return Collections.singletonList(grantedAuthority);    }
 
     @Override
