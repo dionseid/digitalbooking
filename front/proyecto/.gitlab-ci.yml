@@ -21,7 +21,7 @@ build project:
     - npm install --force
     - npm test
     - CI=false npm run build # Investigar 'CI=false'
-    - echo $CI_PIPELINE_IID > build/version.html
+    - echo $APP_VERSION > build/version.html
   artifacts:
     paths:
       - front/proyecto/build
@@ -42,7 +42,10 @@ build docker image:
     - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$APP_VERSION --cache-from $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest front/proyecto
     - docker image ls
     - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
-    - echo $APP_VERSION
+    - | 
+        curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
+        --silent --output /dev/null --show-error --fail \
+        "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/FRONTEND_VERSION" --form "value=`echo $APP_VERSION`"
   variables:
     DOCKER_DRIVER: overlay
 
