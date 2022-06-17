@@ -40,13 +40,13 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria}) => {
     
 
     const getImage = (card) =>{
-        const imagenes = dataImagen.filter((img) => img.producto.id == card.id);
+        const imagenes = dataImagen.filter((img) => img.producto?.id == card.id);
         console.log("imagenes: ", imagenes);
-        return imagenes[0].url      
+        return imagenes[0]?.url      
     }
     
     const getCaracteristicas = (card) =>{
-        const caracteristicas = dataCaracteristicas.filter((c) => c.producto.id == card.id);
+        const caracteristicas = dataCaracteristicas.filter((c) => c.producto?.id == card.id);
         return caracteristicas      
     }
 
@@ -86,7 +86,7 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria}) => {
                         <div className="infoHotel">
                             <p><FontAwesomeIcon icon={faLocationDot} style={{ marginRight: "4px" }} />{card.ciudad.nombre} <span className="mostrarMapa">MOSTRAR EN EL MAPA</span></p>
                             <p className="iconosInfoHotel">
-                                {dataCaracteristicas.filter((c)=>c.producto.id == card.id)
+                                {dataCaracteristicas.filter((c)=>c.producto?.id == card.id)
                                     .map((cat)=>(                            
                                             <span class="material-symbols-outlined">{cat.icono}</span>
                                     ))}

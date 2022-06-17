@@ -20,7 +20,7 @@ public class ImagenController {
     public ResponseEntity<Imagen> agregarImagen(@RequestBody Imagen imagen){
         return ResponseEntity.ok(imagenService.agregarImagen(imagen));
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public ResponseEntity<Imagen> buscarImagen(@PathVariable Integer id){
         Imagen imagen = imagenService.buscarImagen(id).orElse(null);
@@ -48,7 +48,7 @@ public class ImagenController {
         return response;
 
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public ResponseEntity<Collection<Imagen>> listarImagenes(){
         return ResponseEntity.ok(imagenService.listarImagen());

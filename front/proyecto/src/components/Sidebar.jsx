@@ -5,16 +5,22 @@ import { matchPath, useNavigate } from 'react-router';
 import SocialIconsSidebar from './SocialIconsSidebar';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import  {UserContext}  from '../components/context/UserContext';
 
-const Sidebar = ({authenticated, setIsAuthenticated}) => {
+const Sidebar = () => {
     const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
-    useEffect(() => setIsAuthenticatedMenu(authenticated), [authenticated]);
+    const {user, loginLogoutEvent } = useContext(UserContext);
+    useEffect(() => setIsAuthenticatedMenu(user.auth), [user.auth]);
     const { pathname } = useLocation();
 
     const handleClick = () => {
-        localStorage.setItem('user', JSON.stringify({nombre:' ', apellido:' '}));
-        setIsAuthenticated(false);
-      }
+        loginLogoutEvent({
+            nombre: '',
+            apellido: '',
+            mail: '',
+            auth: false
+        });
+    }
 
 
     const buttonsView = {
@@ -61,8 +67,7 @@ const Sidebar = ({authenticated, setIsAuthenticated}) => {
             )
         }else{
             return <span className='menu'>MENU</span>
-        }
-             
+        }  
     }
 
     return (

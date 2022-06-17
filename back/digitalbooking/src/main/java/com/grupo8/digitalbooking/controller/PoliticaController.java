@@ -20,7 +20,7 @@ public class PoliticaController {
     public ResponseEntity<Politica> agregarPolitica(@RequestBody Politica politica){
         return ResponseEntity.ok(politicaService.agregarPolitica(politica));
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public ResponseEntity<Politica> buscarPolitica (@PathVariable Integer id){
         Politica politica= politicaService.buscarPolitica(id).orElse(null);
@@ -50,7 +50,7 @@ public class PoliticaController {
         return response;
 
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping()
     public ResponseEntity<Collection<Politica>> listarPoliticas(){
         return ResponseEntity.ok(politicaService.listarPoliticas());

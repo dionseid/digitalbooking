@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useForm } from './hooks/useForm';
 import { Formulario, Label, ContenedorBotonCentrado, Boton, MensajeError, Input } from './elementStyle/Form';
 import { Link, Navigate } from 'react-router-dom';
@@ -8,13 +8,16 @@ import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons"
 import ComponenteInput from './ComponenteInput';
 import { useNavigate } from 'react-router-dom';
 import usuarios from '../helpers/usuarios.json';
+import  {UserContext}  from './context/UserContext';
+import axios from 'axios';
+import axiosConnection from '../helpers/axiosConnection';
 
-
-
-const FormLogin = ({setIsAuthenticated}) => {
+const FormLogin = () => {
+    const {user, loginLogoutEvent} = useContext(UserContext);
     const [email, cambiarCorreo] = useState({ campo: '', valido: null });
     const [password, cambiarPassword] = useState({ campo: '', valido: null });
     const [formularioValido, cambiarFormularioValido] = useState(null);
+
 
     const navigate = useNavigate();
 
@@ -22,17 +25,51 @@ const FormLogin = ({setIsAuthenticated}) => {
         password: /^.{6,15}$/, // 6 a 15 digitos.
         email: /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/  //coreo electrónico válido
     }
+    
+    // TODO - ver si se puede refactorizar para tambien utilizar en el componente de registro
+
+    const postLoginApi = async (data) => {
+        try{
+            // ** CAMBIAR POR EL URL DE LA API
+            const respuesta = await axiosConnection.post('/login', data);
+            sessionStorage.setItem('token', JSON.stringify(respuesta));
+            return respuesta;
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+    
+    const getLoginApi = async () => {
+        try{
+            // ** CAMBIAR POR EL URL DE LA API
+            const token = sessionStorage.getItem('token')&& JSON.parse(sessionStorage.getItem('token'));
+            const respuesta = await axiosConnection.get('/login', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+            }
+        });
+            return respuesta;
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        const { usuarios: userList } = usuarios;
-        const getUser = userList.find(user => user.mail === email.campo && user.password === password.campo);
-        console.log({ getUser });
+        //// const { usuarios: userList } = usuarios;
+        ////const getUser = userList.find(user => user.mail === email.campo && user.password === password.campo);
+        ////console.log({ getUser });
+        const respuestaPost = postLoginApi({mail: email.campo, password: password.campo})
+        const respuestaGet = respuestaPost && getLoginApi();
+        const getUser = respuestaGet
         if (getUser) {
-            const { nombre, apellido } = getUser;
-            cambiarFormularioValido(false);
-            localStorage.setItem('user', JSON.stringify({ nombre , apellido }));
-            setIsAuthenticated(true);
+            //// const { nombre, apellido } = getUser;
+            //// cambiarFormularioValido(false);
+            //// localStorage.setItem('user', JSON.stringify({ nombre , apellido }));
+            //// setIsAuthenticated(true);
+            loginLogoutEvent({nombre: getUser.nombre, apellido: getUser.apellido, mail: getUser.email, auth: true});
             navigate('/');
         } else {
             cambiarFormularioValido(true);

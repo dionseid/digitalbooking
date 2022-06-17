@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import ComponenteInput from './ComponenteInput';
 import usuarios from "../helpers/usuarios.json"
+import axios from "axios";
+import axiosConnection from "../helpers/axiosConnection";
 
 
 
@@ -46,6 +48,21 @@ const isFormValid = () => {
     return nombre.valido && apellido.valido && email.valido && password.valido && password2.valido
 }
 
+
+// TODO - ver si se puede refactorizar para tambien utilizar en el componente de login
+const registroApi = async (data) => {
+    // ** CAMBIAR POR EL URL DE LA API
+    try{
+        const respuesta = await axios.post('/registro', data);
+        sessionStorage.setItem('token', JSON.stringify(respuesta));
+        return respuesta;
+    }
+    catch(error){
+        console.log(error);
+
+    }
+}
+
 const onSubmit = (e) => {
     e.preventDefault();
     const { usuarios: userList } = usuarios;
@@ -56,7 +73,8 @@ const onSubmit = (e) => {
         password: password.campo
     }
     if(isFormValid()){
-        userList.push(newUser);
+        registroApi(newUser);
+        // ! Revisar esto, si el formulario es valido tendria que ser true y si despues se va a login no tiene sentido que este 
         cambiarFormularioValido(false);
         navigate('/login');
     }else{

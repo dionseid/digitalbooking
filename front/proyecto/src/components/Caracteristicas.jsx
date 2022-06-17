@@ -19,7 +19,7 @@ export default function Caracteristicas() {
             <>            
                 <h2>¿Qué ofrece este lugar?</h2>
                 <div className='contendorCaracteristicas'>
-                    {dataCaracteristicas.filter((imagen)=>imagen.producto.id == id)
+                    {dataCaracteristicas.filter((imagen)=>imagen.producto?.id == id)
                     .map((cat)=>(                                               
                         <div key={cat.id} className="caracteristica">                            
                         <span class="material-symbols-outlined">{cat.icono}</span>

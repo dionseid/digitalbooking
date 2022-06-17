@@ -21,7 +21,7 @@ public class CategoriaController {
     public ResponseEntity<Categoria> agregarCategoria(@RequestBody Categoria categoria){
         return ResponseEntity.ok(categoriaService.agregarCategoria(categoria));
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> buscarCategoria (@PathVariable Integer id){
        Categoria categoria= categoriaService.buscarCategoria(id).orElse(null);
@@ -54,7 +54,7 @@ public class CategoriaController {
         return response;
 
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping()
     public ResponseEntity<Collection<Categoria>> listarCategorias(){
         return ResponseEntity.ok(categoriaService.listarCategorias());

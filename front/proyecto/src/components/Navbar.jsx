@@ -1,4 +1,4 @@
-import React, { useEffect, useState, } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import "../styles/navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -7,6 +7,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { matchPath, Navigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import  {UserContext}  from '../components/context/UserContext';
 import "../styles/navbar.css";
 
 
@@ -31,10 +32,11 @@ border-radius: 5px;
 </>
 
 
-const Navbar = ({ authenticated, setIsAuthenticated , onClick}) => {
+const Navbar = ({onClick}) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
-  useEffect(() => setIsAuthenticatedMenu(authenticated), [authenticated]);
+  useEffect(() => setIsAuthenticatedMenu(user.auth), [user.auth]);
+  const {user, loginLogoutEvent } = useContext(UserContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const {id} = useParams();
@@ -59,18 +61,17 @@ const Navbar = ({ authenticated, setIsAuthenticated , onClick}) => {
         '/account': <><Link to='/login'><Button variant="primary" className='buttonNavBarLogin'>Iniciar Sesión</Button></Link></>,
         '/login': <><Link to='/account'><Button variant="secondary" className='buttonNavBarAccount' >Crear cuenta</Button></Link></>
     }
-   
   
 
   const handleIsAuthMenu = () => {
     if(isAuthenticatedMenu){
-      const { nombre, apellido } = JSON.parse(localStorage.getItem('user'));
+      ////const { nombre, apellido } = JSON.parse(localStorage.getItem('user'));
       return (
         <div className='SidebarBienvenida'>
-        <div><span>{nombre[0] + apellido[0]}</span></div>        
+        <div><span>{/*nombre[0] + apellido[0]*/ user.nombre+ user.apellido}</span></div>        
         <div>
           <p>Hola,</p>
-          <p className='nombreCompletoMenu'>{`${nombre} ${apellido}`}</p>
+          <p className='nombreCompletoMenu'>{`${user.nombre} ${user.apellido}`}</p>
         </div>
         <p className='cruz' onClick={handleClick}>X</p>        
       </div>
@@ -82,9 +83,13 @@ const Navbar = ({ authenticated, setIsAuthenticated , onClick}) => {
   }
 
   const handleClick = () => {
-    localStorage.setItem('user', JSON.stringify({nombre:' ', apellido:' '}));
+    loginLogoutEvent({
+      nombre: '',
+      apellido: '',
+      mail: '',
+      auth: false
+    })
     navigate('/');
-    setIsAuthenticated(false);
   }
 
   return (

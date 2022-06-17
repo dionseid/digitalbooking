@@ -17,12 +17,14 @@ public class CiudadController {
     private CiudadService ciudadService;
 
     //AGREGAR
+
     @PostMapping
     public ResponseEntity<Ciudad> agregarCiudad(@RequestBody Ciudad ciudad){
         return ResponseEntity.ok(ciudadService.agregarCiudad(ciudad));
     }
 
     //BUSCAR
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public ResponseEntity<Ciudad> buscarCiudadPorId(@PathVariable Integer id){
         Ciudad ciudad = ciudadService.buscarCiudadPorId(id).orElse(null);
@@ -30,6 +32,7 @@ public class CiudadController {
     }
 
     //ACTUALIZAR
+
     @PutMapping()
     public ResponseEntity<Ciudad> actualizarCiudad(@RequestBody Ciudad ciudad){
         ResponseEntity<Ciudad> response;
@@ -42,6 +45,7 @@ public class CiudadController {
     }
 
     //ELIMINAR
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarCiudad(@PathVariable Integer id) throws Exception {
 
@@ -58,6 +62,7 @@ public class CiudadController {
     }
 
     //LISTAR TODAS LAS CIUDADES
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping()
     public ResponseEntity<Collection<Ciudad>> listarCiudades(){
         return ResponseEntity.ok(ciudadService.listarCiudades());
