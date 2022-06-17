@@ -132,7 +132,7 @@ backend:
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH != "develop")
       changes:
-        - back/digitalbooking/**
+        - back/digitalbooking/*
       when: manual
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
@@ -176,7 +176,7 @@ deploy to production:
     - curl http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/version.html | grep $FRONTEND_VERSION # Sole prueba que frontend funciona #Capaz no reconoce la variable
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH != "develop")
-      changes:
-        - front/proyecto/*
-        - back/digitalbooking/*
+      # changes:
+      #   - front/proyecto/*
+      #   - back/digitalbooking/*
       when: manual
