@@ -17,8 +17,7 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario){
-    //  return (ResponseEntity<Usuario>) ResponseEntity.ok(usuarioService.agregarUsuario(usuario)).status(HttpStatus.CREATED);
-        return ResponseEntity.ok(usuarioService.newUsuario(usuario));
+        return ResponseEntity.ok(usuarioService.agregarUsuario(usuario));
     }
 
     @GetMapping("/listarTodos")
