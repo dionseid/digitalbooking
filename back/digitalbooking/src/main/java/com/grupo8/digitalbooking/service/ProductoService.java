@@ -92,7 +92,16 @@ public class ProductoService {
         if(oldCheckIn){throw new BadRequestException("El Check In no puede estar en el pasado.");}
         //buscarPorCiudad(filter.getCiudadId());
         //ciudadService.buscarCiudadPorId(filter.getCiudadId());     //si no existe el id, tira un badRequest
+
         List<Producto> results = productoRepository.getProductsByCityAndDates(filter.getCiudadId(), filter.getFechaInicial(), filter.getFechaFinal());
-        return results;
+
+
+        if (results == null){
+        //no anda
+            throw new BadRequestException("No se encuentran alojamientos disponibles con su búsqueda");
+        }else{
+            return results;
+        }
+        //return results;
     };
 }
