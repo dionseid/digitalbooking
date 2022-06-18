@@ -1,5 +1,6 @@
 package com.grupo8.digitalbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.text.DecimalFormat;
+import java.util.List;
 
 @ToString
 @Getter
@@ -34,22 +36,32 @@ public class Producto {
     @JoinColumn(name = "categorias_id")
     private Categoria categoria;
 
+    @OneToMany(mappedBy= "producto", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Reserva> bookingList;
 
-    public Producto(Integer id, String nombre, String descripcion, Ciudad ciudad, Categoria categoria) {
-        this.id = id;
+
+    public Producto(String nombre, String descripcion, Double latitud, Double longitud, Ciudad ciudad, Categoria categoria, List<Reserva> bookingList) {
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.latitud = latitud;
+        this.longitud = longitud;
         this.ciudad = ciudad;
         this.categoria = categoria;
-    }
-
-    public Producto(String nombre, String descripcion, Ciudad ciudad, Categoria categoria) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.ciudad = ciudad;
-        this.categoria = categoria;
+        this.bookingList = bookingList;
     }
 
     public Producto() {
+    }
+
+    public Producto(Integer id, String nombre, String descripcion, Double latitud, Double longitud, Ciudad ciudad, Categoria categoria, List<Reserva> bookingList) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.ciudad = ciudad;
+        this.categoria = categoria;
+        this.bookingList = bookingList;
     }
 }

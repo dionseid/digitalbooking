@@ -5,10 +5,6 @@ import com.grupo8.digitalbooking.model.Ciudad;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -19,7 +15,7 @@ import java.util.Collections;
 @ToString
 @Entity
 @Table(name = "usuarios")
-public class Usuario implements UserDetails {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -34,50 +30,16 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "roles_id")
     private RolUsuario rol;
 
-    //no va
-    @Enumerated(EnumType.STRING)
-    private UserRoles userRoles;
-
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String email, String password, String ciudadUsuario, RolUsuario rol, UserRoles userRoles) {
+    public Usuario(String nombre, String apellido, String email, String password, String ciudadUsuario, RolUsuario rol) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
         this.ciudadUsuario = ciudadUsuario;
         this.rol = rol;
-        this.userRoles = userRoles;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(userRoles.name());
-        return Collections.singletonList(grantedAuthority);    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

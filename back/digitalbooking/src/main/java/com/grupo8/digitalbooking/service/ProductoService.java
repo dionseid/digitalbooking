@@ -1,14 +1,17 @@
 package com.grupo8.digitalbooking.service;
 
+import com.grupo8.digitalbooking.exceptions.BadRequestException;
 import com.grupo8.digitalbooking.model.Categoria;
 import com.grupo8.digitalbooking.model.Ciudad;
 import com.grupo8.digitalbooking.model.Producto;
 import com.grupo8.digitalbooking.repository.CategoriaRepository;
 import com.grupo8.digitalbooking.repository.CiudadRepository;
 import com.grupo8.digitalbooking.repository.ProductoRepository;
+import com.grupo8.digitalbooking.util.ProductoFiltrado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +20,7 @@ public class ProductoService {
     private final ProductoRepository productoRepository;
     private final CiudadRepository ciudadRepository;
     private final CategoriaRepository categoriaRepository;
+    private CiudadService ciudadService;
 
     @Autowired
     public ProductoService(ProductoRepository productoRepository, CiudadRepository ciudadRepository, CategoriaRepository categoriaRepository) {
@@ -72,4 +76,23 @@ public class ProductoService {
         return productoRepository.findByCiudadId(id);
     }
 
+
+    public List<Producto> getProductosPorCiudadYFecha(ProductoFiltrado filter) throws BadRequestException{
+        //errores
+        boolean noNullData = filter.getFechaInicial() != null && filter.getFechaFinal() != null && filter.getCiudadId() != null;
+
+        if(!noNullData){throw new BadRequestException("El filter viene con data null");}
+
+        boolean datesAreInOrder = filter.getFechaFinal().isAfter(filter.getFechaInicial());
+
+        boolean oldCheckIn = LocalDate.now().isAfter(filter.getFechaInicial());
+
+        if(!datesAreInOrder){throw new BadRequestException("Las fechas estan en orden incorrecto o son iguales");}
+
+        if(oldCheckIn){throw new BadRequestException("El Check In no puede estar en el pasado.");}
+        //buscarPorCiudad(filter.getCiudadId());
+        //ciudadService.buscarCiudadPorId(filter.getCiudadId());     //si no existe el id, tira un badRequest
+        List<Producto> results = productoRepository.getProductsByCityAndDates(filter.getCiudadId(), filter.getFechaInicial(), filter.getFechaFinal());
+        return results;
+    };
 }
