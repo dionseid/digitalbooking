@@ -1,13 +1,15 @@
 import React, { createContext, useState } from "react";
+import { redirect } from "react-router";
 
-export const UserContext = createContext();
+const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState({
         nombre: '',
         apellido: '',
         mail: '',
-        auth: false
+        auth: false,
+        redirect:false
 });
 
     const loginLogoutEvent = (userCredentials) => {
@@ -20,3 +22,6 @@ export const UserProvider = ({ children }) => {
         </UserContext.Provider>
     );
 };
+
+
+export default UserContext;

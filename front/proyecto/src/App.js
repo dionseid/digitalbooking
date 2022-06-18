@@ -8,21 +8,22 @@ import Sidebar from './components/Sidebar';
 import Productos from './pages/Productos';
 import Reserva from './pages/Reserva';
 import { IdProductoContextProvider } from './components/context/IdProductoContext';
-import {UserContext, UserProvider} from './components/context/UserContext';
+import {UserProvider} from './components/context/UserContext';
 
 
 function App() {
   //// const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-  const {user} = useContext(UserContext); 
+  const user = useContext(UserProvider);
 
   return (
     <div className="App">
+    {console.log(user)}
         <BrowserRouter>
       <UserProvider>
-          <Sidebar pageWrapId={'page-wrap'} authenticated={user.auth} />
+          <Sidebar pageWrapId={'page-wrap'} authenticated={user?.user.auth} />
           <IdProductoContextProvider>
             <Routes>
-              <Route path='/' element={<Home  authenticated={user.auth}/>} />
+              <Route path='/' element={<Home  authenticated={user?.user.auth}/>} />
               <Route path='/login' element={<Login />} />
               <Route path='/account' element={<Account />} />
                 <Route path='/productos/:id' element={<Productos />} />

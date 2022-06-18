@@ -54,8 +54,12 @@ const registroApi = async (data) => {
     // ** CAMBIAR POR EL URL DE LA API
     try{
         const respuesta = await axios.post('/registro', data);
-        sessionStorage.setItem('token', JSON.stringify(respuesta));
-        return respuesta;
+        if(respuesta.status === 201){
+            sessionStorage.setItem('token', JSON.stringify(respuesta));
+            return respuesta;
+        }else{
+            throw new Error('Lamentablemente no ha podido registrarse. Por favor intente más tarde');
+        }
     }
     catch(error){
         console.log(error);
@@ -153,7 +157,9 @@ return (
             <ContenedorBotonCentrado className='contenedorBotonCentrado'>
                 <Boton type="submit">Crear Cuenta</Boton>
                 <p>¿Ya tienes una cuenta? <Link to='/login' className='link'><span>Iniciar sesión</span></Link></p>
-                {formularioValido === true && <MensajeExito>Formulario enviado exitosamente!</MensajeExito>}
+                {formularioValido === true &&<MensajeExito>Formulario enviado exitosamente!
+                {/*// TODO - hay que hacer uno de error para cuando no se puede registrar y no tendria que haber mensaje de exito, redirecciona al home*/}
+                </MensajeExito>}
             </ContenedorBotonCentrado>
         </Formulario>
         </div>

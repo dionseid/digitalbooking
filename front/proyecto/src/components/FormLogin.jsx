@@ -8,12 +8,12 @@ import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons"
 import ComponenteInput from './ComponenteInput';
 import { useNavigate } from 'react-router-dom';
 import usuarios from '../helpers/usuarios.json';
-import  {UserContext}  from './context/UserContext';
+import  UserProvider  from './context/UserContext';
 import axios from 'axios';
 import axiosConnection from '../helpers/axiosConnection';
 
 const FormLogin = () => {
-    const {user, loginLogoutEvent} = useContext(UserContext);
+    const {user, loginLogoutEvent} = useContext(UserProvider);
     const [email, cambiarCorreo] = useState({ campo: '', valido: null });
     const [password, cambiarPassword] = useState({ campo: '', valido: null });
     const [formularioValido, cambiarFormularioValido] = useState(null);
@@ -32,8 +32,13 @@ const FormLogin = () => {
         try{
             // ** CAMBIAR POR EL URL DE LA API
             const respuesta = await axiosConnection.post('/login', data);
-            sessionStorage.setItem('token', JSON.stringify(respuesta));
+            if(respuesta.status === 200 ){
+            sessionStorage.setItem('token', JSON.stringify(respuesta.token));
             return respuesta;
+        }
+            else if(respuesta.status!==200 || respuesta.status!==201){
+                throw new Error('Lamentablemente no ha podido registrarse. Por favor intente más tarde');
+            }
         }
         catch(error){
             console.log(error);
@@ -69,7 +74,7 @@ const FormLogin = () => {
             //// cambiarFormularioValido(false);
             //// localStorage.setItem('user', JSON.stringify({ nombre , apellido }));
             //// setIsAuthenticated(true);
-            loginLogoutEvent({nombre: getUser.nombre, apellido: getUser.apellido, mail: getUser.email, auth: true});
+            loginLogoutEvent({nombre: getUser.nombre, apellido: getUser.apellido, mail: getUser.email, auth: true, redirect: false});
             navigate('/');
         } else {
             cambiarFormularioValido(true);
@@ -81,6 +86,12 @@ const FormLogin = () => {
         <div className='contenedor'>
             <div className='contenido'>
                 <Formulario action="" onSubmit={onSubmit}>
+                {user.redirect &&<div className='contenedorErrorReserva'>
+                    <p className='mensajeErrorReserva'>
+                        <span className='iconoErrorReserva'>!</span>
+                        Para realizar una reserva debe estar logueado
+                    </p>
+                </div>}
                     <h1 className='titulo'>Iniciar sesión</h1>
                     <ComponenteInput
                         estado={email}
@@ -105,7 +116,8 @@ const FormLogin = () => {
                     {formularioValido && <MensajeError>
                         <p>
                             <FontAwesomeIcon icon={faExclamationTriangle} />
-                            Credenciales Inválidas
+                            {/* Credenciales Inválidas */}
+                            Lamentablemente no ha podido registrarse. Por favor intente más tarde
                         </p>
                     </MensajeError>}
                     <ContenedorBotonCentrado className='contenedorBotonCentrado'>

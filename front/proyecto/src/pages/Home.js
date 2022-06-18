@@ -4,7 +4,7 @@ import CardAlojamiento from '../components/CardAlojamiento';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Banner from '../components/Banner';
-import {UserContext} from '../components/context/UserContext';
+import UserProvider from '../components/context/UserContext';
 import "../styles/pages/home.css";
 
 
@@ -12,7 +12,7 @@ const Home = ({authenticated}) => {
   const [search, setSearch] = useState(0);
   const [filter,setFilter] = useState(0);
   const [filterCategoria,setFilterCategoria] = useState(0);
-  const {user, loginLogoutEvent } = useContext(UserContext);
+  const {user, loginLogoutEvent } = useContext(UserProvider);
 
 
   const handleClick = () =>{

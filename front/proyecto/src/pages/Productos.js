@@ -20,13 +20,31 @@ import UbicacionProducto from "../components/UbicacionProducto";
 import TituloProducto from "../components/TituloProducto";
 import GoogleMaps from "../components/GoogleMaps";
 import IdProductoContextProvider from "../components/context/IdProductoContext";
+import UserProvider  from "../components/context/UserContext";
 
 const Productos = () => { 
   const {id} = useParams();
+  const {user, loginLogoutEvent} = useContext(UserProvider);
 /*   const {idProducto, setIdProducto} = useContext(IdProductoContextProvider);
   console.log(idProducto);
   setIdProducto(id)
   console.log(idProducto); */
+
+  const redireccionIsLogued = () => {
+    if (user.auth){
+      return `/producto/${id}/reserva`
+    }
+    else{
+      loginLogoutEvent({
+        nombre: '',
+        apellido: '',
+        mail: '',
+        auth: false,
+        redirect:true
+      })
+      return `/login`
+    }
+  }
 
   return (
     <div id="page-wrap">
@@ -63,7 +81,7 @@ const Productos = () => {
                 </div>             
                 <div className="contendorReserva">
                   <p>Agregá tus fechas de viaje para obtener precios exactos</p>
-                  <Link to={`/producto/${id}/reserva`}><button className="buttonCard">Iniciar reserva</button></Link>
+                  <Link to={redireccionIsLogued}><button className="buttonCard">Iniciar reserva</button></Link>
                 </div> 
             </div>                        
         </section>
