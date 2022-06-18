@@ -23,6 +23,11 @@ const Sidebar = ({authenticated, setIsAuthenticated}) => {
             <Link to='/login' className='buttonNavSideLogin'>Iniciar Sesión</Link>
 
         </>,
+        '/reserva': <>
+        <Link to='/account' className='buttonSideBarAccount'>Crear cuenta</Link>
+        <Link to='/login' className='buttonNavSideLogin'>Iniciar Sesión</Link>
+
+        </>,        
         '/account': <>
             <Link to='/login' className='buttonNavSideLogin'>Iniciar Sesión</Link>
 

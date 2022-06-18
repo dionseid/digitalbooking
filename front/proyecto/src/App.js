@@ -6,6 +6,9 @@ import Login from './pages/Login';
 import './styles/App.css';
 import Sidebar from './components/Sidebar';
 import Productos from './pages/Productos';
+import Reserva from './pages/Reserva';
+import { IdProductoContextProvider } from './components/context/IdProductoContext';
+import ReservaExitosa from './pages/ReservaExitosa';
 
 
 function App() {
@@ -17,12 +20,16 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Sidebar pageWrapId={'page-wrap'} authenticated={isAuthenticated} />
+      <IdProductoContextProvider>
         <Routes>
           <Route path='/' element={<Home  authenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>} />
           <Route path='/login' element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
           <Route path='/account' element={<Account />} />
-          <Route path='/productos/:id' element={<Productos />} />
+            <Route path='/productos/:id' element={<Productos />} />
+            <Route path='/producto/:id/reserva' element={<Reserva/>} />
+            <Route path='/reservaExitosa' element={<ReservaExitosa/>} />
         </Routes>
+        </IdProductoContextProvider>
       </BrowserRouter>
     </div>
   );

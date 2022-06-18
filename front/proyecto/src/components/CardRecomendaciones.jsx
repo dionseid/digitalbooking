@@ -8,18 +8,19 @@ import { useAccordionButton, Card } from "react-bootstrap";
 import Accordion from 'react-bootstrap/Accordion'
 
 
-const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
+const CardRecomendacion = ({ selectCiudad , selectCategoria, selectDate}) => {
     const [dataProducto, setDataProducto] = useState([]);
     const [dataImagen, setImagen] = useState([]);
+    const [dataCaracteristicas, setCaracteristicas] = useState([]);
     const [idProducto, setIdProducto] = useState([]);
-    const [verMas, setVerMas] = useState(false);
+    const [verMas, setVerMas] = useState(false);    
 
 
 
     const getUrl = () => selectCiudad ? `http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/filtroCiudad/${selectCiudad}` : "http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/traerTodos"
 
     useEffect(() => {
-        axios.get(getUrl())
+        axios.get('http://localhost:8080/productos/traerTodos')
             .then(response => {
                 setDataProducto(response.data)
             })
@@ -31,8 +32,34 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
             .then(response => {
                 setDataProducto(response.data)
             })
+        axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/imagenes`)
+            .then(response => {
+                setImagen(response.data)
+            })            
+    }, [])
 
-    }, [selectCategoria])
+    useEffect(() => {
+        axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/caracteristicas`)
+            .then(response => {
+                setCaracteristicas(response.data)
+            })            
+    }, [])
+    
+
+    const getImage = (card) =>{
+        if(dataImagen.length !== 0){
+        const imagenes = dataImagen.filter((img) => img.producto.id == card.id);
+        return imagenes[0].url
+        }
+        return "buscando imagen"      
+    }
+    
+    const getCaracteristicas = (card) =>{
+        const caracteristicas = dataCaracteristicas.filter((c) => c.producto.id == card.id);
+        return caracteristicas      
+    }
+
+ 
 
     const filteredList = useMemo(() => {
         if (!selectCiudad) { // Cuando selectCiudad es null entonces no filtrar
@@ -54,7 +81,7 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
         <div className="cards">
             {filteredList.map((card) => (
                 <div key={card.id} className="cardRecomendacion">
-                    <div style={{ backgroundImage: "url('" + card.categoria.urlImg + "')" }} className="fondoImagen" />
+                    <div style={{ backgroundImage: "url('" + getImage(card) + "')" }} className="fondoImagen" />
                     <div className="cardBody">
                         <div className="presentacion">
                             <div>
@@ -68,7 +95,12 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
                         </div>
                         <div className="infoHotel">
                             <p><FontAwesomeIcon icon={faLocationDot} style={{ marginRight: "4px" }} />{card.ciudad.nombre} <span className="mostrarMapa">MOSTRAR EN EL MAPA</span></p>
-                            <p className="iconosInfoHotel"><FontAwesomeIcon icon={faWifi} style={{ marginRight: "8px" }} /><FontAwesomeIcon icon={faPersonSwimming} /></p>
+                            <p className="iconosInfoHotel">
+                                {dataCaracteristicas.filter((c)=>c.producto.id == card.id)
+                                    .map((cat)=>(                            
+                                            <span class="material-symbols-outlined">{cat.icono}</span>
+                                    ))}
+                            </p>
                         </div>
                         <p>{verMas ? card.descripcion : card.descripcion.split(' ', 8).join(" ")}<span className="mas" onClick={() => setVerMas(!verMas)}>
                             {verMas ? " ver menos" : " ver más..."}</span></p>

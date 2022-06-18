@@ -26,6 +26,24 @@
   padding: 7px 20px;
 }
 
+.botonCalendario{
+  width: 260px;
+  height: 40px;
+  border: none;
+  background: #F0572D;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+}
+
+.botonCalendario:hover{
+  background: #F0572D;
+  font-weight: 900;
+}
+
 .inputBanner {
   background: #ffffff;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
@@ -35,7 +53,10 @@
   margin-right: 8px;
   font-weight: 500;
   text-align: start;
-  font-size: 20px;;
+  font-size: 14px;
+  padding-left: 8px;
+  font-style: normal;
+  padding-left: 10px;
 }
 
 ::placeholder,
