@@ -1,6 +1,6 @@
 package com.grupo8.digitalbooking.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.grupo8.digitalbooking.model.Reserva;
 import com.grupo8.digitalbooking.model.RolUsuario;
 import com.grupo8.digitalbooking.model.Usuario;
 import com.grupo8.digitalbooking.repository.RolUsuarioRepository;
@@ -17,23 +17,24 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     @Autowired
     private final RolUsuarioRepository rolUsuarioRepository;
-    @Autowired
-    ObjectMapper mapper;
 
-    @Autowired
     public UsuarioService(UsuarioRepository usuarioRepository, RolUsuarioRepository rolUsuarioRepository) {
         this.usuarioRepository = usuarioRepository;
         this.rolUsuarioRepository = rolUsuarioRepository;
     }
 
-    //agregar lógica de password encoder
-    //agregar rol(1 o 2)
     public Usuario agregarUsuario(Usuario usuario){
+        /*Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
+        usuario.setRol(rolUsuario.get());*/
         RolUsuario rolUsuario = rolUsuarioRepository.findById(usuario.getRol().getId()).get();
         usuario.setRol(rolUsuario);
-        //Usuario usuario1= mapper.convertValue(usuario, Usuario.class);
         return usuarioRepository.save(usuario);
     }
+
+    public Usuario newUsuario(Usuario usuario) {
+        return agregarUsuario(usuario);
+    }
+
     //listar todos los usuarios
     public List<Usuario> listarUsuarios(){
         return usuarioRepository.findAll();
@@ -41,10 +42,9 @@ public class UsuarioService {
 
     //actualizar usuario
     public Usuario actualizarUsuario(Usuario usuario){
-        RolUsuario rolUsuario = rolUsuarioRepository.findById(usuario.getRol().getId()).get();
-        usuario.setRol(rolUsuario);
-        Usuario usuario1= mapper.convertValue(usuario, Usuario.class);
-        return usuarioRepository.save(usuario1);
+        Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
+        usuario.setRol(rolUsuario.get());
+        return usuarioRepository.save(usuario);
     }
     //eliminar usuario
     public void eliminarUsuario(Integer id) throws Exception{
@@ -59,5 +59,4 @@ public class UsuarioService {
     public Optional<Usuario> buscarUsuario(Integer id){
         return usuarioRepository.findById(id);
     }
-
 }

@@ -9,7 +9,7 @@ export default function Caracteristicas() {
     const [dataCaracteristicas, setDataCaracteristicas] = useState([]);
     const { id } = useParams();
     useEffect(() => {
-        axios.get("http://awseb-awseb-19h8qama3kcj1-539654579.us-west-1.elb.amazonaws.com/caracteristicas")
+        axios.get("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/caracteristicas")
             .then(response => {
                 setDataCaracteristicas(response.data)
             })

@@ -1,0 +1,8 @@
+.cancel_pipeline_template:
+  image: alpine:latest
+  before_script:
+    - apk add --update curl
+    - | 
+        cancel_pipeline () {
+          curl --request POST --header "PRIVATE-TOKEN: ${MY_PAT_TOKEN}" "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/${CI_JOB_ID}/cancel"
+        }
