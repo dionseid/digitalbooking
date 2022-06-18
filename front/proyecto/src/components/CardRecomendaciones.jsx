@@ -8,13 +8,13 @@ import { useAccordionButton, Card } from "react-bootstrap";
 import Accordion from 'react-bootstrap/Accordion'
 
 
-const CardRecomendacion = ({ selectCiudad , selectCategoria}) => {
+const CardRecomendacion = ({ selectCiudad , selectCategoria, selectDate}) => {
     const [dataProducto, setDataProducto] = useState([]);
     const [dataImagen, setImagen] = useState([]);
     const [dataCaracteristicas, setCaracteristicas] = useState([]);
     const [idProducto, setIdProducto] = useState([]);
-    const [verMas, setVerMas] = useState(false);
-    
+    const [verMas, setVerMas] = useState(false);    
+
 
     useEffect(() => {
         axios.get('http://localhost:8080/productos/traerTodos')
@@ -40,9 +40,11 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria}) => {
     
 
     const getImage = (card) =>{
+        if(dataImagen.length !== 0){
         const imagenes = dataImagen.filter((img) => img.producto.id == card.id);
-        console.log("imagenes: ", imagenes);
-        return imagenes[0].url      
+        return imagenes[0].url
+        }
+        return "buscando imagen"      
     }
     
     const getCaracteristicas = (card) =>{

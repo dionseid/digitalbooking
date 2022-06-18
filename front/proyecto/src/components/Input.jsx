@@ -26,6 +26,7 @@ const Input = ({ attribute, handleChange, param, isInputWithCalendar }) => {
 
     return <div className='input-contenedor'>
         {isInputWithCalendar && <DateRangePicker
+        
             initialSettings={{
                 autoUpdateInput: false,
                 locale: {
