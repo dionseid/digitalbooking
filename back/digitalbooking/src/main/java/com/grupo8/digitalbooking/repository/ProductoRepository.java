@@ -17,13 +17,13 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
     @Query(
             value = "select P.* from Productos P " +
-                    "where P.ciudades_id = :ciudades_id " +
+                    "where P.ciudades_id = ?1 " +
                     "and P.id not in ( " +
-                    "    select distinct R.product_id " +
+                    "    select distinct R.productos_id " +
                     "    from reservas R " +
-                    "    where (R.fecha_final > :fechaInicial and R.fecha_inicial < :fechaFinal) " +
+                    "    where (R.fecha_final > ?2 and R.fecha_inicial < ?3) " +
                     ")" +
                     " group by P.id; ", nativeQuery = true)
-    List<Producto> getProductsByCityAndDates(@Param("ciudades_id") Integer ciudades_id, @Param("fechaInicial") LocalDate fechaInicial, @Param("fechaFinal") LocalDate fechaFinal);
+    List<Producto> getProductsByCityAndDates(Integer ciudades_id, LocalDate fechaInicial, LocalDate fechaFinal);
 
 }

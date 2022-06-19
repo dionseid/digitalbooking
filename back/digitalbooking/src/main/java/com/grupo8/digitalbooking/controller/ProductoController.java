@@ -65,13 +65,13 @@ public class ProductoController {
         return ResponseEntity.ok(productoService.buscarPorCiudad(id));
     }
 
-    @GetMapping("/filterByCityAndDates/{cityId}/{checkInDate}/{checkOutDate}")
-    public ResponseEntity<List<Producto>> filterByCityAndDates(@PathVariable Integer cityId, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkInDate, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkOutDate) throws BadRequestException {
-        ProductoFiltrado filter = new ProductoFiltrado();
-        filter.setFechaInicial(checkInDate);
-        filter.setFechaFinal(checkOutDate);
-        filter.setCiudadId(cityId);
-        List<Producto> filteredProducts = productoService.getProductosPorCiudadYFecha(filter);
-        return ResponseEntity.ok(filteredProducts);
+    @GetMapping("/FiltroPorCiudadYFechas/{ciudadId}/{fechaInicial}/{fechaFinal}")
+    public ResponseEntity<List<Producto>> filterByCityAndDates(@PathVariable Integer ciudadId, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaInicial, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaFinal) throws BadRequestException {
+        ProductoFiltrado filtro = new ProductoFiltrado();
+        filtro.setFechaInicial(fechaInicial);
+        filtro.setFechaFinal(fechaFinal);
+        filtro.setCiudadId(ciudadId);
+        List<Producto> productosFiltrados = productoService.getProductosPorCiudadYFecha(filtro);
+        return ResponseEntity.ok(productosFiltrados);
     }
 }
