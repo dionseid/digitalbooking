@@ -1,12 +1,16 @@
 package com.grupo8.digitalbooking.controller;
 
+import com.grupo8.digitalbooking.exceptions.BadRequestException;
 import com.grupo8.digitalbooking.model.Producto;
 import com.grupo8.digitalbooking.service.ProductoService;
+import com.grupo8.digitalbooking.util.ProductoFiltrado;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,4 +65,13 @@ public class ProductoController {
         return ResponseEntity.ok(productoService.buscarPorCiudad(id));
     }
 
+    @GetMapping("/filterByCityAndDates/{cityId}/{checkInDate}/{checkOutDate}")
+    public ResponseEntity<List<Producto>> filterByCityAndDates(@PathVariable Integer cityId, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkInDate, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkOutDate) throws BadRequestException {
+        ProductoFiltrado filter = new ProductoFiltrado();
+        filter.setFechaInicial(checkInDate);
+        filter.setFechaFinal(checkOutDate);
+        filter.setCiudadId(cityId);
+        List<Producto> filteredProducts = productoService.getProductosPorCiudadYFecha(filter);
+        return ResponseEntity.ok(filteredProducts);
+    }
 }

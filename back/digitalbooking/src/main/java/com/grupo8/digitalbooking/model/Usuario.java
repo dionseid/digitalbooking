@@ -5,10 +5,6 @@ import com.grupo8.digitalbooking.model.Ciudad;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -19,7 +15,7 @@ import java.util.Collections;
 @ToString
 @Entity
 @Table(name = "usuarios")
-public class Usuario implements UserDetails {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -34,9 +30,6 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "roles_id")
     private RolUsuario rol;
 
-
-
-
     public Usuario() {
     }
 
@@ -47,36 +40,6 @@ public class Usuario implements UserDetails {
         this.password = password;
         this.ciudadUsuario = ciudadUsuario;
         this.rol = rol;
-
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(rol.getNombre());
-        return Collections.singletonList(grantedAuthority);    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }
