@@ -122,7 +122,11 @@ deploy to production:
     - curl http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com | grep "ver más"
   # needs: ["frontend", "backend", "infrastructure"]
   #   if_exists: true
-  when: on_success
+  needs:
+    - job: "frontend"
+      optional: true
+    - job: "backend"
+      optional: true
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
