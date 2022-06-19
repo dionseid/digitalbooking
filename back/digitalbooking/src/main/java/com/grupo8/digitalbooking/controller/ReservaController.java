@@ -9,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-
 @RestController
 @RequestMapping("/reserva")
 public class ReservaController {
@@ -40,10 +38,4 @@ public class ReservaController {
         reservaService.deleteReserva(id);
         return ResponseHandler.generateResponse("Reserva eliminada", HttpStatus.OK, null);
     }
-
-    @GetMapping("/buscarPorFechas/{fechaInicial}+{fechaFinal}")
-    public ResponseEntity<Object> buscarPorFechas(@PathVariable LocalDate fechaInicial, LocalDate fechaFinal) throws Exception{
-        return ResponseHandler.generateResponse("Listado de reservas", HttpStatus.OK, reservaService.buscarPorFechas(fechaInicial, fechaFinal));
-    }
-
 }
