@@ -72,6 +72,24 @@ backend:
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
 
+infrastructure:
+  stage: build
+  trigger:
+    include: infra/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - when: always
+    - changes:
+      - infra/*
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+    - if:
+      - or
+      -
+        - $CI_COMMIT_BRANCH
+        - $CI_DEFAULT_BRANCH
+        - $CI_COMMIT_BRANCH
+        - "develop"
+
 deploy to production:
   stage: deploy
   image:
