@@ -65,7 +65,7 @@ backend:
       when: always
       changes:
         - back/digitalbooking/*
-    - if: $CI_PIPELINE_SOURCE != "schedule"
+    - if: $CI_PIPELINE_SOURCE != "schedule" && !($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: manual
       changes:
         - back/digitalbooking/*
