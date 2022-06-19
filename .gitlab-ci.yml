@@ -92,7 +92,7 @@ infrastructure:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
 
-deploy to production:
+.deploy to production:
   stage: deploy
   image:
     name: amazon/aws-cli:2.4.11
@@ -122,11 +122,6 @@ deploy to production:
     - curl http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com | grep "ver más"
   # needs: ["frontend", "backend", "infrastructure"]
   #   if_exists: true
-  needs:
-    - job: "frontend"
-      optional: true
-    - job: "backend"
-      optional: true
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
@@ -138,3 +133,11 @@ deploy to production:
       changes:
         - front/proyecto/*
         - back/digitalbooking/*
+
+deploy backend:
+  <<: deploy to production
+  needs: ["backend"]
+
+deploy frontend:
+  <<: deploy to production
+  needs: ["frontend"]
