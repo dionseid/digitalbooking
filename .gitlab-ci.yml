@@ -44,10 +44,14 @@ frontend:
     include: front/proyecto/.gitlab-ci.yml
     strategy: depend
   rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH != "develop")
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+      when: always
       changes:
         - front/proyecto/*
+    - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
+      changes:
+        - front/proyecto/*
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
 
@@ -57,10 +61,14 @@ backend:
     include: back/digitalbooking/.gitlab-ci.yml
     strategy: depend
   rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH != "develop")
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+      when: always
       changes:
         - back/digitalbooking/*
+    - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
+      changes:
+        - back/digitalbooking/*
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
 
