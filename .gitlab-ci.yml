@@ -78,9 +78,11 @@ infrastructure:
     include: infra/.gitlab-ci.yml
     strategy: depend
   rules:
-    - when: manual
-    changes:
-      - infra/*
+    - when: never
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      - when: manual
+      - changes:
+        - infra/*
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       - when: always
 
