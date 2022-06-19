@@ -142,6 +142,11 @@
     border-radius: 10px;
   }
 
+.iconosInfoHotel{
+  display: flex;
+}
+
+
 
   /*Responsive*/
   @media screen and (max-width: 768px){

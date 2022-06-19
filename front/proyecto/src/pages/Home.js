@@ -11,11 +11,13 @@ const Home = ({authenticated, setIsAuthenticated}) => {
   const [search, setSearch] = useState(0);
   const [filter,setFilter] = useState(0);
   const [filterCategoria,setFilterCategoria] = useState(0);
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
 
 
   const handleClick = () =>{
-    setFilter(search)
-    console.log(search);
+    setFilter(search);
+    alert(dateRange)
   }
 
   const onDoubleClick = (searchCategoria, e) =>{
@@ -25,13 +27,14 @@ const Home = ({authenticated, setIsAuthenticated}) => {
   const onClick = () =>{
     setFilterCategoria(null)
     setFilter(null)
+    setDateRange([null, null])
   }
 
   return (
     <div id="page-wrap">
       <header>
         <Navbar authenticated={authenticated} setIsAuthenticated={setIsAuthenticated} onClick={onClick}/>
-        <Banner onChange={setSearch} onClick={handleClick}/>
+        <Banner startDate={startDate} endDate={endDate} setDateRange={setDateRange} onChange={setSearch} onClick={handleClick}/>
       </header>
       <body>
         <section className='Alojamiento'>
@@ -40,7 +43,7 @@ const Home = ({authenticated, setIsAuthenticated}) => {
         </section>
         <section className='Recomendaciones'>
           <h2>Recomendaciones</h2>
-          <CardRecomendacion selectCiudad={filter} selectCategoria={filterCategoria}/>
+          <CardRecomendacion selectCiudad={filter} selectCategoria={filterCategoria} selectDate={dateRange}/>
         </section>
       </body>
       <footer>
