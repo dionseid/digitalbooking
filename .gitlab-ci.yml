@@ -94,7 +94,7 @@ infrastructure:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
 
-deploy_to_production: #&deploy_to_production
+.deploy_to_production: &deploy_to_production
   stage: deploy
   image:
     name: amazon/aws-cli:2.4.11
@@ -148,6 +148,20 @@ deploy_to_production: #&deploy_to_production
         - back/digitalbooking/*
       # when: on_success
   # allow_failure: false
+
+deploy backend:
+  <<: *deploy_to_production
+  needs: ["backend"]
+
+deploy frontend:
+  <<: *deploy_to_production
+  needs: ["frontend"]
+
+general deployment:
+  <<: *deploy_to_production
+  needs: ["backend", "frontend"]
+
+
 
 # deploy backend:
 #   <<: *deploy_to_production
