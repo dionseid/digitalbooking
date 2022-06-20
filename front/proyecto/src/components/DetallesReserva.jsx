@@ -32,9 +32,9 @@ export default function DetallesReserva() {
 
   const getImage = () =>{
     if(dataImagen.length!==0){
-      const imagenes = dataImagen.filter((img) => img.producto.id == id);
+      const imagenes = dataImagen.filter((img) => img.producto?.id == id);
       console.log("imagenes: ", imagenes);
-      return imagenes[0].url 
+      return imagenes[0]?.url 
     }     
     }
   
