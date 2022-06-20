@@ -139,11 +139,12 @@ deploy_to_production: &deploy_to_production
       changes:
         - front/proyecto/*
         - back/digitalbooking/*
-      when: always
+      when: on_success
     - if: $CI_PIPELINE_SOURCE != "schedule"
       changes:
         - front/proyecto/*
         - back/digitalbooking/*
+      when: on_success
 
 deploy backend:
   <<: *deploy_to_production
