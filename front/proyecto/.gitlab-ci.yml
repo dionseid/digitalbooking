@@ -1,5 +1,5 @@
 include:
-  - local: 'front/proyecto/.gitlab-ci.yml'
+  - local: '/front/proyecto/.gitlab-ci.yml'
 
 variables:
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
