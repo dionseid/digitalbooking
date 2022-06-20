@@ -54,7 +54,6 @@ frontend:
         - front/proyecto/*
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
-  allow_failure: false
 
 backend:
   stage: build
@@ -78,7 +77,6 @@ backend:
     #   when: always
   # variables:
   #   PARENT_PIPELINE_ID: $APP_VERSION
-  allow_failure: false
 
 infrastructure:
   stage: build
