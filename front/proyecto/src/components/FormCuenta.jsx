@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useForm } from './hooks/useForm';
 import "../styles/form.css";
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,11 +9,13 @@ import ComponenteInput from './ComponenteInput';
 import usuarios from "../helpers/usuarios.json"
 import axios from "axios";
 import axiosConnection from "../helpers/axiosConnection";
+import UserProvider from "./context/UserContext";
 
 
 
 const FormCuenta = () => {
 
+    const {user, loginLogoutEvent} = useContext(UserProvider);
 	const [nombre, cambiarNombre] = useState({campo: '', valido: null});
     const [apellido, cambiarApellido] = useState({campo: '', valido: null});
     const [email, cambiarCorreo] = useState({campo: '', valido: null});
@@ -78,6 +80,7 @@ const onSubmit = (e) => {
     }
     if(isFormValid()){
         registroApi(newUser);
+        
         // ! Revisar esto, si el formulario es valido tendria que ser true y si despues se va a login no tiene sentido que este 
         cambiarFormularioValido(false);
         navigate('/login');

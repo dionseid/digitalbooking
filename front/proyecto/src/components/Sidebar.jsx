@@ -80,7 +80,7 @@ const Sidebar = () => {
   };
   const handleAuthenticated = () => {
     if (isAuthenticatedMenu) {
-      const { nombre, apellido } = JSON.parse(localStorage.getItem("user"));
+      const { nombre, apellido } =  user
       return (
         <div className="SidebarBienvenida">
           <span>{nombre[0] + apellido[0]}</span>
