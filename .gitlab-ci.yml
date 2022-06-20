@@ -2,6 +2,8 @@ variables:
   APP_VERSION: $CI_PIPELINE_IID
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
+  DEPLOY_W_BACK: 'false'
+  DEPLOY_W_FRONT: 'false'
 
 include: cancel_pipeline_functions.yml
 
@@ -59,7 +61,7 @@ frontend:
         - front/proyecto/*
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
-    #DEPLOY_W_FRONT: 'true'
+    DEPLOY_W_FRONT: 'true'
   allow_failure: false
 
 backend:
@@ -89,7 +91,7 @@ backend:
     #   when: always
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
-    #DEPLOY_W_BACK: 'true'
+    DEPLOY_W_BACK: 'true'
   allow_failure: false
 
 infrastructure:
@@ -160,6 +162,9 @@ infrastructure:
         - back/digitalbooking/*
       # when: on_success
   # allow_failure: false
+  after_script:
+    - $DEPLOY_W_BACK == 'false'
+    - $DEPLOY_W_FRONT == 'false'
 
 deploy backend:
   <<: *deploy_to_production
