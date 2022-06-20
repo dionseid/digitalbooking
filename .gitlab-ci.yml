@@ -139,7 +139,7 @@ deploy backend:
   needs: ["backend"]
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-      when: always
+      #when: always
       changes:
         - back/digitalbooking/*
 
@@ -150,7 +150,7 @@ deploy frontend:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
         - front/proyecto/*
-      when: always
+      #when: always
 
 general deployment:
   <<: *deploy_to_production
