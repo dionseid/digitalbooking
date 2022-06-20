@@ -160,4 +160,4 @@ general deployment:
       changes:
         - front/proyecto/*
         - back/digitalbooking/*
-      when: always
+      #when: always
