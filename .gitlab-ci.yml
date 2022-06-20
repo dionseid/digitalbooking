@@ -42,7 +42,7 @@ frontend:
   stage: build
   trigger:
     include: front/proyecto/.gitlab-ci.yml
-    #strategy: depend
+    strategy: depend
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
@@ -54,12 +54,13 @@ frontend:
         - front/proyecto/*
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
+  allow_failure: false
 
 backend:
   stage: build
   trigger:
     include: back/digitalbooking/.gitlab-ci.yml
-    #strategy: depend
+    strategy: depend
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
@@ -77,6 +78,7 @@ backend:
     #   when: always
   # variables:
   #   PARENT_PIPELINE_ID: $APP_VERSION
+  allow_failure: false
 
 infrastructure:
   stage: build
