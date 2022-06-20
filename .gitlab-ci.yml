@@ -2,8 +2,8 @@ variables:
   APP_VERSION: $CI_PIPELINE_IID
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
-  DEPLOY_W_BACK: 'false'
-  DEPLOY_W_FRONT: 'false'
+  DEPLOY_W_BACK: 'true'
+  DEPLOY_W_FRONT: 'true'
 
 include: cancel_pipeline_functions.yml
 
@@ -155,7 +155,7 @@ infrastructure:
       changes:
         - front/proyecto/*
         - back/digitalbooking/*
-      when: on_success
+      #when: on_success
     - if: $CI_PIPELINE_SOURCE != "schedule"
       changes:
         - front/proyecto/*
