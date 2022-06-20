@@ -7,7 +7,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.text.DecimalFormat;
 import java.util.List;
 
 @ToString
@@ -38,23 +37,23 @@ public class Producto {
 
     @OneToMany(mappedBy= "producto", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Reserva> bookingList;
+    private List<Reserva> reservas;
 
 
-    public Producto(String nombre, String descripcion, Double latitud, Double longitud, Ciudad ciudad, Categoria categoria, List<Reserva> bookingList) {
+    public Producto(String nombre, String descripcion, Double latitud, Double longitud, Ciudad ciudad, Categoria categoria, List<Reserva> reservas) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.latitud = latitud;
         this.longitud = longitud;
         this.ciudad = ciudad;
         this.categoria = categoria;
-        this.bookingList = bookingList;
+        this.reservas = reservas;
     }
 
     public Producto() {
     }
 
-    public Producto(Integer id, String nombre, String descripcion, Double latitud, Double longitud, Ciudad ciudad, Categoria categoria, List<Reserva> bookingList) {
+    public Producto(Integer id, String nombre, String descripcion, Double latitud, Double longitud, Ciudad ciudad, Categoria categoria, List<Reserva> reservas) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -62,6 +61,6 @@ public class Producto {
         this.longitud = longitud;
         this.ciudad = ciudad;
         this.categoria = categoria;
-        this.bookingList = bookingList;
+        this.reservas = reservas;
     }
 }

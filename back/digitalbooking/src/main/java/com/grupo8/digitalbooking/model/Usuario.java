@@ -5,10 +5,9 @@ import com.grupo8.digitalbooking.model.Ciudad;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+//import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
 
 @Getter
 @Setter
@@ -28,6 +27,7 @@ public class Usuario {
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "roles_id")
+    /* @Enumerated(EnumType.STRING)*/
     private RolUsuario rol;
 
     public Usuario() {
@@ -42,4 +42,13 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public Usuario(Integer id, String nombre, String apellido, String email, String password, String ciudadUsuario, RolUsuario rol) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.password = password;
+        this.ciudadUsuario = ciudadUsuario;
+        this.rol = rol;
+    }
 }
