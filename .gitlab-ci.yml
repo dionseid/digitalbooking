@@ -92,7 +92,7 @@ infrastructure:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
 
-.deploy_to_production: &deploy_to_production
+deploy_to_production: &deploy_to_production
   stage: deploy
   image:
     name: amazon/aws-cli:2.4.11
@@ -133,11 +133,21 @@ infrastructure:
     #   changes:
     #     - front/proyecto/*
     #     - back/digitalbooking/*
+  when: manual
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+      changes:
+        - front/proyecto/*
+        - back/digitalbooking/*
+      when: always
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      changes:
+        - front/proyecto/*
+        - back/digitalbooking/*
 
 deploy backend:
   <<: *deploy_to_production
   needs: ["backend"]
-  when: manual
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
@@ -147,22 +157,21 @@ deploy backend:
 deploy frontend:
   <<: *deploy_to_production
   needs: ["frontend"]
-  when: manual
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
         - front/proyecto/*
       when: always
 
-general deployment:
-  <<: *deploy_to_production
-  needs: 
-    - job: backend
-    - job: frontend
-  when: manual
-  rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-      changes:
-        - front/proyecto/*
-        - back/digitalbooking/*
-      when: on_success
+# general deployment:
+#   <<: *deploy_to_production
+#   needs: 
+#     - job: backend
+#     - job: frontend
+#   when: manual
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+#       changes:
+#         - front/proyecto/*
+#         - back/digitalbooking/*
+#       when: on_success
