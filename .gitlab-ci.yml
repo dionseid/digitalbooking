@@ -50,6 +50,11 @@ frontend:
   #     curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
   #     --silent --output /dev/null --show-error --fail \
   #     "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/DEPLOY_W_FRONT" --form "value=true"
+  script:
+    - echo "DEPLOY_W_FRONT=true" >> build.env
+  artifacts:
+    reports:
+      dotenv: build.env
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
