@@ -1,5 +1,4 @@
-include:
-  - local: '/back/digitalbooking/.gitlab-ci.yml'
+include: '${CI_PROJECT_DIR}/back/digitalbooking/.gitlab-ci.yml'
 
 stages:
   - build
