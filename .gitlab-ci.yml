@@ -162,21 +162,21 @@ infrastructure:
 deploy backend:
   <<: *deploy_to_production
   <<: *variables
-  needs: ["backend"]
+  #needs: ["backend"]
   rules:
     - if: $DEPLOY_W_BACK == "OK"
 
 deploy frontend:
   <<: *deploy_to_production
   <<: *variables
-  needs: ["frontend"]
+  #needs: ["frontend"]
   rules:
     - if: $DEPLOY_W_FRONT == "OK"
 
 general deployment:
   <<: *deploy_to_production
   <<: *variables
-  needs: ["backend", "frontend"]
+  #needs: ["backend", "frontend"]
   rules:
     - if: $DEPLOY_W_BACK == "OK"
 
