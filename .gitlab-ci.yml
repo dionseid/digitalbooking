@@ -2,8 +2,6 @@ variables:
   APP_VERSION: $CI_PIPELINE_IID
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
-  DEPLOY_W_BACK: 'false'
-  DEPLOY_W_FRONT: 'false'
 
 include: cancel_pipeline_functions.yml
 
@@ -45,6 +43,11 @@ frontend:
   trigger:
     include: front/proyecto/.gitlab-ci.yml
     strategy: depend
+  after_script:
+    - |
+      curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
+      --silent --output /dev/null --show-error --fail \
+      "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/DEPLOY_W_FRONT" --form "value=true"
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
@@ -56,7 +59,7 @@ frontend:
         - front/proyecto/*
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
-    DEPLOY_W_FRONT: 'true'
+    #DEPLOY_W_FRONT: 'true'
   allow_failure: false
 
 backend:
@@ -64,6 +67,11 @@ backend:
   trigger:
     include: back/digitalbooking/.gitlab-ci.yml
     strategy: depend
+  after_script:
+    - |
+      curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
+      --silent --output /dev/null --show-error --fail \
+      "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/DEPLOY_W_BACK" --form "value=true"
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
@@ -81,7 +89,7 @@ backend:
     #   when: always
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
-    DEPLOY_W_BACK: 'true'
+    #DEPLOY_W_BACK: 'true'
   allow_failure: false
 
 infrastructure:
