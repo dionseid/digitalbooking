@@ -154,6 +154,8 @@ infrastructure:
 deploy backend:
   <<: *deploy_to_production
   needs: ["backend"]
+  rules:
+    - if: $DEPLOY_W_BACK == 'true'
 
 deploy frontend:
   <<: *deploy_to_production
