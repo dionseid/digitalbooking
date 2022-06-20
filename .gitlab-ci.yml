@@ -2,8 +2,6 @@ variables:
   APP_VERSION: $CI_PIPELINE_IID
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
-  DEPLOY_W_BACK: 'false'
-  DEPLOY_W_FRONT: 'false'
 
 include: cancel_pipeline_functions.yml
 
@@ -11,6 +9,7 @@ stages:
   - update
   - cancel if update
   - build
+  - stage
   - deploy
 
 update token:
@@ -50,11 +49,6 @@ frontend:
   #     curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
   #     --silent --output /dev/null --show-error --fail \
   #     "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/DEPLOY_W_FRONT" --form "value=true"
-  script:
-    - echo "DEPLOY_W_FRONT=true" >> build.env
-  artifacts:
-    reports:
-      dotenv: build.env
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
@@ -113,6 +107,38 @@ infrastructure:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
 
+stage backend:
+  stage: stage
+  script:
+    - echo "DEPLOY_W_BACK=true" >> build.env
+  artifacts:
+    reports:
+      dotenv: build.env
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+      changes:
+        - back/digitalbooking/*
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      when: manual
+      changes:
+        - back/digitalbooking/*
+
+stage frontend:
+  stage: stage
+  script:
+    - echo "DEPLOY_W_FRONT=true" >> build.env
+  artifacts:
+    reports:
+      dotenv: build.env
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+      changes:
+        - front/proyecto/*
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      when: manual
+      changes:
+        - front/proyeto/*
+
 .deploy_to_production: &deploy_to_production
   stage: deploy
   image:
@@ -167,9 +193,6 @@ infrastructure:
         - back/digitalbooking/*
       # when: on_success
   # allow_failure: false
-  after_script:
-    - $DEPLOY_W_BACK == 'false'
-    - $DEPLOY_W_FRONT == 'false'
 
 deploy backend:
   <<: *deploy_to_production
