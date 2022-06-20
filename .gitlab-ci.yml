@@ -43,7 +43,7 @@ frontend:
   trigger:
     include: front/proyecto/.gitlab-ci.yml
     strategy: depend
-  after_script:
+  before_script:
     - |
       curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
       --silent --output /dev/null --show-error --fail \
@@ -67,7 +67,7 @@ backend:
   trigger:
     include: back/digitalbooking/.gitlab-ci.yml
     strategy: depend
-  after_script:
+  before_script:
     - |
       curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
       --silent --output /dev/null --show-error --fail \
