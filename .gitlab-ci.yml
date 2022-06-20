@@ -1,3 +1,8 @@
+
+
+
+
+
 variables: 
   APP_VERSION: $CI_PIPELINE_IID
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
@@ -10,7 +15,6 @@ stages:
   - update
   - cancel if update
   - build
-  # - stage
   - deploy
 
 update token:
@@ -45,11 +49,6 @@ frontend:
   trigger:
     include: front/proyecto/.gitlab-ci.yml
     strategy: depend
-  # before_script:
-  #   - |
-  #     curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
-  #     --silent --output /dev/null --show-error --fail \
-  #     "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/DEPLOY_W_FRONT" --form "value=true"
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
@@ -61,7 +60,6 @@ frontend:
         - front/proyecto/*
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
-    DEPLOY_W_FRONT: 'true'
   allow_failure: false
 
 backend:
@@ -69,11 +67,6 @@ backend:
   trigger:
     include: back/digitalbooking/.gitlab-ci.yml
     strategy: depend
-  # before_script:
-  #   - |
-  #     curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
-  #     --silent --output /dev/null --show-error --fail \
-  #     "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/DEPLOY_W_BACK" --form "value=true"
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
@@ -107,38 +100,6 @@ infrastructure:
         - infra/*
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
-
-# stage backend:
-#   stage: stage
-#   script:
-#     - echo "DEPLOY_W_BACK=true" >> build.env
-#   artifacts:
-#     reports:
-#       dotenv: build.env
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-#       changes:
-#         - back/digitalbooking/*
-#     - if: $CI_PIPELINE_SOURCE != "schedule"
-#       when: manual
-#       changes:
-#         - back/digitalbooking/*
-
-# stage frontend:
-#   stage: stage
-#   script:
-#     - echo "DEPLOY_W_FRONT=true" >> build.env
-#   artifacts:
-#     reports:
-#       dotenv: build.env
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-#       changes:
-#         - front/proyecto/*
-#     - if: $CI_PIPELINE_SOURCE != "schedule"
-#       when: manual
-#       changes:
-#         - front/proyeto/*
 
 .deploy_to_production: &deploy_to_production
   stage: deploy
@@ -187,7 +148,7 @@ infrastructure:
       changes:
         - front/proyecto/*
         - back/digitalbooking/*
-      #when: on_success
+      when: on_success
     - if: $CI_PIPELINE_SOURCE != "schedule"
       changes:
         - front/proyecto/*
@@ -198,24 +159,18 @@ infrastructure:
 deploy backend:
   <<: *deploy_to_production
   needs: ["backend"]
-  # variables:
-  #   DEPLOY_W_BACK: 'false'
   rules:
     - if: $DEPLOY_W_BACK == 'true'
 
 deploy frontend:
   <<: *deploy_to_production
   needs: ["frontend"]
-  variables:
-    DEPLOY_W_FRONT: 'false'
-  rules:
-    - if: $DEPLOY_W_FRONT == 'true'
 
 general deployment:
   <<: *deploy_to_production
   needs: ["backend", "frontend"]
   rules:
-    - if: $DEPLOY_W_BACK == 'true' && $DEPLOY_W_FRONT == 'true'
+    - if: $DEPLOY_W_BACK == 'true'
 
 
 
