@@ -3,7 +3,7 @@
 
 
 
-variables: 
+variables: &variables
   APP_VERSION: $CI_PIPELINE_IID
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
@@ -60,6 +60,7 @@ frontend:
       changes:
         - front/proyecto/*
   variables:
+    <<: *variables
     PARENT_PIPELINE_ID: $APP_VERSION
     DEPLOY_W_FRONT: "OK"
   allow_failure: false
@@ -160,18 +161,21 @@ infrastructure:
 
 deploy backend:
   <<: *deploy_to_production
+  <<: *variables
   needs: ["backend"]
   rules:
     - if: $DEPLOY_W_BACK == "OK"
 
 deploy frontend:
   <<: *deploy_to_production
+  <<: *variables
   needs: ["frontend"]
   rules:
     - if: $DEPLOY_W_FRONT == "OK"
 
 general deployment:
   <<: *deploy_to_production
+  <<: *variables
   needs: ["backend", "frontend"]
   rules:
     - if: $DEPLOY_W_BACK == "OK"
