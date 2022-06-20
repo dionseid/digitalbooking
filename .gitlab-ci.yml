@@ -163,7 +163,7 @@ general deployment:
   <<: *deploy_to_production
   needs: ["backend", "frontend"]
   rules:
-    if: $DEPLOY_W_BACK == true
+    - if: $DEPLOY_W_BACK == true
 
 
 
