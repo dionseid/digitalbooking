@@ -20,11 +20,11 @@ cache:
 
 build job:
   stage: build
-  # before_script:
-  #   - |
-  #     curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
-  #     --silent --output /dev/null --show-error --fail \
-  #     "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/DEPLOY_W_BACK" --form "value=true"
+  after_script:
+    - |
+      curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
+      --silent --output /dev/null --show-error --fail \
+      "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/DEPLOY_W_BACK" --form "value=true"
   script:
     - cd back/digitalbooking
     - mvn compile
