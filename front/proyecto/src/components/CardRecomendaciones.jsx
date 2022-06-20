@@ -16,9 +16,6 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria, selectDate}) => {
     const [verMas, setVerMas] = useState(false);    
 
 
-
-    const getUrl = () => selectCiudad ? `http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/filtroCiudad/${selectCiudad}` : "http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/traerTodos"
-
     useEffect(() => {
         axios.get('http://localhost:8080/productos/traerTodos')
             .then(response => {
@@ -28,31 +25,34 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria, selectDate}) => {
     }, [selectCiudad])
 
     useEffect(() => {
-        axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/filtroCategoria/${selectCategoria}`)
+        axios.get(`http://localhost:8080/productos/filtroCategoria/${selectCategoria}`)
             .then(response => {
                 setDataProducto(response.data)
             })
-        axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/imagenes`)
+        axios.get(`http://localhost:8080/imagenes`)
             .then(response => {
                 setImagen(response.data)
             })            
     }, [])
 
     useEffect(() => {
-        axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/caracteristicas`)
+        axios.get(`http://localhost:8080/caracteristicas`)
             .then(response => {
                 setCaracteristicas(response.data)
             })            
     }, [])
     
 
-    const getImage = (card) =>{
+
+
+    const isCard = useMemo(() =>{
         if(dataImagen.length !== 0){
-        const imagenes = dataImagen.filter((img) => img.producto.id == card.id);
-        return imagenes[0].url
-        }
-        return "buscando imagen"      
-    }
+            return true
+        } else{
+            return false;
+        }        
+
+    },[dataImagen])
     
     const getCaracteristicas = (card) =>{
         const caracteristicas = dataCaracteristicas.filter((c) => c.producto.id == card.id);
@@ -74,14 +74,25 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria, selectDate}) => {
 
     }, [dataProducto, selectCategoria, selectCiudad])
 
+    const getImage = (card) =>{
+        if(dataImagen.length > 0){
+            const imagenes = dataImagen.filter((img) => img.producto == card);
+            console.log(imagenes[0].url);
+            return imagenes[0].url
+            }
+            return "https://images.pexels.com/photos/11125429/pexels-photo-11125429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+         
+    }
+//console.log(getImage());
+
     //const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
 
     //const getFilteredCategoryList = () => selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
     return (
         <div className="cards">
-            {filteredList.map((card) => (
-                <div key={card.id} className="cardRecomendacion">
-                    <div style={{ backgroundImage: "url('" + getImage(card) + "')" }} className="fondoImagen" />
+            {(isCard) && ((filteredList.map((card) => (
+               <div key={card.id} className="cardRecomendacion">
+                    <div style={{ backgroundImage: "url('" + /* getImage(card) */ + "')" }} className="fondoImagen" />
                     <div className="cardBody">
                         <div className="presentacion">
                             <div>
@@ -95,19 +106,19 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria, selectDate}) => {
                         </div>
                         <div className="infoHotel">
                             <p><FontAwesomeIcon icon={faLocationDot} style={{ marginRight: "4px" }} />{card.ciudad.nombre} <span className="mostrarMapa">MOSTRAR EN EL MAPA</span></p>
-                            <p className="iconosInfoHotel">
+                            {/* <p className="iconosInfoHotel">
                                 {dataCaracteristicas.filter((c)=>c.producto.id == card.id)
                                     .map((cat)=>(                            
                                             <span class="material-symbols-outlined">{cat.icono}</span>
                                     ))}
-                            </p>
+                            </p> */}
                         </div>
                         <p>{verMas ? card.descripcion : card.descripcion.split(' ', 8).join(" ")}<span className="mas" onClick={() => setVerMas(!verMas)}>
                             {verMas ? " ver menos" : " ver más..."}</span></p>
                         <Link to={`/productos/${card.id}`}><button className="buttonCard">ver más</button></Link>
-                    </div>
+                    </div>                    
                 </div>
-            ))}
+                ))))}            
         </div>
     )
 

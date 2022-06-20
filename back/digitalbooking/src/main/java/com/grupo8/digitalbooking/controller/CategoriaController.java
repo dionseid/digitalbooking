@@ -13,6 +13,7 @@ import java.util.Collection;
 //request a la bdd
 @RestController
 @RequestMapping("/categorias")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;

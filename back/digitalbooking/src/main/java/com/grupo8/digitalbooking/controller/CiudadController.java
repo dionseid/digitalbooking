@@ -12,6 +12,7 @@ import java.util.Collection;
 //Conexión con la bd
 @RestController
 @RequestMapping("/ciudades")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CiudadController {
     @Autowired
     private CiudadService ciudadService;

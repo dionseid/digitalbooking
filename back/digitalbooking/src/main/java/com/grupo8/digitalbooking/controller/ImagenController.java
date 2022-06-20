@@ -11,6 +11,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/imagenes")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ImagenController {
     @Autowired
     private ImagenService imagenService;

@@ -11,6 +11,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/politicas")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 
 public class PoliticaController {
     @Autowired

@@ -14,9 +14,8 @@ export default function BootstrapCarousel() {
   };
   const [dataImagen, setDataImagen] = useState([]);
   useEffect(() => {
-    axios.get("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/imagenes")
+    axios.get("http://localhost:8080/imagenes")
       .then(response => {
-        console.log(response.data);
         setDataImagen(response.data)
       })
 

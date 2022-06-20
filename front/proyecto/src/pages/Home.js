@@ -17,7 +17,6 @@ const Home = ({authenticated, setIsAuthenticated}) => {
 
   const handleClick = () =>{
     setFilter(search);
-    alert(dateRange)
   }
 
   const onDoubleClick = (searchCategoria, e) =>{

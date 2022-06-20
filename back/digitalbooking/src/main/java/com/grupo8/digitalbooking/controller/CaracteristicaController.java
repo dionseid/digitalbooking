@@ -11,6 +11,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/caracteristicas")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CaracteristicaController {
     @Autowired
     private CaracteristicaService caracteristicaService;
