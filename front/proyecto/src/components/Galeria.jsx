@@ -35,7 +35,7 @@ const Galeria = () => {
     <SimpleReactLightbox>
       <SRLWrapper>
         <ImageList variant="quilted" cols={4} rowHeight={200}>
-          {dataImagen.filter((imagen) => imagen.producto.id == id)
+          {dataImagen.filter((imagen) => imagen.producto?.id == id)
             .map((item, index) => (
               <ImageListItem
                 key={item.id}

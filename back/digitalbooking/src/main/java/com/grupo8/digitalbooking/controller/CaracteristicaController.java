@@ -17,12 +17,14 @@ public class CaracteristicaController {
     private CaracteristicaService caracteristicaService;
 
     //AGREGAR
+
     @PostMapping
     public ResponseEntity<Caracteristica> agregarCaracteristica(@RequestBody Caracteristica caracteristica){
         return ResponseEntity.ok(caracteristicaService.agregarCaracteristica(caracteristica));
     }
 
     //BUSCAR
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public ResponseEntity<Caracteristica> buscarCaracteristica(@PathVariable Integer id){
         Caracteristica caracteristica = caracteristicaService.buscarCaracteristica(id).orElse(null);
@@ -30,6 +32,7 @@ public class CaracteristicaController {
     }
 
     //ELIMINAR
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarCaracteristica(@PathVariable Integer id) throws Exception {
         ResponseEntity<String> response=null;
@@ -45,6 +48,7 @@ public class CaracteristicaController {
 
 
     //ACTUALIZAR
+
     @PutMapping()
     public ResponseEntity<Caracteristica> actualizarCaracteristica(@RequestBody Caracteristica caracteristica){
         ResponseEntity<Caracteristica> response;
@@ -58,6 +62,7 @@ public class CaracteristicaController {
 
 
     //LISTAR TODAS
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping()
     public ResponseEntity<Collection<Caracteristica>> listarCaracteristicas(){
         return ResponseEntity.ok(caracteristicaService.listarCaracteristicas());

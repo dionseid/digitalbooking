@@ -12,7 +12,7 @@ import Calendario from "../components/Calendario";
 import "../styles/pages/productos.css";
 import BootstrapCarousel from "../components/BootstrapCarousel";
 import Media from "react-media";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import Caracteristicas from "../components/Caracteristicas";
 import Reglas from "../components/Reglas";
 import DescripcionProducto from "../components/DescripcionProducto";
@@ -20,13 +20,32 @@ import UbicacionProducto from "../components/UbicacionProducto";
 import TituloProducto from "../components/TituloProducto";
 import GoogleMaps from "../components/GoogleMaps";
 import IdProductoContextProvider from "../components/context/IdProductoContext";
+import UserProvider  from "../components/context/UserContext";
 
 const Productos = () => { 
+  const navigate = useNavigate();
   const {id} = useParams();
+  const {user, loginLogoutEvent} = useContext(UserProvider);
 /*   const {idProducto, setIdProducto} = useContext(IdProductoContextProvider);
   console.log(idProducto);
   setIdProducto(id)
   console.log(idProducto); */
+
+  const redireccionIsLogued = () => {
+    if (user.auth){
+      navigate(`/producto/${id}/reserva`) 
+    }
+    else{
+      loginLogoutEvent({
+        nombre: '',
+        apellido: '',
+        mail: '',
+        auth: false,
+        redirect:true
+      })
+      navigate(`/login`)
+    }
+  }
 
   return (
     <div id="page-wrap">
@@ -63,7 +82,7 @@ const Productos = () => {
                 </div>             
                 <div className="contendorReserva">
                   <p>Agregá tus fechas de viaje para obtener precios exactos</p>
-                  <Link to={`/producto/${id}/reserva`}><button className="buttonCard">Iniciar reserva</button></Link>
+                  <button className="buttonCard" onClick={redireccionIsLogued}>Iniciar reserva</button>
                 </div> 
             </div>                        
         </section>
