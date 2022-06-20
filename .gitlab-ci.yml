@@ -159,7 +159,13 @@ deploy frontend:
 
 general deployment:
   <<: *deploy_to_production
-  needs: ["backend", "frontend"]
+  needs: #["backend", "frontend"]
+    - job: "backend"
+      optional: true
+    - job: "frontend"
+      optional: true
+  rules:
+    
 
 
 
