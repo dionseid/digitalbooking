@@ -2,7 +2,7 @@ variables:
   APP_VERSION: $CI_PIPELINE_IID
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
-  DEPLOY_W_BACK: false
+  DEPLOY_W_BACK: 'false'
 
 include: cancel_pipeline_functions.yml
 
@@ -77,11 +77,10 @@ backend:
     #     - back/digitalbooking/*
     # - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
     #   when: always
-  # variables:
-  #   PARENT_PIPELINE_ID: $APP_VERSION
-  allow_failure: false
   variables:
-    DEPLOY_W_BACK: true
+    PARENT_PIPELINE_ID: $APP_VERSION
+    DEPLOY_W_BACK: 'true'
+  allow_failure: false
 
 infrastructure:
   stage: build
