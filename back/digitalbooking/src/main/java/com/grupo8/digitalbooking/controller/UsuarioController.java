@@ -3,7 +3,6 @@ package com.grupo8.digitalbooking.controller;
 import com.grupo8.digitalbooking.model.Usuario;
 import com.grupo8.digitalbooking.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +30,6 @@ public class UsuarioController {
         return ResponseEntity.ok("Se eliminó el usuario correctamente");
     }
 
-    //hacer post login
-    //@PostMapping("/login")
+//    hacer post login
+//    @PostMapping("/login")
 }

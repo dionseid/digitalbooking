@@ -20,6 +20,7 @@ public class Usuario {
     private Integer id;
     private String nombre;
     private String apellido;
+    private String username;
     private String email;
     private String password;
     private String ciudadUsuario;
@@ -27,22 +28,22 @@ public class Usuario {
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "roles_id")
-    /* @Enumerated(EnumType.STRING)*/
     private RolUsuario rol;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String email, String password, String ciudadUsuario, RolUsuario rol) {
+    public Usuario(String nombre, String apellido, String username, String email, String password, String ciudadUsuario, RolUsuario rol) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
         this.ciudadUsuario = ciudadUsuario;
         this.rol = rol;
+        this.username = username;
     }
 
-    public Usuario(Integer id, String nombre, String apellido, String email, String password, String ciudadUsuario, RolUsuario rol) {
+    public Usuario(Integer id, String nombre, String apellido, String username, String email, String password, String ciudadUsuario, RolUsuario rol) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -50,5 +51,7 @@ public class Usuario {
         this.password = password;
         this.ciudadUsuario = ciudadUsuario;
         this.rol = rol;
+        this.username = username;
+
     }
 }

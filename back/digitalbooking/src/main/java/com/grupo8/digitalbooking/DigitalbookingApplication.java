@@ -15,18 +15,6 @@ public class DigitalbookingApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DigitalbookingApplication.class, args);
 
-		// Ciudad ciudad = new Ciudad("San Miguel de Tucuman", "Tucumán","Argentina");
-		// Ciudad ciudad1= new Ciudad("Yerba Buena", "Tucumán","Argentina");
-		// Ciudad ciudad2 = new Ciudad("Tafí del Valle", "Tucumán","Argentina");
-		//
-		// CiudadService ciudadService = new CiudadService((CiudadRepository) ciudad);
-		//
-		// Categoria categoria = new Categoria("Hotel", "Hotel 4 estrellas",
-		// "djksadjas");
-		// Categoria categoria1 = new Categoria("Hostel", "Hostel con habitaciones
-		// compartidas", "dasdsadas");
-		// Categoria categoria2 =new Categoria("Departamento", "Departamento ambolado",
-		// "djaskdaj");
 
 	}
 
