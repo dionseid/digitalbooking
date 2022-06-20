@@ -23,6 +23,7 @@ public class Usuario {
     private String email;
     private String password;
     private String ciudadUsuario;
+    private String username;
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -33,22 +34,24 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String email, String password, String ciudadUsuario, RolUsuario rol) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.password = password;
-        this.ciudadUsuario = ciudadUsuario;
-        this.rol = rol;
-    }
-
-    public Usuario(Integer id, String nombre, String apellido, String email, String password, String ciudadUsuario, RolUsuario rol) {
+    public Usuario(Integer id, String nombre, String apellido, String email, String password, String ciudadUsuario, String username, RolUsuario rol) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
         this.ciudadUsuario = ciudadUsuario;
+        this.username = username;
+        this.rol = rol;
+    }
+
+    public Usuario(String nombre, String apellido, String email, String password, String ciudadUsuario, String username, RolUsuario rol) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.password = password;
+        this.ciudadUsuario = ciudadUsuario;
+        this.username = username;
         this.rol = rol;
     }
 }
