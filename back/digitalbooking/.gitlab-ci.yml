@@ -1,3 +1,6 @@
+include:
+  - local: 'back/digitalbooking/.gitlab-ci.yml'
+
 stages:
   - build
   - test
