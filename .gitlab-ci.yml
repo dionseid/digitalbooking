@@ -122,42 +122,42 @@ infrastructure:
     - curl http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com | grep "ver más"
   # needs: ["frontend", "backend", "infrastructure"]
   #   if_exists: true
-  rules:
+  # rules:
     # - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
     #   changes:
     #     - front/proyecto/*
     #     - back/digitalbooking/*
     #   when: always
-    - if: $CI_PIPELINE_SOURCE != "schedule"
-      when: manual
-      changes:
-        - front/proyecto/*
-        - back/digitalbooking/*
+    # - if: $CI_PIPELINE_SOURCE != "schedule"
+    #   when: manual
+    #   changes:
+    #     - front/proyecto/*
+    #     - back/digitalbooking/*
 
-deploy backend:
-  <<: *deploy_to_production
-  needs: ["backend"]
-  rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-      #when: always
-      changes:
-        - back/digitalbooking/*
+# deploy backend:
+#   <<: *deploy_to_production
+#   needs: ["backend"]
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+#       #when: always
+#       changes:
+#         - back/digitalbooking/*
 
-deploy frontend:
-  <<: *deploy_to_production
-  needs: ["frontend"]
-  rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-      changes:
-        - front/proyecto/*
-      #when: always
+# deploy frontend:
+#   <<: *deploy_to_production
+#   needs: ["frontend"]
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+#       changes:
+#         - front/proyecto/*
+#       #when: always
 
-general deployment:
-  <<: *deploy_to_production
-  needs: ["backend", "frontend"]
-  rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-      changes:
-        - front/proyecto/*
-        - back/digitalbooking/*
-      #when: always
+# general deployment:
+#   <<: *deploy_to_production
+#   needs: ["backend", "frontend"]
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+#       changes:
+#         - front/proyecto/*
+#         - back/digitalbooking/*
+#       #when: always

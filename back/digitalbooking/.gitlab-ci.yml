@@ -65,8 +65,14 @@ build job:
 
 
 
-
-
+deploy backend:
+  <<: *deploy_to_production
+  # needs: ["backend"]
+  # # rules:
+  # #   - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+  # #     #when: always
+  # #     changes:
+  # #       - back/digitalbooking/*
 
 
 
