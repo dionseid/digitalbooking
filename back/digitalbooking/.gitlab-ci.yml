@@ -30,39 +30,39 @@ build job:
 #     - cd back/digitalbooking
 #     - mvn test #mvn clean test
 
-package job:
-  stage: package
-  artifacts:
-    paths:
-      - back/digitalbooking/target/*.jar #target/consoleapp.jar
-  script:
-    - cd back/digitalbooking
-    - mvn package
+# package job:
+#   stage: package
+#   artifacts:
+#     paths:
+#       - back/digitalbooking/target/*.jar #target/consoleapp.jar
+#   script:
+#     - cd back/digitalbooking
+#     - mvn package
 
-build docker image:
-  stage: image
-  image:
-    name: amazon/aws-cli
-    entrypoint: [""]
-  services:
-    - docker:dind
-  before_script:
-    #- docker system prune
-    - amazon-linux-extras install docker
-    - aws --version
-    - docker --version
-  script:
-    - aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
-    - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$APP_VERSION --cache-from $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest back/digitalbooking
-    - docker image ls
-    - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
-    - echo $APP_VERSION
-    - | 
-        curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
-        --silent --output /dev/null --show-error --fail \
-        "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/BACKEND_VERSION" --form "value=`echo $APP_VERSION`"
-  variables:
-    DOCKER_DRIVER: overlay
+# build docker image:
+#   stage: image
+#   image:
+#     name: amazon/aws-cli
+#     entrypoint: [""]
+#   services:
+#     - docker:dind
+#   before_script:
+#     #- docker system prune
+#     - amazon-linux-extras install docker
+#     - aws --version
+#     - docker --version
+#   script:
+#     - aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
+#     - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$APP_VERSION --cache-from $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest back/digitalbooking
+#     - docker image ls
+#     - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
+#     - echo $APP_VERSION
+#     - | 
+#         curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
+#         --silent --output /dev/null --show-error --fail \
+#         "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/BACKEND_VERSION" --form "value=`echo $APP_VERSION`"
+#   variables:
+#     DOCKER_DRIVER: overlay
 
 
 
