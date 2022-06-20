@@ -145,6 +145,7 @@ deploy_to_production: &deploy_to_production
         - front/proyecto/*
         - back/digitalbooking/*
       when: on_success
+  allow_failure: false
 
 deploy backend:
   <<: *deploy_to_production
@@ -154,6 +155,7 @@ deploy backend:
       when: always
       changes:
         - back/digitalbooking/*
+  allow_failure: false
 
 deploy frontend:
   <<: *deploy_to_production
@@ -163,7 +165,8 @@ deploy frontend:
       changes:
         - front/proyecto/*
       when: always
-
+  allow_failure: false
+  
 # general deployment:
 #   <<: *deploy_to_production
 #   needs: 
