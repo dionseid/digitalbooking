@@ -15,7 +15,7 @@ public class RolUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nombre;
+    public String nombre;
 
     public RolUsuario() {
     }
