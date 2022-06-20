@@ -2,8 +2,8 @@ variables:
   APP_VERSION: $CI_PIPELINE_IID
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
-  DEPLOY_W_BACK: 'true'
-  DEPLOY_W_FRONT: 'true'
+  DEPLOY_W_BACK: 'false'
+  DEPLOY_W_FRONT: 'false'
 
 include: cancel_pipeline_functions.yml
 
