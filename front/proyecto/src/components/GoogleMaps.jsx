@@ -13,7 +13,7 @@ const GoogleMaps = () => {
 
 
   useEffect(() => {
-    fetch(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/buscarProductoPorId/${id}`)
+    fetch(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
       .then((res) => res.json())
       .then((res) => setDataLocacion([res.latitud, res.longitud]));
   }, []);
@@ -26,10 +26,9 @@ const GoogleMaps = () => {
       return false
     } else {
       return true
-    }
-
-
+    }    
   }
+  
   return (
     <>
       <div id="map">

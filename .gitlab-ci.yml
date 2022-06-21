@@ -1,83 +1,13 @@
-# stages:
-#   - infra
-#   - compile
-#   - docker
-#   - test
-#   - deploy
-
-# variables:
-#   APP_VERSION: $CI_PIPELINE_IID
-#   TF_ROOT: ${CI_PROJECT_DIR}/infra  # The relative path to the root directory of the Terraform project
-#   # ---------------------------------------------------------------------------- #
-#   #                  Pero tengo backend de Terraform en S3                       #
-#   # ---------------------------------------------------------------------------- #
-#   TF_STATE_NAME: ${TF_STATE_NAME:-default}
-
-# cache:
-#   key: "${TF_ROOT}"
-#   paths:
-#     - ${TF_ROOT}/.terraform/
-
-# compile backend:
-#   stage: compile
-#   script: 
-
-# compile frontend:  
-#   stage: compile
-#   image: node:10  
-#   script:   
-#     - npm install ./front/proyecto/
-#     - npm build ./front/proyecto/package.json
-#     - echo $APP_VERSION > ./front/proyecto/build/version.html
-#   artifacts:    
-#     paths:      
-#       - ./front/proyecto/build
-#   only:    
-#     refs:      
-#       - main
-
-# build docker image:
-#   stage: docker
-#   image: adoptopenjdk/openjdk11:alpine-jre
-#   script:
-#     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-#     - docker build -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$APP_VERSION ./back/digitalbooking/ # The first tag points to our latest image
-#     - docker image ls
-#     - docker push --all-tags $CI_REGISTRY_IMAGE
-
-# test docker image: 
-#   stage: test 
-#   image: curlimages/curl 
-#   services: 
-#     - name: $CI_REGISTRY_IMAGE:$APP_VERSION 
-#       alias: frontend 
-#   script: 
-#     - curl http://frontend/version.html | grep $APP_VERSION
-
-# deploy to production:
-#   image:
-#     name: amazon/aws-cli:2.4.11
-#     entrypoint: [""]
-#   stage: deploy
-#   #environment: production
-#   script:
-#     - aws --version
-#     - yum install -y gettext
-#     - export DEPLOY_TOKEN=$(echo $GITLAB_DEPLOY_TOKEN | tr -d "\n" | base64)
-#     - envsubst < eb-templates/Dockerrun.aws.json > Dockerrun.aws.json
-#     - envsubst < eb-templates/auth.json > auth.json
-#     - cat Dockerrun.aws.json
-#     - cat auth.json
-#     - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
-#     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
-
 variables: 
   APP_VERSION: $CI_PIPELINE_IID
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
 
+include: cancel_pipeline_functions.yml
+
 stages:
   - update
+  - cancel if update
   - build
   - deploy
 
@@ -99,17 +29,29 @@ update token:
       --silent --output /dev/null --show-error --fail \
       "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH" --form "value=$AUTH"
 
+avoid remaining:
+  stage: cancel if update
+  extends: .cancel_pipeline_template
+  script:
+    - echo "This job will cancel the pipeline"
+    - cancel_pipeline
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+
 frontend:
   stage: build
   trigger:
     include: front/proyecto/.gitlab-ci.yml
     strategy: depend
   rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule" 
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+      when: always
       changes:
         - front/proyecto/*
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH != "develop"
+    - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
+      changes:
+        - front/proyecto/*
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
 
@@ -119,20 +61,42 @@ backend:
     include: back/digitalbooking/.gitlab-ci.yml
     strategy: depend
   rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule"
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
         - back/digitalbooking/*
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH != "develop"
+    - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
-  variables:
-    PARENT_PIPELINE_ID: $APP_VERSION
+      changes:
+        - back/digitalbooking/*
+    # - when: never
+    # - if: $CI_PIPELINE_SOURCE != "schedule"
+    #   when: manual
+    #   changes:
+    #     - back/digitalbooking/*
+    # - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+    #   when: always
+  # variables:
+  #   PARENT_PIPELINE_ID: $APP_VERSION
 
-deploy to production:
+infrastructure:
+  stage: build
+  trigger:
+    include: infra/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - when: never
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      when: manual
+      changes:
+        - infra/*
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+      when: always
+
+deploy_to_production: #&deploy_to_production
   stage: deploy
   image:
     name: amazon/aws-cli:2.4.11
     entrypoint: [""]
-  stage: deploy
   variables:
     APP_NAME: remo-digitalbooking-prod
     APP_ENV_NAME: remo-digitalbooking-env-prod
@@ -145,29 +109,76 @@ deploy to production:
   script:
     - envsubst < eb-templates/docker-compose.yml > docker-compose.yml
     - envsubst < eb-templates/Dockerrun.aws.json > Dockerrun.aws.json
-    #- envsubst < eb-templates/config.json > config.json
     - envsubst < eb-templates/.dockercfg > .dockercfg
-    #- cp -r eb-templates/.platform/ ../
     - cat docker-compose.yml
     - cat Dockerrun.aws.json
-    #- cat config.json
     - cat .dockercfg
     - zip remo-digitalbooking-eb-app-dev-$APP_VERSION.zip docker-compose.yml Dockerrun.aws.json
-    #- zip -r remo-digitalbooking-eb-app-dev-$APP_VERSION.zip docker-compose.yml .platform
     - aws s3 cp .dockercfg s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/.dockercfg
     - aws s3 cp remo-digitalbooking-eb-app-dev-$APP_VERSION.zip s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev-$APP_VERSION.zip
-    #- aws s3 cp docker-compose.yml s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/docker-compose.yml
-    #- aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/Dockerrun.aws.json
-    #- aws s3 cp config.json s3://$AWS_S3_BUCKET/remo/digitalbooking/dev/config.json
-    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --auto-create-application --version-label $APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev-$APP_VERSION.zip
-    #- aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/Dockerrun.aws.json
+    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev-$APP_VERSION.zip
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
     - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
-    - curl http://awseb-AWSEB-185HFL68KS755-374311792.us-west-1.elb.amazonaws.com/version.html | grep $APP_VERSION # Sole prueba que frontend funciona #Capaz no reconoce la variable
+    #- curl http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com | grep "ver más"
+  #   if_exists: true
+  # rules:
+    # - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+    #   changes:
+    #     - front/proyecto/*
+    #     - back/digitalbooking/*
+    #   when: always
+    # - if: $CI_PIPELINE_SOURCE != "schedule"
+    #   when: manual
+    #   changes:
+    #     - front/proyecto/*
+    #     - back/digitalbooking/*
+  when: manual
   rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+      changes:
+        - front/proyecto/*
+        - back/digitalbooking/*
+      when: on_success
     - if: $CI_PIPELINE_SOURCE != "schedule"
-      # changes:
-      #   - front/proyecto/*
-      #   - back/digitalbooking/*
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH != "develop"
-      when: manual
+      changes:
+        - front/proyecto/*
+        - back/digitalbooking/*
+      # when: on_success
+  # allow_failure: false
+
+# deploy backend:
+#   <<: *deploy_to_production
+#   needs: ["backend"]
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+#       when: always
+#       changes:
+#         - back/digitalbooking/*
+#         - ^front/proyecto/*
+#   allow_failure: false
+#   variables:
+#     "deployment": $STAGE
+
+# deploy frontend:
+#   <<: *deploy_to_production
+#   needs: ["frontend"]
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+#       changes:
+#         - front/proyecto/*
+#         - ^back/digitalbooking/*
+#       when: always
+#   allow_failure: false
+
+# general deployment:
+#   <<: *deploy_to_production
+#   needs: 
+#     - job: backend
+#     - job: frontend
+#   when: manual
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+#       changes:
+#         - front/proyecto/*
+#         - back/digitalbooking/*
+#       when: on_success

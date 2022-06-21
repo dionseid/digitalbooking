@@ -14,12 +14,14 @@ import java.util.Collection;
 @RestController
 @Api(tags = "Características")
 @RequestMapping("/caracteristicas")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CaracteristicaController {
     @Autowired
     private CaracteristicaService caracteristicaService;
 
 
     @ApiOperation(value="agregarCaraterística", notes="Agregar una nueva característica")
+
     @PostMapping("/agregarCaracteristica")
     public ResponseEntity<Caracteristica> agregarCaracteristica(@RequestBody Caracteristica caracteristica){
         return ResponseEntity.ok(caracteristicaService.agregarCaracteristica(caracteristica));
@@ -28,6 +30,7 @@ public class CaracteristicaController {
     //BUSCAR
     @ApiOperation(value="buscarCaracteristica", notes="Buscar una característica por su ID")
     @GetMapping("/buscarCaracteristica/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Caracteristica> buscarCaracteristica(@PathVariable Integer id){
         Caracteristica caracteristica = caracteristicaService.buscarCaracteristica(id).orElse(null);
         return ResponseEntity.ok(caracteristica);
@@ -66,6 +69,7 @@ public class CaracteristicaController {
     //LISTAR TODAS
     @ApiOperation(value="listarCaracteristicas", notes="Listar todas las características")
     @GetMapping("/listarCaracteristicas")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Collection<Caracteristica>> listarCaracteristicas(){
         return ResponseEntity.ok(caracteristicaService.listarCaracteristicas());
     }

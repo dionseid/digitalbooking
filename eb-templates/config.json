@@ -1,7 +1,0 @@
-{
-    "auths": {
-        "$AWS_ECR_REGISTRY": {
-            "auth": "$AWS_ECR_AUTH"
-        }
-    }
-}

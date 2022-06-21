@@ -14,6 +14,7 @@ import java.util.Collection;
 @RestController
 @Api(tags = "Imágenes")
 @RequestMapping("/imagenes")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ImagenController {
     @Autowired
     private ImagenService imagenService;
@@ -26,6 +27,7 @@ public class ImagenController {
 
     @ApiOperation(value="buscarImagen", notes="Buscar una imágen por ID")
     @GetMapping("/buscarImagen/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Imagen> buscarImagen(@PathVariable Integer id){
         Imagen imagen = imagenService.buscarImagen(id).orElse(null);
         return ResponseEntity.ok(imagen);
@@ -57,6 +59,7 @@ public class ImagenController {
 
     @ApiOperation(value="listarImagenes", notes="Listar todas las imágenes")
     @GetMapping("/listarImagenes")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Collection<Imagen>> listarImagenes(){
         return ResponseEntity.ok(imagenService.listarImagen());
     }

@@ -8,53 +8,70 @@ import { useAccordionButton, Card } from "react-bootstrap";
 import Accordion from 'react-bootstrap/Accordion'
 
 
-const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
+const CardRecomendacion = ({ selectCiudad , selectCategoria, startDate, endDate}) => {
     const [dataProducto, setDataProducto] = useState([]);
     const [dataImagen, setImagen] = useState([]);
+    const [dataCaracteristicas, setCaracteristicas] = useState([]);
     const [idProducto, setIdProducto] = useState([]);
     const [verMas, setVerMas] = useState(false);
 
+    const fechaInicio = new Date(startDate).toISOString().slice(0,10);
+    const fechaFinal = new Date(endDate).toISOString().slice(0,10);
+    
+    const getUrl = () => selectCiudad ? `http://localhost:8080/productos/FiltroPorCiudadYFechas/${selectCiudad}/${fechaInicio}/${fechaFinal}`:"http://localhost:8080/productos/traerTodos"; 
 
-
-    const getUrl = () => selectCiudad ? `http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/filtroCiudad/${selectCiudad}` : "http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/traerTodos"
 
     useEffect(() => {
         axios.get(getUrl())
             .then(response => {
                 setDataProducto(response.data)
             })
-
-    }, [selectCiudad])
-
-    useEffect(() => {
-        axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/filtroCategoria/${selectCategoria}`)
+        
+        axios.get(`http://localhost:8080/imagenes`)
             .then(response => {
-                setDataProducto(response.data)
-            })
+                setImagen(response.data)
+            }) 
 
-    }, [selectCategoria])
+    }, [selectCiudad,startDate, endDate])
+
+    console.log(startDate);
+    useEffect(() => {
+        axios.get(`http://localhost:8080/caracteristicas`)
+            .then(response => {
+                setCaracteristicas(response.data)
+            })            
+    }, [])
+    
+
+    const getImage = (card) =>{
+        const imagenes = dataImagen.filter((img) => img.producto?.id == card.id);
+        //console.log("imagenes: ", imagenes);
+        return imagenes[0]?.url      
+    }
+    
+/*     const getCaracteristicas = (card) =>{
+        const caracteristicas = dataCaracteristicas.filter((c) => c.producto?.id == card.id);
+        return caracteristicas      
+    } */
+
 
     const filteredList = useMemo(() => {
-        if (!selectCiudad) { // Cuando selectCiudad es null entonces no filtrar
-            return selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
-        } else {
-            if (!selectCategoria) {   //cuando selectCategoria es null no filtrar por categoria, solo ciudad
-                return dataProducto.filter((prod) => prod.ciudad.id == selectCiudad)
-            }
-            return dataProducto.filter((prod) => prod.ciudad.id == selectCiudad && prod.categoria.id == selectCategoria)
-        }
-        return dataProducto;
+
+        return selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
+
 
     }, [dataProducto, selectCategoria, selectCiudad])
+
 
     //const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
 
     //const getFilteredCategoryList = () => selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
+    
     return (
         <div className="cards">
-            {filteredList.map((card) => (
-                <div key={card.id} className="cardRecomendacion">
-                    <div style={{ backgroundImage: "url('" + card.categoria.urlImg + "')" }} className="fondoImagen" />
+            {(filteredList?.map((card) => (
+               <div key={card.id} className="cardRecomendacion">
+                    <div style={{ backgroundImage: "url('" + getImage(card) + "')" }} className="fondoImagen" />
                     <div className="cardBody">
                         <div className="presentacion">
                             <div>
@@ -68,14 +85,19 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria }) => {
                         </div>
                         <div className="infoHotel">
                             <p><FontAwesomeIcon icon={faLocationDot} style={{ marginRight: "4px" }} />{card.ciudad.nombre} <span className="mostrarMapa">MOSTRAR EN EL MAPA</span></p>
-                            <p className="iconosInfoHotel"><FontAwesomeIcon icon={faWifi} style={{ marginRight: "8px" }} /><FontAwesomeIcon icon={faPersonSwimming} /></p>
+                            <p className="iconosInfoHotel">
+                                {dataCaracteristicas.filter((c)=>c.producto?.id == card.id)
+                                    .map((cat)=>(                            
+                                            <span class="material-symbols-outlined">{cat.icono}</span>
+                                    ))}
+                            </p> 
                         </div>
                         <p>{verMas ? card.descripcion : card.descripcion.split(' ', 8).join(" ")}<span className="mas" onClick={() => setVerMas(!verMas)}>
                             {verMas ? " ver menos" : " ver más..."}</span></p>
                         <Link to={`/productos/${card.id}`}><button className="buttonCard">ver más</button></Link>
-                    </div>
+                    </div>                    
                 </div>
-            ))}
+                )))}            
         </div>
     )
 

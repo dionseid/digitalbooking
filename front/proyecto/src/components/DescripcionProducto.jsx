@@ -9,7 +9,7 @@ const DescripcionProducto = () => {
         const [dataDescripcion, setDataDescripcion] = useState([]);
         const { id } = useParams();
         useEffect(() => {
-                axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/buscarProductoPorId/${id}`)
+                axios.get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
                         .then(response => {
                                 setDataDescripcion(response.data)
                         })

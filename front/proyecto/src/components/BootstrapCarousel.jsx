@@ -14,9 +14,8 @@ export default function BootstrapCarousel() {
   };
   const [dataImagen, setDataImagen] = useState([]);
   useEffect(() => {
-    axios.get("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/imagenes")
+    axios.get("http://localhost:8080/imagenes")
       .then(response => {
-        console.log(response.data);
         setDataImagen(response.data)
       })
 
@@ -24,7 +23,7 @@ export default function BootstrapCarousel() {
   return (
     <div>
       <Carousel activeIndex={index} onSelect={handleSelect}>
-        {dataImagen.filter((imagen) => imagen.producto.id == id)
+        {dataImagen.filter((imagen) => imagen.producto?.id == id)
           .map((item, index) => (
             <Carousel.Item key={item.id}>
               <img

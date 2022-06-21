@@ -19,12 +19,14 @@ import java.util.Optional;
 @RestController
 @Api(tags = "Productos")
 @RequestMapping("/productos")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
 
     @ApiOperation(value="ListarTodosLosProductos", notes="Listar todos los productos")
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/traerTodos")
     public ResponseEntity<List<Producto>> buscarTodosLosProductos(){
         return ResponseEntity.ok(productoService.listarProductos());
@@ -37,6 +39,7 @@ public class ProductoController {
     }
 
     @ApiOperation(value="buscarProducto", notes="Buscar un producto por ID")
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/buscarProductoPorId/{id}")
     public ResponseEntity<Optional<Producto>> buscarProducto (@PathVariable Integer id){
         Optional<Producto> producto = productoService.buscarProducto(id);
@@ -47,10 +50,12 @@ public class ProductoController {
     @PutMapping("/actualizarProd")
     public ResponseEntity<Producto> actualizarProducto(@RequestBody Producto producto){
         ResponseEntity<Producto> response=null;
+
         if (producto.getId() != null && productoService.buscarProducto(producto.getId()).isPresent())
             response = ResponseEntity.ok(productoService.actualizarProducto(producto));
         else
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
         return response;
     }
 
@@ -62,12 +67,14 @@ public class ProductoController {
     }
 
     @ApiOperation(value="filtroCategoria", notes="Buscar productos por categoría")
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/filtroCategoria/{id}")
     public ResponseEntity<List<Producto>> buscarPorCategoria(@PathVariable Integer id){
         return ResponseEntity.ok(productoService.buscarPorCategoria(id));
     }
 
     @ApiOperation(value="filtroCiudad", notes="Buscar productos por ciudad")
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/filtroCiudad/{id}")
     public ResponseEntity<List<Producto>> buscarPorCiudad(@PathVariable Integer id){
         return ResponseEntity.ok(productoService.buscarPorCiudad(id));

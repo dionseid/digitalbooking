@@ -5,13 +5,17 @@ import { GrupoInput, IconoValidacion, Input, Label, ParrafoError } from './eleme
 const ComponenteInput = ({estado, cambiarEstado, tipo, label, placeholder, name, parrafoError, expresionRegular, funcion}) => {
 	const onChange = (e) => {
 		const { value } = e.target
-		cambiarEstado({ valido: value !== '' , campo: value});
+		
+			cambiarEstado({ valido: value !== '' , campo: value});
+		
+		
 	}
 
 	const validacion = () => {
+		
 		if(expresionRegular){
 			if(expresionRegular.test(estado.campo)){
-				cambiarEstado({...estado, valido: 'true'});
+			cambiarEstado({...estado, valido: 'true'});
 			} else {
 				cambiarEstado({...estado, valido: 'false'});
 			}

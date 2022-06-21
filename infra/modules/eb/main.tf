@@ -72,7 +72,7 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     value     = join(",", var.private_subnets)
   }
 
-  # LB --»
+  /* --------------------------------- LB --------------------------------- */
 
   setting {
     namespace = "aws:ec2:vpc"
@@ -80,7 +80,167 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     value     = join(",", var.public_subnets)
   }
 
-  # instances --»
+  # listener --»
+
+  setting {
+    name      = "Rules"
+    namespace = "aws:elbv2:listener:default"
+    resource  = ""
+    value     = "politicas,imagenes,caracteristicas,categorias,productos,ciudades"
+  }
+
+  # processes --»
+
+  setting {
+    name      = "Protocol"
+    namespace = "aws:elasticbeanstalk:environment:process:default8080"
+    resource  = ""
+    value     = "HTTP"
+  }
+
+  setting {
+    name      = "Port"
+    namespace = "aws:elasticbeanstalk:environment:process:default8080"
+    resource  = ""
+    value     = "8080"
+  }
+
+  setting {
+    name      = "HealthCheckPath"
+    namespace = "aws:elasticbeanstalk:environment:process:default8080"
+    resource  = ""
+    value     = "/ciudades"
+  }
+
+  # rules --»
+
+  setting {
+    name      = "Priority"
+    namespace = "aws:elbv2:listenerrule:caracteristicas"
+    resource  = ""
+    value     = "5"
+  }
+
+  setting {
+    name      = "Priority"
+    namespace = "aws:elbv2:listenerrule:categorias"
+    resource  = ""
+    value     = "2"
+  }
+
+  setting {
+    name      = "Priority"
+    namespace = "aws:elbv2:listenerrule:ciudades"
+    resource  = ""
+    value     = "1"
+  }
+
+  setting {
+    name      = "Priority"
+    namespace = "aws:elbv2:listenerrule:imagenes"
+    resource  = ""
+    value     = "4"
+  }
+
+  setting {
+    name      = "Priority"
+    namespace = "aws:elbv2:listenerrule:politicas"
+    resource  = ""
+    value     = "6"
+  }
+
+  setting {
+    name      = "Priority"
+    namespace = "aws:elbv2:listenerrule:productos"
+    resource  = ""
+    value     = "3"
+  }
+
+  setting {
+    name      = "PathPatterns"
+    namespace = "aws:elbv2:listenerrule:caracteristicas"
+    resource  = ""
+    value     = "/caracteristicas"
+  }
+
+  setting {
+    name      = "PathPatterns"
+    namespace = "aws:elbv2:listenerrule:categorias"
+    resource  = ""
+    value     = "/categorias"
+  }
+
+  setting {
+    name      = "PathPatterns"
+    namespace = "aws:elbv2:listenerrule:ciudades"
+    resource  = ""
+    value     = "/ciudades"
+  }
+
+  setting {
+    name      = "PathPatterns"
+    namespace = "aws:elbv2:listenerrule:imagenes"
+    resource  = ""
+    value     = "/imagenes"
+  }
+
+  setting {
+    name      = "PathPatterns"
+    namespace = "aws:elbv2:listenerrule:politicas"
+    resource  = ""
+    value     = "/politicas"
+  }
+
+  setting {
+    name      = "PathPatterns"
+    namespace = "aws:elbv2:listenerrule:productos"
+    resource  = ""
+    value     = "/productos/*"
+  }
+
+  setting {
+    name      = "Process"
+    namespace = "aws:elbv2:listenerrule:caracteristicas"
+    resource  = ""
+    value     = "default8080"
+  }
+
+  setting {
+    name      = "Process"
+    namespace = "aws:elbv2:listenerrule:categorias"
+    resource  = ""
+    value     = "default8080"
+  }
+
+  setting {
+    name      = "Process"
+    namespace = "aws:elbv2:listenerrule:ciudades"
+    resource  = ""
+    value     = "default8080"
+  }
+
+  setting {
+    name      = "Process"
+    namespace = "aws:elbv2:listenerrule:imagenes"
+    resource  = ""
+    value     = "default8080"
+  }
+
+  setting {
+    name      = "Process"
+    namespace = "aws:elbv2:listenerrule:politicas"
+    resource  = ""
+    value     = "default8080"
+  }
+
+  setting {
+    name      = "Process"
+    namespace = "aws:elbv2:listenerrule:productos"
+    resource  = ""
+    value     = "default8080"
+  }
+
+  /* ------------------------------ instances ----------------------------- */
 
   setting {
     namespace = "aws:ec2:instances"
@@ -169,4 +329,8 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     namespace = "aws:rds:dbinstance"
     value     = "false"
   }
+}
+
+output "cname" {
+  value = aws_elastic_beanstalk_environment.beanstalk_app_env.cname
 }

@@ -5,7 +5,6 @@ import com.grupo8.digitalbooking.service.UsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +36,6 @@ public class UsuarioController {
         return ResponseEntity.ok("Se eliminó el usuario correctamente");
     }
 
-    //hacer post login
-    //@PostMapping("/login")
+//    hacer post login
+//    @PostMapping("/login")
 }

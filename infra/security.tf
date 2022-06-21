@@ -21,7 +21,7 @@ resource "aws_security_group_rule" "app_ssh_ingress" { # attributes as blocks --
   from_port                = 22
   to_port                  = 22
   protocol                 = "tcp"
-  source_security_group_id = aws_security_group.g8_cloud9_sg.id # Con el mecanismo de membresía de grupo nos evitamos la gestión de IPs, que pueden ser cambiantes
+  source_security_group_id = tolist(module.cloud9.bastion_instace_sg)[0] # Con el mecanismo de membresía de grupo nos evitamos la gestión de IPs, que pueden ser cambiantes
 }
 
 resource "aws_security_group_rule" "app_http_ingress" {
@@ -64,7 +64,7 @@ resource "aws_security_group" "g8_rds_sg" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [aws_security_group.g8_app_sg.id]
+    security_groups = [aws_security_group.g8_app_sg.id, tolist(module.cloud9.bastion_instace_sg)[0], aws_security_group.g8_ingress_sg.id] # Probando Bastion https://aws.amazon.com/es/premiumsupport/knowledge-center/rds-mysql-ssh-workbench-connect-ec2/#:~:text=Open%20MySQL%20Workbench.,address%20of%20your%20EC2%20instance.
   }
 }
 
@@ -102,36 +102,27 @@ resource "aws_security_group_rule" "lb_https_ingress" {
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
-resource "aws_security_group" "g8_cloud9_sg" { # ❗ Cloud9 automáticamente ya desplegaría su propie SG
-  name   = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-cloud9-sg${var.environment_name != "" ? "-${var.environment_name}" : ""}"
-  vpc_id = module.vpc.vpc_id
+# resource "aws_security_group" "g8_cloud9_sg" { # ❗ Cloud9 automáticamente ya desplegaría su propie SG
+#   name   = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-cloud9-sg${var.environment_name != "" ? "-${var.environment_name}" : ""}"
+#   vpc_id = module.vpc.vpc_id
 
-  tags = {
-    Role = "public"
-  }
+#   tags = {
+#     Role = "public"
+#   }
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
+#   egress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+# }
 
-resource "aws_security_group_rule" "cloud9_http_ingress" {
-  security_group_id = aws_security_group.g8_cloud9_sg.id
+resource "aws_security_group_rule" "cloud9_ingress" {
+  security_group_id = tolist(module.cloud9.bastion_instace_sg)[0]
   type              = "ingress"
-  from_port         = 80
-  to_port           = 80
+  from_port         = 22
+  to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-}
-
-resource "aws_security_group_rule" "cloud9_https_ingress" {
-  security_group_id = aws_security_group.g8_cloud9_sg.id
-  type              = "ingress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = ["0.0.0.0/0", "170.239.90.87/32"]
 }

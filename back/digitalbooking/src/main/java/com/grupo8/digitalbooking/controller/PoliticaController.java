@@ -14,6 +14,7 @@ import java.util.Collection;
 @RestController
 @Api(tags = "Políticas")
 @RequestMapping("/politicas")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 
 public class PoliticaController {
     @Autowired
@@ -27,6 +28,7 @@ public class PoliticaController {
 
     @ApiOperation(value="buscarPolitica", notes="Buscar una política por ID")
     @GetMapping("/buscarPolitica/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Politica> buscarPolitica (@PathVariable Integer id){
         Politica politica= politicaService.buscarPolitica(id).orElse(null);
         return  ResponseEntity.ok(politica);
@@ -36,6 +38,7 @@ public class PoliticaController {
     @PutMapping("/actualizarPolitica")
     public ResponseEntity<Politica> actualizarPolitica(@RequestBody Politica politica){
         ResponseEntity<Politica> response;
+
         if (politica.getId()!=null && politicaService.buscarPolitica(politica.getId()).isPresent())
             response= ResponseEntity.ok(politicaService.actualizarPolitica(politica));
         else
@@ -57,6 +60,7 @@ public class PoliticaController {
 
     @ApiOperation(value="listarPoliticas", notes="Listar todas las políticas")
     @GetMapping("/listarPoliticas")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Collection<Politica>> listarPoliticas(){
         return ResponseEntity.ok(politicaService.listarPoliticas());
     }
