@@ -157,6 +157,10 @@ deploy_to_production: #&deploy_to_production
     #     - front/proyecto/*
     #     - back/digitalbooking/*
   needs: ["backend", "frontend"]
+    # - job: backend
+    #   optional: false
+    # - job: frontend
+    #   optional: false
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
