@@ -104,7 +104,7 @@ infrastructure:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
 
-.deploy_to_production: &deploy_to_production
+deploy_to_production: #&deploy_to_production
   stage: deploy
   image:
     name: amazon/aws-cli:2.4.11
