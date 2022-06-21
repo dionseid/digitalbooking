@@ -4,10 +4,9 @@ import React, {useState} from 'react';
 const Context = React.createContext({})
 
 export function FechaRangoContextProvider ({children}) {
-  const [fechaInicio, setFechaInicio] = useState([null]);
-  const [fechaFinal, setFechaFinal] = useState([null]);
+  const [rango, setRango] = useState([null, null]);
 
-  return <Context.Provider value={{fechaInicio, setFechaInicio, fechaFinal, setFechaFinal}}>
+  return <Context.Provider value={{rango, setRango}}>
     {children}
   </Context.Provider>
 }

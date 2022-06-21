@@ -14,16 +14,7 @@ import UbicacionProducto from '../components/UbicacionProducto';
 import "../styles/pages/reserva.css";
 
 export default function Reserva() {
-  const {rango, setRango} = useContext(FechaRangoContextProvider);
-  const {id} = useParams
-/*   const [idP, setIdP ]= useState([]);
-  const {idProducto} = useContext(IdProductoContextProvider);
-  console.log("reserva: ", idProducto);
-  useEffect(() => {
-    setIdP(idProducto);
-    
-    
-  }, [idProducto]) */
+
   
 
   

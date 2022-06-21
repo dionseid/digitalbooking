@@ -94,7 +94,7 @@ const Productos = () => {
             <h2>Fechas disponibles</h2>
             <div className="contenedorCalendario">            
                 <div>
-                <Calendario /> 
+                <Calendario />
                 </div>             
                 <div className="contendorReserva">
                   <p>Agregá tus fechas de viaje para obtener precios exactos</p>

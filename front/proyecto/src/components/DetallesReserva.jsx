@@ -14,11 +14,14 @@ import FechaRangoContextProvider from "./context/FechaRangoContextProvider";
 
 
 export default function DetallesReserva() {
-  const {fechaInicio, setFechaInicio, fechaFinal, setFechaFinal} = useContext(FechaRangoContextProvider);
+    const {rango, setRango} = useContext(FechaRangoContextProvider);
+    console.log("rango: ", rango);
     const [dataProducto, setDataProducto] = useState([]);
     const [dataImagen, setDataImagen] = useState([]);
     const {id} = useParams();
 
+    const fechaInicio = rango[0] ? new Date(rango[0]).toISOString().slice(0,10): "_/_/_";
+    const fechaFinal = rango[1] ? new Date(rango[1]).toISOString().slice(0,10): "_/_/_";
     
     
     useEffect( () => {
@@ -72,12 +75,12 @@ export default function DetallesReserva() {
           <div className='linea'/>
           <div className='check'>
             <p>Check in</p>
-            <p>fecha</p>
+            <p>{fechaInicio}</p>
           </div>
           <div className='linea'/>
           <div className='check'>
             <p>Check out</p>
-            <p>fecha</p>
+            <p>{fechaFinal}</p>
           </div>
           <Link to='/reservaExitosa'><button className='confirmarReserva'>Confirmar reserva</button></Link>
         </div>

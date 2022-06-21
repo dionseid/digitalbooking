@@ -10,33 +10,47 @@ import '../styles/calendario.css';
 import { Container, Row, Col } from "react-bootstrap";
 import FechaRangoContextProvider from "./context/FechaRangoContextProvider";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 
 
 const Calendario = () => {
-  //const {fechaInicio, setFechaInicio, fechaFinal, setFechaFinal} = useContext(FechaRangoContextProvider);
+  const {rango, setRango} = useContext(FechaRangoContextProvider);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
+  const {id} = useParams();
 
   const [dataReservas, setDataReservas] = useState([]);
+  setRango(dateRange);
   
+
+
   useEffect( () => {
       axios.get("http://localhost:8080/reserva")
       .then(response => {
         setDataReservas(response.data)})
+        
   
   }, [])
-
-
-
   
-/*   useMemo(() =>{
-    setFechaInicio(startDate)
-    setFechaFinal(endDate)
-  }, [startDate, endDate])
-  console.log(fechaInicio);
-  console.log(fechaFinal); */
+  const getFechasReservadas = () =>{
+    const reservas = dataReservas?.data?.filter((reserva) => reserva.producto?.id == id).map((fecha)=>(
+                
+      {start: new Date(fecha.fechaInicial), end: new Date(fecha.fechaFinal)}
   
+    ));
+    return reservas    
+  }
+
+
+  //console.log(getFechasReservadas()?.map((date)=>(date.start)));
+  
+/*   const fechasNo = [
+    { start: new Date("Dec 11 2022"), end: new Date("Dec 12 2022") }
+    ]
+  
+  console.log("fechasNo: ", fechasNo); */
+
   registerLocale("es", es);
   setDefaultLocale("es"); 
 
@@ -48,9 +62,8 @@ const Calendario = () => {
         {matches => {
         return matches ? 
             <DatePicker
-              excludeDateIntervals={[
-                { start: new Date("Jun 8 2022"), end: new Date("Jun 19 2022") },
-                ]}
+              excludeDateIntervals={getFechasReservadas()}
+              excludeDates={getFechasReservadas()?.map((date)=>(date.start))}
                 selected={startDate}    
                 selectsRange={true}
                 startDate={startDate}
@@ -64,9 +77,8 @@ const Calendario = () => {
             />
             :
             <DatePicker
-            excludeDateIntervals={[
-              { start: new Date("Jun 8 2022"), end: new Date("Jun 19 2022") },
-              ]}      
+            excludeDateIntervals={getFechasReservadas()}
+            excludeDates={getFechasReservadas()?.map((date)=>(date.start))}      
               selectsRange={true}
               startDate={startDate}
               endDate={endDate}
