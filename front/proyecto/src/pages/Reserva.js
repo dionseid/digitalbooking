@@ -13,11 +13,7 @@ import TituloProducto from '../components/TituloProducto';
 import UbicacionProducto from '../components/UbicacionProducto';
 import "../styles/pages/reserva.css";
 
-export default function Reserva() {
-
-  
-
-  
+export default function Reserva() {  
   return (
     <>
     <header>

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
@@ -11,14 +11,19 @@ import "../styles/reservaDetalle.css";
 import { Button } from 'react-bootstrap';
 import { Boton } from './elementStyle/Form';
 import FechaRangoContextProvider from "./context/FechaRangoContextProvider";
+import HoraContextProvider from './context/HoraContextProvider';
 
 
 export default function DetallesReserva() {
+    const {isHora, setIsHora} = useContext(HoraContextProvider);
     const {rango, setRango} = useContext(FechaRangoContextProvider);
     console.log("rango: ", rango);
     const [dataProducto, setDataProducto] = useState([]);
     const [dataImagen, setDataImagen] = useState([]);
     const {id} = useParams();
+    const navigate = useNavigate();
+    const [formularioValido, setFormularioValido] = useState(false);
+
 
     const fechaInicio = rango[0] ? new Date(rango[0]).toISOString().slice(0,10): "_/_/_";
     const fechaFinal = rango[1] ? new Date(rango[1]).toISOString().slice(0,10): "_/_/_";
@@ -53,6 +58,17 @@ export default function DetallesReserva() {
         }
     }
 
+    console.log("isHora:", isHora);
+
+    const onSubmit = (e) => {
+      e.preventDefault();
+      if(rango[0]!== null && rango[1]!== null && isHora){
+        navigate(`/reservaExitosa`)
+      }
+      
+
+  }
+
 
 
 
@@ -82,7 +98,7 @@ export default function DetallesReserva() {
             <p>Check out</p>
             <p>{fechaFinal}</p>
           </div>
-          <Link to='/reservaExitosa'><button className='confirmarReserva'>Confirmar reserva</button></Link>
+          <button className='confirmarReserva' onClick={onSubmit}>Confirmar reserva</button>
         </div>
         
         </div>

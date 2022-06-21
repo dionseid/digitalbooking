@@ -10,6 +10,7 @@ import Reserva from './pages/Reserva';
 import { FechaRangoContextProvider } from './components/context/FechaRangoContextProvider';
 import ReservaExitosa from './pages/ReservaExitosa';
 import {UserProvider} from './components/context/UserContext';
+import { HoraContextProvider } from './components/context/HoraContextProvider';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <UserProvider>
           <Sidebar pageWrapId={'page-wrap'} authenticated={user?.user.auth} />
           <FechaRangoContextProvider>
+            <HoraContextProvider>
             <Routes>
               <Route path='/' element={<Home  authenticated={user?.user.auth}/>} />
               <Route path='/login' element={<Login />} />
@@ -31,6 +33,7 @@ function App() {
                 <Route path='/producto/:id/reserva' element={<Reserva/>} />
                 <Route path='/reservaExitosa' element={<ReservaExitosa/>} />
             </Routes>
+            </HoraContextProvider>
           </FechaRangoContextProvider>
       </UserProvider>
         </BrowserRouter>
