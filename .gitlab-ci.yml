@@ -107,7 +107,7 @@ infrastructure:
       when: always
   
 
-deploy_to_production: #&deploy_to_production
+deploy to production: #&deploy_to_production
   stage: deploy
   image:
     name: amazon/aws-cli:2.4.11

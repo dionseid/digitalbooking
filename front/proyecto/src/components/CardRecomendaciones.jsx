@@ -20,7 +20,7 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria, selectDate}) => {
     const getUrl = () => selectCiudad ? `http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/filtroCiudad/${selectCiudad}` : "http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/traerTodos"
 
     useEffect(() => {
-        axios.get('http://localhost:8080/productos/traerTodos')
+        axios.get('http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/traerTodos')
             .then(response => {
                 setDataProducto(response.data)
             })

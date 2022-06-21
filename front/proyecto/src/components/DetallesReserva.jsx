@@ -18,13 +18,13 @@ export default function DetallesReserva() {
     const {id} = useParams();
     
     useEffect( () => {
-        axios.get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
+        axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/buscarProductoPorId/${id}`)
         .then(response => {
             setDataProducto(response.data)})
     }, [])
 
     useEffect( () => {
-      axios.get(`http://localhost:8080/imagenes`)
+      axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/imagenes`)
       .then(response => {
         setDataImagen(response.data)})
 
