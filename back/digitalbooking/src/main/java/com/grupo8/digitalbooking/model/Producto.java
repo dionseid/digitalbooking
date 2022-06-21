@@ -35,9 +35,9 @@ public class Producto {
     @JoinColumn(name = "categorias_id")
     private Categoria categoria;
 
-    @OneToMany(mappedBy= "producto", cascade = CascadeType.ALL)
+    /*@OneToMany(mappedBy= "producto", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Reserva> reservas;
+    private List<Reserva> reservas;*/
 
 
     public Producto(String nombre, String descripcion, Double latitud, Double longitud, Ciudad ciudad, Categoria categoria, List<Reserva> reservas) {
@@ -47,7 +47,7 @@ public class Producto {
         this.longitud = longitud;
         this.ciudad = ciudad;
         this.categoria = categoria;
-        this.reservas = reservas;
+        /*this.reservas = reservas;*/
     }
 
     public Producto() {
@@ -61,6 +61,6 @@ public class Producto {
         this.longitud = longitud;
         this.ciudad = ciudad;
         this.categoria = categoria;
-        this.reservas = reservas;
+        /*this.reservas = reservas;*/
     }
 }
