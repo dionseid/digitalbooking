@@ -1,5 +1,6 @@
 package com.grupo8.digitalbooking.service;
 
+import com.grupo8.digitalbooking.model.Reserva;
 import com.grupo8.digitalbooking.model.RolUsuario;
 import com.grupo8.digitalbooking.model.Usuario;
 import com.grupo8.digitalbooking.repository.RolUsuarioRepository;
@@ -66,14 +67,15 @@ public class UsuarioService implements UserDetailsService {
         return usuarioRepository.findById(id);
     }
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepository.findByUsername(username);
         String rol = usuario.getRol().getNombre();
-
+        System.out.println(rol);
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities.add(new SimpleGrantedAuthority(rol));
+
         return new User(username, usuario.getPassword(), true, true, true, true, authorities);
     }
-
 }
