@@ -3,7 +3,7 @@
 
 
 
-variables: &variables
+variables:
   APP_VERSION: $CI_PIPELINE_IID
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
@@ -11,6 +11,7 @@ variables: &variables
   # DEPLOY_W_FRONT: "true"
   # $DEPLOY_W_BACK: "false"
   # $DEPLOY_W_FRONT: "false"
+  ALLOW_DEPLOYMENT: ""
 
 include: cancel_pipeline_functions.yml
 
@@ -91,6 +92,9 @@ backend:
     PARENT_PIPELINE_ID: $APP_VERSION
     # DEPLOY_W_BACK: "OK"
   allow_failure: true
+  artifacts: 
+    paths: 
+      - allowDeployment.txt
 
 infrastructure:
   stage: build
@@ -115,8 +119,12 @@ deploy to production: #&deploy_to_production
   variables:
     APP_NAME: remo-digitalbooking-prod
     APP_ENV_NAME: remo-digitalbooking-env-prod
+  dependencies: 
+    - frontend 
+    - backend script
   environment: production
   before_script:
+    - ALLOW_DEPLOYMENT=$(cat allowDeployment.text)
     - aws --version
     - yum install -y gettext
     - yum install -y zip
@@ -134,7 +142,9 @@ deploy to production: #&deploy_to_production
     - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev-$APP_VERSION.zip
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
     - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
-  #needs: ["frontend", "backend"]
+  after_script:
+    - echo "false" > allowDeployment.txt
+  needs: ["frontend", "backend"]
     #- curl http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com | grep "ver más"
   #   if_exists: true
   # rules:
@@ -154,12 +164,12 @@ deploy to production: #&deploy_to_production
     # - job: frontend
     #   optional: false
   rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop") && $ALLOW_DEPLOYMENT == "true"
       changes:
         - front/proyecto/*
         - back/digitalbooking/*
       when: on_success
-    - if: $CI_PIPELINE_SOURCE != "schedule"
+    - if: $CI_PIPELINE_SOURCE != "schedule" && $ALLOW_DEPLOYMENT == "true"
       changes:
         - front/proyecto/*
         - back/digitalbooking/*
