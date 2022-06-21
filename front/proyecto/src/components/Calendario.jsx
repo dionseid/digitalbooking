@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect, useContext, useMemo } from "react";
 //import Calendar from "react-calendar";
 //import 'react-calendar/dist/Calendar.css';
 import Media from "react-media";
@@ -8,14 +8,34 @@ import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
 import '../styles/calendario.css';
 import { Container, Row, Col } from "react-bootstrap";
+import FechaRangoContextProvider from "./context/FechaRangoContextProvider";
+import axios from "axios";
 
 
 
 const Calendario = () => {
-  const [value, onChange] = useState(new Date());
+  //const {fechaInicio, setFechaInicio, fechaFinal, setFechaFinal} = useContext(FechaRangoContextProvider);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
 
+  const [dataReservas, setDataReservas] = useState([]);
+  
+  useEffect( () => {
+      axios.get("http://localhost:8080/reserva")
+      .then(response => {
+        setDataReservas(response.data)})
+  
+  }, [])
+
+
+
+  
+/*   useMemo(() =>{
+    setFechaInicio(startDate)
+    setFechaFinal(endDate)
+  }, [startDate, endDate])
+  console.log(fechaInicio);
+  console.log(fechaFinal); */
   
   registerLocale("es", es);
   setDefaultLocale("es"); 
@@ -30,11 +50,12 @@ const Calendario = () => {
             <DatePicker
               excludeDateIntervals={[
                 { start: new Date("Jun 8 2022"), end: new Date("Jun 19 2022") },
-                ]}      
-                selected={startDate}
+                ]}
+                selected={startDate}    
                 selectsRange={true}
                 startDate={startDate}
                 endDate={endDate}
+                minDate={new Date()}
                 onChange={(update) => {
                   setDateRange(update);
                 }}
@@ -46,10 +67,10 @@ const Calendario = () => {
             excludeDateIntervals={[
               { start: new Date("Jun 8 2022"), end: new Date("Jun 19 2022") },
               ]}      
-              selected={startDate}
               selectsRange={true}
               startDate={startDate}
               endDate={endDate}
+              minDate={new Date()}
               onChange={(update) => {
                 setDateRange(update);
               }}

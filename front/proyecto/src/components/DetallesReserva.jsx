@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,12 +10,16 @@ import {
 import "../styles/reservaDetalle.css";
 import { Button } from 'react-bootstrap';
 import { Boton } from './elementStyle/Form';
+import FechaRangoContextProvider from "./context/FechaRangoContextProvider";
 
 
 export default function DetallesReserva() {
+  const {fechaInicio, setFechaInicio, fechaFinal, setFechaFinal} = useContext(FechaRangoContextProvider);
     const [dataProducto, setDataProducto] = useState([]);
     const [dataImagen, setDataImagen] = useState([]);
     const {id} = useParams();
+
+    
     
     useEffect( () => {
         axios.get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
@@ -33,7 +37,6 @@ export default function DetallesReserva() {
   const getImage = () =>{
     if(dataImagen.length!==0){
       const imagenes = dataImagen.filter((img) => img.producto?.id == id);
-      console.log("imagenes: ", imagenes);
       return imagenes[0]?.url 
     }     
     }

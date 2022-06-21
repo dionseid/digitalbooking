@@ -8,33 +8,33 @@ import { useAccordionButton, Card } from "react-bootstrap";
 import Accordion from 'react-bootstrap/Accordion'
 
 
-const CardRecomendacion = ({ selectCiudad , selectCategoria, selectDate}) => {
+const CardRecomendacion = ({ selectCiudad , selectCategoria, startDate, endDate}) => {
     const [dataProducto, setDataProducto] = useState([]);
     const [dataImagen, setImagen] = useState([]);
     const [dataCaracteristicas, setCaracteristicas] = useState([]);
     const [idProducto, setIdProducto] = useState([]);
-    const [verMas, setVerMas] = useState(false);    
+    const [verMas, setVerMas] = useState(false);
+
+    const fechaInicio = new Date(startDate).toISOString().slice(0,10);
+    const fechaFinal = new Date(endDate).toISOString().slice(0,10);
+    
+    const getUrl = () => selectCiudad ? `http://localhost:8080/productos/FiltroPorCiudadYFechas/${selectCiudad}/${fechaInicio}/${fechaFinal}`:"http://localhost:8080/productos/traerTodos"; 
 
 
     useEffect(() => {
-        axios.get('http://localhost:8080/productos/traerTodos')
+        axios.get(getUrl())
             .then(response => {
                 setDataProducto(response.data)
             })
-
-    }, [selectCiudad])
-
-    useEffect(() => {
-        axios.get(`http://localhost:8080/productos/filtroCategoria/${selectCategoria}`)
-            .then(response => {
-                setDataProducto(response.data)
-            })
+        
         axios.get(`http://localhost:8080/imagenes`)
             .then(response => {
                 setImagen(response.data)
-            })            
-    }, [])
+            }) 
 
+    }, [selectCiudad,startDate, endDate])
+
+    console.log(startDate);
     useEffect(() => {
         axios.get(`http://localhost:8080/caracteristicas`)
             .then(response => {
@@ -45,49 +45,33 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria, selectDate}) => {
 
     const getImage = (card) =>{
         const imagenes = dataImagen.filter((img) => img.producto?.id == card.id);
-        console.log("imagenes: ", imagenes);
+        //console.log("imagenes: ", imagenes);
         return imagenes[0]?.url      
     }
     
-    const getCaracteristicas = (card) =>{
+/*     const getCaracteristicas = (card) =>{
         const caracteristicas = dataCaracteristicas.filter((c) => c.producto?.id == card.id);
         return caracteristicas      
-    }
+    } */
 
- 
 
     const filteredList = useMemo(() => {
-        if (!selectCiudad) { // Cuando selectCiudad es null entonces no filtrar
-            return selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
-        } else {
-            if (!selectCategoria) {   //cuando selectCategoria es null no filtrar por categoria, solo ciudad
-                return dataProducto.filter((prod) => prod.ciudad.id == selectCiudad)
-            }
-            return dataProducto.filter((prod) => prod.ciudad.id == selectCiudad && prod.categoria.id == selectCategoria)
-        }
-        return dataProducto;
+
+        return selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
+
 
     }, [dataProducto, selectCategoria, selectCiudad])
 
-/*     const getImage = (card) =>{
-        if(dataImagen.length > 0){
-            const imagenes = dataImagen.filter((img) => img.producto == card);
-            console.log(imagenes[0].url);
-            return imagenes[0].url
-            }
-            return "https://images.pexels.com/photos/11125429/pexels-photo-11125429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-         
-    } */
-//console.log(getImage());
 
     //const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
 
     //const getFilteredCategoryList = () => selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
+    
     return (
         <div className="cards">
             {(filteredList?.map((card) => (
                <div key={card.id} className="cardRecomendacion">
-                    <div style={{ backgroundImage: "url('" + /* getImage(card) */ + "')" }} className="fondoImagen" />
+                    <div style={{ backgroundImage: "url('" + getImage(card) + "')" }} className="fondoImagen" />
                     <div className="cardBody">
                         <div className="presentacion">
                             <div>

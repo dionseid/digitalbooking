@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import Calendar from 'react-calendar';
 import { useParams } from 'react-router';
 import Calendario from '../components/Calendario';
-import IdProductoContextProvider from '../components/context/IdProductoContext';
+import FechaRangoContextProvider from '../components/context/FechaRangoContextProvider';
 import DatosUsuario from '../components/DatosUsuario';
 import DetallesReserva from '../components/DetallesReserva';
 import Footer from '../components/Footer'
@@ -14,6 +14,7 @@ import UbicacionProducto from '../components/UbicacionProducto';
 import "../styles/pages/reserva.css";
 
 export default function Reserva() {
+  const {rango, setRango} = useContext(FechaRangoContextProvider);
   const {id} = useParams
 /*   const [idP, setIdP ]= useState([]);
   const {idProducto} = useContext(IdProductoContextProvider);
@@ -23,7 +24,7 @@ export default function Reserva() {
     
     
   }, [idProducto]) */
-
+  
 
   
   return (
