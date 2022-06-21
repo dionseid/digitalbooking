@@ -16,11 +16,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/productos")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/traerTodos")
     public ResponseEntity<List<Producto>> buscarTodosLosProductos(){
         return ResponseEntity.ok(productoService.listarProductos());
@@ -30,7 +32,7 @@ public class ProductoController {
     public ResponseEntity<Producto> agregarProducto(@RequestBody Producto producto){
         return ResponseEntity.ok(productoService.agregarProducto(producto));
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/buscarProductoPorId/{id}")
     public ResponseEntity<Optional<Producto>> buscarProducto (@PathVariable Integer id){
         Optional<Producto> producto = productoService.buscarProducto(id);
@@ -55,11 +57,13 @@ public class ProductoController {
         return ResponseEntity.ok("Se eliminó el producto correctamente");
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/filtroCategoria/{id}")
     public ResponseEntity<List<Producto>> buscarPorCategoria(@PathVariable Integer id){
         return ResponseEntity.ok(productoService.buscarPorCategoria(id));
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/filtroCiudad/{id}")
     public ResponseEntity<List<Producto>> buscarPorCiudad(@PathVariable Integer id){
         return ResponseEntity.ok(productoService.buscarPorCiudad(id));

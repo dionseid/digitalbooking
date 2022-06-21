@@ -24,7 +24,7 @@ const Galeria = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/imagenes")
+    axios.get("http://localhost:8080/imagenes")
       .then(response => {
         setDataImagen(response.data)
       })
@@ -35,7 +35,7 @@ const Galeria = () => {
     <SimpleReactLightbox>
       <SRLWrapper>
         <ImageList variant="quilted" cols={4} rowHeight={200}>
-          {dataImagen.filter((imagen) => imagen.producto.id == id)
+          {dataImagen.filter((imagen) => imagen.producto?.id == id)
             .map((item, index) => (
               <ImageListItem
                 key={item.id}

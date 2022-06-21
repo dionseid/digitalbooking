@@ -1,0 +1,87 @@
+.tablaDatos .fondoImagen{
+    height:300px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0%;
+}
+
+.contenedorTablaDetalle{
+    height:817px;
+}
+
+.contenedorEstrellas{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.linea {
+    border-top: 1px solid #F0572D;
+    height: 2px;
+    width: 98%;
+    padding: 0;
+    margin: 20px auto 0 auto;
+}
+
+.check{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top:19px;
+    margin-bottom: 30px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.contenedorDetalle{
+    padding: 20px;
+}
+
+.contenedorDetalle p{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.contenedorDetalle span{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    color: #31363F;
+    opacity: 0.5;
+}
+
+.contenedorDetalle h2{
+    font-weight: 700;
+    font-size: 24px;
+    color: #31363F;
+}
+
+.tituloDetalleReserva{
+    padding-top: 20px;
+}
+
+.confirmarReserva{
+    background: #F0572D;
+    color: #DFE4EA;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    height: 50px;
+    width: 98%;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+	transition: .1s ease all;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.confirmarReserva:hover{
+    box-shadow: 3px 0px 30px rgba(163,163,163, 1);
+}

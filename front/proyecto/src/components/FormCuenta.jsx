@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import ComponenteInput from './ComponenteInput';
 import usuarios from "../helpers/usuarios.json"
+import axios from "axios";
+import axiosConnection from "../helpers/axiosConnection";
 
 
 
@@ -46,6 +48,25 @@ const isFormValid = () => {
     return nombre.valido && apellido.valido && email.valido && password.valido && password2.valido
 }
 
+
+// TODO - ver si se puede refactorizar para tambien utilizar en el componente de login
+const registroApi = async (data) => {
+    // ** CAMBIAR POR EL URL DE LA API
+    try{
+        const respuesta = await axios.post('/registro', data);
+        if(respuesta.status === 201){
+            sessionStorage.setItem('token', JSON.stringify(respuesta));
+            return respuesta;
+        }else{
+            throw new Error('Lamentablemente no ha podido registrarse. Por favor intente más tarde');
+        }
+    }
+    catch(error){
+        console.log(error);
+
+    }
+}
+
 const onSubmit = (e) => {
     e.preventDefault();
     const { usuarios: userList } = usuarios;
@@ -56,7 +77,8 @@ const onSubmit = (e) => {
         password: password.campo
     }
     if(isFormValid()){
-        userList.push(newUser);
+        registroApi(newUser);
+        // ! Revisar esto, si el formulario es valido tendria que ser true y si despues se va a login no tiene sentido que este 
         cambiarFormularioValido(false);
         navigate('/login');
     }else{
@@ -135,7 +157,9 @@ return (
             <ContenedorBotonCentrado className='contenedorBotonCentrado'>
                 <Boton type="submit">Crear Cuenta</Boton>
                 <p>¿Ya tienes una cuenta? <Link to='/login' className='link'><span>Iniciar sesión</span></Link></p>
-                {formularioValido === true && <MensajeExito>Formulario enviado exitosamente!</MensajeExito>}
+                {formularioValido === true &&<MensajeExito>Formulario enviado exitosamente!
+                {/*// TODO - hay que hacer uno de error para cuando no se puede registrar y no tendria que haber mensaje de exito, redirecciona al home*/}
+                </MensajeExito>}
             </ContenedorBotonCentrado>
         </Formulario>
         </div>

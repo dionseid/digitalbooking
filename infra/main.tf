@@ -50,9 +50,10 @@ module "vpc" {
   igw_tags = {
     Name = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-igw${var.environment_name != "" ? "-${var.environment_name}" : ""}"
   }
-  enable_nat_gateway     = true
-  single_nat_gateway     = true # The NAT gateway will be placed in the first public subnet in public_subnets block
-  one_nat_gateway_per_az = false
+  enable_nat_gateway                     = true
+  single_nat_gateway                     = true # The NAT gateway will be placed in the first public subnet in public_subnets block
+  one_nat_gateway_per_az                 = false
+  create_database_internet_gateway_route = false
   nat_gateway_tags = {
     Name        = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-ngw${var.environment_name != "" ? "-${var.environment_name}" : ""}"
     Description = "NAT gateway con EIP alocade a la subred pública"
@@ -117,3 +118,19 @@ module "ecr" {
   product_name     = var.product_name
   environment_name = var.environment_name
 }
+
+module "cloud9" {
+  source = "./modules/cloud9"
+
+  team_name        = var.team_name
+  product_name     = var.product_name
+  environment_name = var.environment_name
+  subnet_id        = module.vpc.public_subnets[1]
+  key_name         = aws_key_pair.key_public.key_name
+}
+
+# module "route53" {
+#   source = "./modules/route53"
+
+#   eb_endpoint = module.elastic_beanstalk_app.cname
+# }

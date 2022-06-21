@@ -17,6 +17,14 @@ const selectStyles = {
       justifyContent: 'space-between',
       alignItems: 'center'
     }),
+/*     placeholder:()=>({
+      fontFamily: "Font Awesome 5 Free",
+      fontStyle:"normal",
+      fontWeight: "500",
+      fontSize: "14px",
+      lineHeight: "16px",
+      marginLeft: "12px"
+    }), */
     singleValue: (provided, state) => {
       const opacity = state.isDisabled ? 0.5 : 1;
       const transition = 'opacity 300ms';
