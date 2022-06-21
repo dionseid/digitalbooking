@@ -15,12 +15,14 @@ public class ReservaController {
     @Autowired
     private ReservaService reservaService;
 
+    //crear query
+
     @GetMapping
     public ResponseEntity<Object> readAllReservas() throws Exception{
         return ResponseHandler.generateResponse("Listado de reservas", HttpStatus.OK, reservaService.readAll());
     }
 
-    @PostMapping
+    @PostMapping("/nuevaReserva")
     public ResponseEntity<Object> addReserva(@RequestBody Reserva reserva) throws Exception{
         return ResponseHandler.generateResponse("La reserva fue guardada con éxito", HttpStatus.OK, reservaService.newReserva(reserva));
     }
