@@ -47,7 +47,7 @@ build docker image:
         --silent --output /dev/null --show-error --fail \
         "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/FRONTEND_VERSION" --form "value=`echo $APP_VERSION`"
   after_script:
-    - echo "true" > allowDeployment.txt
+    - touch allowDeployment
   variables:
     DOCKER_DRIVER: overlay
 

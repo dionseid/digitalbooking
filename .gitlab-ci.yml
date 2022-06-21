@@ -92,9 +92,9 @@ backend:
     PARENT_PIPELINE_ID: $APP_VERSION
     # DEPLOY_W_BACK: "OK"
   allow_failure: true
-  artifacts: 
-    paths: 
-      - allowDeployment.txt
+  # artifacts: 
+  #   paths: 
+  #     - allowDeployment.txt
 
 infrastructure:
   stage: build
@@ -143,7 +143,7 @@ deploy to production: #&deploy_to_production
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
     - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
   after_script:
-    - echo "false" > allowDeployment.txt
+    - rm allowDeployment
   needs: ["frontend", "backend"]
     #- curl http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com | grep "ver más"
   #   if_exists: true
@@ -164,6 +164,8 @@ deploy to production: #&deploy_to_production
     # - job: frontend
     #   optional: false
   rules:
+    - exists:
+      - allowDeployment
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop") && $ALLOW_DEPLOYMENT == "true"
       changes:
         - front/proyecto/*
