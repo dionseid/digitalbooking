@@ -65,6 +65,7 @@ frontend:
     # <<: *variables
     PARENT_PIPELINE_ID: $APP_VERSION
     # DEPLOY_W_FRONT: "OK"
+  allow_failure: true
 
 backend:
   stage: build
@@ -89,6 +90,7 @@ backend:
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
     # DEPLOY_W_BACK: "OK"
+  allow_failure: true
 
 infrastructure:
   stage: build
@@ -103,6 +105,7 @@ infrastructure:
         - infra/*
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
+  
 
 deploy_to_production: #&deploy_to_production
   stage: deploy
