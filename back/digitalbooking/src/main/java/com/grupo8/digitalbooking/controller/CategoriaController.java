@@ -3,6 +3,7 @@ package com.grupo8.digitalbooking.controller;
 
 import com.grupo8.digitalbooking.model.Categoria;
 import com.grupo8.digitalbooking.service.CategoriaService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.Collection;
 
 //request a la bdd
 @RestController
+@Api(tags = "Categorías")
 @RequestMapping("/categorias")
 public class CategoriaController {
     @Autowired

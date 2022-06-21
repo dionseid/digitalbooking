@@ -2,6 +2,7 @@ package com.grupo8.digitalbooking.controller;
 
 import com.grupo8.digitalbooking.model.Ciudad;
 import com.grupo8.digitalbooking.service.CiudadService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import java.util.Collection;
 
 //Conexión con la bd
 @RestController
+@Api(tags = "Ciudades")
 @RequestMapping("/ciudades")
 public class CiudadController {
     @Autowired
