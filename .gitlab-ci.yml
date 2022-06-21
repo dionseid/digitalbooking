@@ -65,7 +65,6 @@ frontend:
     # <<: *variables
     PARENT_PIPELINE_ID: $APP_VERSION
     # DEPLOY_W_FRONT: "OK"
-  allow_failure: false
 
 backend:
   stage: build
@@ -90,7 +89,6 @@ backend:
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
     # DEPLOY_W_BACK: "OK"
-  allow_failure: false
 
 infrastructure:
   stage: build
@@ -158,7 +156,7 @@ infrastructure:
     #   changes:
     #     - front/proyecto/*
     #     - back/digitalbooking/*
-  when: manual
+  needs: ["backend", "frontend"]
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
@@ -169,26 +167,27 @@ infrastructure:
       changes:
         - front/proyecto/*
         - back/digitalbooking/*
+      when: manual
       # when: on_success
   # allow_failure: false
 
-deploy backend:
-  <<: *deploy_to_production
-  needs: ["backend"]
-  rules:
-    - if: $DEPLOY_W_BACK == "true"
+# deploy backend:
+#   <<: *deploy_to_production
+#   needs: ["backend"]
+#   rules:
+#     - if: $DEPLOY_W_BACK == "true"
 
-deploy frontend:
-  <<: *deploy_to_production
-  needs: ["frontend"]
-  rules:
-    - if: $DEPLOY_W_FRONT == "true"
+# deploy frontend:
+#   <<: *deploy_to_production
+#   needs: ["frontend"]
+#   rules:
+#     - if: $DEPLOY_W_FRONT == "true"
 
-general deployment:
-  <<: *deploy_to_production
-  needs: ["backend", "frontend"]
-  rules:
-    - if: $DEPLOY_W_BACK == "true" && $DEPLOY_W_FRONT == "true"
+# general deployment:
+#   <<: *deploy_to_production
+#   needs: ["backend", "frontend"]
+#   rules:
+#     - if: $DEPLOY_W_BACK == "true" && $DEPLOY_W_FRONT == "true"
 
 
 
