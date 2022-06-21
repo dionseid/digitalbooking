@@ -1,3 +1,14 @@
+**#Proyecto Integrador aplicación Digital Booking**
+##Certified Tech Developer, Digital House
+######Grupo 8
+- María Alejandra Pantano (@alepantano.ok)
+- Diana Sauval (@DianaSauval)
+- María Sofía Monasterio (@SofiMonasterio93)
+- Dionys Seidel (@dion.seid)
+- Sergio Andres Perez Amsler (@sergioperezamsler)
+- Franco Verón Peralta (@francoveronp)
+
+
 TESTING:
 
 - Template casos de prueba:
