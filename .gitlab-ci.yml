@@ -1,6 +1,6 @@
 include: 
-  - template: backend.gitlab-ci.yml
-  - template: front/proyecto/.gitlab-ci.yml
+  - local: 'backend.gitlab-ci.yml'
+  - local: '/front/proyecto/.gitlab-ci.yml'
 
 
 
