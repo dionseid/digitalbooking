@@ -164,8 +164,8 @@ deploy to production: #&deploy_to_production
     # - job: frontend
     #   optional: false
   rules:
-    - exists:
-      - allowDeployment
+    # - exists:
+    #   - allowDeployment
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop") && $ALLOW_DEPLOYMENT == "true"
       changes:
         - front/proyecto/*
