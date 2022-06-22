@@ -122,6 +122,7 @@ stage:
   needs: [backend, frontend]
   script:
     - echo "Staging"
+  when: on_success
 
 deploy to production: #&deploy_to_production
   stage: deploy
