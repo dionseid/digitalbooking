@@ -1,6 +1,7 @@
 include: 
-  - local: '/backend.gitlab-ci.yml'
-  - local: '/front/proyecto/.gitlab-ci.yml'
+  - backend.gitlab-ci.yml
+  - front/proyecto/.gitlab-ci.yml
+  - cancel_pipeline_functions.yml
 
 
 
@@ -14,8 +15,6 @@ variables:
   # $DEPLOY_W_BACK: "false"
   # $DEPLOY_W_FRONT: "false"
   # ALLOW_DEPLOYMENT: ""
-
-include: cancel_pipeline_functions.yml
 
 stages:
   - update
