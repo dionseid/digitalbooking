@@ -1,6 +1,6 @@
 include: 
-  - 'back/digitalbooking/.gitlab-ci.yml'
-  - 'front/proyecto/.gitlab-ci.yml'
+  - template: 'back/digitalbooking/.gitlab-ci.yml'
+  - template: 'front/proyecto/.gitlab-ci.yml'
 
 
 
