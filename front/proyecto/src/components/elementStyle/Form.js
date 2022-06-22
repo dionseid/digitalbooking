@@ -12,6 +12,7 @@ const Formulario = styled.form`
 	flex-direction: column;
 	margin-bottom: 55px;
 	margin-top: 70px;
+	background-color:#f3f3f3;
 `;
 
 const Label = styled.label`

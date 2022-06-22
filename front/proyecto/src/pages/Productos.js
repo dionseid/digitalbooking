@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import FechaRangoContextProvider from "../components/context/FechaRangoContextProvider";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,8 +20,8 @@ import DescripcionProducto from "../components/DescripcionProducto";
 import UbicacionProducto from "../components/UbicacionProducto";
 import TituloProducto from "../components/TituloProducto";
 import GoogleMaps from "../components/GoogleMaps";
-import IdProductoContextProvider from "../components/context/IdProductoContext";
 import UserProvider  from "../components/context/UserContext";
+
 
 const Productos = () => { 
   const navigate = useNavigate();
@@ -30,6 +31,21 @@ const Productos = () => {
   console.log(idProducto);
   setIdProducto(id)
   console.log(idProducto); */
+  
+
+  //const {rango, setRango} = useContext(FechaRangoContextProvider);
+
+/*   useEffect(() => {
+    if(dateRange !== null){
+      setRango(dateRange)
+    }
+  }, []) */
+  
+  
+
+
+  
+  //console.log("fecha inicial: ", rango[0]);
 
   const redireccionIsLogued = () => {
     if (user.auth){
@@ -78,7 +94,7 @@ const Productos = () => {
             <h2>Fechas disponibles</h2>
             <div className="contenedorCalendario">            
                 <div>
-                <Calendario/> 
+                <Calendario />
                 </div>             
                 <div className="contendorReserva">
                   <p>Agregá tus fechas de viaje para obtener precios exactos</p>

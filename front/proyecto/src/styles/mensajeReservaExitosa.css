@@ -8,7 +8,7 @@
     background-color:#f3f3f3;
 }
 
-.contenido{
+.contenidoMensajeReserva{
     width: 400px;
     height: 200px;
     background: #FFFFFF;    
@@ -23,7 +23,7 @@
     text-align: center;
 }
 
-.contenido .material-symbols-outlined {
+.contenidoMensajeReserva .material-symbols-outlined {
   font-variation-settings:
   'FILL' 1,
   'wght' 400,
@@ -32,7 +32,7 @@
 }
 
 
-.contenido .material-symbols-outlined{
+.contenidoMensajeReserva .material-symbols-outlined{
     font-size: 52px;
     color: #F0572D;
 }
@@ -44,19 +44,19 @@
     color: #F0572D;
 }
 
-.contenido p{
+.contenidoMensajeReserva p{
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
 }
 
-.contenido button{
+.contenidoMensajeReserva button{
     font-weight: 700;
     font-size: 16px;
 }
 
 @media screen and (max-width: 768px) {
-    .contenido{
+    .contenidoMensajeReserva{
         margin-top: 54%;
         max-width: 90%;
         height: 357px;

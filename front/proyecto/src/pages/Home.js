@@ -17,6 +17,8 @@ const Home = ({authenticated}) => {
   const {user, loginLogoutEvent } = useContext(UserProvider);
 
 
+  
+
   const handleClick = () =>{
     setFilter(search);
   }
@@ -35,7 +37,7 @@ const Home = ({authenticated}) => {
     <div id="page-wrap">
       <header>
         <Navbar authenticated={authenticated}  onClick={onClick}/>
-        <Banner startDate={startDate} endDate={endDate} setDateRange={setDateRange} onChange={setSearch} onClick={handleClick}/>
+        <Banner startDate={startDate} endDate={endDate}  setDateRange={setDateRange} onChange={setSearch} onClick={handleClick}/>
       </header>
       <body>
         <section className='Alojamiento'>
@@ -44,7 +46,7 @@ const Home = ({authenticated}) => {
         </section>
         <section className='Recomendaciones'>
           <h2>Recomendaciones</h2>
-          <CardRecomendacion selectCiudad={filter} selectCategoria={filterCategoria} selectDate={dateRange}/>
+          <CardRecomendacion selectCiudad={filter} selectCategoria={filterCategoria} startDate={startDate} endDate={endDate}/>
         </section>
       </body>
       <footer>
