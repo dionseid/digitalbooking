@@ -22,9 +22,11 @@ build frontend:
     - npm test
     - CI=false npm run build # Investigar 'CI=false'
     - echo $APP_VERSION > build/version.html
+    - echo "true" > front/allowDeploy
   artifacts:
     paths:
       - front/proyecto/build
+      - front/allowDeploy
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
