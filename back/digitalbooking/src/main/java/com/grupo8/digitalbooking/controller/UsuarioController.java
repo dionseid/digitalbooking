@@ -18,6 +18,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @ApiOperation(value="agregarUsuario", notes="Agregar un nuevo usuario")
+    @CrossOrigin(origins="http://localhost:3000/")
     @PostMapping("/agregarUsuario")
     public ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario){
         return ResponseEntity.ok(usuarioService.agregarUsuario(usuario));
