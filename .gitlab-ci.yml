@@ -119,6 +119,7 @@ stage:
   dependencies:
     - backend
     - frontend
+  needs: [backend, frontend]
   script:
     - echo "Staging"
 
