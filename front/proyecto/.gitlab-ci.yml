@@ -1,17 +1,17 @@
 variables:
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
-  TEAM: remo
+  # TEAM: remo
   APP: front
 
 # cache:
 #   paths:
 #     - front/proyecto/node_modules
 
-stages:
-  - build
-  - package
-  - test
-  - deploy
+# stages:
+#   - build
+#   - package
+#   - test
+#   - deploy
 
 build project:
   stage: build

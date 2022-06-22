@@ -1,17 +1,16 @@
 
 
-stages:
-  - build
-  - test
-  - package
-  - image
-  - deploy
+# stages:
+#   - build
+#   - test
+#   - package
+#   - image
+#   - deploy
 
 variables:
   MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
-  REPOSITORY_NAME: remo-digitalbooking-repo-prod
-  TEAM: remo
-  APP: back
+  # REPOSITORY_NAME: remo-digitalbooking-repo-prod
+  # TEAM: remo
 
 cache:
   paths:
@@ -53,7 +52,7 @@ build job:
 #     - docker --version
 #   script:
 #     - aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
-#     - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$APP_VERSION --cache-from $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest back/digitalbooking
+#     - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-$APP_VERSION --cache-from $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-latest back/digitalbooking
 #     - docker image ls
 #     - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
 #     - echo $APP_VERSION
