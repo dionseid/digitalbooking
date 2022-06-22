@@ -40,12 +40,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                             "/configuration/**"
                         ).permitAll()
                 .antMatchers("/usuarios/agregarUsuario").permitAll()
+                .antMatchers("/usuarios/listarTodos").permitAll()
+                .antMatchers("/usuarios/eliminarUsuario/**").permitAll()
+                .antMatchers("/usuarios/actualizarUsuario").permitAll()
                 .antMatchers("/roles/**").permitAll()
                 .antMatchers("/caracteristicas/**").permitAll()
                 .antMatchers("/caracteristicas/buscarCaracteristica/**").permitAll()
                 .antMatchers("/caracteristicas/listarCaracteristicas").permitAll()
                 .antMatchers("/categorias/**").permitAll()
-                .antMatchers("/ciudades").permitAll()
+                .antMatchers("/ciudades/**").permitAll()
                 .antMatchers("/imagenes/**").permitAll()
                 .antMatchers("/imagenes/listarImagenes").permitAll()
                 .antMatchers("/imagenes/buscarImagen/**").permitAll()
@@ -61,6 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //eliminar
                 .antMatchers("/productos/agregarProducto").permitAll()
                 .antMatchers("/reserva/listarReservas").permitAll()
+                .antMatchers("/productos/agregarProducto").hasAuthority("ADMIN")
                 .antMatchers("/reserva/nuevaReserva").hasAuthority("CLIENT")
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
