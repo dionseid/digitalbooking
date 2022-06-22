@@ -1,5 +1,5 @@
 include: 
-  - template: back/digitalbooking/.gitlab-ci.yml
+  - template: backend.gitlab-ci.yml
   - template: front/proyecto/.gitlab-ci.yml
 
 
