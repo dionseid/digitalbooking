@@ -51,28 +51,47 @@ avoid remaining:
     - if: $CI_PIPELINE_SOURCE == "schedule"
 
 build frontend:
-  extends: .build_frontend
   stage: build
-  # trigger:
-  #   include: front/proyecto/.gitlab-ci.yml
-  #   strategy: depend
-  rules:
-    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-      when: always
-      changes:
-        - front/proyecto/*
-    - if: $CI_PIPELINE_SOURCE != "schedule"
-      when: manual
-      changes:
-        - front/proyecto/*
-  variables:
-    # <<: *variables
-    PARENT_PIPELINE_ID: $APP_VERSION
-    # DEPLOY_W_FRONT: "OK"
-  allow_failure: false
-  # artifacts: 
-  #   paths: 
-  #     - front/allowDeployment
+  image: node:16-alpine
+  script:
+    - cd front/proyecto
+    - npm install --force
+    - npm test
+    - CI=false npm run build # Investigar 'CI=false'
+    - echo $APP_VERSION > build/version.html
+  artifacts:
+    paths:
+      - front/proyecto/build
+
+build backend:
+  stage: build
+  script:
+    - cd back/digitalbooking
+    - mvn compile
+
+# build frontend:
+#   extends: .build_frontend
+#   stage: build
+#   # trigger:
+#   #   include: front/proyecto/.gitlab-ci.yml
+#   #   strategy: depend
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+#       when: always
+#       changes:
+#         - front/proyecto/*
+#     - if: $CI_PIPELINE_SOURCE != "schedule"
+#       when: manual
+#       changes:
+#         - front/proyecto/*
+#   variables:
+#     # <<: *variables
+#     PARENT_PIPELINE_ID: $APP_VERSION
+#     # DEPLOY_W_FRONT: "OK"
+#   allow_failure: false
+#   # artifacts: 
+#   #   paths: 
+#   #     - front/allowDeployment
 
 # backend:
 #   stage: build
