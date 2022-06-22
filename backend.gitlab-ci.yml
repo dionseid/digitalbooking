@@ -17,7 +17,7 @@ cache:
     - back/digitalbooking/.m2/repository
     - back/digitalbooking/target
 
-build job:
+build backend:
   stage: build
   script:
     - cd back/digitalbooking
