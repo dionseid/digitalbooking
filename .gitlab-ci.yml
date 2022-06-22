@@ -119,6 +119,8 @@ stage:
   dependencies:
     - backend
     - frontend
+  script:
+    - echo "Staging"
 
 deploy to production: #&deploy_to_production
   stage: deploy
