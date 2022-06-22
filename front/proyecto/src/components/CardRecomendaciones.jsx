@@ -27,7 +27,7 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria, startDate, endDate}
                 setDataProducto(response.data)
             })
             // TODO Modificar url
-        axios.get(`http://localhost:8080/listarImagenes`)
+        axios.get(`http://localhost:8080/imagenes/listarImagenes`)
             .then(response => {
                 setImagen(response.data)
             }) 
@@ -36,7 +36,7 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria, startDate, endDate}
 
     console.log(startDate);
     useEffect(() => {
-        axios.get(`http://localhost:8080/listarCaracteristicas`)
+        axios.get(`http://localhost:8080/caracteristicas/listarCaracteristicas`)
             .then(response => {
                 setCaracteristicas(response.data)
             })            

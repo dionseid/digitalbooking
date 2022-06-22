@@ -40,16 +40,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                             "/configuration/**"
                         ).permitAll()
                 .antMatchers("/usuarios/agregarUsuario").permitAll()
-                .antMatchers("/roles").permitAll()
-                .antMatchers("/caracteristicas").permitAll()
+                .antMatchers("/roles/**").permitAll()
+                .antMatchers("/caracteristicas/**").permitAll()
                 .antMatchers("/caracteristicas/buscarCaracteristica/**").permitAll()
                 .antMatchers("/caracteristicas/listarCaracteristicas").permitAll()
                 .antMatchers("/categorias/**").permitAll()
                 .antMatchers("/ciudades").permitAll()
-                .antMatchers("/imagenes").permitAll()
+                .antMatchers("/imagenes/**").permitAll()
                 .antMatchers("/imagenes/listarImagenes").permitAll()
                 .antMatchers("/imagenes/buscarImagen/**").permitAll()
-                .antMatchers("/politicas").permitAll()
+                .antMatchers("/politicas/**").permitAll()
                 .antMatchers("/politicas/listarPoliticas").permitAll()
                 .antMatchers("/politicas/buscarPolitica/**").permitAll()
                 .antMatchers("/productos/traerTodos").permitAll()
@@ -57,8 +57,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/productos/filtroCategoria/**").permitAll()
                 .antMatchers("/productos/filtroCiudad/**").permitAll()
                 .antMatchers("/productos/FiltroPorCiudadYFechas/**").permitAll()
-//                .antMatchers("/productos/agregarProducto").hasAuthority("ADMIN")
-//                .antMatchers("/reserva/nuevaReserva").hasAuthority("CLIENT")
+                //.antMatchers("/productos/agregarProducto").hasAuthority("ADMIN")
+                //eliminar
+                .antMatchers("/productos/agregarProducto").permitAll()
+                .antMatchers("/reserva/nuevaReserva").hasAuthority("CLIENT")
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 

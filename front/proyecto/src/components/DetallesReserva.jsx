@@ -37,7 +37,7 @@ export default function DetallesReserva() {
 
     useEffect( () => {
       // TODO modificar url
-      axios.get(`http://localhost:8080/listarImagenes`)
+      axios.get(`http://localhost:8080/imagenes/listarImagenes`)
       .then(response => {
         setDataImagen(response.data)})
 
