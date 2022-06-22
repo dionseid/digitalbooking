@@ -25,11 +25,11 @@ build backend:
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
-        - back/digitalbooking/*
+        - /back/digitalbooking/*
       when: always
     - if: $CI_PIPELINE_SOURCE != "schedule"
       changes:
-        - back/digitalbooking/*
+        - /back/digitalbooking/*
       when: manual
 
 # test job:
