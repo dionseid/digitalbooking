@@ -29,6 +29,7 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria, selectDate}) => {
             .then(response => {
                 setDataProducto(response.data)
             })
+            // TODO Modificar url
         axios.get(`http://localhost:8080/imagenes`)
             .then(response => {
                 setImagen(response.data)
