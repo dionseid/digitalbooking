@@ -1,6 +1,6 @@
 include: 
   - backend.gitlab-ci.yml
-  - front/proyecto/.gitlab-ci.yml
+  - frontend.gitlab-ci.yml
   - cancel_pipeline_functions.yml
 
 
@@ -50,24 +50,24 @@ avoid remaining:
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
 
-build frontend:
-  stage: build
-  image: node:16-alpine
-  script:
-    - cd front/proyecto
-    - npm install --force
-    - npm test
-    - CI=false npm run build # Investigar 'CI=false'
-    - echo $APP_VERSION > build/version.html
-  artifacts:
-    paths:
-      - front/proyecto/build
+# build frontend:
+#   stage: build
+#   image: node:16-alpine
+#   script:
+#     - cd front/proyecto
+#     - npm install --force
+#     - npm test
+#     - CI=false npm run build # Investigar 'CI=false'
+#     - echo $APP_VERSION > build/version.html
+#   artifacts:
+#     paths:
+#       - front/proyecto/build
 
-build backend:
-  stage: build
-  script:
-    - cd back/digitalbooking
-    - mvn compile
+# build backend:
+#   stage: build
+#   script:
+#     - cd back/digitalbooking
+#     - mvn compile
 
 # build frontend:
 #   extends: .build_frontend
