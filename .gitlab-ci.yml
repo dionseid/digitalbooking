@@ -119,9 +119,9 @@ deploy to production: #&deploy_to_production
   variables:
     APP_NAME: remo-digitalbooking-prod
     APP_ENV_NAME: remo-digitalbooking-env-prod
-  dependencies: 
-    - frontend
-    - backend
+  # dependencies: 
+  #   - frontend
+  #   - backend
   environment: production
   before_script:
     - ALLOW_DEPLOYMENT=$(cat allowDeployment.text)
