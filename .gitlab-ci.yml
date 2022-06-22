@@ -11,7 +11,7 @@ variables:
   # DEPLOY_W_FRONT: "true"
   # $DEPLOY_W_BACK: "false"
   # $DEPLOY_W_FRONT: "false"
-  ALLOW_DEPLOYMENT: ""
+  # ALLOW_DEPLOYMENT: ""
 
 include: cancel_pipeline_functions.yml
 
@@ -68,9 +68,9 @@ frontend:
     PARENT_PIPELINE_ID: $APP_VERSION
     # DEPLOY_W_FRONT: "OK"
   allow_failure: true
-  artifacts: 
-    paths: 
-      - front/allowDeployment
+  # artifacts: 
+  #   paths: 
+  #     - front/allowDeployment
 
 backend:
   stage: build
@@ -96,9 +96,9 @@ backend:
     PARENT_PIPELINE_ID: $APP_VERSION
     # DEPLOY_W_BACK: "OK"
   allow_failure: true
-  artifacts: 
-    paths: 
-      - back/allowDeployment
+  # artifacts: 
+  #   paths: 
+  #     - back/allowDeployment
 
 infrastructure:
   stage: build
@@ -130,9 +130,9 @@ deploy to production: #&deploy_to_production
   variables:
     APP_NAME: remo-digitalbooking-prod
     APP_ENV_NAME: remo-digitalbooking-env-prod
-  # dependencies: 
-  #   - frontend
-  #   - backend
+  dependencies: 
+    - frontend
+    - backend
   environment: production
   before_script:
     - ALLOW_DEPLOYMENT=$(cat allowDeployment.text)
