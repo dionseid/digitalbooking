@@ -67,7 +67,7 @@ frontend:
     # <<: *variables
     PARENT_PIPELINE_ID: $APP_VERSION
     # DEPLOY_W_FRONT: "OK"
-  allow_failure: true
+  allow_failure: false
   # artifacts: 
   #   paths: 
   #     - front/allowDeployment
@@ -95,7 +95,7 @@ backend:
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
     # DEPLOY_W_BACK: "OK"
-  allow_failure: true
+  allow_failure: false
   # artifacts: 
   #   paths: 
   #     - back/allowDeployment
