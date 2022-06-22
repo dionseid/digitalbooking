@@ -19,6 +19,7 @@ stages:
   - update
   - cancel if update
   - build
+  - stage
   - deploy
 
 update token:
@@ -67,6 +68,9 @@ frontend:
     PARENT_PIPELINE_ID: $APP_VERSION
     # DEPLOY_W_FRONT: "OK"
   allow_failure: true
+  artifacts: 
+    paths: 
+      - front/allowDeployment
 
 backend:
   stage: build
@@ -92,9 +96,9 @@ backend:
     PARENT_PIPELINE_ID: $APP_VERSION
     # DEPLOY_W_BACK: "OK"
   allow_failure: true
-  # artifacts: 
-  #   paths: 
-  #     - allowDeployment.txt
+  artifacts: 
+    paths: 
+      - back/allowDeployment
 
 infrastructure:
   stage: build
@@ -110,6 +114,11 @@ infrastructure:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
   
+stage:
+  stage: stage
+  dependencies:
+    - backend
+    - frontend
 
 deploy to production: #&deploy_to_production
   stage: deploy
@@ -144,7 +153,7 @@ deploy to production: #&deploy_to_production
     - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
   after_script:
     - rm allowDeployment
-  needs: ["frontend", "backend"]
+  #needs: ["frontend", "backend"]
     #- curl http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com | grep "ver más"
   #   if_exists: true
   # rules:
