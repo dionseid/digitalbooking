@@ -57,9 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/productos/filtroCategoria/**").permitAll()
                 .antMatchers("/productos/filtroCiudad/**").permitAll()
                 .antMatchers("/productos/FiltroPorCiudadYFechas/**").permitAll()
-                //.antMatchers("/productos/agregarProducto").hasAuthority("ADMIN")
-                //eliminar
-                .antMatchers("/productos/agregarProducto").permitAll()
+                .antMatchers("/productos/agregarProducto").hasAuthority("ADMIN")
                 .antMatchers("/reserva/nuevaReserva").hasAuthority("CLIENT")
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
