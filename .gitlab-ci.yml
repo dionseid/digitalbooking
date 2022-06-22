@@ -52,7 +52,7 @@ avoid remaining:
     - if: $CI_PIPELINE_SOURCE == "schedule"
 
 build frontend:
-  extends: .build_frontend
+  extends: *build_frontend
   stage: build
   # trigger:
   #   include: front/proyecto/.gitlab-ci.yml
