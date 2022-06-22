@@ -183,8 +183,8 @@ deploy to production: #&deploy_to_production
       changes:
         - front/proyecto/*
         - back/digitalbooking/*
-      when: on_success
-    - if: $CI_PIPELINE_SOURCE != "schedule" && $ALLOW_DEPLOYMENT == "true"
+      #when: on_success
+    - if: $CI_PIPELINE_SOURCE != "schedule" #&& $ALLOW_DEPLOYMENT == "true"
       changes:
         - front/proyecto/*
         - back/digitalbooking/*
