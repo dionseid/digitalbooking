@@ -60,6 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/productos/agregarProducto").hasAuthority("ADMIN")
                 //eliminar
                 .antMatchers("/productos/agregarProducto").permitAll()
+                .antMatchers("/reserva/listarReservas").permitAll()
                 .antMatchers("/reserva/nuevaReserva").hasAuthority("CLIENT")
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
