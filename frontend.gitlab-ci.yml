@@ -36,6 +36,7 @@ build frontend:
       when: manual
       changes:
         - front/proyecto/*
+      allow_failure: true
 
 # build docker image:
 #   stage: package

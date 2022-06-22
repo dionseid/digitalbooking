@@ -31,6 +31,7 @@ build backend:
       changes:
         - back/digitalbooking/*
       when: manual
+      allow_failure: true
 
 # test job:
 #   stage: test
