@@ -83,7 +83,7 @@ const Sidebar = () => {
       const { nombre, apellido } =  user
       return (
         <div className="SidebarBienvenida">
-          <span>{nombre[0] + apellido[0]}</span>
+          <span>{/*nombre && apellido && */(nombre[0] + apellido[0])}</span>
           <p>Hola,</p>
           <p className="nombreCompletoMenu">{`${nombre} ${apellido}`}</p>
         </div>
