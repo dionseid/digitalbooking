@@ -2,10 +2,12 @@ image:
   name: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
 
 variables:
-  TF_ROOT: ${CI_PROJECT_DIR}/infra  # The relative path to the root directory of the Terraform project
-  TF_STATE_NAME: ${TF_STATE_NAME:-default}  # The name of the state file used by the GitLab Managed Terraform state backend
+  TF_ROOT: ${CI_PROJECT_DIR}/infra # The relative path to the root directory of the Terraform project
+  #TF_STATE_NAME: ${TF_STATE_NAME:-default}  # The name of the state file used by the GitLab Managed Terraform state backend  # Aquí debería tener la dirección de S3
+  LOCK: "Terraform"
 
 stages:
+  - format
   - validate
   - build
   - deploy
@@ -17,45 +19,46 @@ cache:
     - ${TF_ROOT}/.terraform/
 
 terraform:fmt: #&terraform_fmt
-  stage: validate
+  stage: format
   script:
     - cd "${TF_ROOT}"
     - gitlab-terraform fmt
   #allow_failure: true
 
-# terraform:validate: #&terraform_validate
-#   stage: validate
-#   script:
-#     - cd "${TF_ROOT}"
-#     - gitlab-terraform validate
+terraform:validate: #&terraform_validate
+  stage: validate
+  script:
+    - cd "${TF_ROOT}"
+    - gitlab-terraform validate
 
-# terraform:build: #&terraform_build
-#   stage: build
-#   script:
-#     - cd "${TF_ROOT}"
-#     - gitlab-terraform plan -var-db_pass="$DB_PASSWORD"
-#     - gitlab-terraform plan-json -var-db_pass="$DB_PASSWORD"
-#   resource_group: ${TF_STATE_NAME}
-#   artifacts:
-#     paths:
-#       - ${TF_ROOT}/plan.cache
-#     reports:
-#       terraform: ${TF_ROOT}/plan.json
+terraform:build: #&terraform_build
+  stage: build
+  script:
+    - cd "${TF_ROOT}"
+    - gitlab-terraform plan -var-db_pass="$DB_PASSWORD"
+    - gitlab-terraform plan-json -var-db_pass="$DB_PASSWORD"
+  resource_group: ${LOCK} # Cualquier nombre puede ir acá
+  artifacts:
+    paths:
+      - ${TF_ROOT}/plan.cache
+    reports:
+      terraform: ${TF_ROOT}/plan.json
 
-# .terraform:deploy: &terraform_deploy
-#   stage: deploy
-#   script:
-#     - cd "${TF_ROOT}"
-#     - gitlab-terraform apply -var-db_pass="$DB_PASSWORD" -auto-approve
-#   resource_group: ${TF_STATE_NAME}
-#   rules:
-#     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-#       when: manual
+terraform:deploy:
+  stage: deploy
+  script:
+    - cd "${TF_ROOT}"
+    - gitlab-terraform apply -var-db_pass="$DB_PASSWORD" -auto-approve
+  resource_group: ${LOCK}
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
 
-# .terraform:destroy: &terraform_destroy
-#   stage: cleanup
-#   script:
-#     - cd "${TF_ROOT}"
-#     - gitlab-terraform destroy -var-db_pass="$DB_PASSWORD"
-#   resource_group: ${TF_STATE_NAME}
-#   when: manual
+terraform:destroy:
+  stage: cleanup
+  script:
+    - cd "${TF_ROOT}"
+    - gitlab-terraform destroy -var-db_pass="$DB_PASSWORD" -auto-approve
+  resource_group: ${LOCK}
+  when: manual
+  allow_failure: true

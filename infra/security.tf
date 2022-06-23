@@ -64,7 +64,7 @@ resource "aws_security_group" "g8_rds_sg" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [aws_security_group.g8_app_sg.id, tolist(module.cloud9.bastion_instace_sg)[0], aws_security_group.g8_ingress_sg.id] # Probando Bastion https://aws.amazon.com/es/premiumsupport/knowledge-center/rds-mysql-ssh-workbench-connect-ec2/#:~:text=Open%20MySQL%20Workbench.,address%20of%20your%20EC2%20instance.
+    security_groups = [aws_security_group.g8_app_sg.id, tolist(module.cloud9.bastion_instace_sg)[0]] # Probando Bastion https://aws.amazon.com/es/premiumsupport/knowledge-center/rds-mysql-ssh-workbench-connect-ec2/#:~:text=Open%20MySQL%20Workbench.,address%20of%20your%20EC2%20instance.
   }
 }
 

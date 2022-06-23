@@ -1,26 +1,14 @@
-include: 
-  - backend.gitlab-ci.yml
-  - frontend.gitlab-ci.yml
-  - cancel_pipeline_functions.yml
-
-
-
-
 variables:
   APP_VERSION: $CI_PIPELINE_IID
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
-  # DEPLOY_W_BACK: "true"
-  # DEPLOY_W_FRONT: "true"
-  # $DEPLOY_W_BACK: "false"
-  # $DEPLOY_W_FRONT: "false"
-  # ALLOW_DEPLOYMENT: ""
+  LOCK: deployment
 
 stages:
   - update
   - cancel if update
+  - provision
   - build
-  - stage
   - deploy
 
 update token:
@@ -50,103 +38,59 @@ avoid remaining:
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
 
-# build frontend:
-#   stage: build
-#   image: node:16-alpine
-#   script:
-#     - cd front/proyecto
-#     - npm install --force
-#     - npm test
-#     - CI=false npm run build # Investigar 'CI=false'
-#     - echo $APP_VERSION > build/version.html
-#   artifacts:
-#     paths:
-#       - front/proyecto/build
-
-# build backend:
-#   stage: build
-#   script:
-#     - cd back/digitalbooking
-#     - mvn compile
-
-# build frontend:
-#   extends: .build_frontend
-#   stage: build
-#   # trigger:
-#   #   include: front/proyecto/.gitlab-ci.yml
-#   #   strategy: depend
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-#       when: always
-#       changes:
-#         - front/proyecto/*
-#     - if: $CI_PIPELINE_SOURCE != "schedule"
-#       when: manual
-#       changes:
-#         - front/proyecto/*
-#   variables:
-#     # <<: *variables
-#     PARENT_PIPELINE_ID: $APP_VERSION
-#     # DEPLOY_W_FRONT: "OK"
-#   allow_failure: false
-#   # artifacts: 
-#   #   paths: 
-#   #     - front/allowDeployment
-
-# backend:
-#   stage: build
-#   trigger:
-#     include: back/digitalbooking/.gitlab-ci.yml
-#     strategy: depend
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-#       changes:
-#         - back/digitalbooking/*
-#     - if: $CI_PIPELINE_SOURCE != "schedule"
-#       when: manual
-#       changes:
-#         - back/digitalbooking/*
-#     # - when: never
-#     # - if: $CI_PIPELINE_SOURCE != "schedule"
-#     #   when: manual
-#     #   changes:
-#     #     - back/digitalbooking/*
-#     # - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-#     #   when: always
-#   variables:
-#     PARENT_PIPELINE_ID: $APP_VERSION
-#     # DEPLOY_W_BACK: "OK"
-#   allow_failure: false
-#   # artifacts: 
-#   #   paths: 
-#   #     - back/allowDeployment
-
 infrastructure:
-  stage: build
+  stage: provision
   trigger:
     include: infra/.gitlab-ci.yml
     strategy: depend
   rules:
-    - when: never
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+      when: always
+      changes:
+        - infra/*
     - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
       changes:
         - infra/*
+
+frontend:
+  stage: build
+  trigger:
+    include: front/proyecto/.gitlab-ci.yml
+    strategy: depend
+  rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
-  
-# stage:
-#   stage: stage
-#   # dependencies:
-#   #   - backend
-#   #   - frontend
-#   needs: [backend, frontend]
-#   script:
-#     - echo "Staging"
-#   when: on_failure
-#   allow_failure: false
+      changes:
+        - front/proyecto/*
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      when: manual
+      changes:
+        - front/proyecto/*
+  variables:
+    PARENT_PIPELINE_ID: $APP_VERSION
+  allow_failure: true
 
-deploy to production: #&deploy_to_production
+backend:
+  stage: build
+  trigger:
+    include: back/digitalbooking/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+      when: always
+      changes:
+        - back/digitalbooking/*
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      when: manual
+      changes:
+        - back/digitalbooking/*
+  variables:
+    PARENT_PIPELINE_ID: $APP_VERSION
+  allow_failure: false
+
+
+deploy to production:
   stage: deploy
   image:
     name: amazon/aws-cli:2.4.11
@@ -154,12 +98,9 @@ deploy to production: #&deploy_to_production
   variables:
     APP_NAME: remo-digitalbooking-prod
     APP_ENV_NAME: remo-digitalbooking-env-prod
-  # dependencies: 
-  #   - stage
-  # needs: [stage]
   environment: production
+  resource_group: ${LOCK}
   before_script:
-    - ALLOW_DEPLOYMENT=$(cat allowDeployment.text)
     - aws --version
     - yum install -y gettext
     - yum install -y zip
@@ -177,102 +118,14 @@ deploy to production: #&deploy_to_production
     - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=remo/digitalbooking/dev/remo-digitalbooking-eb-app-dev-$APP_VERSION.zip
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
     - aws elasticbeanstalk wait environment-updated --application-name $APP_NAME --version-label $APP_VERSION --environment-name $APP_ENV_NAME
-  after_script:
-    - rm allowDeployment
-  #needs: ["frontend", "backend"]
-    #- curl http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com | grep "ver más"
-  #   if_exists: true
-  # rules:
-    # - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-    #   changes:
-    #     - front/proyecto/*
-    #     - back/digitalbooking/*
-    #   when: always
-    # - if: $CI_PIPELINE_SOURCE != "schedule"
-    #   when: manual
-    #   changes:
-    #     - front/proyecto/*
-    #     - back/digitalbooking/*
-  #needs: ["backend", "frontend"]
-    # - job: backend
-    #   optional: false
-    # - job: frontend
-    #   optional: false
   rules:
-    # - exists:
-    #   - allowDeployment
-    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop") #&& $ALLOW_DEPLOYMENT == "true"
+    - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
         - front/proyecto/*
         - back/digitalbooking/*
       when: always
-    - if: $CI_PIPELINE_SOURCE != "schedule" #&& $ALLOW_DEPLOYMENT == "true"
+    - if: $CI_PIPELINE_SOURCE != "schedule"
       changes:
         - front/proyecto/*
         - back/digitalbooking/*
       when: manual
-      exists:
-        - back/allowDeploy
-        - front/allowDeploy
-  dependencies:
-    - "build frontend"
-    - "build backend"
-      # when: on_success
-  # allow_failure: false
-
-# deploy backend:
-#   <<: *deploy_to_production
-#   needs: ["backend"]
-#   rules:
-#     - if: $DEPLOY_W_BACK == "true"
-
-# deploy frontend:
-#   <<: *deploy_to_production
-#   needs: ["frontend"]
-#   rules:
-#     - if: $DEPLOY_W_FRONT == "true"
-
-# general deployment:
-#   <<: *deploy_to_production
-#   needs: ["backend", "frontend"]
-#   rules:
-#     - if: $DEPLOY_W_BACK == "true" && $DEPLOY_W_FRONT == "true"
-
-
-
-# deploy backend:
-#   <<: *deploy_to_production
-#   needs: ["backend"]
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-#       when: always
-#       changes:
-#         - back/digitalbooking/*
-#         - ^front/proyecto/*
-#   allow_failure: false
-#   variables:
-#     "deployment": $STAGE
-
-# deploy frontend:
-#   <<: *deploy_to_production
-#   needs: ["frontend"]
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-#       changes:
-#         - front/proyecto/*
-#         - ^back/digitalbooking/*
-#       when: always
-#   allow_failure: false
-
-# general deployment:
-#   <<: *deploy_to_production
-#   needs: 
-#     - job: backend
-#     - job: frontend
-#   when: manual
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
-#       changes:
-#         - front/proyecto/*
-#         - back/digitalbooking/*
-#       when: on_success
