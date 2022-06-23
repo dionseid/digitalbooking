@@ -24,7 +24,7 @@ update token:
     - if: $CI_PIPELINE_SOURCE == "schedule"
   script:
     - USER=AWS
-    - TOKEN=$(aws ecr get-login-password --region us-west-2)
+    - TOKEN=$(aws ecr get-login-password)
     - AUTH=$(echo "$USER:$TOKEN" | base64 | tr -d "\n")
     - |
       curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
