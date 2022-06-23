@@ -42,6 +42,7 @@ build docker image:
     - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$APP_VERSION --cache-from $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$APP_VERSION front/proyecto
     - docker image ls
     - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
+    - echo $APP_VERSION
     - |
       curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
       --silent --output /dev/null --show-error --fail \
