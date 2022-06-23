@@ -37,7 +37,7 @@
     height:340px;
     width: 660px;
     transition: all 400ms ease-out;
-    cursor: default;    
+    cursor: default;   
   }
 
   .cardRecomendacion:hover{
@@ -60,16 +60,28 @@
     text-align: center;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
 	  cursor: pointer;
-	  transition: .1s ease all;    
+	  transition: .1s ease all; 
+    margin-bottom: 8px;   
   }
 
   .buttonCard:hover {
     box-shadow: 3px 0px 30px rgba(163,163,163, 1);
   }
 
-  .hotel{
-    font-weight: lighter;
+  .categoria{
+    font-style: normal;
+    font-weight: 500;
     font-size: 14px;
+    color: #383B58;
+    opacity: 0.5;
+  }
+
+  .categoriaYEstrellas{
+    display: flex;
+    justify-content: start;
+    align-items: center;    
+    margin-top: 10px;
+    gap: 5px;
   }
   .estrella, .mostrarMapa, .mas{
     color: #F0572D;
@@ -85,8 +97,9 @@
 }
 
 .nombreHotel{
-  font-size: 24px;
+  font-style: normal;
   font-weight: 700;
+  font-size: 24px;
 }
 
 #corazon-fill {
@@ -107,10 +120,25 @@
   .infoHotel{
     margin: 10px 0;
   }
+
+  .infoHotel p{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
   .calificacion{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+  }
+
+  .calificacion p{
+    font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: right;
   }
   
   .puntaje{
@@ -127,9 +155,17 @@
   .cardBody{
     padding: 10px;
     font-size: 14px;
-    margin: 5px;
+    margin: 5px;    
+    text-align: start; 
   }
   
+  .cardBody p{
+    text-align: start;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
   .fondoImagen{
     height:100%;
     width: 100%;

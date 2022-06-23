@@ -26,7 +26,7 @@ const Calendario = () => {
 
 
   useEffect( () => {
-      axios.get("http://localhost:8080/reserva")
+      axios.get("http://localhost:8080/reserva/listarReservas")
       .then(response => {
         setDataReservas(response.data)})
         
@@ -62,8 +62,9 @@ const Calendario = () => {
         {matches => {
         return matches ? 
             <DatePicker
+            calendarClassName="bordeCalendario"
               excludeDateIntervals={getFechasReservadas()}
-              excludeDates={getFechasReservadas()?.map((date)=>(date.start))}
+              excludeDates={getFechasReservadas()?.map((date)=>(date.end))}
                 selected={startDate}    
                 selectsRange={true}
                 startDate={startDate}
@@ -77,8 +78,9 @@ const Calendario = () => {
             />
             :
             <DatePicker
+            calendarClassName="bordeCalendario"
             excludeDateIntervals={getFechasReservadas()}
-            excludeDates={getFechasReservadas()?.map((date)=>(date.start))}      
+            excludeDates={getFechasReservadas()?.map((date)=>(date.end))}      
               selectsRange={true}
               startDate={startDate}
               endDate={endDate}

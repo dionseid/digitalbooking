@@ -32,7 +32,7 @@ export default function UbicacionProducto() {
         <dd>A 940 m del centro</dd>
       </div>
       <div className="calificacionProductos">
-        <div className="contenedorEstrellas">
+        <div className="contenedorEstrellasProducto">
           <dt style={{ fontWeight: "700" }}>Muy bueno</dt>
           <dd><FontAwesomeIcon icon={faStar} className="estrella" />
             <FontAwesomeIcon icon={faStar} className="estrella" />

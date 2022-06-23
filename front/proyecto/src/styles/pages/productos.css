@@ -52,7 +52,7 @@
     line-height: 16px;
 }
 
-.contenedorEstrellas{
+.contenedorEstrellasProducto{
    display: flex;
    flex-direction: column;
    align-items: flex-end;

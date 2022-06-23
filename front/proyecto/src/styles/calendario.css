@@ -83,7 +83,8 @@
   font-size: 0.8rem;
   background-color: #fff;
   color: #000;
-  border: 1px solid #aeaeae;
+  border-top: 2px solid #aeaeae;
+  border-bottom: 2px solid #aeaeae;
   border-radius: 0.3rem;
   display: inline-block;
   position: relative;
@@ -248,6 +249,8 @@
 
 .react-datepicker__month-container {
   float: left;
+  border-left: 0.5px solid #aeaeae;
+  border-right: 0.5px solid #aeaeae; 
 }
 
 .react-datepicker__year {
@@ -766,3 +769,6 @@
 
 }
 
+/* .bordeCalendario{
+  border-color: #216ba5;
+} */

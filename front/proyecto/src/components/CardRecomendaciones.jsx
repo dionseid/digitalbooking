@@ -75,7 +75,10 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria, startDate, endDate}
                     <div className="cardBody">
                         <div className="presentacion">
                             <div>
-                                <p className="hotel">{card.categoria.titulo} <FontAwesomeIcon icon={faStar} className="estrella" /><FontAwesomeIcon icon={faStar} className="estrella" /><FontAwesomeIcon icon={faStar} className="estrella" /><FontAwesomeIcon icon={faStar} className="estrella" /><FontAwesomeIcon icon={faStar} className="estrella" /></p>
+                                <div className="categoriaYEstrellas">
+                                    <p className="categoria">{card.categoria.titulo}</p>
+                                    <p><FontAwesomeIcon icon={faStar} className="estrella" /><FontAwesomeIcon icon={faStar} className="estrella" /><FontAwesomeIcon icon={faStar} className="estrella" /><FontAwesomeIcon icon={faStar} className="estrella" /><FontAwesomeIcon icon={faStar} className="estrella" /></p>
+                                </div>
                                 <h3 className="nombreHotel">{card.nombre}</h3>
                             </div>
                             <div className="calificacion">
