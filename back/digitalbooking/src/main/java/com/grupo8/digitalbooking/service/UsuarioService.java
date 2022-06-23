@@ -1,6 +1,5 @@
 package com.grupo8.digitalbooking.service;
 
-import com.grupo8.digitalbooking.model.Reserva;
 import com.grupo8.digitalbooking.model.RolUsuario;
 import com.grupo8.digitalbooking.model.Usuario;
 import com.grupo8.digitalbooking.repository.RolUsuarioRepository;
@@ -12,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,17 +24,19 @@ public class UsuarioService implements UserDetailsService {
     private final UsuarioRepository usuarioRepository;
     @Autowired
     private final RolUsuarioRepository rolUsuarioRepository;
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, RolUsuarioRepository rolUsuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, RolUsuarioRepository rolUsuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
         this.rolUsuarioRepository = rolUsuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Usuario agregarUsuario(Usuario usuario){
-        /*Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
-        usuario.setRol(rolUsuario.get());*/
         RolUsuario rolUsuario = rolUsuarioRepository.findById(usuario.getRol().getId()).get();
         usuario.setRol(rolUsuario);
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario);
     }
 
