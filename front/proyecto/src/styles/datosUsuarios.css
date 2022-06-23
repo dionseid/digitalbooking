@@ -23,3 +23,23 @@
     margin-right: 5px;
     width: 100%;
 }
+
+input:disabled{
+    background: #ccc;
+}
+
+@media screen and (max-width: 460px){
+    .dosDatos{
+        flex-direction: column;
+        margin-bottom: 80px;
+    }
+
+    .tablaDatos{
+        width: 100% !important ;
+        min-height: 420px;
+    }
+
+    .datoSolo{
+        margin-bottom: 10px;
+    }
+}

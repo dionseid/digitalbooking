@@ -53,11 +53,13 @@ const Productos = () => {
     }
     else{
       loginLogoutEvent({
-        nombre: '',
-        apellido: '',
-        mail: '',
+        nombre: "",
+        apellido: "",
+        mail: "",
+        id:null,
         auth: false,
-        redirect:true
+        redirect: false,
+        ciudad:""
       })
       navigate(`/login`)
     }

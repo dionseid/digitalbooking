@@ -22,7 +22,7 @@
     height: 2px;
     width: 98%;
     padding: 0;
-    margin: 20px auto 0 auto;
+    margin: 5px auto 0 auto;
 }
 
 .check{
@@ -84,4 +84,57 @@
 
 .confirmarReserva:hover{
     box-shadow: 3px 0px 30px rgba(163,163,163, 1);
+}
+
+
+
+
+/* Responsive */
+@media screen and (max-width: 768px){
+    .contenidoTablaDetalle{
+        display: flex;
+        width: 100%;
+        
+    }
+
+    .contenedorTablaDetalle{
+        height:440px;
+        padding: 10px;
+    }
+
+    .tablaDatos{
+        width: 708px;
+    }
+
+    .contenedorDetalle{
+        width: 850px;
+        padding: 15px;
+    }
+
+    .confirmarReserva{
+        margin: 0px;
+    }
+
+    .check{
+        margin: 0px;
+    }   
+}
+
+@media screen and (max-width: 460px){
+    .contenidoTablaDetalle{
+        flex-direction: column;
+        width: 100%;  
+        height:917px;      
+    }
+
+    .contenedorDetalle{
+        width: 100%;
+    }
+
+    .contenedorTablaDetalle{
+        height:720px;      
+    }
+
+
+    
 }

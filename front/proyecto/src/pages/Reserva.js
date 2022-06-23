@@ -14,6 +14,7 @@ import UbicacionProducto from '../components/UbicacionProducto';
 import "../styles/pages/reserva.css";
 
 export default function Reserva() {  
+
   return (
     <>
     <header>
@@ -36,6 +37,7 @@ export default function Reserva() {
       </div>
       <section>
           <h2>¿Qué tenes que saber?</h2>
+          <div className='linea'/>
           <Reglas/>
       </section>        
     </body>

@@ -10,16 +10,27 @@ import UserProvider from "../components/context/UserContext";
 const Sidebar = () => {
   const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
   const { user, loginLogoutEvent } = useContext(UserProvider);
-  useEffect(() => setIsAuthenticatedMenu(user.auth), [user.auth]);
+  useEffect(() => setIsAuthenticatedMenu(user.auth), [user]);
   const { pathname } = useLocation();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    function handleSize() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleSize);
+    return () => window.removeEventListener("resize", handleSize);
+  });
 
   const handleClick = () => {
     loginLogoutEvent({
       nombre: "",
       apellido: "",
       mail: "",
+      id:null,
       auth: false,
       redirect: false,
+      ciudad:""
     });
   };
 
@@ -95,15 +106,19 @@ const Sidebar = () => {
   };
 
   return (
-    <Menu right>
-      <div className="upper-colored-box">{handleAuthenticated()}</div>
-      <div className="menuConFooter">
-        <div className="menu-main">{handleIsAuthMenu()}</div>
-        <div>
-          <SocialIconsSidebar />
-        </div>
-      </div>
-    </Menu>
+    <>
+      {windowWidth <= 768 && (
+        <Menu right>
+          <div className="upper-colored-box">{handleAuthenticated()}</div>
+          <div className="menuConFooter">
+            <div className="menu-main">{handleIsAuthMenu()}</div>
+            <div>
+              <SocialIconsSidebar />
+            </div>
+          </div>
+        </Menu>
+      )}
+    </>
   );
 };
 

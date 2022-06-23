@@ -83,6 +83,7 @@
     margin-top: 10px;
     gap: 5px;
   }
+  
   .estrella, .mostrarMapa, .mas{
     color: #F0572D;
     font-weight: 700;
@@ -148,7 +149,7 @@
     border-radius: 9px;
     color: white;
     font-weight: bolder;
-    font-size: 20px;
+    font-size: 18px;
   }
 
   

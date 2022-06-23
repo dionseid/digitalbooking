@@ -17,3 +17,14 @@ h2{
     padding: 8px;
 }
 
+
+/* Responsive */
+@media screen and (max-width: 768px){
+    .tablasDeInformacion{
+        flex-direction: column;
+    }
+
+    .completarDatos{
+        width: 100%;
+    }
+}

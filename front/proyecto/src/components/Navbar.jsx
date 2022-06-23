@@ -33,7 +33,9 @@ const Navbar = ({ onClick }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [isAuthenticatedMenu, setIsAuthenticatedMenu] = useState(false);
   const { user, loginLogoutEvent } = useContext(UserProvider);
-  useEffect(() => setIsAuthenticatedMenu(user.auth), [user.auth]);
+
+
+  useEffect(() => setIsAuthenticatedMenu(user.auth), [user]);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -131,8 +133,10 @@ const Navbar = ({ onClick }) => {
       nombre: "",
       apellido: "",
       mail: "",
+      id: null,
       auth: false,
       redirect: false,
+      ciudad:""
     });
     navigate("/");
   };

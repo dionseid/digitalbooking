@@ -12,17 +12,29 @@ import { Button } from 'react-bootstrap';
 import { Boton } from './elementStyle/Form';
 import FechaRangoContextProvider from "./context/FechaRangoContextProvider";
 import HoraContextProvider from './context/HoraContextProvider';
+import UserProvider from "../components/context/UserContext";
 
 
 export default function DetallesReserva() {
+  const { user, loginLogoutEvent } = useContext(UserProvider);
     const {isHora, setIsHora} = useContext(HoraContextProvider);
     const {rango, setRango} = useContext(FechaRangoContextProvider);
     console.log("rango: ", rango);
     const [dataProducto, setDataProducto] = useState([]);
     const [dataImagen, setDataImagen] = useState([]);
+    const [isCiudad, setIsCiudad] = useState(false);
     const {id} = useParams();
     const navigate = useNavigate();
-    const [formularioValido, setFormularioValido] = useState(false);
+
+    console.log("isCiudad: ", isCiudad);
+    useEffect(() => {
+        if(user.ciudad !== ''){
+          setIsCiudad(true)
+        }else if(user.ciudad === ''){
+          setIsCiudad(false)
+        }
+    }, [user.ciudad])
+    
 
 
     const fechaInicio = rango[0] ? new Date(rango[0]).toISOString().slice(0,10): "_/_/_";
@@ -42,6 +54,7 @@ export default function DetallesReserva() {
         setDataImagen(response.data)})
 
   }, [])
+
 
   const getImage = () =>{
     if(dataImagen.length!==0){
@@ -63,7 +76,25 @@ export default function DetallesReserva() {
 
     const onSubmit = (e) => {
       e.preventDefault();
-      if(rango[0]!== null && rango[1]!== null && isHora){
+      if(rango[0]!== null && rango[1]!== null && isHora && isCiudad){
+        fetch('http://localhost:8080/reserva/nuevaReserva', {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        hora: "15:00:00",
+        fechaInicial: fechaInicio,
+        fechaFinal: fechaFinal,
+        producto: {
+            id: id
+        },
+        usuario: {
+            id: user.id
+        }
+      })
+  });
         navigate(`/reservaExitosa`)
       }
       
@@ -77,6 +108,7 @@ export default function DetallesReserva() {
     <div className='tablaDatos'>  
     {isProducto() && ( <div className='contenedorTablaDetalle'>    
         <h2 className='tituloDetalleReserva'>Detalle de la reserva</h2>
+        <div className='contenidoTablaDetalle'>
         <div style={{ backgroundImage: "url('" + getImage() + "')" }} className="fondoImagen" />
         <div className='contenedorDetalle'>
           <span>{dataProducto.categoria.titulo}</span>
@@ -100,6 +132,7 @@ export default function DetallesReserva() {
             <p>{fechaFinal}</p>
           </div>
           <button className='confirmarReserva' onClick={onSubmit}>Confirmar reserva</button>
+        </div>
         </div>
         
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { GrupoInput, IconoValidacion, Input, Label, ParrafoError } from './elementStyle/Form';
 
-const ComponenteInput = ({estado, cambiarEstado, tipo, label, placeholder, name, parrafoError, expresionRegular, funcion}) => {
+const ComponenteInput = ({estado, cambiarEstado, tipo, label, placeholder, name, parrafoError, expresionRegular,isDisabled, funcion}) => {
 	const onChange = (e) => {
 		const { value } = e.target
 		
@@ -31,6 +31,7 @@ const ComponenteInput = ({estado, cambiarEstado, tipo, label, placeholder, name,
 			<Label htmlFor={name} valido={estado.valido}>{label}</Label>
 			<GrupoInput>
 				<Input 
+					disabled={isDisabled}
 					type={tipo}
 					placeholder={placeholder} 
 					id={name}

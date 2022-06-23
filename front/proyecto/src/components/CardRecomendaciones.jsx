@@ -83,7 +83,7 @@ const CardRecomendacion = ({ selectCiudad , selectCategoria, startDate, endDate}
                             </div>
                             <div className="calificacion">
                                 <span className="puntaje">8</span>
-                                <p style={{ fontWeight: "700" }}>Muy Bueno</p>
+                                <p style={{ fontWeight: "700", textAlign:"right" }}>Muy Bueno</p>
                             </div>
                         </div>
                         <div className="infoHotel">

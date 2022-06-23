@@ -62,16 +62,20 @@ const registroApi = async (data) => {
                 nombre: respuesta.data.nombre,
                 apellido: respuesta.data.apellido,
                 mail: respuesta.data.email,
+                id: respuesta.data.id,
                 auth: true,
-                redirect:false
+                redirect:false,
+                ciudad:""
             })
             sessionStorage.clear()
             sessionStorage.setItem("user",JSON.stringify({
                 nombre: respuesta.data.nombre,
                 apellido: respuesta.data.apellido,
                 mail: respuesta.data.email,
+                id: respuesta.data.id,
                 auth: true,
-                redirect:false
+                redirect:false,
+                ciudad:""
             }))
             console.log(respuesta.data)
             return respuesta.data;

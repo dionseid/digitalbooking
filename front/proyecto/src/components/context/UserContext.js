@@ -8,8 +8,10 @@ export const UserProvider = ({ children }) => {
         nombre: '',
         apellido: '',
         mail: '',
+        id:null,
         auth: false,
-        redirect:false
+        redirect:false,
+        ciudad:''
 });
 
     const loginLogoutEvent = (userCredentials) => {
