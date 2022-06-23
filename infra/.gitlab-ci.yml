@@ -50,9 +50,6 @@ terraform:deploy:
     - cd "${TF_ROOT}"
     - gitlab-terraform apply -var 'db_pass=$DB_PASSWORD' -auto-approve
   resource_group: ${LOCK}
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      when: manual
 
 terraform:destroy:
   stage: cleanup
