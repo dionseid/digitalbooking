@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div className="App">
-    {console.log(user)}
+    {console.log(user?.user)}
         <BrowserRouter>
       <UserProvider>
           <Sidebar pageWrapId={'page-wrap'} authenticated={user?.user.auth} />

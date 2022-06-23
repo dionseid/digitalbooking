@@ -36,6 +36,7 @@ const FormLogin = () => {
             console.log("resspuesta post login", respuesta)
             if(respuesta.status === 200 ){
             sessionStorage.setItem('token', JSON.stringify(respuesta.data.jwt));
+            loginLogoutEvent(JSON.parse(sessionStorage.getItem('user')))
             return respuesta;
         }
             else if(respuesta.status!==200 || respuesta.status!==201){
@@ -57,7 +58,7 @@ const FormLogin = () => {
             // const token = sessionStorage.getItem('token')&& JSON.parse(sessionStorage.getItem('token'));
             const respuesta = await axiosConnection.get('/login', {
                 headers: {
-                    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmcmFuY292ZXJvbnBlcmFsdGFAZ21haWwuY29tIiwiZXhwIjoxNjU1OTIyNzMyLCJpYXQiOjE2NTU5MjIxMzJ9.B9-cRMpw69bP0s7CC0yOouKHgGU3uokFmtyTKWB-w5A`
+                    Authorization: `Bearer `
             }
         });
             return respuesta;
@@ -72,15 +73,15 @@ const FormLogin = () => {
         //// const { usuarios: userList } = usuarios;
         ////const getUser = userList.find(user => user.mail === email.campo && user.password === password.campo);
         ////console.log({ getUser });
-        //const respuestaPost = postLoginApi({username: email.campo, password: password.campo})
-        const respuestaGet = getLoginApi();
-        const getUser = respuestaGet
-        if (getUser) {
+        const respuestaPost = postLoginApi({username: email.campo, password: password.campo})
+        /*const respuestaGet = respuestaPost && getLoginApi();
+        const getUser = respuestaGet*/
+        if (respuestaPost) {
             //// const { nombre, apellido } = getUser;
             //// cambiarFormularioValido(false);
             //// localStorage.setItem('user', JSON.stringify({ nombre , apellido }));
             //// setIsAuthenticated(true);
-            loginLogoutEvent({nombre: getUser.nombre, apellido: getUser.apellido, mail: getUser.email, auth: true, redirect: false});
+
             navigate('/');
         } else {
             cambiarFormularioValido(true);
