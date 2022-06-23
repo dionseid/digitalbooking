@@ -57,7 +57,7 @@
 
 @media screen and (max-width: 768px) {
     .contenidoMensajeReserva{
-        margin-top: 54%;
+        margin-top: 30px;
         max-width: 90%;
         height: 357px;
     }

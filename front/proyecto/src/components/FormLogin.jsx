@@ -36,7 +36,10 @@ const FormLogin = () => {
             console.log("resspuesta post login", respuesta)
             if(respuesta.status === 200 ){
             sessionStorage.setItem('token', JSON.stringify(respuesta.data.jwt));
-            loginLogoutEvent(JSON.parse(sessionStorage.getItem('user')))
+            const cuentas = JSON.parse(localStorage.getItem('user'))
+            const cuentaFiltrada = cuentas.filter((cuenta) => cuenta.mail === data.username)
+            loginLogoutEvent(cuentaFiltrada[0])
+            console.warn(cuentaFiltrada)
             return respuesta;
         }
             else if(respuesta.status!==200 || respuesta.status!==201){

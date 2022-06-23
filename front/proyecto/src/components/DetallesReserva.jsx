@@ -13,6 +13,7 @@ import { Boton } from './elementStyle/Form';
 import FechaRangoContextProvider from "./context/FechaRangoContextProvider";
 import HoraContextProvider from './context/HoraContextProvider';
 import UserProvider from "../components/context/UserContext";
+import axiosConnection from "../helpers/axiosConnection";
 
 
 export default function DetallesReserva() {
@@ -73,10 +74,27 @@ export default function DetallesReserva() {
     }
 
     console.log("isHora:", isHora);
+    const getLoginApi = async () => {
+      try{
+          // ** CAMBIAR POR EL URL DE LA API
+          // const token = sessionStorage.getItem('token')&& JSON.parse(sessionStorage.getItem('token'));
+          const respuesta = await axiosConnection.get('/login', {
+              headers: {
+                  Authorization: `Bearer `
+          }
+      });
+          return respuesta;
+      }
+      catch(error){
+          console.log(error);
+      }
+  }
 
     const onSubmit = (e) => {
       e.preventDefault();
       if(rango[0]!== null && rango[1]!== null && isHora && isCiudad){
+        
+            if(getLoginApi().status === 200 ){
         fetch('http://localhost:8080/reserva/nuevaReserva', {
       method: 'POST',
       headers: {
@@ -96,7 +114,7 @@ export default function DetallesReserva() {
       })
   });
         navigate(`/reservaExitosa`)
-      }
+      }}
       
 
   }
