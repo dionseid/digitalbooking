@@ -1,3 +1,5 @@
+include: cancel_pipeline_functions.yml
+
 variables:
   APP_VERSION: $CI_PIPELINE_IID
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
@@ -13,13 +15,13 @@ stages:
 
 update token:
   stage: update
-  image: 
+  image:
     name: amazon/aws-cli
     entrypoint: [""]
   before_script:
     - aws --version
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" 
+    - if: $CI_PIPELINE_SOURCE == "schedule"
   script:
     - USER=AWS
     - TOKEN=$(aws ecr get-login-password --region us-west-2)
@@ -88,7 +90,6 @@ backend:
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
   allow_failure: false
-
 
 deploy to production:
   stage: deploy
