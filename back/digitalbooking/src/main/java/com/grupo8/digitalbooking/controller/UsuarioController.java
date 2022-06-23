@@ -1,6 +1,5 @@
 package com.grupo8.digitalbooking.controller;
 
-import com.grupo8.digitalbooking.model.RolUsuario;
 import com.grupo8.digitalbooking.model.Usuario;
 import com.grupo8.digitalbooking.service.UsuarioService;
 import io.swagger.annotations.Api;
@@ -47,6 +46,12 @@ public class UsuarioController {
         else
             response= ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return response;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> buscarUsuario (@PathVariable Integer id){
+        Usuario usuario= usuarioService.buscarUsuario(id).orElse(null);
+        return  ResponseEntity.ok(usuario);
     }
 
 //    hacer post login
