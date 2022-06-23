@@ -3,6 +3,7 @@ package com.grupo8.digitalbooking.controller;
 
 import com.grupo8.digitalbooking.model.Categoria;
 import com.grupo8.digitalbooking.service.CategoriaService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,9 @@ import java.util.Collection;
 
 //request a la bdd
 @RestController
+@Api(tags = "Categorías")
 @RequestMapping("/categorias")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
@@ -21,7 +24,7 @@ public class CategoriaController {
     public ResponseEntity<Categoria> agregarCategoria(@RequestBody Categoria categoria){
         return ResponseEntity.ok(categoriaService.agregarCategoria(categoria));
     }
-
+//    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> buscarCategoria (@PathVariable Integer id){
        Categoria categoria= categoriaService.buscarCategoria(id).orElse(null);
@@ -54,7 +57,7 @@ public class CategoriaController {
         return response;
 
     }
-
+//    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping()
     public ResponseEntity<Collection<Categoria>> listarCategorias(){
         return ResponseEntity.ok(categoriaService.listarCategorias());

@@ -1,33 +1,42 @@
 package com.grupo8.digitalbooking.service;
 
-import com.grupo8.digitalbooking.model.Reserva;
 import com.grupo8.digitalbooking.model.RolUsuario;
 import com.grupo8.digitalbooking.model.Usuario;
 import com.grupo8.digitalbooking.repository.RolUsuarioRepository;
 import com.grupo8.digitalbooking.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements UserDetailsService {
     @Autowired
     private final UsuarioRepository usuarioRepository;
     @Autowired
     private final RolUsuarioRepository rolUsuarioRepository;
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, RolUsuarioRepository rolUsuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, RolUsuarioRepository rolUsuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
         this.rolUsuarioRepository = rolUsuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Usuario agregarUsuario(Usuario usuario){
-        /*Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
-        usuario.setRol(rolUsuario.get());*/
         RolUsuario rolUsuario = rolUsuarioRepository.findById(usuario.getRol().getId()).get();
         usuario.setRol(rolUsuario);
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario);
     }
 
@@ -42,8 +51,8 @@ public class UsuarioService {
 
     //actualizar usuario
     public Usuario actualizarUsuario(Usuario usuario){
-        Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
-        usuario.setRol(rolUsuario.get());
+        RolUsuario rolUsuario = rolUsuarioRepository.findById(usuario.getRol().getId()).get();
+        usuario.setRol(rolUsuario);
         return usuarioRepository.save(usuario);
     }
     //eliminar usuario
@@ -58,5 +67,17 @@ public class UsuarioService {
     //buscar usuario
     public Optional<Usuario> buscarUsuario(Integer id){
         return usuarioRepository.findById(id);
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        String rol = usuario.getRol().getNombre();
+        System.out.println(rol);
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority(rol));
+
+        return new User(username, usuario.getPassword(), true, true, true, true, authorities);
     }
 }

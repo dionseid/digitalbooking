@@ -1,11 +1,183 @@
 {
 	"info": {
-		"_postman_id": "7037113b-3167-46b4-8e89-b4e5282c9fac",
+		"_postman_id": "0254d26f-68eb-41ba-9823-0cbeb9bb360d",
 		"name": "Digitalbooking Posts",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "18046053"
+		"_exporter_id": "18045963"
 	},
 	"item": [
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Crear Rol ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/roles/agregarRol",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roles",
+								"agregarRol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Rol CLIENT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"CLIENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/roles/agregarRol",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roles",
+								"agregarRol"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Agregar Usuario ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Ale\",\r\n    \"apellido\":\"Pan\",\r\n    \"email\":\"ap@gmail.com\",\r\n    \"password\":\"123ale\",\r\n    \"username\":\"ap@gmail.com\",\r\n    \"rol\":{\r\n        \"id\":1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuarios/agregarUsuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								"agregarUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Usuario CLIENT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Sofi\",\r\n    \"apellido\":\"Mon\",\r\n    \"email\":\"sm@gmail.com\",\r\n    \"password\":\"123sof\",\r\n    \"username\":\"sm@gmail.com\",\r\n    \"rol\":{\r\n        \"id\":2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuarios/agregarUsuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								"agregarUsuario"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authenticate ADMIN",
+			"item": [
+				{
+					"name": "login ADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resp = pm.response.json();\r",
+									"pm.globals.set(\"jwt_token\", resp.jwt);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"ap@gmail.com\",\r\n    \"password\":\"123ale\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "Categorias",
 			"item": [
@@ -246,6 +418,16 @@
 				{
 					"name": "Producto 1",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -359,6 +541,36 @@
 					},
 					"response": []
 				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -385,14 +597,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -413,14 +626,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -446,14 +660,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -474,14 +689,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -502,14 +718,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -535,14 +752,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -573,14 +791,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -601,14 +820,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -634,14 +854,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -662,14 +883,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -690,14 +912,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -723,14 +946,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -761,14 +985,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -789,14 +1014,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -822,14 +1048,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -850,14 +1077,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -878,14 +1106,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -911,14 +1140,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -949,14 +1179,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -977,14 +1208,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -1010,14 +1242,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -1038,14 +1271,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -1066,14 +1300,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -1099,14 +1334,15 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas",
+											"raw": "http://localhost:8080/politicas/agregarPolitica",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8080",
 											"path": [
-												"politicas"
+												"politicas",
+												"agregarPolitica"
 											]
 										}
 									},
@@ -1139,14 +1375,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1167,14 +1404,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1195,14 +1433,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1223,14 +1462,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1251,14 +1491,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1284,14 +1525,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1312,14 +1554,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1340,14 +1583,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1368,14 +1612,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1396,14 +1641,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1429,14 +1675,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1457,14 +1704,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1485,14 +1733,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1513,14 +1762,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1541,14 +1791,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1574,14 +1825,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1602,14 +1854,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1630,14 +1883,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1658,14 +1912,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1686,14 +1941,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes",
+									"raw": "http://localhost:8080/imagenes/agregarImagen",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"imagenes"
+										"imagenes",
+										"agregarImagen"
 									]
 								}
 							},
@@ -1724,14 +1980,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -1752,14 +2009,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -1780,14 +2038,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -1808,14 +2067,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -1836,14 +2096,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -1869,14 +2130,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -1897,14 +2159,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -1925,14 +2188,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -1953,14 +2217,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -1981,14 +2246,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -2014,14 +2280,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -2042,14 +2309,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -2070,14 +2338,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -2098,14 +2367,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -2126,14 +2396,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -2159,14 +2430,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -2187,14 +2459,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -2215,14 +2488,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
@@ -2243,20 +2517,206 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/caracteristicas",
+									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"caracteristicas"
+										"caracteristicas",
+										"agregarCaracteristica"
 									]
 								}
 							},
 							"response": []
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "Authenticate CLIENT",
+			"item": [
+				{
+					"name": "login CLIENT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resp = pm.response.json();\r",
+									"pm.globals.set(\"jwt_token\", resp.jwt);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"sm@gmail.com\",\r\n    \"password\":\"123sof\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservas",
+			"item": [
+				{
+					"name": "Agregar Reserva 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hora\": \"15:00:00\",\r\n    \"fechaInicial\": \"2022-12-12\",\r\n    \"fechaFinal\": \"2022-12-13\",\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/reserva/nuevaReserva",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reserva",
+								"nuevaReserva"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Reserva 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hora\": \"15:00:00\",\r\n    \"fechaInicial\": \"2022-12-11\",\r\n    \"fechaFinal\": \"2022-12-15\",\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/reserva/nuevaReserva",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reserva",
+								"nuevaReserva"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}

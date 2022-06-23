@@ -1,21 +1,32 @@
-import React from 'react';
+import React, { useState,useEffect, useMemo, useContext } from 'react';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState } from 'react';
 import selectStyles from './elementStyle/selectStyles';
+import HoraContextProvider from './context/HoraContextProvider';
 
 // CSS Modules, react-datepicker-cssmodules.css
 // importar 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-export default function SelectHora() {
-    const [startDate, setStartDate] = useState(null);
+export default function SelectHora(requerido) {
+    const [startTime, setStartTime] = useState(null);
+    const {isHora, setIsHora} = useContext(HoraContextProvider);
+
+
+
+
+    console.log("hora: ", startTime?.toTimeString().slice(0,9));
+    //setIsHora(startTime.toTimeString().slice(0,9))
+
+    setIsHora(startTime?.toTimeString().slice(0,9))
+
+    
 
 
     return (
         <DatePicker
-      selected={startDate}
-      onChange={(date) => setStartDate(date)}
+      selected={startTime}
+      onChange={(date) => setStartTime(date)}
       showTimeSelect
       showTimeSelectOnly
       timeIntervals={15}
@@ -23,9 +34,10 @@ export default function SelectHora() {
       dateFormat="h:mm aa"
       className='inputHora'
       styles={selectStyles}
-      locale="es_AR"
+      locale="es"
       scrollableYearDropdown
       placeholderText="seleccionar hora de llegada"
+      required={true}
       />
     )
 }

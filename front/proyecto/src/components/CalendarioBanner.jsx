@@ -6,16 +6,8 @@ import DateRangePicker from "react-bootstrap-daterangepicker";
 import "bootstrap-daterangepicker/daterangepicker.css";
 import { Button } from "react-bootstrap";
 
-export default function CalendarioBanner({startDate, endDate, setDateRange}) {
-    const [isStartOpen, setIsStartOpen] = useState(false);
 
-    const onClickAplicar = () => {
-        setIsStartOpen(false);
-      };
-    
-      const onCalendarOpen = () => {
-        setIsStartOpen(true);
-      };
+export default function CalendarioBanner({startDate, endDate, setDateRange}) {
     
       registerLocale("es", es);
       setDefaultLocale("es");
@@ -33,25 +25,11 @@ export default function CalendarioBanner({startDate, endDate, setDateRange}) {
             onChange={(update) => {
               setDateRange(update);
             }}
+            minDate={new Date()}
             locale="es"
             monthsShown={2}
-            excludeDateIntervals={[
-              { start: new Date("Jun 8 2022"), end: new Date("Jun 19 2022") },
-            ]}
-            calendarStartDay={1}
-            timeCaption="time"
-            dateFormat="MMMM d, yyyy"
+            dateFormat="yyyy/M/d"
             changeMonth
-            todayButton={
-              <Button className="botonCalendario" onClick={onClickAplicar}>
-                Aplicar
-              </Button>
-            }
-            selected={startDate}
-            shouldCloseOnSelect={false}
-            onCalendarOpen={onCalendarOpen}
-            onFocus={onCalendarOpen}
-            open={isStartOpen}
         />
     </div>
   )

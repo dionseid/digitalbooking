@@ -12,8 +12,7 @@ import selectStyles from './elementStyle/selectStyles';
 export default function SelectCiudades({ onChange }) {
   const [dataCiudades, setDataCiudades] = useState([]);
   useEffect(() => {
-    axios.get("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/ciudades", { headers: { "Access-Control-Allow-Origin": "*" } }
-    )
+    axios.get("http://localhost:8080/ciudades")
       .then(response => {
         setDataCiudades(response.data)
       })

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useForm } from './hooks/useForm';
 import "../styles/form.css";
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,11 +7,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import ComponenteInput from './ComponenteInput';
 import usuarios from "../helpers/usuarios.json"
+import axios from "axios";
+import axiosConnection from "../helpers/axiosConnection";
+import UserProvider from "./context/UserContext";
 
 
 
 const FormCuenta = () => {
 
+    const {user, loginLogoutEvent} = useContext(UserProvider);
 	const [nombre, cambiarNombre] = useState({campo: '', valido: null});
     const [apellido, cambiarApellido] = useState({campo: '', valido: null});
     const [email, cambiarCorreo] = useState({campo: '', valido: null});
@@ -46,19 +50,62 @@ const isFormValid = () => {
     return nombre.valido && apellido.valido && email.valido && password.valido && password2.valido
 }
 
+
+// TODO - ver si se puede refactorizar para tambien utilizar en el componente de login
+const registroApi = async (data) => {
+    // ** CAMBIAR POR EL URL DE LA API
+    try{
+        const respuesta = await axiosConnection.post('/usuarios/agregarUsuario', data);
+        if(respuesta.status === 200){
+            console.log("REGISTRO EXITOSO API ",respuesta)
+            loginLogoutEvent({
+                nombre: respuesta.data.nombre,
+                apellido: respuesta.data.apellido,
+                mail: respuesta.data.email,
+                auth: true,
+                redirect:false
+            })
+            sessionStorage.clear()
+            sessionStorage.setItem("user",JSON.stringify({
+                nombre: respuesta.data.nombre,
+                apellido: respuesta.data.apellido,
+                mail: respuesta.data.email,
+                auth: true,
+                redirect:false
+            }))
+            console.log(respuesta.data)
+            return respuesta.data;
+        }else{
+            throw new Error('Lamentablemente no ha podido registrarse. Por favor intente más tarde');
+        }
+    }
+    catch(error){
+        console.error('ERROR REGISTRO API ',error);
+
+    }
+}
+
+
 const onSubmit = (e) => {
     e.preventDefault();
-    const { usuarios: userList } = usuarios;
+
+
     const newUser = {
         nombre: nombre.campo,
         apellido: apellido.campo,
-        mail: email.campo,
-        password: password.campo
+        email: email.campo,
+        password: password.campo,
+        rol:{
+            id: 1
+        },
+        username: email.campo
     }
+
     if(isFormValid()){
-        userList.push(newUser);
-        cambiarFormularioValido(false);
-        navigate('/login');
+        // ! Revisar esto, si el formulario es valido tendria que ser true y si despues se va a login no tiene sentido que este 
+        // cambiarFormularioValido(false);
+        registroApi(newUser)
+        navigate('/');
     }else{
         cambiarFormularioValido(true);
     }
@@ -135,7 +182,9 @@ return (
             <ContenedorBotonCentrado className='contenedorBotonCentrado'>
                 <Boton type="submit">Crear Cuenta</Boton>
                 <p>¿Ya tienes una cuenta? <Link to='/login' className='link'><span>Iniciar sesión</span></Link></p>
-                {formularioValido === true && <MensajeExito>Formulario enviado exitosamente!</MensajeExito>}
+                {formularioValido === true &&<MensajeExito>Formulario enviado exitosamente!
+                {/*// TODO - hay que hacer uno de error para cuando no se puede registrar y no tendria que haber mensaje de exito, redirecciona al home*/}
+                </MensajeExito>}
             </ContenedorBotonCentrado>
         </Formulario>
         </div>
