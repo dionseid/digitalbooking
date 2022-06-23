@@ -54,6 +54,7 @@ infrastructure:
       when: manual
       changes:
         - infra/*
+      allow_failure: true
 
 frontend:
   stage: build
