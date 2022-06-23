@@ -30,10 +30,13 @@ const FormLogin = () => {
 
     const postLoginApi = async (data) => {
         try{
+            console.log("data que le llega al post: ", data)
             // ** CAMBIAR POR EL URL DE LA API
-            const respuesta = await axiosConnection.post('/login', data);
+            const respuesta = await axiosConnection.post('/authenticate', data);
+            console.log("resspuesta post login", respuesta)
             if(respuesta.status === 200 ){
-            sessionStorage.setItem('token', JSON.stringify(respuesta.token));
+            sessionStorage.setItem('token', JSON.stringify(respuesta.data.jwt));
+            loginLogoutEvent(JSON.parse(sessionStorage.getItem('user')))
             return respuesta;
         }
             else if(respuesta.status!==200 || respuesta.status!==201){
@@ -42,17 +45,20 @@ const FormLogin = () => {
         }
         catch(error){
             
-            console.log(error);
+            console.log("error login: ", error);
         }
     }
     
+
+
+
     const getLoginApi = async () => {
         try{
             // ** CAMBIAR POR EL URL DE LA API
-            const token = sessionStorage.getItem('token')&& JSON.parse(sessionStorage.getItem('token'));
+            // const token = sessionStorage.getItem('token')&& JSON.parse(sessionStorage.getItem('token'));
             const respuesta = await axiosConnection.get('/login', {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer `
             }
         });
             return respuesta;
@@ -67,15 +73,15 @@ const FormLogin = () => {
         //// const { usuarios: userList } = usuarios;
         ////const getUser = userList.find(user => user.mail === email.campo && user.password === password.campo);
         ////console.log({ getUser });
-        const respuestaPost = postLoginApi({mail: email.campo, password: password.campo})
-        const respuestaGet = respuestaPost && getLoginApi();
-        const getUser = respuestaGet
-        if (getUser) {
+        const respuestaPost = postLoginApi({username: email.campo, password: password.campo})
+        /*const respuestaGet = respuestaPost && getLoginApi();
+        const getUser = respuestaGet*/
+        if (respuestaPost) {
             //// const { nombre, apellido } = getUser;
             //// cambiarFormularioValido(false);
             //// localStorage.setItem('user', JSON.stringify({ nombre , apellido }));
             //// setIsAuthenticated(true);
-            loginLogoutEvent({nombre: getUser.nombre, apellido: getUser.apellido, mail: getUser.email, auth: true, redirect: false});
+
             navigate('/');
         } else {
             cambiarFormularioValido(true);
