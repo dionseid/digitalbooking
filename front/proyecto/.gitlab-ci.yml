@@ -54,7 +54,7 @@ test docker image:
   stage: test
   image: curlimages/curl
   services:
-    - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$FRONTEND_VERSION
+    - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$APP_VERSION
       alias: frontend
   script:
     - curl http://frontend/version.html | grep $FRONTEND_VERSION
