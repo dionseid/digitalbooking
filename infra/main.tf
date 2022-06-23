@@ -129,8 +129,8 @@ module "cloud9" {
   key_name         = aws_key_pair.key_public.key_name
 }
 
-# module "route53" {
-#   source = "./modules/route53"
+module "route53" {
+  source = "./modules/route53"
 
-#   eb_endpoint = module.elastic_beanstalk_app.cname
-# }
+  eb_endpoint = module.elastic_beanstalk_app.cname
+}
