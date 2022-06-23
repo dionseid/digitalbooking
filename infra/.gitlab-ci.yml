@@ -35,8 +35,8 @@ terraform:build: #&terraform_build
   stage: build
   script:
     - cd "${TF_ROOT}"
-    - gitlab-terraform plan -var-db_pass="$DB_PASSWORD"
-    - gitlab-terraform plan-json -var-db_pass="$DB_PASSWORD"
+    - gitlab-terraform plan -var 'db_pass=$DB_PASSWORD'
+    - gitlab-terraform plan-json -var 'db_pass=$DB_PASSWORD'
   resource_group: ${LOCK} # Cualquier nombre puede ir acá
   artifacts:
     paths:
@@ -48,7 +48,7 @@ terraform:deploy:
   stage: deploy
   script:
     - cd "${TF_ROOT}"
-    - gitlab-terraform apply -var-db_pass="$DB_PASSWORD" -auto-approve
+    - gitlab-terraform apply -var 'db_pass=$DB_PASSWORD' -auto-approve
   resource_group: ${LOCK}
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -58,7 +58,7 @@ terraform:destroy:
   stage: cleanup
   script:
     - cd "${TF_ROOT}"
-    - gitlab-terraform destroy -var-db_pass="$DB_PASSWORD" -auto-approve
+    - gitlab-terraform destroy -var 'db_pass=$DB_PASSWORD' -auto-approve
   resource_group: ${LOCK}
   when: manual
   allow_failure: true
