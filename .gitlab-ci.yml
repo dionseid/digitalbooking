@@ -70,9 +70,9 @@ frontend:
       when: manual
       changes:
         - front/proyecto/*
+      allow_failure: true
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
-  allow_failure: true
 
 backend:
   stage: build
@@ -88,9 +88,9 @@ backend:
       when: manual
       changes:
         - back/digitalbooking/*
+      allow_failure: true
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
-  allow_failure: false
 
 deploy to production:
   stage: deploy
