@@ -48,7 +48,7 @@ terraform:deploy:
   stage: deploy
   script:
     - cd "${TF_ROOT}"
-    - gitlab-terraform apply -var 'db_pass=$DB_PASSWORD' -auto-approve
+    - gitlab-terraform apply -auto-approve
   resource_group: ${LOCK}
 
 terraform:destroy:
