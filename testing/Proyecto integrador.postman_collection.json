@@ -7,6 +7,281 @@
 	},
 	"item": [
 		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Crear Rol TESTER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"TESTER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/roles/agregarRol",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roles",
+								"agregarRol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Rol",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/roles/buscarRol/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roles",
+								"buscarRol",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Rol",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":3,\r\n    \"nombre\":\"USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/roles/actualizarRol",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roles",
+								"actualizarRol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Rol",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/roles/eliminarRol/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roles",
+								"eliminarRol",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/roles/listarRoles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roles",
+								"listarRoles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Agregar Usuario TESTER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Tester\",\r\n    \"apellido\":\"Test\",\r\n    \"email\":\"test@gmail.com\",\r\n    \"password\":\"test\",\r\n    \"username\":\"test\",\r\n    \"rol\":{\r\n        \"id\":1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuarios/agregarUsuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								"agregarUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":3,\r\n    \"nombre\":\"Tester1\",\r\n    \"apellido\":\"Test\",\r\n    \"email\":\"test@gmail.com\",\r\n    \"password\":\"test\",\r\n    \"username\":\"test\",\r\n    \"rol\":{\r\n        \"id\":2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuarios/actualizarUsuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								"actualizarUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/usuarios/eliminarUsuario/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								"eliminarUsuario",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/usuarios/listarTodos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								"listarTodos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authenticate ADMIN",
+			"item": [
+				{
+					"name": "login ADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resp = pm.response.json();\r",
+									"pm.globals.set(\"jwt_token\", resp.jwt);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"ap@gmail.com\",\r\n    \"password\":\"123ale\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Categorias",
 			"item": [
 				{
@@ -16,9 +291,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"  pm.response.to.have.status(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -106,9 +379,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"  pm.response.to.have.status(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -147,9 +418,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 204\", function () {\r",
-									"  pm.response.to.have.status(204);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -251,9 +520,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"  pm.response.to.have.status(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -331,9 +598,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"  pm.response.to.have.status(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -373,9 +638,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 204\", function () {\r",
-									"  pm.response.to.have.status(204);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -444,15 +707,23 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"  pm.response.to.have.status(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -526,15 +797,23 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"  pm.response.to.have.status(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -568,19 +847,27 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200 or 204\", () => {\r",
-									"pm.expect(pm.response.code).to.be.oneOf([200,204]);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/productos/5",
+							"raw": "http://localhost:8080/productos/eliminarProducto/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -588,6 +875,7 @@
 							"port": "8080",
 							"path": [
 								"productos",
+								"eliminarProducto",
 								"5"
 							]
 						}
@@ -697,6 +985,29 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Listar por ciudad y fechas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/productos/FiltroPorCiudadYFechas/3/2022-12-12/2022-12-13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"FiltroPorCiudadYFechas",
+								"3",
+								"2022-12-12",
+								"2022-12-13"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -718,14 +1029,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/politicas",
+							"raw": "http://localhost:8080/politicas/agregarPolitica",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"politicas"
+								"politicas",
+								"agregarPolitica"
 							]
 						}
 					},
@@ -737,14 +1049,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/politicas",
+							"raw": "http://localhost:8080/politicas/listarPoliticas",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"politicas"
+								"politicas",
+								"listarPoliticas"
 							]
 						}
 					},
@@ -768,7 +1081,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/politicas/1",
+							"raw": "http://localhost:8080/politicas/buscarPolitica/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -776,6 +1089,7 @@
 							"port": "8080",
 							"path": [
 								"politicas",
+								"buscarPolitica",
 								"1"
 							]
 						}
@@ -797,14 +1111,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/politicas",
+							"raw": "http://localhost:8080/politicas/actualizarPolitica",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"politicas"
+								"politicas",
+								"actualizarPolitica"
 							]
 						}
 					},
@@ -816,7 +1131,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/politicas/19",
+							"raw": "http://localhost:8080/politicas/eliminarPolitica/19",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -824,6 +1139,7 @@
 							"port": "8080",
 							"path": [
 								"politicas",
+								"eliminarPolitica",
 								"19"
 							]
 						}
@@ -842,9 +1158,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"  pm.response.to.have.status(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -863,14 +1177,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/imagenes",
+							"raw": "http://localhost:8080/imagenes/agregarImagen",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"imagenes"
+								"imagenes",
+								"agregarImagen"
 							]
 						}
 					},
@@ -900,7 +1215,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/imagenes/21",
+							"raw": "http://localhost:8080/imagenes/buscarImagen/21",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -908,6 +1223,7 @@
 							"port": "8080",
 							"path": [
 								"imagenes",
+								"buscarImagen",
 								"21"
 							]
 						}
@@ -934,14 +1250,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/imagenes",
+							"raw": "http://localhost:8080/imagenes/listarImagenes",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"imagenes"
+								"imagenes",
+								"listarImagenes"
 							]
 						}
 					},
@@ -954,9 +1271,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"  pm.response.to.have.status(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -975,14 +1290,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/imagenes",
+							"raw": "http://localhost:8080/imagenes/actualizarImagen",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"imagenes"
+								"imagenes",
+								"actualizarImagen"
 							]
 						}
 					},
@@ -995,9 +1311,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200 or 204\", () => {\r",
-									"pm.expect(pm.response.code).to.be.oneOf([200,204]);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -1007,7 +1321,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/imagenes/21",
+							"raw": "http://localhost:8080/imagenes/eliminarImagen/21",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1015,6 +1329,7 @@
 							"port": "8080",
 							"path": [
 								"imagenes",
+								"eliminarImagen",
 								"21"
 							]
 						}
@@ -1033,9 +1348,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"  pm.response.to.have.status(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -1054,14 +1367,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/caracteristicas",
+							"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"caracteristicas"
+								"caracteristicas",
+								"agregarCaracteristica"
 							]
 						}
 					},
@@ -1091,7 +1405,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/caracteristicas/5",
+							"raw": "http://localhost:8080/caracteristicas/buscarCaracteristica/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1099,6 +1413,7 @@
 							"port": "8080",
 							"path": [
 								"caracteristicas",
+								"buscarCaracteristica",
 								"5"
 							]
 						}
@@ -1112,9 +1427,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"  pm.response.to.have.status(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -1133,14 +1446,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/caracteristicas",
+							"raw": "http://localhost:8080/caracteristicas/actualizarCaracteristica",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"caracteristicas"
+								"caracteristicas",
+								"actualizarCaracteristica"
 							]
 						}
 					},
@@ -1153,9 +1467,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 204\", function () {\r",
-									"  pm.response.to.have.status(204);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -1165,7 +1477,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/caracteristicas/16",
+							"raw": "http://localhost:8080/caracteristicas/eliminarCaracteristica/16",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1173,6 +1485,7 @@
 							"port": "8080",
 							"path": [
 								"caracteristicas",
+								"eliminarCaracteristica",
 								"16"
 							]
 						}
@@ -1199,14 +1512,262 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/caracteristicas",
+							"raw": "http://localhost:8080/caracteristicas/listarCaracteristicas",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"caracteristicas"
+								"caracteristicas",
+								"listarCaracteristicas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authenticate CLIENT",
+			"item": [
+				{
+					"name": "login CLIENT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resp = pm.response.json();\r",
+									"pm.globals.set(\"jwt_token\", resp.jwt);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"sm@gmail.com\",\r\n    \"password\":\"123sof\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservas",
+			"item": [
+				{
+					"name": "Agregar Reserva",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hora\": \"15:00:00\",\r\n    \"fechaInicial\": \"2022-12-12\",\r\n    \"fechaFinal\": \"2022-12-13\",\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/reserva/nuevaReserva",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reserva",
+								"nuevaReserva"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Reserva TEST",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hora\": \"15:00:00\",\r\n    \"fechaInicial\": \"2022-12-11\",\r\n    \"fechaFinal\": \"2022-12-15\",\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/reserva/nuevaReserva",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reserva",
+								"nuevaReserva"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Reserva",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/reserva/buscarReserva/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reserva",
+								"buscarReserva",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Reserva",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/reserva/eliminarReserva/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reserva",
+								"eliminarReserva",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Reservas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/reserva/listarReservas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reserva",
+								"listarReservas"
 							]
 						}
 					},

@@ -9,7 +9,8 @@ export default function Caracteristicas() {
     const [dataCaracteristicas, setDataCaracteristicas] = useState([]);
     const {id} = useParams();
     useEffect( () => {
-    axios.get("http://localhost:8080/caracteristicas")
+        // TODO modificar url
+    axios.get("http://localhost:8080/caracteristicas/listarCaracteristicas")
         .then(response => {
             setDataCaracteristicas(response.data)})
 

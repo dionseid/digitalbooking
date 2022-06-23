@@ -109,7 +109,7 @@ const Navbar = ({ onClick }) => {
           <div>
             <span>
               {/* ////nombre[0] + apellido[0]*/}
-              { user.nombre + user.apellido}
+              { user.nombre[0] + user.apellido[0]}
             </span>
           </div>
           <div>

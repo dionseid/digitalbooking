@@ -1,43 +1,307 @@
 {
-	"id": "ae27bded-0eff-4725-93bf-683db79b2614",
+	"id": "307f23dd-37a5-4fc2-a821-fe29f920a04a",
 	"name": "Proyecto integrador",
-	"timestamp": "2022-06-08T16:54:58.998Z",
+	"timestamp": "2022-06-22T18:25:45.879Z",
 	"collection_id": "18045963-28035114-d80d-4ceb-bb7c-440db164be14",
 	"folder_id": 0,
 	"environment_id": "0",
-	"totalPass": 65,
+	"totalPass": 67,
 	"totalFail": 0,
 	"results": [
 		{
-			"id": "0a274f12-24b3-4c10-b7ea-13e2671f5e9b",
-			"name": "Agregar Categoria",
-			"url": "http://localhost:8080/categorias",
-			"time": 55,
+			"id": "2c9a8206-f9d0-4637-8393-9e95cc697241",
+			"name": "Crear Rol TESTER",
+			"url": "http://localhost:8080/roles/agregarRol",
+			"time": 96,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
 			},
 			"tests": {
-				"Status code is 200 or 204": true,
-				"Status code is 200": true
+				"Status code is 200 or 204": true
 			},
 			"testPassFailCounts": {
 				"Status code is 200 or 204": {
 					"pass": 1,
 					"fail": 0
-				},
-				"Status code is 200": {
+				}
+			},
+			"times": [
+				96
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "68252158-3db3-4159-a2b3-9e027df45e16",
+			"name": "Buscar Rol",
+			"url": "http://localhost:8080/roles/buscarRol/1",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
 					"pass": 1,
 					"fail": 0
 				}
 			},
 			"times": [
-				55
+				13
 			],
 			"allTests": [
 				{
-					"Status code is 200 or 204": true,
-					"Status code is 200": true
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "e5834d5d-4795-4bd0-8c21-cd17b791d205",
+			"name": "Actualizar Rol",
+			"url": "http://localhost:8080/roles/actualizarRol",
+			"time": 186,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				186
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "65004cd9-972f-4723-8e60-42b8d894610e",
+			"name": "Eliminar Rol",
+			"url": "http://localhost:8080/roles/eliminarRol/3",
+			"time": 40,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				40
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "fd032661-4bbc-4930-b752-3e917262f06d",
+			"name": "Listar Roles",
+			"url": "http://localhost:8080/roles/listarRoles",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				13
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "098294c7-48d8-488e-b55e-079f14dd0bc8",
+			"name": "Agregar Usuario TESTER",
+			"url": "http://localhost:8080/usuarios/agregarUsuario",
+			"time": 36,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				36
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "e2a472b6-471d-4b66-8c4f-85e84a19301c",
+			"name": "Actualizar Usuario",
+			"url": "http://localhost:8080/usuarios/actualizarUsuario",
+			"time": 44,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				44
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "1d756356-9e8a-4a2c-95f1-6497fd9b4d1e",
+			"name": "Eliminar Usuario",
+			"url": "http://localhost:8080/usuarios/eliminarUsuario/3",
+			"time": 30,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				30
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "51d2d300-64b3-4a76-9cc5-5a99db844501",
+			"name": "Listar Usuarios",
+			"url": "http://localhost:8080/usuarios/listarTodos",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "c6a54589-ee42-4b68-b1b9-e3ab99f088ea",
+			"name": "login ADMIN",
+			"url": "http://localhost:8080/authenticate",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "0a274f12-24b3-4c10-b7ea-13e2671f5e9b",
+			"name": "Agregar Categoria",
+			"url": "http://localhost:8080/categorias",
+			"time": 113,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				113
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
 				}
 			]
 		},
@@ -45,7 +309,7 @@
 			"id": "e0479daf-add1-4a5f-9a4d-a55877809ccf",
 			"name": "Buscar Categoria",
 			"url": "http://localhost:8080/categorias/1",
-			"time": 14,
+			"time": 11,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -70,7 +334,7 @@
 				}
 			},
 			"times": [
-				14
+				11
 			],
 			"allTests": [
 				{
@@ -84,370 +348,7 @@
 			"id": "f6fb700b-d35c-4602-90a9-131ebc028083",
 			"name": "Actualizar Categoria",
 			"url": "http://localhost:8080/categorias",
-			"time": 54,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200 or 204": true,
-				"Status code is 200": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200 or 204": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				54
-			],
-			"allTests": [
-				{
-					"Status code is 200 or 204": true,
-					"Status code is 200": true
-				}
-			]
-		},
-		{
-			"id": "a662dabf-a838-4c2b-ab56-c7cd9c0aef0f",
-			"name": "Borrar Categoria",
-			"url": "http://localhost:8080/categorias/5",
-			"time": 44,
-			"responseCode": {
-				"code": 204,
-				"name": "No Content"
-			},
-			"tests": {
-				"Status code is 200 or 204": true,
-				"Status code is 204": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200 or 204": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Status code is 204": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				44
-			],
-			"allTests": [
-				{
-					"Status code is 200 or 204": true,
-					"Status code is 204": true
-				}
-			]
-		},
-		{
-			"id": "3a2187bc-1894-401c-90cf-af7b989e7756",
-			"name": "Listar Categorias",
-			"url": "http://localhost:8080/categorias",
-			"time": 153,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200 or 204": true,
-				"Test data type of the response": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200 or 204": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Test data type of the response": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				153
-			],
-			"allTests": [
-				{
-					"Status code is 200 or 204": true,
-					"Test data type of the response": true
-				}
-			]
-		},
-		{
-			"id": "0d151621-b17c-4016-9ca9-545224ed3829",
-			"name": "Agregar Ciudad",
-			"url": "http://localhost:8080/ciudades",
-			"time": 31,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200 or 204": true,
-				"Status code is 200": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200 or 204": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				31
-			],
-			"allTests": [
-				{
-					"Status code is 200 or 204": true,
-					"Status code is 200": true
-				}
-			]
-		},
-		{
-			"id": "64da460b-4b24-4050-9cdf-6f6981aa127c",
-			"name": "Buscar Ciudad por ID",
-			"url": "http://localhost:8080/ciudades/1",
-			"time": 10,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200 or 204": true,
-				"The response has all properties": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200 or 204": {
-					"pass": 1,
-					"fail": 0
-				},
-				"The response has all properties": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				10
-			],
-			"allTests": [
-				{
-					"Status code is 200 or 204": true,
-					"The response has all properties": true
-				}
-			]
-		},
-		{
-			"id": "b73a03ba-a7aa-427c-a675-24d5e3267de4",
-			"name": "Actualizar Ciudad",
-			"url": "http://localhost:8080/ciudades/",
-			"time": 46,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200 or 204": true,
-				"Status code is 200": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200 or 204": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				46
-			],
-			"allTests": [
-				{
-					"Status code is 200 or 204": true,
-					"Status code is 200": true
-				}
-			]
-		},
-		{
-			"id": "63b33ef8-a092-482f-b85d-9eb412bae682",
-			"name": "Borrar Ciudad",
-			"url": "http://localhost:8080/ciudades/5",
-			"time": 28,
-			"responseCode": {
-				"code": 204,
-				"name": "No Content"
-			},
-			"tests": {
-				"Status code is 200 or 204": true,
-				"Status code is 204": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200 or 204": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Status code is 204": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				28
-			],
-			"allTests": [
-				{
-					"Status code is 200 or 204": true,
-					"Status code is 204": true
-				}
-			]
-		},
-		{
-			"id": "1d94d6ff-af46-4e73-85c8-09537aa1a11b",
-			"name": "Listar Ciudades",
-			"url": "http://localhost:8080/ciudades",
-			"time": 14,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200 or 204": true,
-				"Test data type of the response": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200 or 204": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Test data type of the response": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				14
-			],
-			"allTests": [
-				{
-					"Status code is 200 or 204": true,
-					"Test data type of the response": true
-				}
-			]
-		},
-		{
-			"id": "01639dfc-6e9b-434f-ae3f-1faf3854a15b",
-			"name": "Agregar Producto",
-			"url": "http://localhost:8080/productos/agregarProducto",
-			"time": 43,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200 or 204": true,
-				"Status code is 200": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200 or 204": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				43
-			],
-			"allTests": [
-				{
-					"Status code is 200 or 204": true,
-					"Status code is 200": true
-				}
-			]
-		},
-		{
-			"id": "f9193c82-2e52-4c15-a1b0-f14ec39f2597",
-			"name": "Buscar Producto por Id",
-			"url": "http://localhost:8080/productos/buscarProductoPorId/1",
-			"time": 20,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200 or 204": true,
-				"The response has all properties": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200 or 204": {
-					"pass": 1,
-					"fail": 0
-				},
-				"The response has all properties": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				20
-			],
-			"allTests": [
-				{
-					"Status code is 200 or 204": true,
-					"The response has all properties": true
-				}
-			]
-		},
-		{
-			"id": "eecf02fb-f997-416c-9a4f-f91951d99140",
-			"name": "Actualizar Producto",
-			"url": "http://localhost:8080/productos/actualizarProd",
-			"time": 63,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200 or 204": true,
-				"Status code is 200": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200 or 204": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				63
-			],
-			"allTests": [
-				{
-					"Status code is 200 or 204": true,
-					"Status code is 200": true
-				}
-			]
-		},
-		{
-			"id": "853d64f9-8cb7-4713-a63f-a37460cd3cbf",
-			"name": "Borrar Producto",
-			"url": "http://localhost:8080/productos/5",
-			"time": 45,
+			"time": 99,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -462,7 +363,7 @@
 				}
 			},
 			"times": [
-				45
+				99
 			],
 			"allTests": [
 				{
@@ -471,10 +372,37 @@
 			]
 		},
 		{
-			"id": "eb3a97f5-402f-4082-b30b-3e16bb0f7b7b",
-			"name": "Buscar por categoria",
-			"url": "http://localhost:8080/productos/filtroCategoria/4",
-			"time": 35,
+			"id": "a662dabf-a838-4c2b-ab56-c7cd9c0aef0f",
+			"name": "Borrar Categoria",
+			"url": "http://localhost:8080/categorias/5",
+			"time": 46,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				46
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "3a2187bc-1894-401c-90cf-af7b989e7756",
+			"name": "Listar Categorias",
+			"url": "http://localhost:8080/categorias",
+			"time": 12,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -494,7 +422,301 @@
 				}
 			},
 			"times": [
-				35
+				12
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "0d151621-b17c-4016-9ca9-545224ed3829",
+			"name": "Agregar Ciudad",
+			"url": "http://localhost:8080/ciudades",
+			"time": 104,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				104
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "64da460b-4b24-4050-9cdf-6f6981aa127c",
+			"name": "Buscar Ciudad por ID",
+			"url": "http://localhost:8080/ciudades/1",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true,
+				"The response has all properties": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"The response has all properties": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true,
+					"The response has all properties": true
+				}
+			]
+		},
+		{
+			"id": "b73a03ba-a7aa-427c-a675-24d5e3267de4",
+			"name": "Actualizar Ciudad",
+			"url": "http://localhost:8080/ciudades/",
+			"time": 86,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				86
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "63b33ef8-a092-482f-b85d-9eb412bae682",
+			"name": "Borrar Ciudad",
+			"url": "http://localhost:8080/ciudades/5",
+			"time": 47,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				47
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "1d94d6ff-af46-4e73-85c8-09537aa1a11b",
+			"name": "Listar Ciudades",
+			"url": "http://localhost:8080/ciudades",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "01639dfc-6e9b-434f-ae3f-1faf3854a15b",
+			"name": "Agregar Producto",
+			"url": "http://localhost:8080/productos/agregarProducto",
+			"time": 55,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				55
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "f9193c82-2e52-4c15-a1b0-f14ec39f2597",
+			"name": "Buscar Producto por Id",
+			"url": "http://localhost:8080/productos/buscarProductoPorId/1",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true,
+				"The response has all properties": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"The response has all properties": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				13
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true,
+					"The response has all properties": true
+				}
+			]
+		},
+		{
+			"id": "eecf02fb-f997-416c-9a4f-f91951d99140",
+			"name": "Actualizar Producto",
+			"url": "http://localhost:8080/productos/actualizarProd",
+			"time": 69,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				69
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "853d64f9-8cb7-4713-a63f-a37460cd3cbf",
+			"name": "Borrar Producto",
+			"url": "http://localhost:8080/productos/eliminarProducto/5",
+			"time": 50,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				50
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "eb3a97f5-402f-4082-b30b-3e16bb0f7b7b",
+			"name": "Buscar por categoria",
+			"url": "http://localhost:8080/productos/filtroCategoria/4",
+			"time": 25,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				25
 			],
 			"allTests": [
 				{
@@ -507,7 +729,7 @@
 			"id": "c15b0669-63dc-4547-9489-7b6df115a0fb",
 			"name": "Buscar por Ciudad",
 			"url": "http://localhost:8080/productos/filtroCiudad/4",
-			"time": 18,
+			"time": 23,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -527,7 +749,7 @@
 				}
 			},
 			"times": [
-				18
+				23
 			],
 			"allTests": [
 				{
@@ -570,10 +792,10 @@
 			]
 		},
 		{
-			"id": "e1618321-59b5-43d2-8b03-3db38b8b0ecc",
-			"name": "Agregar Politica",
-			"url": "http://localhost:8080/politicas",
-			"time": 68,
+			"id": "8bab1082-e752-4670-bf10-dd83a59cf787",
+			"name": "Listar por ciudad y fechas",
+			"url": "http://localhost:8080/productos/FiltroPorCiudadYFechas/3/2022-12-12/2022-12-13",
+			"time": 60,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -588,7 +810,34 @@
 				}
 			},
 			"times": [
-				68
+				60
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "e1618321-59b5-43d2-8b03-3db38b8b0ecc",
+			"name": "Agregar Politica",
+			"url": "http://localhost:8080/politicas/agregarPolitica",
+			"time": 119,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				119
 			],
 			"allTests": [
 				{
@@ -599,8 +848,8 @@
 		{
 			"id": "80b5aae4-e931-4ce7-b67d-31569e20dc58",
 			"name": "Listar Politicas",
-			"url": "http://localhost:8080/politicas",
-			"time": 40,
+			"url": "http://localhost:8080/politicas/listarPoliticas",
+			"time": 38,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -615,7 +864,7 @@
 				}
 			},
 			"times": [
-				40
+				38
 			],
 			"allTests": [
 				{
@@ -626,7 +875,7 @@
 		{
 			"id": "6d44fb57-1bae-4554-8ccf-16a992f46d38",
 			"name": "Buscar Politica",
-			"url": "http://localhost:8080/politicas/1",
+			"url": "http://localhost:8080/politicas/buscarPolitica/1",
 			"time": 13,
 			"responseCode": {
 				"code": 200,
@@ -653,8 +902,8 @@
 		{
 			"id": "3a282e75-4139-4071-a959-2b0036e2ce5a",
 			"name": "Actualizar Politica",
-			"url": "http://localhost:8080/politicas",
-			"time": 50,
+			"url": "http://localhost:8080/politicas/actualizarPolitica",
+			"time": 121,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -669,7 +918,7 @@
 				}
 			},
 			"times": [
-				50
+				121
 			],
 			"allTests": [
 				{
@@ -680,8 +929,8 @@
 		{
 			"id": "af1531ba-18d6-437c-9ede-c739ba128be2",
 			"name": "Eliminar Politica",
-			"url": "http://localhost:8080/politicas/19",
-			"time": 45,
+			"url": "http://localhost:8080/politicas/eliminarPolitica/19",
+			"time": 43,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -696,7 +945,7 @@
 				}
 			},
 			"times": [
-				45
+				43
 			],
 			"allTests": [
 				{
@@ -707,41 +956,35 @@
 		{
 			"id": "380c08bc-f26d-41eb-9989-01c6b4853444",
 			"name": "Agregar Imagen",
-			"url": "http://localhost:8080/imagenes",
-			"time": 49,
+			"url": "http://localhost:8080/imagenes/agregarImagen",
+			"time": 40,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
 			},
 			"tests": {
-				"Status code is 200 or 204": true,
-				"Status code is 200": true
+				"Status code is 200 or 204": true
 			},
 			"testPassFailCounts": {
 				"Status code is 200 or 204": {
 					"pass": 1,
 					"fail": 0
-				},
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
 				}
 			},
 			"times": [
-				49
+				40
 			],
 			"allTests": [
 				{
-					"Status code is 200 or 204": true,
-					"Status code is 200": true
+					"Status code is 200 or 204": true
 				}
 			]
 		},
 		{
 			"id": "74b0dd59-4286-4ac2-b3aa-fc4524383722",
 			"name": "Buscar Imagen",
-			"url": "http://localhost:8080/imagenes/21",
-			"time": 13,
+			"url": "http://localhost:8080/imagenes/buscarImagen/21",
+			"time": 15,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -761,7 +1004,7 @@
 				}
 			},
 			"times": [
-				13
+				15
 			],
 			"allTests": [
 				{
@@ -773,8 +1016,8 @@
 		{
 			"id": "f8d3336f-faae-4281-bbd2-9b31336a9c13",
 			"name": "Listar Imagenes",
-			"url": "http://localhost:8080/imagenes",
-			"time": 37,
+			"url": "http://localhost:8080/imagenes/listarImagenes",
+			"time": 27,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -794,7 +1037,7 @@
 				}
 			},
 			"times": [
-				37
+				27
 			],
 			"allTests": [
 				{
@@ -806,41 +1049,8 @@
 		{
 			"id": "e511a387-02c5-4605-88dc-eb1049d0a23b",
 			"name": "Actualizar Imagen",
-			"url": "http://localhost:8080/imagenes",
-			"time": 19,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200 or 204": true,
-				"Status code is 200": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200 or 204": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				19
-			],
-			"allTests": [
-				{
-					"Status code is 200 or 204": true,
-					"Status code is 200": true
-				}
-			]
-		},
-		{
-			"id": "e2d884f4-e25c-400c-ae54-03a45c9631e4",
-			"name": "Eliminar Imagen",
-			"url": "http://localhost:8080/imagenes/21",
-			"time": 41,
+			"url": "http://localhost:8080/imagenes/actualizarImagen",
+			"time": 17,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -855,7 +1065,34 @@
 				}
 			},
 			"times": [
-				41
+				17
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "e2d884f4-e25c-400c-ae54-03a45c9631e4",
+			"name": "Eliminar Imagen",
+			"url": "http://localhost:8080/imagenes/eliminarImagen/21",
+			"time": 43,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				43
 			],
 			"allTests": [
 				{
@@ -866,41 +1103,35 @@
 		{
 			"id": "c1074451-d90e-4d61-8f69-6ffc827f4623",
 			"name": "Agregar Caracteristica",
-			"url": "http://localhost:8080/caracteristicas",
-			"time": 51,
+			"url": "http://localhost:8080/caracteristicas/agregarCaracteristica",
+			"time": 42,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
 			},
 			"tests": {
-				"Status code is 200 or 204": true,
-				"Status code is 200": true
+				"Status code is 200 or 204": true
 			},
 			"testPassFailCounts": {
 				"Status code is 200 or 204": {
 					"pass": 1,
 					"fail": 0
-				},
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
 				}
 			},
 			"times": [
-				51
+				42
 			],
 			"allTests": [
 				{
-					"Status code is 200 or 204": true,
-					"Status code is 200": true
+					"Status code is 200 or 204": true
 				}
 			]
 		},
 		{
 			"id": "3a5f4e1e-201c-4050-ada8-121ea10f57e5",
 			"name": "Buscar Caracteristica",
-			"url": "http://localhost:8080/caracteristicas/5",
-			"time": 16,
+			"url": "http://localhost:8080/caracteristicas/buscarCaracteristica/5",
+			"time": 14,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -920,7 +1151,7 @@
 				}
 			},
 			"times": [
-				16
+				14
 			],
 			"allTests": [
 				{
@@ -932,74 +1163,62 @@
 		{
 			"id": "3ae351fe-6ad5-4206-822b-bdb7e4ce9a18",
 			"name": "Actualizar Caracteristica",
-			"url": "http://localhost:8080/caracteristicas",
-			"time": 21,
+			"url": "http://localhost:8080/caracteristicas/actualizarCaracteristica",
+			"time": 116,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
 			},
 			"tests": {
-				"Status code is 200 or 204": true,
-				"Status code is 200": true
+				"Status code is 200 or 204": true
 			},
 			"testPassFailCounts": {
 				"Status code is 200 or 204": {
 					"pass": 1,
 					"fail": 0
-				},
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
 				}
 			},
 			"times": [
-				21
+				116
 			],
 			"allTests": [
 				{
-					"Status code is 200 or 204": true,
-					"Status code is 200": true
+					"Status code is 200 or 204": true
 				}
 			]
 		},
 		{
 			"id": "aa2c0ed3-5b79-4cba-abcc-2bc52a854154",
 			"name": "Borrar Caracteristica",
-			"url": "http://localhost:8080/caracteristicas/16",
-			"time": 59,
+			"url": "http://localhost:8080/caracteristicas/eliminarCaracteristica/16",
+			"time": 43,
 			"responseCode": {
 				"code": 204,
 				"name": "No Content"
 			},
 			"tests": {
-				"Status code is 200 or 204": true,
-				"Status code is 204": true
+				"Status code is 200 or 204": true
 			},
 			"testPassFailCounts": {
 				"Status code is 200 or 204": {
 					"pass": 1,
 					"fail": 0
-				},
-				"Status code is 204": {
-					"pass": 1,
-					"fail": 0
 				}
 			},
 			"times": [
-				59
+				43
 			],
 			"allTests": [
 				{
-					"Status code is 200 or 204": true,
-					"Status code is 204": true
+					"Status code is 200 or 204": true
 				}
 			]
 		},
 		{
 			"id": "6fa082cf-b2c0-4467-945b-cbb8d5db704f",
 			"name": "Listar Caracteristicas",
-			"url": "http://localhost:8080/caracteristicas",
-			"time": 29,
+			"url": "http://localhost:8080/caracteristicas/listarCaracteristicas",
+			"time": 27,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -1019,7 +1238,7 @@
 				}
 			},
 			"times": [
-				29
+				27
 			],
 			"allTests": [
 				{
@@ -1027,12 +1246,214 @@
 					"Test data type of the response": true
 				}
 			]
+		},
+		{
+			"id": "3ca647b0-f7bf-456c-8c83-0bf1974c9686",
+			"name": "login CLIENT",
+			"url": "http://localhost:8080/authenticate",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				20
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "12a42be5-cb03-4ce5-91a4-41b7828ab222",
+			"name": "Agregar Reserva",
+			"url": "http://localhost:8080/reserva/nuevaReserva",
+			"time": 62,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				62
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "78d50091-1ae7-46c3-b122-072e334200a9",
+			"name": "Agregar Reserva TEST",
+			"url": "http://localhost:8080/reserva/nuevaReserva",
+			"time": 55,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				55
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "3c044387-1e88-4199-91cf-5b13febe9799",
+			"name": "Buscar Reserva",
+			"url": "http://localhost:8080/reserva/buscarReserva/1",
+			"time": 31,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				31
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "65f8ae13-5365-444d-b4a4-7dd2adb3f807",
+			"name": "Eliminar Reserva",
+			"url": "http://localhost:8080/reserva/eliminarReserva/2",
+			"time": 82,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				82
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
+		},
+		{
+			"id": "21af3d2b-6b30-45b3-9c36-6de2e408da63",
+			"name": "Listar Reservas",
+			"url": "http://localhost:8080/reserva/listarReservas",
+			"time": 30,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				30
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 204": true
+				}
+			]
 		}
 	],
 	"count": 1,
-	"totalTime": 1247,
+	"totalTime": 2341,
 	"collection": {
 		"requests": [
+			{
+				"id": "2c9a8206-f9d0-4637-8393-9e95cc697241",
+				"method": "POST"
+			},
+			{
+				"id": "68252158-3db3-4159-a2b3-9e027df45e16",
+				"method": "GET"
+			},
+			{
+				"id": "e5834d5d-4795-4bd0-8c21-cd17b791d205",
+				"method": "PUT"
+			},
+			{
+				"id": "65004cd9-972f-4723-8e60-42b8d894610e",
+				"method": "DELETE"
+			},
+			{
+				"id": "fd032661-4bbc-4930-b752-3e917262f06d",
+				"method": "GET"
+			},
+			{
+				"id": "098294c7-48d8-488e-b55e-079f14dd0bc8",
+				"method": "POST"
+			},
+			{
+				"id": "e2a472b6-471d-4b66-8c4f-85e84a19301c",
+				"method": "PUT"
+			},
+			{
+				"id": "1d756356-9e8a-4a2c-95f1-6497fd9b4d1e",
+				"method": "DELETE"
+			},
+			{
+				"id": "51d2d300-64b3-4a76-9cc5-5a99db844501",
+				"method": "GET"
+			},
+			{
+				"id": "c6a54589-ee42-4b68-b1b9-e3ab99f088ea",
+				"method": "POST"
+			},
 			{
 				"id": "0a274f12-24b3-4c10-b7ea-13e2671f5e9b",
 				"method": "POST"
@@ -1102,6 +1523,10 @@
 				"method": "GET"
 			},
 			{
+				"id": "8bab1082-e752-4670-bf10-dd83a59cf787",
+				"method": "GET"
+			},
+			{
 				"id": "e1618321-59b5-43d2-8b03-3db38b8b0ecc",
 				"method": "POST"
 			},
@@ -1159,6 +1584,30 @@
 			},
 			{
 				"id": "6fa082cf-b2c0-4467-945b-cbb8d5db704f",
+				"method": "GET"
+			},
+			{
+				"id": "3ca647b0-f7bf-456c-8c83-0bf1974c9686",
+				"method": "POST"
+			},
+			{
+				"id": "12a42be5-cb03-4ce5-91a4-41b7828ab222",
+				"method": "POST"
+			},
+			{
+				"id": "78d50091-1ae7-46c3-b122-072e334200a9",
+				"method": "POST"
+			},
+			{
+				"id": "3c044387-1e88-4199-91cf-5b13febe9799",
+				"method": "GET"
+			},
+			{
+				"id": "65f8ae13-5365-444d-b4a4-7dd2adb3f807",
+				"method": "DELETE"
+			},
+			{
+				"id": "21af3d2b-6b30-45b3-9c36-6de2e408da63",
 				"method": "GET"
 			}
 		]

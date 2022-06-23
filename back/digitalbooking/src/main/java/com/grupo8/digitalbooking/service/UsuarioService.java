@@ -51,8 +51,8 @@ public class UsuarioService implements UserDetailsService {
 
     //actualizar usuario
     public Usuario actualizarUsuario(Usuario usuario){
-        Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
-        usuario.setRol(rolUsuario.get());
+        RolUsuario rolUsuario = rolUsuarioRepository.findById(usuario.getRol().getId()).get();
+        usuario.setRol(rolUsuario);
         return usuarioRepository.save(usuario);
     }
     //eliminar usuario

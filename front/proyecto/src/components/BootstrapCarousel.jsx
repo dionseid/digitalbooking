@@ -14,7 +14,8 @@ export default function BootstrapCarousel() {
   };
   const [dataImagen, setDataImagen] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8080/imagenes")
+    // TODO modificar url
+    axios.get("http://localhost:8080/imagenes/listarImagenes")
       .then(response => {
         setDataImagen(response.data)
       })

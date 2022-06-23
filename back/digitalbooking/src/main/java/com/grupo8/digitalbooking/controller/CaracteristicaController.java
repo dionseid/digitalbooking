@@ -30,7 +30,7 @@ public class CaracteristicaController {
     //BUSCAR
     @ApiOperation(value="buscarCaracteristica", notes="Buscar una característica por su ID")
     @GetMapping("/buscarCaracteristica/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
+//    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Caracteristica> buscarCaracteristica(@PathVariable Integer id){
         Caracteristica caracteristica = caracteristicaService.buscarCaracteristica(id).orElse(null);
         return ResponseEntity.ok(caracteristica);
@@ -69,7 +69,7 @@ public class CaracteristicaController {
     //LISTAR TODAS
     @ApiOperation(value="listarCaracteristicas", notes="Listar todas las características")
     @GetMapping("/listarCaracteristicas")
-    @CrossOrigin(origins = "http://localhost:3000")
+//    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Collection<Caracteristica>> listarCaracteristicas(){
         return ResponseEntity.ok(caracteristicaService.listarCaracteristicas());
     }

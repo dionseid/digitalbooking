@@ -10,7 +10,8 @@ export default function Reglas() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get("http://localhost:8080/politicas")
+    // TODO cambiar url
+    axios.get("http://localhost:8080/politicas/listarPoliticas")
       .then(response => {
         setDataReglas(response.data)
       })

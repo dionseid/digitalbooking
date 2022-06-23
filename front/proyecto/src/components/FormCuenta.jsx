@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useForm } from './hooks/useForm';
 import "../styles/form.css";
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,11 +9,13 @@ import ComponenteInput from './ComponenteInput';
 import usuarios from "../helpers/usuarios.json"
 import axios from "axios";
 import axiosConnection from "../helpers/axiosConnection";
+import UserProvider from "./context/UserContext";
 
 
 
 const FormCuenta = () => {
 
+    const {user, loginLogoutEvent} = useContext(UserProvider);
 	const [nombre, cambiarNombre] = useState({campo: '', valido: null});
     const [apellido, cambiarApellido] = useState({campo: '', valido: null});
     const [email, cambiarCorreo] = useState({campo: '', valido: null});
@@ -53,34 +55,57 @@ const isFormValid = () => {
 const registroApi = async (data) => {
     // ** CAMBIAR POR EL URL DE LA API
     try{
-        const respuesta = await axios.post('/registro', data);
-        if(respuesta.status === 201){
-            sessionStorage.setItem('token', JSON.stringify(respuesta));
-            return respuesta;
+        const respuesta = await axiosConnection.post('/usuarios/agregarUsuario', data);
+        if(respuesta.status === 200){
+            console.log("REGISTRO EXITOSO API ",respuesta)
+            loginLogoutEvent({
+                nombre: respuesta.data.nombre,
+                apellido: respuesta.data.apellido,
+                mail: respuesta.data.email,
+                auth: true,
+                redirect:false
+            })
+            sessionStorage.clear()
+            sessionStorage.setItem("user",JSON.stringify({
+                nombre: respuesta.data.nombre,
+                apellido: respuesta.data.apellido,
+                mail: respuesta.data.email,
+                auth: true,
+                redirect:false
+            }))
+            console.log(respuesta.data)
+            return respuesta.data;
         }else{
             throw new Error('Lamentablemente no ha podido registrarse. Por favor intente más tarde');
         }
     }
     catch(error){
-        console.log(error);
+        console.error('ERROR REGISTRO API ',error);
 
     }
 }
 
+
 const onSubmit = (e) => {
     e.preventDefault();
-    const { usuarios: userList } = usuarios;
+
+
     const newUser = {
         nombre: nombre.campo,
         apellido: apellido.campo,
-        mail: email.campo,
-        password: password.campo
+        email: email.campo,
+        password: password.campo,
+        rol:{
+            id: 1
+        },
+        username: email.campo
     }
+
     if(isFormValid()){
-        registroApi(newUser);
         // ! Revisar esto, si el formulario es valido tendria que ser true y si despues se va a login no tiene sentido que este 
-        cambiarFormularioValido(false);
-        navigate('/login');
+        // cambiarFormularioValido(false);
+        registroApi(newUser)
+        navigate('/');
     }else{
         cambiarFormularioValido(true);
     }

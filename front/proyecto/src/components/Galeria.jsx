@@ -24,7 +24,8 @@ const Galeria = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get("http://localhost:8080/imagenes")
+    // TODO cambiar url
+    axios.get("http://localhost:8080/imagenes/listarImagenes")
       .then(response => {
         setDataImagen(response.data)
       })

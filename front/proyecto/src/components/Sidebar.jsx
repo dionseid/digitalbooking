@@ -19,7 +19,7 @@ const Sidebar = () => {
       apellido: "",
       mail: "",
       auth: false,
-      redirect: false
+      redirect: false,
     });
   };
 
@@ -80,12 +80,13 @@ const Sidebar = () => {
   };
   const handleAuthenticated = () => {
     if (isAuthenticatedMenu) {
-      const { nombre, apellido } = JSON.parse(localStorage.getItem("user"));
       return (
         <div className="SidebarBienvenida">
-          <span>{nombre[0] + apellido[0]}</span>
+          {console.log(user)}
+          <span>{user.nombre[0] + user.apellido[0]}</span>
+          {console.log(user.nombre[0])}
           <p>Hola,</p>
-          <p className="nombreCompletoMenu">{`${nombre} ${apellido}`}</p>
+          <p className="nombreCompletoMenu">{`${user.nombre} ${user.apellido}`}</p>
         </div>
       );
     } else {
