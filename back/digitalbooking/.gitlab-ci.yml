@@ -50,13 +50,13 @@ build docker image:
     - docker --version
   script:
     - aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
-    - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-$APP_VERSION --cache-from $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-latest back/digitalbooking
+    - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-$PARENT_PIPELINE_ID --cache-from $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-back-latest back/digitalbooking
     - docker image ls
     - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
-    - echo $APP_VERSION
+    - echo $PARENT_PIPELINE_ID
     - |
       curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
       --silent --output /dev/null --show-error --fail \
-      "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/BACKEND_VERSION" --form "value=`echo $APP_VERSION`"
+      "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/BACKEND_VERSION" --form "value=`echo $PARENT_PIPELINE_ID`"
   variables:
     DOCKER_DRIVER: overlay
