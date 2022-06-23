@@ -48,12 +48,11 @@ build docker image:
       "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/FRONTEND_VERSION" --form "value=`echo $APP_VERSION`"
   variables:
     DOCKER_DRIVER: overlay
-
-test docker image:
-  stage: test
-  image: curlimages/curl
-  services:
-    - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$APP_VERSION
-      alias: frontend
-  script:
-    - curl http://frontend/version.html | grep $APP_VERSION
+# test docker image:
+#   stage: test
+#   image: curlimages/curl
+#   services:
+#     - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$APP_VERSION
+#       alias: frontend
+#   script:
+#     - curl http://frontend/version.html | grep $APP_VERSION
