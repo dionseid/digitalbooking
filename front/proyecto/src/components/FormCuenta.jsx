@@ -62,17 +62,43 @@ const registroApi = async (data) => {
                 nombre: respuesta.data.nombre,
                 apellido: respuesta.data.apellido,
                 mail: respuesta.data.email,
+                id: respuesta.data.id,
                 auth: true,
-                redirect:false
+                redirect:false,
+                ciudad:""
             })
-            sessionStorage.clear()
-            sessionStorage.setItem("user",JSON.stringify({
-                nombre: respuesta.data.nombre,
-                apellido: respuesta.data.apellido,
-                mail: respuesta.data.email,
-                auth: true,
-                redirect:false
-            }))
+            // sessionStorage.clear()
+            let cuentasGurdadas = localStorage.getItem('user') && JSON.parse(localStorage.getItem('user'))
+            if(cuentasGurdadas){
+                console.log('Entro')
+                cuentasGurdadas = [...cuentasGurdadas,{
+                    nombre: respuesta.data.nombre,
+                    apellido: respuesta.data.apellido,
+                    mail: respuesta.data.email,
+                    id: respuesta.data.id,
+                    auth: true,
+                    redirect:false,
+                    ciudad: ""
+                }]
+                localStorage.clear()
+                localStorage.setItem('user', JSON.stringify(cuentasGurdadas))
+            }    
+            else if(!cuentasGurdadas){
+                console.error('no entro: ', cuentasGurdadas)   
+                localStorage.clear()
+                localStorage.setItem("user",JSON.stringify([{
+                        nombre: respuesta.data.nombre,
+                        apellido: respuesta.data.apellido,
+                        mail: respuesta.data.email,
+                        id: respuesta.data.id,
+                        auth: true,
+                        redirect:false,
+                        ciudad:""
+                        
+                    }]))
+                }
+            
+
             console.log(respuesta.data)
             return respuesta.data;
         }else{
@@ -104,7 +130,7 @@ const onSubmit = (e) => {
     if(isFormValid()){
         // ! Revisar esto, si el formulario es valido tendria que ser true y si despues se va a login no tiene sentido que este 
         // cambiarFormularioValido(false);
-        registroApi(newUser)
+        const respAPI = registroApi(newUser)
         navigate('/');
     }else{
         cambiarFormularioValido(true);

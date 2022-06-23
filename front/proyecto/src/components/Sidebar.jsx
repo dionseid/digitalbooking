@@ -18,8 +18,10 @@ const Sidebar = () => {
       nombre: "",
       apellido: "",
       mail: "",
+      id:null,
       auth: false,
       redirect: false,
+      ciudad:""
     });
   };
 

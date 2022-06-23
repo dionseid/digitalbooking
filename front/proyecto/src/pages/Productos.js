@@ -56,8 +56,10 @@ const Productos = () => {
         nombre: '',
         apellido: '',
         mail: '',
+        id:null,
         auth: false,
-        redirect:true
+        redirect:true,
+        ciudad:""
       })
       navigate(`/login`)
     }
