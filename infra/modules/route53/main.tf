@@ -7,7 +7,7 @@ module "zones" {
   version = "~> 2.0"
 
   zones = {
-    "remo-digitalbooking.com" = {
+    "remo-digitalbooking.click" = {
       tags = {
         env = var.environment_name
       }
@@ -29,8 +29,8 @@ module "records" {
 
   records = [
     {
-      name    = "remo-digitalbooking.com"
-      type    = "A"
+      name    = "www.remo-digitalbooking.click"
+      type    = "CNAME"
       ttl     = 300
       records = [var.eb_endpoint]
     }
