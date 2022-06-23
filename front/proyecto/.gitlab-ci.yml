@@ -39,7 +39,7 @@ build docker image:
     - docker --version
   script:
     - aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
-    - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$$PARENT_PIPELINE_ID --cache-from $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest front/proyecto
+    - docker build -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest -t $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$PARENT_PIPELINE_ID --cache-from $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-latest front/proyecto
     - docker image ls
     - docker push --all-tags $AWS_ECR_REGISTRY/$REPOSITORY_NAME
     - echo $PARENT_PIPELINE_ID
@@ -54,7 +54,7 @@ test docker image:
   stage: test
   image: curlimages/curl
   services:
-    - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$PARENT_PIPELINE_ID
+    - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$FRONTEND_VERSION
       alias: frontend
   script:
-    - curl http://frontend/version.html | grep $PARENT_PIPELINE_ID
+    - curl http://frontend/version.html | grep $FRONTEND_VERSION
