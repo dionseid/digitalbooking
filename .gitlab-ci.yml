@@ -139,6 +139,9 @@ deploy to production:
       when: manual
 
 redeploy if failure:
+  image:
+    name: amazon/aws-cli:2.4.11
+    entrypoint: [""]
   stage: redeploy
   when: on_failure
   script:
