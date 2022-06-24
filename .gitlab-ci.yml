@@ -5,6 +5,8 @@ variables:
   REPOSITORY_NAME: remo-digitalbooking-repo-prod
   TEAM: remo
   LOCK: deployment
+  APP_NAME: remo-digitalbooking-prod
+  APP_ENV_NAME: remo-digitalbooking-env-prod
 
 stages:
   - update
