@@ -16,19 +16,16 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "reservas")
 public class Reserva {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Time hora;
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
-
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "productos_id")
     private Producto producto;
-
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "usuarios_id")

@@ -80,4 +80,23 @@ public class UsuarioService implements UserDetailsService {
 
         return new User(username, usuario.getPassword(), true, true, true, true, authorities);
     }
+
+    public String nombreUsuario(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        String nombre = usuario.getNombre();
+
+        return (nombre);
+    }
+    public String apellidoUsuario(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        String apellido = usuario.getApellido();
+        //String ciudadUsuario = usuario.getCiudadUsuario();
+        return (apellido);
+    }
+
+    public String ciudadUsuario(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        String ciudadUsuario = usuario.getCiudadUsuario();
+        return (ciudadUsuario);
+    }
 }
