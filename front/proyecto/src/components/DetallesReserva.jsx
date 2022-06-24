@@ -38,7 +38,7 @@ export default function DetallesReserva() {
 
   useEffect(() => {
     // TODO modificar url
-    axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk/imagenes/listarImagenes`)
+    axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/imagenes/listarImagenes`)
       .then(response => {
         setDataImagen(response.data)
       })

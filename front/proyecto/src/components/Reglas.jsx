@@ -11,7 +11,7 @@ export default function Reglas() {
 
   useEffect(() => {
     // TODO cambiar url
-    axios.get("http://localhost:8080/politicas/listarPoliticas")
+    axios.get("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/politicas/listarPoliticas")
       .then(response => {
         setDataReglas(response.data)
       })
@@ -26,9 +26,9 @@ export default function Reglas() {
         </div>
         <div className='listaReglas'>
           <ul>
-            {dataReglas.filter((regla)=>regla.tipo === 1 && regla.producto?.id == id)
-              .map((regla)=>(
-                
+            {dataReglas.filter((regla) => regla.tipo === 1 && regla.producto?.id == id)
+              .map((regla) => (
+
                 <li key={regla.id}>{regla.descripcion}</li>
 
               ))}
@@ -41,9 +41,9 @@ export default function Reglas() {
         </div>
         <div className='listaReglas'>
           <ul>
-            {dataReglas.filter((regla)=>regla.tipo === 2 && regla.producto?.id == id)
-              .map((regla)=>(
-                
+            {dataReglas.filter((regla) => regla.tipo === 2 && regla.producto?.id == id)
+              .map((regla) => (
+
                 <li key={regla.id}>{regla.descripcion}</li>
 
               ))}
@@ -56,9 +56,9 @@ export default function Reglas() {
         </div>
         <div className='listaReglas'>
           <ul>
-            {dataReglas.filter((regla)=>regla.tipo === 3 && regla.producto?.id == id)
-              .map((regla)=>(
-                
+            {dataReglas.filter((regla) => regla.tipo === 3 && regla.producto?.id == id)
+              .map((regla) => (
+
                 <li key={regla.id}>{regla.descripcion}</li>
 
               ))}

@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useContext, useMemo } from "react";
+import React, { useState, useEffect, useContext, useMemo } from "react";
 //import Calendar from "react-calendar";
 //import 'react-calendar/dist/Calendar.css';
 import Media from "react-media";
@@ -15,85 +15,86 @@ import { useParams } from "react-router-dom";
 
 
 const Calendario = () => {
-  const {rango, setRango} = useContext(FechaRangoContextProvider);
+  const { rango, setRango } = useContext(FechaRangoContextProvider);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-  const {id} = useParams();
+  const { id } = useParams();
 
   const [dataReservas, setDataReservas] = useState([]);
   setRango(dateRange);
-  
 
 
-  useEffect( () => {
-      axios.get("http://localhost:8080/reserva")
+
+  useEffect(() => {
+    axios.get("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/reserva")
       .then(response => {
-        setDataReservas(response.data)})
-        
-  
+        setDataReservas(response.data)
+      })
+
+
   }, [])
-  
-  const getFechasReservadas = () =>{
-    const reservas = dataReservas?.data?.filter((reserva) => reserva.producto?.id == id).map((fecha)=>(
-                
-      {start: new Date(fecha.fechaInicial), end: new Date(fecha.fechaFinal)}
-  
+
+  const getFechasReservadas = () => {
+    const reservas = dataReservas?.data?.filter((reserva) => reserva.producto?.id == id).map((fecha) => (
+
+      { start: new Date(fecha.fechaInicial), end: new Date(fecha.fechaFinal) }
+
     ));
-    return reservas    
+    return reservas
   }
 
 
   //console.log(getFechasReservadas()?.map((date)=>(date.start)));
-  
-/*   const fechasNo = [
-    { start: new Date("Dec 11 2022"), end: new Date("Dec 12 2022") }
-    ]
-  
-  console.log("fechasNo: ", fechasNo); */
+
+  /*   const fechasNo = [
+      { start: new Date("Dec 11 2022"), end: new Date("Dec 12 2022") }
+      ]
+    
+    console.log("fechasNo: ", fechasNo); */
 
   registerLocale("es", es);
-  setDefaultLocale("es"); 
+  setDefaultLocale("es");
 
   return (<>
     <Container fluid className="datePickerContainer">
-        <Row>
-          <Col>
+      <Row>
+        <Col>
           <Media query="(max-width:460px)">
-        {matches => {
-        return matches ? 
-            <DatePicker
-              excludeDateIntervals={getFechasReservadas()}
-              excludeDates={getFechasReservadas()?.map((date)=>(date.start))}
-                selected={startDate}    
-                selectsRange={true}
-                startDate={startDate}
-                endDate={endDate}
-                minDate={new Date()}
-                onChange={(update) => {
-                  setDateRange(update);
-                }}
-                monthsShown={1}
-                inline
-            />
-            :
-            <DatePicker
-            excludeDateIntervals={getFechasReservadas()}
-            excludeDates={getFechasReservadas()?.map((date)=>(date.start))}      
-              selectsRange={true}
-              startDate={startDate}
-              endDate={endDate}
-              minDate={new Date()}
-              onChange={(update) => {
-                setDateRange(update);
-              }}
-              monthsShown={2}
-              inline
-          />
-        }}
-        </Media>
-          </Col>
-        </Row>
-      </Container>
+            {matches => {
+              return matches ?
+                <DatePicker
+                  excludeDateIntervals={getFechasReservadas()}
+                  excludeDates={getFechasReservadas()?.map((date) => (date.start))}
+                  selected={startDate}
+                  selectsRange={true}
+                  startDate={startDate}
+                  endDate={endDate}
+                  minDate={new Date()}
+                  onChange={(update) => {
+                    setDateRange(update);
+                  }}
+                  monthsShown={1}
+                  inline
+                />
+                :
+                <DatePicker
+                  excludeDateIntervals={getFechasReservadas()}
+                  excludeDates={getFechasReservadas()?.map((date) => (date.start))}
+                  selectsRange={true}
+                  startDate={startDate}
+                  endDate={endDate}
+                  minDate={new Date()}
+                  onChange={(update) => {
+                    setDateRange(update);
+                  }}
+                  monthsShown={2}
+                  inline
+                />
+            }}
+          </Media>
+        </Col>
+      </Row>
+    </Container>
     {/* {<CalendarStyle>
       <Media query="(max-width:460px)">
         {matches => {
@@ -115,7 +116,7 @@ const Calendario = () => {
       
     </CalendarStyle>} */}
 
-    </>
+  </>
   );
 };
 

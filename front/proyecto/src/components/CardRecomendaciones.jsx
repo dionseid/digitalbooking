@@ -27,7 +27,7 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria, startDate, endDate }
                 setDataProducto(response.data)
             })
         // TODO Modificar url
-        axios.get(`http://localhost:8080/imagenes/listarImagenes`)
+        axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/imagenes/listarImagenes`)
             .then(response => {
                 setImagen(response.data)
             })
@@ -36,7 +36,7 @@ const CardRecomendacion = ({ selectCiudad, selectCategoria, startDate, endDate }
 
     console.log(startDate);
     useEffect(() => {
-        axios.get(`http://localhost:8080/caracteristicas/listarCaracteristicas`)
+        axios.get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/caracteristicas/listarCaracteristicas`)
             .then(response => {
                 setCaracteristicas(response.data)
             })
