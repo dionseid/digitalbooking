@@ -114,11 +114,12 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
 
   # rules --»
 
+
   setting {
     name      = "Priority"
-    namespace = "aws:elbv2:listenerrule:caracteristicas"
+    namespace = "aws:elbv2:listenerrule:ciudades"
     resource  = ""
-    value     = "5"
+    value     = "1"
   }
 
   setting {
@@ -130,9 +131,9 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
 
   setting {
     name      = "Priority"
-    namespace = "aws:elbv2:listenerrule:ciudades"
+    namespace = "aws:elbv2:listenerrule:productos"
     resource  = ""
-    value     = "1"
+    value     = "3"
   }
 
   setting {
@@ -144,23 +145,31 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
 
   setting {
     name      = "Priority"
+    namespace = "aws:elbv2:listenerrule:caracteristicas"
+    resource  = ""
+    value     = "5"
+  }
+
+
+  setting {
+    name      = "Priority"
     namespace = "aws:elbv2:listenerrule:politicas"
     resource  = ""
     value     = "6"
   }
 
-  setting {
-    name      = "Priority"
-    namespace = "aws:elbv2:listenerrule:productos"
-    resource  = ""
-    value     = "3"
-  }
+  # setting {
+  #   name      = "Priority"
+  #   namespace = "aws:elbv2:listenerrule:politicas"
+  #   resource  = ""
+  #   value     = "7"
+  # }
 
   setting {
     name      = "PathPatterns"
     namespace = "aws:elbv2:listenerrule:caracteristicas"
     resource  = ""
-    value     = "/caracteristicas"
+    value     = "/caracteristicas*"
   }
 
   setting {
@@ -181,7 +190,7 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     name      = "PathPatterns"
     namespace = "aws:elbv2:listenerrule:imagenes"
     resource  = ""
-    value     = "/imagenes"
+    value     = "/imagenes*"
   }
 
   setting {
