@@ -15,6 +15,7 @@ import "../styles/pages/reserva.css";
 
 export default function Reserva() {  
 
+
   return (
     <>
     <header>
@@ -24,7 +25,7 @@ export default function Reserva() {
     <body>
       <div className='tablasDeInformacion'>
         <div className='completarDatos'>
-          <DatosUsuario/>
+          <DatosUsuario />
           <div>
             <h2>Seleccioná tu fecha de reserva</h2>
             <Calendario/>

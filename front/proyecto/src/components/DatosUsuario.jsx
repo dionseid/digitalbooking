@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useContext } from 'react'
+import React, { useState,useEffect,useRef, useContext } from 'react'
 import ComponenteInput from './ComponenteInput';
 import "../styles/datosUsuarios.css";
 import UserProvider from "../components/context/UserContext";
@@ -35,6 +35,8 @@ useEffect(() => {
         ciudad: ciudad.campo        
     }
 
+    const inputRef = useRef();
+
   return (
     <>
     <h2>Completá tus datos</h2>
@@ -50,7 +52,7 @@ useEffect(() => {
                 name="nombre"
                 parrafoError="El apellido solo puede contener letras y espacios."
                 expresionRegular={expresiones.nombre}
-                isDisabled={true}
+                isDisabled={true}                                                
                 />
             </div>
             <div className='datoSolo'>
@@ -94,7 +96,7 @@ useEffect(() => {
                 name="ciudad"
                 parrafoError="La ciudad solo puede contener letras y espacios."
                 expresionRegular={expresiones.nombre}
-                isDisabled={false}                
+                isDisabled={false}              
                 />
             </div>
         </div>

@@ -19,7 +19,7 @@ export default function SelectHora(requerido) {
     //setIsHora(startTime.toTimeString().slice(0,9))
 
     setIsHora(startTime?.toTimeString().slice(0,9))
-
+  
     
 
 
