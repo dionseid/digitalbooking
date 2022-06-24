@@ -52,11 +52,11 @@ infrastructure:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
       changes:
-        - infra*
+        - infra/*
     - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
       changes:
-        - infra*
+        - infra/*
       allow_failure: true
 
 frontend:
@@ -68,11 +68,11 @@ frontend:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
       changes:
-        - front/proyecto*
+        - front/proyecto/*
     - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
       changes:
-        - front/proyecto*
+        - front/proyecto/*
       allow_failure: true
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
@@ -86,11 +86,11 @@ backend:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
       changes:
-        - back/digitalbooking*
+        - back/digitalbooking/*
     - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
       changes:
-        - back/digitalbooking*
+        - back/digitalbooking/*
       allow_failure: true
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
@@ -126,13 +126,13 @@ deploy to production:
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
-        - front/proyecto*
-        - back/digitalbooking*
+        - front/proyecto/*
+        - back/digitalbooking/*
       when: always
     - if: $CI_PIPELINE_SOURCE != "schedule"
       changes:
-        - front/proyecto*
-        - back/digitalbooking*
+        - front/proyecto/*
+        - back/digitalbooking/*
       when: manual
 
 save succeded version:
@@ -143,6 +143,10 @@ save succeded version:
       curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
       --silent --output /dev/null --show-error --fail \
       "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/VERSION_OK" --form "value=$APP_VERSION"
+  rules:
+    changes:
+      - front/proyecto/*
+      - back/digitalbooking/*
 
 redeploy if failure:
   image:
@@ -152,3 +156,7 @@ redeploy if failure:
   when: on_failure
   script:
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $VERSION_OK --environment-name $APP_ENV_NAME
+  rules:
+    changes:
+      - front/proyecto/*
+      - back/digitalbooking/*
