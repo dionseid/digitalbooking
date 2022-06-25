@@ -67,9 +67,9 @@ frontend:
   rules:
     - changes:
         - front/**/**
-      - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
+      if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
         when: always
-      - if: $CI_PIPELINE_SOURCE != "schedule"
+      if: $CI_PIPELINE_SOURCE != "schedule"
         when: manual
         allow_failure: true
   variables:
