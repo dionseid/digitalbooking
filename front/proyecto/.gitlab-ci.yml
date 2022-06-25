@@ -57,7 +57,7 @@ test docker image:
   #   - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$FRONTEND_VERSION
   #     alias: frontend
   before_script:
-    - yum install -y curl
-    - yum install -y grep
+    - apt-get install -y curl
+    - apt-get install -y grep
   script:
     - curl http://localhost/version.html | grep $FRONTEND_VERSION
