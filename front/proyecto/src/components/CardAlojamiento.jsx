@@ -15,11 +15,18 @@ const CardAlojamiento= ({idCategoria,setIdCategoria, onDoubleClick}) =>{
            setDataCategoria(response.data)})
     
     }, [])
-    
-    
-    
-            return (
-                <div className="cards" >
+
+    const buscadorCardsCategoria = () => {
+        if (dataCategoria.length === 0) {
+          return (
+            <>
+                <SpinnerLoader/>
+            </>
+          );
+        } else {
+          return (
+            <>
+              <div className="cards" >
                     {dataCategoria.map((cat)=>(
                         <div key={cat.id} className="cardAlojamiento" onDoubleClick={(e)=>{onDoubleClick(cat.id,e)}}>
                             <div style={{backgroundImage:"url('" + cat.urlImg + "')"}} className="fondoImagen"/>
@@ -32,6 +39,17 @@ const CardAlojamiento= ({idCategoria,setIdCategoria, onDoubleClick}) =>{
                     ))}
 
                 </div>
+            </>
+          );
+        }
+      };
+    
+    
+    
+            return (
+                <>
+                {buscadorCardsCategoria()}
+                </>
             ) 
     
     

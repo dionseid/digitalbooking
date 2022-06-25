@@ -248,5 +248,11 @@
     height: 500px;
     margin-bottom: 30px;
   }
+
+  .parrafoEmpty{
+    text-align: center;
+    font-size: 14px;
+    max-width: 60%;
+  }
  
 }
