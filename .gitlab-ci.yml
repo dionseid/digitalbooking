@@ -166,8 +166,8 @@ save succeded version:
       "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/VERSION_OK" --form "value=$APP_VERSION"
   rules:
     - changes:
-        - front/proyecto/*
-        - back/digitalbooking/*
+        - front/**/**
+        - back/**/**
 
 redeploy if failure:
   image:
@@ -179,6 +179,6 @@ redeploy if failure:
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --version-label $VERSION_OK --environment-name $APP_ENV_NAME
   rules:
     - changes:
-        - front/proyecto/*
-        - back/digitalbooking/*
+        - front/**/**
+        - back/**/**
       when: manual
