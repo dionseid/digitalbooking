@@ -65,16 +65,12 @@ frontend:
     include: front/proyecto/.gitlab-ci.yml
     strategy: depend
   rules:
+    - changes:
+        - front/**/**
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
-      changes:
-        #- front/proyecto/*
-        - front/**/**
     - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
-      changes:
-        #- front/proyecto/*
-        - front/**/**
       allow_failure: true
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
