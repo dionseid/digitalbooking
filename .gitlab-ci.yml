@@ -126,13 +126,13 @@ deploy to production:
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       changes:
-        - front/proyecto/*
-        - back/digitalbooking/*
+        - front/**/**
+        - back/**/**
       when: always
     - if: $CI_PIPELINE_SOURCE != "schedule"
       changes:
-        - front/proyecto/*
-        - back/digitalbooking/*
+        - front/**/**
+        - back/**/**
       when: manual
 
 save succeded version:
