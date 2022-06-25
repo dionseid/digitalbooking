@@ -86,7 +86,8 @@ backend:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
       changes:
-        - back/digitalbooking/**
+        - back/digitalbooking/*
+        - back/digitalbooking/src/main/java/com/grupo8/digitalbooking/*
     - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
       changes:
