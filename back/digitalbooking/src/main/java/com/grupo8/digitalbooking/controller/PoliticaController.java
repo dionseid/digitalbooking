@@ -14,39 +14,39 @@ import java.util.Collection;
 @RestController
 @Api(tags = "Políticas")
 @RequestMapping("/politicas")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 
 public class PoliticaController {
     @Autowired
     private PoliticaService politicaService;
 
-    @ApiOperation(value="agregarPolitica", notes="Agregar una nueva política")
+    @ApiOperation(value = "agregarPolitica", notes = "Agregar una nueva política")
     @PostMapping("/agregarPolitica")
-    public ResponseEntity<Politica> agregarPolitica(@RequestBody Politica politica){
+    public ResponseEntity<Politica> agregarPolitica(@RequestBody Politica politica) {
         return ResponseEntity.ok(politicaService.agregarPolitica(politica));
     }
 
-    @ApiOperation(value="buscarPolitica", notes="Buscar una política por ID")
+    @ApiOperation(value = "buscarPolitica", notes = "Buscar una política por ID")
     @GetMapping("/buscarPolitica/{id}")
-//    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Politica> buscarPolitica (@PathVariable Integer id){
-        Politica politica= politicaService.buscarPolitica(id).orElse(null);
-        return  ResponseEntity.ok(politica);
+    // @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Politica> buscarPolitica(@PathVariable Integer id) {
+        Politica politica = politicaService.buscarPolitica(id).orElse(null);
+        return ResponseEntity.ok(politica);
     }
 
-    @ApiOperation(value="actualizarPolitica", notes="Actualizar una política")
+    @ApiOperation(value = "actualizarPolitica", notes = "Actualizar una política")
     @PutMapping("/actualizarPolitica")
-    public ResponseEntity<Politica> actualizarPolitica(@RequestBody Politica politica){
+    public ResponseEntity<Politica> actualizarPolitica(@RequestBody Politica politica) {
         ResponseEntity<Politica> response;
 
-        if (politica.getId()!=null && politicaService.buscarPolitica(politica.getId()).isPresent())
-            response= ResponseEntity.ok(politicaService.actualizarPolitica(politica));
+        if (politica.getId() != null && politicaService.buscarPolitica(politica.getId()).isPresent())
+            response = ResponseEntity.ok(politicaService.actualizarPolitica(politica));
         else
-            response= ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return response;
     }
 
-    @ApiOperation(value="eliminarPolitica", notes="Eliminar una política")
+    @ApiOperation(value = "eliminarPolitica", notes = "Eliminar una política")
     @DeleteMapping("/eliminarPolitica/{id}")
     public ResponseEntity<String> eliminarPolitica(@PathVariable Integer id) throws Exception {
         ResponseEntity<String> response = null;
@@ -58,10 +58,10 @@ public class PoliticaController {
 
     }
 
-    @ApiOperation(value="listarPoliticas", notes="Listar todas las políticas")
+    @ApiOperation(value = "listarPoliticas", notes = "Listar todas las políticas")
     @GetMapping("/listarPoliticas")
-//    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Collection<Politica>> listarPoliticas(){
+    // @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Collection<Politica>> listarPoliticas() {
         return ResponseEntity.ok(politicaService.listarPoliticas());
     }
 

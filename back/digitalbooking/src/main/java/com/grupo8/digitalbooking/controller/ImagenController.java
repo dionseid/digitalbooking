@@ -14,39 +14,39 @@ import java.util.Collection;
 @RestController
 @Api(tags = "Imágenes")
 @RequestMapping("/imagenes")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ImagenController {
     @Autowired
     private ImagenService imagenService;
 
-    @ApiOperation(value="agregarImagen", notes="Agregar una nueva imágen")
+    @ApiOperation(value = "agregarImagen", notes = "Agregar una nueva imágen")
     @PostMapping("/agregarImagen")
-    public ResponseEntity<Imagen> agregarImagen(@RequestBody Imagen imagen){
+    public ResponseEntity<Imagen> agregarImagen(@RequestBody Imagen imagen) {
         return ResponseEntity.ok(imagenService.agregarImagen(imagen));
     }
 
-    @ApiOperation(value="buscarImagen", notes="Buscar una imágen por ID")
+    @ApiOperation(value = "buscarImagen", notes = "Buscar una imágen por ID")
     @GetMapping("/buscarImagen/{id}")
-//    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Imagen> buscarImagen(@PathVariable Integer id){
+    // @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Imagen> buscarImagen(@PathVariable Integer id) {
         Imagen imagen = imagenService.buscarImagen(id).orElse(null);
         return ResponseEntity.ok(imagen);
     }
 
-    @ApiOperation(value="actualizarImagen", notes="Actualizar una imágen")
+    @ApiOperation(value = "actualizarImagen", notes = "Actualizar una imágen")
     @PutMapping("/actualizarImagen")
-    public ResponseEntity<Imagen> actualizarImagen(@RequestBody Imagen imagen){
+    public ResponseEntity<Imagen> actualizarImagen(@RequestBody Imagen imagen) {
         ResponseEntity<Imagen> response;
-        if (imagen.getId()!=null && imagenService.buscarImagen(imagen.getId()).isPresent())
+        if (imagen.getId() != null && imagenService.buscarImagen(imagen.getId()).isPresent())
             response = ResponseEntity.ok(imagenService.actualizarImagen(imagen));
         else
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return response;
     }
 
-    @ApiOperation(value="eliminarImagen", notes="Eliminar una imágen por ID")
+    @ApiOperation(value = "eliminarImagen", notes = "Eliminar una imágen por ID")
     @DeleteMapping("/eliminarImagen/{id}")
-    public ResponseEntity<String> eliminarImagen(@PathVariable Integer id) throws Exception{
+    public ResponseEntity<String> eliminarImagen(@PathVariable Integer id) throws Exception {
         ResponseEntity<String> response = null;
 
         if (imagenService.buscarImagen(id).isPresent())
@@ -57,10 +57,10 @@ public class ImagenController {
 
     }
 
-    @ApiOperation(value="listarImagenes", notes="Listar todas las imágenes")
+    @ApiOperation(value = "listarImagenes", notes = "Listar todas las imágenes")
     @GetMapping("/listarImagenes")
-//    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Collection<Imagen>> listarImagenes(){
+    // @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Collection<Imagen>> listarImagenes() {
         return ResponseEntity.ok(imagenService.listarImagen());
     }
 }

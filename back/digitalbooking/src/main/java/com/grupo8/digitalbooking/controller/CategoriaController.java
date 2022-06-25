@@ -1,6 +1,5 @@
 package com.grupo8.digitalbooking.controller;
 
-
 import com.grupo8.digitalbooking.model.Categoria;
 import com.grupo8.digitalbooking.service.CategoriaService;
 import io.swagger.annotations.Api;
@@ -15,30 +14,31 @@ import java.util.Collection;
 @RestController
 @Api(tags = "Categorías")
 @RequestMapping("/categorias")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
     @PostMapping
-    public ResponseEntity<Categoria> agregarCategoria(@RequestBody Categoria categoria){
+    public ResponseEntity<Categoria> agregarCategoria(@RequestBody Categoria categoria) {
         return ResponseEntity.ok(categoriaService.agregarCategoria(categoria));
     }
-//    @CrossOrigin(origins = "http://localhost:3000")
+
+    // @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> buscarCategoria (@PathVariable Integer id){
-       Categoria categoria= categoriaService.buscarCategoria(id).orElse(null);
-        return  ResponseEntity.ok(categoria);
+    public ResponseEntity<Categoria> buscarCategoria(@PathVariable Integer id) {
+        Categoria categoria = categoriaService.buscarCategoria(id).orElse(null);
+        return ResponseEntity.ok(categoria);
     }
 
     @PutMapping()
-    public ResponseEntity<Categoria> actualizarCategoria(@RequestBody Categoria categoria){
+    public ResponseEntity<Categoria> actualizarCategoria(@RequestBody Categoria categoria) {
         ResponseEntity<Categoria> response;
 
-        if (categoria.getId()!=null && categoriaService.buscarCategoria(categoria.getId()).isPresent())
-            response= ResponseEntity.ok(categoriaService.actualizarCategoria(categoria));
+        if (categoria.getId() != null && categoriaService.buscarCategoria(categoria.getId()).isPresent())
+            response = ResponseEntity.ok(categoriaService.actualizarCategoria(categoria));
         else
-            response= ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return response;
     }
 
@@ -57,11 +57,11 @@ public class CategoriaController {
         return response;
 
     }
-//    @CrossOrigin(origins = "http://localhost:3000")
+
+    // @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping()
-    public ResponseEntity<Collection<Categoria>> listarCategorias(){
+    public ResponseEntity<Collection<Categoria>> listarCategorias() {
         return ResponseEntity.ok(categoriaService.listarCategorias());
     }
-
 
 }

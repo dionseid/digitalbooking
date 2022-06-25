@@ -14,63 +14,60 @@ import java.util.Collection;
 @RestController
 @Api(tags = "Características")
 @RequestMapping("/caracteristicas")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+/* @CrossOrigin(origins = "*", allowedHeaders = "*") */
 public class CaracteristicaController {
     @Autowired
     private CaracteristicaService caracteristicaService;
 
-
-    @ApiOperation(value="agregarCaraterística", notes="Agregar una nueva característica")
+    @ApiOperation(value = "agregarCaraterística", notes = "Agregar una nueva característica")
 
     @PostMapping("/agregarCaracteristica")
-    public ResponseEntity<Caracteristica> agregarCaracteristica(@RequestBody Caracteristica caracteristica){
+    public ResponseEntity<Caracteristica> agregarCaracteristica(@RequestBody Caracteristica caracteristica) {
         return ResponseEntity.ok(caracteristicaService.agregarCaracteristica(caracteristica));
     }
 
-    //BUSCAR
-    @ApiOperation(value="buscarCaracteristica", notes="Buscar una característica por su ID")
+    // BUSCAR
+    @ApiOperation(value = "buscarCaracteristica", notes = "Buscar una característica por su ID")
     @GetMapping("/buscarCaracteristica/{id}")
-//    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Caracteristica> buscarCaracteristica(@PathVariable Integer id){
+    // @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Caracteristica> buscarCaracteristica(@PathVariable Integer id) {
         Caracteristica caracteristica = caracteristicaService.buscarCaracteristica(id).orElse(null);
         return ResponseEntity.ok(caracteristica);
     }
 
-    //ELIMINAR
-    @ApiOperation(value="eliminarCaracteristica", notes="Eliminar una característica por su ID")
+    // ELIMINAR
+    @ApiOperation(value = "eliminarCaracteristica", notes = "Eliminar una característica por su ID")
     @DeleteMapping("/eliminarCaracteristica/{id}")
     public ResponseEntity<String> eliminarCaracteristica(@PathVariable Integer id) throws Exception {
-        ResponseEntity<String> response=null;
+        ResponseEntity<String> response = null;
 
-        if (caracteristicaService.buscarCaracteristica(id).isPresent()){
+        if (caracteristicaService.buscarCaracteristica(id).isPresent()) {
             caracteristicaService.eliminarCaracteristica(id);
             response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Se eliminó la categoría correctamente");
-        }
-        else
+        } else
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: no se encontró el id");
         return response;
     }
 
-
-    //ACTUALIZAR
-    @ApiOperation(value="actualizarCaracteristica", notes="Actualizar una característica")
+    // ACTUALIZAR
+    @ApiOperation(value = "actualizarCaracteristica", notes = "Actualizar una característica")
     @PutMapping("/actualizarCaracteristica")
-    public ResponseEntity<Caracteristica> actualizarCaracteristica(@RequestBody Caracteristica caracteristica){
+    public ResponseEntity<Caracteristica> actualizarCaracteristica(@RequestBody Caracteristica caracteristica) {
         ResponseEntity<Caracteristica> response;
 
-        if (caracteristica.getId()!=null && caracteristicaService.buscarCaracteristica(caracteristica.getId()).isPresent())
-            response=ResponseEntity.ok(caracteristicaService.actualizarCarateristica(caracteristica));
+        if (caracteristica.getId() != null
+                && caracteristicaService.buscarCaracteristica(caracteristica.getId()).isPresent())
+            response = ResponseEntity.ok(caracteristicaService.actualizarCarateristica(caracteristica));
         else
-            response=ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return response;
     }
 
-
-    //LISTAR TODAS
-    @ApiOperation(value="listarCaracteristicas", notes="Listar todas las características")
+    // LISTAR TODAS
+    @ApiOperation(value = "listarCaracteristicas", notes = "Listar todas las características")
     @GetMapping("/listarCaracteristicas")
-//    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Collection<Caracteristica>> listarCaracteristicas(){
+    // @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Collection<Caracteristica>> listarCaracteristicas() {
         return ResponseEntity.ok(caracteristicaService.listarCaracteristicas());
     }
 }

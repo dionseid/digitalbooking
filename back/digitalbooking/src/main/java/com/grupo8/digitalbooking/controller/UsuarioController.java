@@ -18,43 +18,43 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @ApiOperation(value="agregarUsuario", notes="Agregar un nuevo usuario")
-    @CrossOrigin(origins="http://localhost:3000/")
+    @ApiOperation(value = "agregarUsuario", notes = "Agregar un nuevo usuario")
+    // @CrossOrigin(origins="http://localhost:3000/")
     @PostMapping("/agregarUsuario")
-    public ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario) {
         return ResponseEntity.ok(usuarioService.agregarUsuario(usuario));
     }
 
-    @ApiOperation(value="listarTodos", notes="Listar todos los usuarios")
+    @ApiOperation(value = "listarTodos", notes = "Listar todos los usuarios")
     @GetMapping("/listarTodos")
-    public ResponseEntity<List<Usuario>> listarTodosLosUsuarios(){
+    public ResponseEntity<List<Usuario>> listarTodosLosUsuarios() {
         return ResponseEntity.ok(usuarioService.listarUsuarios());
     }
 
-    @ApiOperation(value="eliminarUsuario", notes="Eliminar un usuario por ID")
+    @ApiOperation(value = "eliminarUsuario", notes = "Eliminar un usuario por ID")
     @DeleteMapping("/eliminarUsuario/{id}")
-    public ResponseEntity<String> eliminarUsuario(@PathVariable Integer id) throws Exception{
+    public ResponseEntity<String> eliminarUsuario(@PathVariable Integer id) throws Exception {
         usuarioService.eliminarUsuario(id);
         return ResponseEntity.ok("Se eliminó el usuario correctamente");
     }
 
-    @ApiOperation(value="actualizarUsuario", notes="Actualizar un usuario")
+    @ApiOperation(value = "actualizarUsuario", notes = "Actualizar un usuario")
     @PutMapping("/actualizarUsuario")
-    public ResponseEntity<Usuario> actualizarUsuario(@RequestBody Usuario usuario){
-        ResponseEntity<Usuario> response=null;
-        if (usuario.getId()!=null && usuarioService.buscarUsuario(usuario.getId()).isPresent())
-            response= ResponseEntity.ok(usuarioService.actualizarUsuario(usuario));
+    public ResponseEntity<Usuario> actualizarUsuario(@RequestBody Usuario usuario) {
+        ResponseEntity<Usuario> response = null;
+        if (usuario.getId() != null && usuarioService.buscarUsuario(usuario.getId()).isPresent())
+            response = ResponseEntity.ok(usuarioService.actualizarUsuario(usuario));
         else
-            response= ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return response;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscarUsuario (@PathVariable Integer id){
-        Usuario usuario= usuarioService.buscarUsuario(id).orElse(null);
-        return  ResponseEntity.ok(usuario);
+    public ResponseEntity<Usuario> buscarUsuario(@PathVariable Integer id) {
+        Usuario usuario = usuarioService.buscarUsuario(id).orElse(null);
+        return ResponseEntity.ok(usuario);
     }
 
-//    hacer post login
-//    @PostMapping("/login")
+    // hacer post login
+    // @PostMapping("/login")
 }
