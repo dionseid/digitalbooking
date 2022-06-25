@@ -1,8 +1,14 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faWhatsapp, faFacebook, faLinkedinIn, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import "../styles/modalRedes.css";
 
 export default function ModalRedes(props) {
+    const { id } = useParams();
+    const urlACompartir = `http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/${id}`
+
   return (
     <Modal
       {...props}
@@ -18,23 +24,23 @@ export default function ModalRedes(props) {
       <Modal.Body className="modalBody">
         <ul className="listaRedes">
           <li>
-            <a href="#">
-              <i class="fab fa-facebook-f icon"></i>{" "}
+            <a href={"https://www.facebook.com/sharer/sharer.php?u=" + urlACompartir}>
+              <i class="fab fa-facebook-f icon"></i>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="https://twitter.com/intent/tweet?text=[text]&url=[url]&hashtags=[hashtag]">
               <i class="fab fa-twitter icon"></i>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href={'https://www.linkedin.com/sharing/share-offsite/?url=' + urlACompartir}>
               <i class="fab fa-linkedin-in icon"></i>
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="fab fa-google-plus-g icon"></i>
+            <a href={"https://api.whatsapp.com/send?text=digital%20booking%20" + urlACompartir}>              
+              <FontAwesomeIcon icon={faWhatsapp} className="icon"/>
             </a>
           </li>
         </ul>
