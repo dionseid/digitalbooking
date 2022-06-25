@@ -52,12 +52,12 @@ build docker image:
 
 test docker image:
   stage: test
-  image: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$FRONTEND_VERSION
-  # services:
-  #   - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$FRONTEND_VERSION
-  #     alias: frontend
+  image: curlimages/curl
+  services:
+    - name: $AWS_ECR_REGISTRY/$REPOSITORY_NAME:$TEAM-$APP-$FRONTEND_VERSION
+      alias: frontend
   # before_script:
   #   - apt-get install -y curl
   #   - apt-get install -y grep
   script:
-    - curl http://localhost/version.html | grep $FRONTEND_VERSION
+    - curl http://frontend/version.html | grep $FRONTEND_VERSION

@@ -169,7 +169,6 @@ save succeded version:
       changes:
         - front/**/**
         - back/**/**
-      when: manual
 
 redeploy if failure:
   image:
@@ -184,4 +183,3 @@ redeploy if failure:
       changes:
         - front/**/**
         - back/**/**
-      when: manual
