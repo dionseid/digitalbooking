@@ -21,9 +21,12 @@ import UbicacionProducto from "../components/UbicacionProducto";
 import TituloProducto from "../components/TituloProducto";
 import GoogleMaps from "../components/GoogleMaps";
 import UserProvider  from "../components/context/UserContext";
+import { Button, Modal } from "react-bootstrap";
+import ModalRedes from "../components/ModalRedes";
 
 
 const Productos = () => { 
+  const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
   const {id} = useParams();
   const {user, loginLogoutEvent} = useContext(UserProvider);
@@ -32,20 +35,6 @@ const Productos = () => {
   setIdProducto(id)
   console.log(idProducto); */
   
-
-  //const {rango, setRango} = useContext(FechaRangoContextProvider);
-
-/*   useEffect(() => {
-    if(dateRange !== null){
-      setRango(dateRange)
-    }
-  }, []) */
-  
-  
-
-
-  
-  //console.log("fecha inicial: ", rango[0]);
 
   const redireccionIsLogued = () => {
     if (user.auth){
@@ -77,7 +66,11 @@ const Productos = () => {
           <UbicacionProducto/>
         </section>
         <section className="imagenes">
-          <p><FontAwesomeIcon icon={faShareNodes} className='iconosLike'/><FontAwesomeIcon icon={faHeart} className='iconosLike'/></p>
+          <p><button className="botonCompartir"><FontAwesomeIcon icon={faShareNodes} className='iconosLike' onClick={() => setModalShow(true)}/></button><FontAwesomeIcon icon={faHeart} className='iconosLike'/></p>
+      <ModalRedes
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
           <Media query="(max-width:768px)">
             {matches => {
               return matches ? 

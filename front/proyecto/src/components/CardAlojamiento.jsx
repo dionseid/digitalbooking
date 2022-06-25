@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import "../styles/cards.css";
+import SpinnerLoader from "./SpinnerLoader";
 
 
 
@@ -25,9 +26,11 @@ const CardAlojamiento= ({idCategoria,setIdCategoria, onDoubleClick}) =>{
                             <div className="cardBody">
                                 <h4>{cat.titulo}</h4>
                                 <p style={{fontWeight:"700"}}>{cat.descripcion}</p>
-                            </div>                        
+                            </div>
+                                                    
                         </div>
                     ))}
+
                 </div>
             ) 
     
