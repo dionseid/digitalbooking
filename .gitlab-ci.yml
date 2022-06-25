@@ -165,4 +165,3 @@ redeploy if failure:
     - changes:
         - front/proyecto/*
         - back/digitalbooking/*
-  needs: ["deploy to production"]
