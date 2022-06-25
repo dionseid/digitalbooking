@@ -9,4 +9,4 @@ AWS_PASSWORD=$(docker run --rm \
     --region $AWS_DEFAULT_REGION)
 ENCODED=$(echo -n "AWS:$AWS_PASSWORD" | base64)
 PAYLOAD=$( jq -n --arg userpass "$ENCODED" '{"auths": {"$AWS_ECR_REGISTRY": {"auth": $userpass}}}' )
-curl --request PUT --header "PRIVATE-TOKEN:$TOKEN" "https://gitlab.com/api/v4/projects/$PROJECT_ID/variables/DOCKER_AUTH_CONFIG" --form "value=$PAYLOAD"
+curl --request PUT --header "PRIVATE-TOKEN:$TOKEN" "https://gl.deitech.online/api/v4/projects/$PROJECT_ID/variables/DOCKER_AUTH_CONFIG" --form "value=$PAYLOAD"
