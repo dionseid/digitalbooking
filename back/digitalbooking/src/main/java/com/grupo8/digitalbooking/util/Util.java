@@ -23,7 +23,7 @@ public class Util {
         return sqlTime;
     }
 
-    public something(something again again);
+    public something(something again again again);
 
 }
 

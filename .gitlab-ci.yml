@@ -86,15 +86,17 @@ backend:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
       changes:
-        - back/*
-        - back/digitalbooking/src/main/java/com/grupo8/digitalbooking/*
-        - back/digitalbooking/src/main/java/com/grupo8/digitalbooking/util/*
+        # - back/*
+        # - back/digitalbooking/src/main/java/com/grupo8/digitalbooking/*
+        # - back/digitalbooking/src/main/java/com/grupo8/digitalbooking/util/*
+        - back/**/**
     - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
       changes:
-        - back/*
-        - back/digitalbooking/src/main/java/com/grupo8/digitalbooking/util/*
-        - back/digitalbooking/src/main/java/com/grupo8/digitalbooking/*
+        # - back/*
+        # - back/digitalbooking/src/main/java/com/grupo8/digitalbooking/util/*
+        # - back/digitalbooking/src/main/java/com/grupo8/digitalbooking/*
+        - back/**/**
       allow_failure: true
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION
