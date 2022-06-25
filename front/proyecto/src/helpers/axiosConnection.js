@@ -8,6 +8,3 @@ const axiosConnection = axios.create({
 })
 
 export default axiosConnection;
-
-
-/* helloooo again again again*/

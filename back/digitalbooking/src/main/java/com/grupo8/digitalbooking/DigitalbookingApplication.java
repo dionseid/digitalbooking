@@ -26,8 +26,7 @@ public class DigitalbookingApplication {
 				registry.addMapping("/**")
 						.allowedOrigins("/**")
 						.allowedMethods("*")
-						.allowedHeaders("*")
-						.somethingHere(hey);
+						.allowedHeaders("*");
 			}
 		};
 	}
