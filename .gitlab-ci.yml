@@ -166,8 +166,8 @@ save succeded version:
       "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/VERSION_OK" --form "value=$APP_VERSION"
   rules:
     - changes:
-        - front/proyecto/*
-        - back/digitalbooking/*
+        - front/**/**
+        - back/**/**
 
 redeploy if failure:
   image:
@@ -180,5 +180,5 @@ redeploy if failure:
   rules:
     - when: manual
     - changes:
-        - front/proyecto/*
-        - back/digitalbooking/*
+        - front/**/**
+        - back/**/**
