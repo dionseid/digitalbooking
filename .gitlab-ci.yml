@@ -92,6 +92,7 @@ backend:
       when: manual
       changes:
         - back/digitalbooking/**
+        - back/digitalbooking/src/main/java/com/grupo8/digitalbooking/*
       allow_failure: true
   variables:
     PARENT_PIPELINE_ID: $APP_VERSION

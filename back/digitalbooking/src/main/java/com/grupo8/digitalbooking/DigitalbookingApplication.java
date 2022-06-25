@@ -27,7 +27,7 @@ public class DigitalbookingApplication {
 						.allowedOrigins("/**")
 						.allowedMethods("*")
 						.allowedHeaders("*")
-						.somethingHere();
+						.somethingHere(hey);
 			}
 		};
 	}
