@@ -91,7 +91,7 @@ backend:
     - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
       changes:
-        - back/digitalbooking/*
+        - back/*
         - back/digitalbooking/src/main/java/com/grupo8/digitalbooking/*
       allow_failure: true
   variables:
