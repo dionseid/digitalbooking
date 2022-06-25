@@ -16,7 +16,6 @@ public class DigitalbookingApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DigitalbookingApplication.class, args);
 
-
 	}
 
 	@Bean
@@ -25,11 +24,10 @@ public class DigitalbookingApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins("*")
+						.allowedOrigins("/**")
 						.allowedMethods("*")
 						.allowedHeaders("*");
 			}
 		};
 	}
 }
-
