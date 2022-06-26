@@ -158,12 +158,12 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     value     = "6"
   }
 
-  # setting {
-  #   name      = "Priority"
-  #   namespace = "aws:elbv2:listenerrule:politicas"
-  #   resource  = ""
-  #   value     = "7"
-  # }
+  setting {
+    name      = "Priority"
+    namespace = "aws:elbv2:listenerrule:reservas"
+    resource  = ""
+    value     = "7"
+  }
 
   setting {
     name      = "PathPatterns"
@@ -197,7 +197,7 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     name      = "PathPatterns"
     namespace = "aws:elbv2:listenerrule:politicas"
     resource  = ""
-    value     = "/politicas"
+    value     = "/politicas*"
   }
 
   setting {
@@ -205,6 +205,13 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     namespace = "aws:elbv2:listenerrule:productos"
     resource  = ""
     value     = "/productos/*"
+  }
+
+  setting {
+    name      = "PathPatterns"
+    namespace = "aws:elbv2:listenerrule:reservas"
+    resource  = ""
+    value     = "/reserva*"
   }
 
   setting {
