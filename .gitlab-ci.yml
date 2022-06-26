@@ -73,11 +73,11 @@ infrastructure:
     - if: $CI_PIPELINE_SOURCE != "schedule" && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop")
       when: always
       changes:
-        - infra/*
+        - infra/**/**
     - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
       changes:
-        - infra/*
+        - infra/**/**
       allow_failure: true
 
 frontend:
