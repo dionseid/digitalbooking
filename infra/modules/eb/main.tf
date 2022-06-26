@@ -256,6 +256,13 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     value     = "default8080"
   }
 
+  setting {
+    name      = "Process"
+    namespace = "aws:elbv2:listenerrule:reservas"
+    resource  = ""
+    value     = "default8080"
+  }
+
   /* ------------------------------ instances ----------------------------- */
 
   setting {
