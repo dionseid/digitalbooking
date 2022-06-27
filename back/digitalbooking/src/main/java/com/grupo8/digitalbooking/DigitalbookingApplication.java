@@ -24,7 +24,7 @@ public class DigitalbookingApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/", "http://awseb-awseb-6foy51yz3xbu-292893803.us-west-1.elb.amazonaws.com", "http://remo-digitalbooking.click")
+						.allowedOrigins("*") // "http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/", "http://awseb-awseb-6foy51yz3xbu-292893803.us-west-1.elb.amazonaws.com", "http://remo-digitalbooking.click"
 						.allowedMethods("*")
 						.allowedHeaders("*");
 			}
