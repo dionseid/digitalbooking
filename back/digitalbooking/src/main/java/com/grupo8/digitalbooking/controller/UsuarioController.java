@@ -38,14 +38,6 @@ public class UsuarioController {
         return ResponseEntity.ok("Se eliminó el usuario correctamente");
     }
 
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscarUsuario (@PathVariable Integer id) {
-        Usuario usuario = usuarioService.buscarUsuario(id).orElse(null);
-        return ResponseEntity.ok(usuario);
-    }
-
-
     @ApiOperation(value="actualizarUsuario", notes="Actualizar un usuario")
     @PutMapping("/actualizarUsuario")
     public ResponseEntity<Usuario> actualizarUsuario(@RequestBody Usuario usuario){
@@ -55,6 +47,14 @@ public class UsuarioController {
         else
             response= ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return response;
-
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> buscarUsuario (@PathVariable Integer id){
+        Usuario usuario= usuarioService.buscarUsuario(id).orElse(null);
+        return  ResponseEntity.ok(usuario);
+    }
+
+//    hacer post login
+//    @PostMapping("/login")
 }

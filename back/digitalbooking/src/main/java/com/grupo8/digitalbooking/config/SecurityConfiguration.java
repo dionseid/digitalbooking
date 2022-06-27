@@ -11,14 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -45,21 +38,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                             "/configuration/**"
                         ).permitAll()
                 .antMatchers("/usuarios/agregarUsuario").permitAll()
-                .antMatchers("/usuarios/listarTodos").permitAll()
-                .antMatchers("/usuarios/eliminarUsuario/**").permitAll()
-                .antMatchers("/usuarios/actualizarUsuario").permitAll()
                 .antMatchers("/roles/**").permitAll()
                 .antMatchers("/caracteristicas/**").permitAll()
-                .antMatchers("/caracteristicas/buscarCaracteristica/**").permitAll()
-                .antMatchers("/caracteristicas/listarCaracteristicas").permitAll()
                 .antMatchers("/categorias/**").permitAll()
                 .antMatchers("/ciudades/**").permitAll()
                 .antMatchers("/imagenes/**").permitAll()
-                .antMatchers("/imagenes/listarImagenes").permitAll()
-                .antMatchers("/imagenes/buscarImagen/**").permitAll()
                 .antMatchers("/politicas/**").permitAll()
-                .antMatchers("/politicas/listarPoliticas").permitAll()
-                .antMatchers("/politicas/buscarPolitica/**").permitAll()
                 .antMatchers("/productos/traerTodos").permitAll()
                 .antMatchers("/productos/buscarProductoPorId/**").permitAll()
                 .antMatchers("/productos/filtroCategoria/**").permitAll()
@@ -77,11 +61,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
     }
 
 }

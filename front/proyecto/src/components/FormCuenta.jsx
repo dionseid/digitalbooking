@@ -58,7 +58,23 @@ const registroApi = async (data) => {
         const respuesta = await axiosConnection.post('/usuarios/agregarUsuario', data);
         if(respuesta.status === 200){
             console.log("REGISTRO EXITOSO API ",respuesta)
-            return respuesta;
+            loginLogoutEvent({
+                nombre: respuesta.data.nombre,
+                apellido: respuesta.data.apellido,
+                mail: respuesta.data.email,
+                auth: true,
+                redirect:false
+            })
+            sessionStorage.clear()
+            sessionStorage.setItem("user",JSON.stringify({
+                nombre: respuesta.data.nombre,
+                apellido: respuesta.data.apellido,
+                mail: respuesta.data.email,
+                auth: true,
+                redirect:false
+            }))
+            console.log(respuesta.data)
+            return respuesta.data;
         }else{
             throw new Error('Lamentablemente no ha podido registrarse. Por favor intente más tarde');
         }
@@ -70,42 +86,10 @@ const registroApi = async (data) => {
 }
 
 
-// const logueoAutomatico = async (data) =>{
-//     try{
-//         // ** CAMBIAR POR EL URL DE LA API
-//         const respuesta = await axiosConnection.post('/authenticate', {
-//             password: data.password,
-//             username: data.username
-//         });
-//         console.log('resp logueo automatico ', respuesta)
-//         if(respuesta.status === 200 ){
-//             sessionStorage.setItem('token', JSON.stringify(respuesta.jwt));
-//             try{
-//                 // ** CAMBIAR POR EL URL DE LA API
-//                 const token = sessionStorage.getItem('token')&& JSON.parse(sessionStorage.getItem('token'));
-//                 const respuesta = await axiosConnection.get('/login', {
-//                     headers: {
-//                         'Authorization': `Bearer ${token}`
-//                     }
-//                 });
-//                 return respuesta;
-//             }
-//             catch(error){
-//                 console.log(error);
-//             }
-//         // return respuesta;
-//         }
-//         else if(respuesta.status!==200 || respuesta.status!==201){
-//             throw new Error('Lamentablemente no ha podido registrarse. Por favor intente más tarde');
-//         }
-//     }
-//     catch(error){
-//         console.log(error);
-//     }
-// }
-
 const onSubmit = (e) => {
     e.preventDefault();
+
+
     const newUser = {
         nombre: nombre.campo,
         apellido: apellido.campo,
@@ -118,12 +102,10 @@ const onSubmit = (e) => {
     }
 
     if(isFormValid()){
-        registroApi(newUser);
-        // logueoAutomatico(newUser)
-        
         // ! Revisar esto, si el formulario es valido tendria que ser true y si despues se va a login no tiene sentido que este 
-        cambiarFormularioValido(false);
-        navigate('/login');
+        // cambiarFormularioValido(false);
+        registroApi(newUser)
+        navigate('/');
     }else{
         cambiarFormularioValido(true);
     }
