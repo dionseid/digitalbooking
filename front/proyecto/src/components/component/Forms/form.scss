@@ -249,6 +249,7 @@ h1{
 
 .contenedorAgregarCaracteristicas{
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -273,10 +274,15 @@ h1{
 .contenedorAgregarCaracteristicas .contenedorPlus{
     margin-top: 90px;
 }
+.contenedorDosInputs{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
 
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px){
     .nombreCompleto{
         flex-direction: column;
     }
@@ -288,6 +294,38 @@ h1{
     .selectCrearProducto{
         margin-bottom: 25px;        
     }
+
+    .contenedorDosInputs{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .inputCargarNombreCaracteristica, .inputCargarIconoCaracteristica{
+        width: 100%;
+        margin-bottom: 60px;
+    }
+
+    .contenedorAgregarCaracteristicas .contenedorPlus{
+        margin-top: 30px;
+    }
+  }
+
+  @media screen and (max-width: 460px){
+    .contenedorAgregarCaracteristicas{
+        padding: 10px;
+    }
+
+    .contenedorDeReglas{
+        flex-direction: column;
+    }
+
+    .contenedorCargarImagenes{
+        padding: 2px;
+    }
+
+
+
   }
 
 

@@ -125,6 +125,7 @@ export default function FormCrearProducto() {
         <div>
           <h2>Agregar atributos</h2>
           <div className="contenedorAgregarCaracteristicas">
+            <div className="contenedorDosInputs">
               <div className="inputCargarNombreCaracteristica">
                 <ComponenteInput
                 estado={nombreCaracteristica}
@@ -144,6 +145,7 @@ export default function FormCrearProducto() {
                 placeholder="fa-Wifi"
                 name="nombreIconoCaracteristica"
                 /> 
+                </div>
                 </div>          
               <button className="contenedorPlus">
                 <FontAwesomeIcon icon={faPlus} className="iconoPlus" />
