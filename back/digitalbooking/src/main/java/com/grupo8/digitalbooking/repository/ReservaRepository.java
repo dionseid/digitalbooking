@@ -7,4 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ReservaRepository extends JpaRepository<Reserva, Integer> {
+
+    List<Reserva> findByUsuarioId(Integer usuarios_id);
 }

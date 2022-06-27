@@ -13,28 +13,38 @@ import java.util.Optional;
 @Service
 public class CaracteristicaService {
     private final CaracteristicaRepository caractProdRepository;
-    private final ProductoRepository productoRepository;
 
 
     @Autowired
-    public CaracteristicaService(CaracteristicaRepository caractProdRepository, ProductoRepository productoRepository) {
+    public CaracteristicaService(CaracteristicaRepository caractProdRepository) {
         this.caractProdRepository = caractProdRepository;
-        this.productoRepository = productoRepository;
     }
 
     //AGREGAR
-    public Caracteristica agregarCaracteristica(Caracteristica caracteristica){
-        Optional<Producto> producto = productoRepository.findById(caracteristica.getProducto().getId());
-        caracteristica.setProducto(producto.get());
+
+        public Caracteristica agregarCaracteristica(Caracteristica caracteristica){
         return caractProdRepository.save(caracteristica);
     }
 
+
+//    public Caracteristica agregarCaracteristica(Caracteristica caracteristica){
+//        Optional<Producto> producto = productoRepository.findById(caracteristica.getProducto().getId());
+//        caracteristica.setProducto(producto.get());
+//        return caractProdRepository.save(caracteristica);
+//    }
+
     //ACTUALIZAR
+
     public Caracteristica actualizarCarateristica(Caracteristica caracteristica){
-        Optional<Producto> producto = productoRepository.findById(caracteristica.getProducto().getId());
-        caracteristica.setProducto(producto.get());
         return caractProdRepository.save(caracteristica);
     }
+
+
+//    public Caracteristica actualizarCarateristica(Caracteristica caracteristica){
+//        Optional<Producto> producto = productoRepository.findById(caracteristica.getProducto().getId());
+//        caracteristica.setProducto(producto.get());
+//        return caractProdRepository.save(caracteristica);
+//    }
 
 
     //BUSCAR POR ID
