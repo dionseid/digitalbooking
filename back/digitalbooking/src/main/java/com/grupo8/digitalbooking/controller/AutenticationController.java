@@ -1,8 +1,11 @@
 package com.grupo8.digitalbooking.controller;
 
+import com.grupo8.digitalbooking.model.Usuario;
 import com.grupo8.digitalbooking.model.dto.AuthenticationDTORequest;
 import com.grupo8.digitalbooking.model.dto.AuthenticationDTOResponse;
+import com.grupo8.digitalbooking.repository.UsuarioRepository;
 import com.grupo8.digitalbooking.service.IJwtService;
+import com.grupo8.digitalbooking.service.UsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.grupo8.digitalbooking.model.Usuario;
 
 @RestController
 @Api(tags = "Autenticación")
@@ -27,6 +31,9 @@ public class AutenticationController {
     private UserDetailsService userDetailsService;
     @Autowired
     private IJwtService jwtService;
+    @Autowired
+    private UsuarioService usuario;
+
 
     //Anotaciones para swagger
     @ApiOperation(value="Autenticación", notes="Autenticación del rol utilizando JWT")
@@ -39,7 +46,11 @@ public class AutenticationController {
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationDTORequest.getUsername());
         final String jwt = jwtService.generateToken(userDetails);
+        //final String username = String.valueOf(userDetails);
+        final String nombre = usuario.nombreUsuario(authenticationDTORequest.getUsername());
+        final String apellido = usuario.apellidoUsuario(authenticationDTORequest.getUsername());
+        final String ciudadUsuario = usuario.ciudadUsuario(authenticationDTORequest.getUsername());
 
-        return ResponseEntity.ok(new AuthenticationDTOResponse((jwt)));
+        return ResponseEntity.ok(new AuthenticationDTOResponse((jwt), nombre, apellido, ciudadUsuario));
     }
 }

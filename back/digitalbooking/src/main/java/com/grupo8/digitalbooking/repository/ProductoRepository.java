@@ -26,6 +26,8 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
                     "    where (R.fecha_final > ?2 and R.fecha_inicial < ?3) " +
                     ")" +
                     " group by P.id; ", nativeQuery = true)
-    List<Producto> getProductsByCityAndDates(Integer ciudades_id, LocalDate fechaInicial, LocalDate fechaFinal);
+    List<Producto> getProductsByCityAndDates(Integer ciudades_id,
+                                             LocalDate fechaInicial,
+                                             LocalDate fechaFinal);
 
 }
