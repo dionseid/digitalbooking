@@ -21,8 +21,14 @@ public class Caracteristica {
     private String nombre;
     private String icono;
 
-    @ManyToMany(mappedBy = "caracteristicas")
-    private List<Producto> productos = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "productos_id")
+    private Producto producto;
+
+
+/*    @ManyToMany(mappedBy = "caracteristicas")
+    private List<Producto> productos = new ArrayList<>();*/
 
 //    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 //    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -30,18 +36,10 @@ public class Caracteristica {
 //    private Producto producto;
 
 
-    public Caracteristica(Integer id, String nombre, String icono, List<Producto> productos) {
-        this.id = id;
+    public Caracteristica(String nombre, String icono, Producto producto) {
         this.nombre = nombre;
         this.icono = icono;
-        this.productos= productos;
-    }
-
-    public Caracteristica(String nombre, String icono, List<Producto> productos) {
-        this.nombre = nombre;
-        this.icono = icono;
-        this.productos= productos;
-
+        this.producto = producto;
     }
 
     public Caracteristica() {

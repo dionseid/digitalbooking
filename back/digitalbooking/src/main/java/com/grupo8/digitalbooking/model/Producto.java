@@ -36,40 +36,29 @@ public class Producto {
     @JoinColumn(name = "categorias_id")
     private Categoria categoria;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    /*@ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "productos_caracteristicas",
             joinColumns = { @JoinColumn(name = "productos_id") },
             inverseJoinColumns = { @JoinColumn(name = "caracteristicas_id") }
     )
-    List<Caracteristica> caracteristicas = new ArrayList<>();
+    List<Caracteristica> caracteristicas = new ArrayList<>();*/
 
     /*@OneToMany(mappedBy= "producto", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Reserva> reservas;*/
 
-
-    public Producto(String nombre, String descripcion, Double latitud, Double longitud, Ciudad ciudad, Categoria categoria, List<Caracteristica> caracteristicas) {
+    public Producto(String nombre, String descripcion, Double latitud, Double longitud, Ciudad ciudad, Categoria categoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.latitud = latitud;
         this.longitud = longitud;
         this.ciudad = ciudad;
         this.categoria = categoria;
-        this.caracteristicas = caracteristicas;
     }
 
     public Producto() {
     }
 
-    public Producto(Integer id, String nombre, String descripcion, Double latitud, Double longitud, Ciudad ciudad, Categoria categoria, List<Caracteristica> caracteristicas) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.ciudad = ciudad;
-        this.categoria = categoria;
-        this.caracteristicas = caracteristicas;
-    }
+
 }

@@ -41,7 +41,7 @@ public class ProductoService {
         Optional<Categoria> categoria =  categoriaRepository.findById(producto.getCategoria().getId());
         producto.setCategoria(categoria.get());
 
-        producto.setCaracteristicas(getCaracteristicasId(producto));
+        //producto.setCaracteristicas(getCaracteristicasId(producto));
 
         return productoRepository.save(producto);
     }
@@ -112,7 +112,7 @@ public class ProductoService {
         }
         //return results;
     };
-private List<Caracteristica> getCaracteristicasId(Producto producto){
+/*private List<Caracteristica> getCaracteristicasId(Producto producto){
     List<Caracteristica> caracteristicasId = producto.getCaracteristicas();
     List<Caracteristica> caracteristicas = new ArrayList<>();
     for (Caracteristica c: caracteristicasId) {
@@ -120,5 +120,5 @@ private List<Caracteristica> getCaracteristicasId(Producto producto){
         caracteristicas.add(caracteristica);
     }
 return caracteristicas;
-}
+}*/
 }

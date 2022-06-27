@@ -53,4 +53,17 @@ public class ReservaController {
         return response;
 
     }
+
+    //Endpoint para buscar reservas por usuario
+    @ApiOperation(value="listarReservasPorUsuario", notes="Listar las reservas filtradas por un ID de usuario")
+    @GetMapping("/listarByUsuario/{id}")
+    public ResponseEntity<Object> listarReservasByUsuario(@PathVariable Integer id) throws Exception{
+        ResponseEntity<Object> response = null;
+        if (reservaService.buscarPorUsuario(id).isEmpty()){
+            response = ResponseHandler.generateResponse("El usuario no posee reservas", HttpStatus.NOT_FOUND, null);
+        }else {
+            response=ResponseHandler.generateResponse("Listado de reservas", HttpStatus.OK, reservaService.buscarPorUsuario(id));
+        }
+        return response;
+    }
 }
