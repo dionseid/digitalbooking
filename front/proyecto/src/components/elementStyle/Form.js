@@ -49,6 +49,13 @@ const Input = styled.input`
 	line-height: 35px;
 	transition: .3s ease all;
 	border: 3px solid transparent;
+	&::placeholder{
+		font-family: 'Roboto';
+		font-style: normal;
+		font-weight: 500;
+		font-size: 12px;
+		opacity: 0.85;
+	}
 	&:focus {
 		border: 3px solid ${colores.borde};
 		outline: none;

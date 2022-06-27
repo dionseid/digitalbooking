@@ -50,6 +50,22 @@ img {
   padding: 7px 20px;
 }
 
+.linkAdministracion{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  color: #282c34;
+  text-decoration: none;
+  margin-right: 7px;
+}
+
+.lineaHorizontal{
+  border: 1px solid #F0572D;
+  background-color: #F0572D;
+  height: 90%;
+  margin-right: 7px;
+}
+
 @media screen and (max-width: 768px) {
   .parrafoNavBar {
     display: none;

@@ -107,6 +107,10 @@ const Navbar = ({ onClick }) => {
       return (
         <div className="SidebarBienvenida">
           <div>
+            <Link to="/administracion" className="linkAdministracion">Administracion</Link>            
+          </div>          
+          <div className="lineaHorizontal"/>
+          <div>
             <span>
               {/* ////nombre[0] + apellido[0]*/}
               {user.nombre[0] + user.apellido[0]}

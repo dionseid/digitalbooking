@@ -66,7 +66,7 @@ const CardRecomendacion = ({
   }, [dataProducto, selectCategoria, selectCiudad]);
 
   //const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
-
+  console.log("caracteristicas: ",dataCaracteristicas.filter((c) => c.producto?.id == 2));
   //const getFilteredCategoryList = () => selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
   const buscadorCards = () => {
     if (filteredList.length === 0) {
@@ -82,11 +82,12 @@ const CardRecomendacion = ({
     } else {
       return (
         <>
+        <span class="material-symbols-outlined">tv</span>
           {filteredList?.map((card) => (
             <div key={card.id} className="cardRecomendacion">
               <div
                 style={{ backgroundImage: "url('" + getImage(card) + "')" }}
-                className="fondoImagen"
+                className="fondoImagenProducto"
               />
               <div className="cardBody">
                 <div className="presentacion">
