@@ -1,9 +1,11 @@
 package com.grupo8.digitalbooking.service;
 
 import com.grupo8.digitalbooking.exceptions.BadRequestException;
+import com.grupo8.digitalbooking.model.Caracteristica;
 import com.grupo8.digitalbooking.model.Categoria;
 import com.grupo8.digitalbooking.model.Ciudad;
 import com.grupo8.digitalbooking.model.Producto;
+import com.grupo8.digitalbooking.repository.CaracteristicaRepository;
 import com.grupo8.digitalbooking.repository.CategoriaRepository;
 import com.grupo8.digitalbooking.repository.CiudadRepository;
 import com.grupo8.digitalbooking.repository.ProductoRepository;
@@ -12,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,13 +24,14 @@ public class ProductoService {
     private final ProductoRepository productoRepository;
     private final CiudadRepository ciudadRepository;
     private final CategoriaRepository categoriaRepository;
-    private CiudadService ciudadService;
+    private final CaracteristicaRepository caracteristicaRepository;
 
     @Autowired
-    public ProductoService(ProductoRepository productoRepository, CiudadRepository ciudadRepository, CategoriaRepository categoriaRepository) {
+    public ProductoService(ProductoRepository productoRepository, CiudadRepository ciudadRepository, CategoriaRepository categoriaRepository, CaracteristicaRepository caracteristicaRepository) {
         this.productoRepository = productoRepository;
         this.ciudadRepository = ciudadRepository;
         this.categoriaRepository = categoriaRepository;
+        this.caracteristicaRepository= caracteristicaRepository;
     }
 
     //Agregar producto
@@ -35,6 +40,9 @@ public class ProductoService {
         producto.setCiudad(ciudad.get());
         Optional<Categoria> categoria =  categoriaRepository.findById(producto.getCategoria().getId());
         producto.setCategoria(categoria.get());
+
+        producto.setCaracteristicas(getCaracteristicasId(producto));
+
         return productoRepository.save(producto);
     }
 
@@ -104,4 +112,13 @@ public class ProductoService {
         }
         //return results;
     };
+private List<Caracteristica> getCaracteristicasId(Producto producto){
+    List<Caracteristica> caracteristicasId = producto.getCaracteristicas();
+    List<Caracteristica> caracteristicas = new ArrayList<>();
+    for (Caracteristica c: caracteristicasId) {
+        Caracteristica caracteristica = caracteristicaRepository.findById(c.getId()).get();
+        caracteristicas.add(caracteristica);
+    }
+return caracteristicas;
+}
 }
