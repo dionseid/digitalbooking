@@ -160,7 +160,7 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
 
   setting {
     name      = "Priority"
-    namespace = "aws:elbv2:listenerrule:reservas"
+    namespace = "aws:elbv2:listenerrule:reserva"
     resource  = ""
     value     = "7"
   }
@@ -209,7 +209,7 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
 
   setting {
     name      = "PathPatterns"
-    namespace = "aws:elbv2:listenerrule:reservas"
+    namespace = "aws:elbv2:listenerrule:reserva"
     resource  = ""
     value     = "/reserva*"
   }
@@ -258,7 +258,7 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
 
   setting {
     name      = "Process"
-    namespace = "aws:elbv2:listenerrule:reservas"
+    namespace = "aws:elbv2:listenerrule:reserva"
     resource  = ""
     value     = "default8080"
   }
