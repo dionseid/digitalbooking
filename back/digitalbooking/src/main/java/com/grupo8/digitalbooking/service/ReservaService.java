@@ -7,7 +7,6 @@ import com.grupo8.digitalbooking.exceptions.ResourceNotFoundException;
 import com.grupo8.digitalbooking.model.Producto;
 import com.grupo8.digitalbooking.model.Reserva;
 import com.grupo8.digitalbooking.model.Usuario;
-import com.grupo8.digitalbooking.repository.ImagenRepository;
 import com.grupo8.digitalbooking.repository.ProductoRepository;
 import com.grupo8.digitalbooking.repository.ReservaRepository;
 import com.grupo8.digitalbooking.repository.UsuarioRepository;
@@ -15,11 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ReservaService {
@@ -69,6 +64,10 @@ public class ReservaService {
             reservas1.add(mapper.convertValue(reserv, Reserva.class));
         }
         return reservas1;
+    }
+
+    public List<Reserva> buscarPorUsuario(Integer id){
+        return reservaRepository.findByUsuarioId(id);
     }
 
 }

@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,25 +21,25 @@ public class Caracteristica {
     private String nombre;
     private String icono;
 
-
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "productos_id")
     private Producto producto;
 
 
-    public Caracteristica(Integer id, String nombre, String icono, Producto producto) {
-        this.id = id;
-        this.nombre = nombre;
-        this.icono = icono;
-        this.producto= producto;
-    }
+/*    @ManyToMany(mappedBy = "caracteristicas")
+    private List<Producto> productos = new ArrayList<>();*/
+
+//    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    @JoinColumn(name = "productos_id")
+//    private Producto producto;
+
 
     public Caracteristica(String nombre, String icono, Producto producto) {
         this.nombre = nombre;
         this.icono = icono;
-        this.producto= producto;
-
+        this.producto = producto;
     }
 
     public Caracteristica() {
