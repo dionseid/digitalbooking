@@ -69,7 +69,7 @@ const CardRecomendacion = ({
 
   return (
     <div className="cards">
-      {filteredList?.map((card) => (
+      {()=>filteredList?.map((card) => (
         <div key={card.id} className="cardRecomendacion">
           <div
             style={{ backgroundImage: "url('" + getImage(card) + "')" }}

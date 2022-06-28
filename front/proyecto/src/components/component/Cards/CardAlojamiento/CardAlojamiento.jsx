@@ -14,7 +14,7 @@ const CardAlojamiento = ({ idCategoria, setIdCategoria, onDoubleClick }) => {
 
   return (
     <div className="cards">
-      {dataCategoria.map((cat) => (
+      {()=>dataCategoria.map((cat) => (
         <div
           key={cat.id}
           className="cardAlojamiento"

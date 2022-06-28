@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faLocationDot } from "@fortawesome/free-solid-svg-icons";
@@ -39,8 +38,8 @@ export default function DetallesReserva() {
     : "_/_/_";
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
+    axiosConnection
+      .get(`/productos/buscarProductoPorId/${id}`)
       .then((response) => {
         setDataProducto(response.data);
       });
@@ -48,8 +47,8 @@ export default function DetallesReserva() {
 
   useEffect(() => {
     // TODO modificar url
-    axios
-      .get(`http://localhost:8080/imagenes/listarImagenes`)
+    axiosConnection
+      .get(`/imagenes/listarImagenes`)
       .then((response) => {
         setDataImagen(response.data);
       });
@@ -90,24 +89,17 @@ export default function DetallesReserva() {
     e.preventDefault();
     if (rango[0] !== null && rango[1] !== null && isHora && isCiudad) {
       // if(getLoginApi().status === 200 ){
-      fetch("http://localhost:8080/reserva/nuevaReserva", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+      axiosConnection.post('/reserva/nuevaReserva',{
+        hora: "15:00:00",
+        fechaInicial: fechaInicio,
+        fechaFinal: fechaFinal,
+        producto: {
+          id: id,
         },
-        body: JSON.stringify({
-          hora: "15:00:00",
-          fechaInicial: fechaInicio,
-          fechaFinal: fechaFinal,
-          producto: {
-            id: id,
-          },
-          usuario: {
-            id: user.id,
-          },
-        }),
-      });
+        usuario: {
+          id: user.id,
+        },
+      })
       navigate(`/reservaExitosa`);
     } //}
   };

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosConnection from "../../../helpers/axiosConnection";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./caracteristicas.scss";
@@ -8,7 +8,7 @@ export default function Caracteristicas() {
   const { id } = useParams();
   useEffect(() => {
     // TODO modificar url
-    axios
+    axiosConnection
       .get("http://localhost:8080/caracteristicas/listarCaracteristicas")
       .then((response) => {
         setDataCaracteristicas(response.data);

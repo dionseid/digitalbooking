@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,17 +24,19 @@ public class UsuarioService implements UserDetailsService {
     private final UsuarioRepository usuarioRepository;
     @Autowired
     private final RolUsuarioRepository rolUsuarioRepository;
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, RolUsuarioRepository rolUsuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, RolUsuarioRepository rolUsuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
         this.rolUsuarioRepository = rolUsuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Usuario agregarUsuario(Usuario usuario){
-        /*Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
-        usuario.setRol(rolUsuario.get());*/
         RolUsuario rolUsuario = rolUsuarioRepository.findById(usuario.getRol().getId()).get();
         usuario.setRol(rolUsuario);
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario);
     }
 
@@ -76,5 +79,24 @@ public class UsuarioService implements UserDetailsService {
         authorities.add(new SimpleGrantedAuthority(rol));
 
         return new User(username, usuario.getPassword(), true, true, true, true, authorities);
+    }
+
+    public String nombreUsuario(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        String nombre = usuario.getNombre();
+
+        return (nombre);
+    }
+    public String apellidoUsuario(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        String apellido = usuario.getApellido();
+        //String ciudadUsuario = usuario.getCiudadUsuario();
+        return (apellido);
+    }
+
+    public String ciudadUsuario(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        String ciudadUsuario = usuario.getCiudadUsuario();
+        return (ciudadUsuario);
     }
 }
