@@ -10,7 +10,7 @@ const TituloProducto = () => {
   const { id } = useParams();
   useEffect(() => {
     axiosConnection
-      .get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/buscarProductoPorId/${id}`)
+      .get(`/productos/buscarProductoPorId/${id}`)
       .then((response) => {
         setDataTitulo(response.data.data);
       });

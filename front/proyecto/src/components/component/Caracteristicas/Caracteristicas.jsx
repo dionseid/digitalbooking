@@ -9,7 +9,7 @@ export default function Caracteristicas() {
   useEffect(() => {
     // TODO modificar url
     axios
-      .get("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/caracteristicas/listarCaracteristicas")
+      .get("/caracteristicas/listarCaracteristicas")
       .then((response) => {
         setDataCaracteristicas(response.data.data);
       });

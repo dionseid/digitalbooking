@@ -2,12 +2,13 @@ import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faWhatsapp, faFacebook, faLinkedinIn, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faWhatsapp, faFacebook, faLinkedinIn, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import "./modalRedes.scss";
+import axiosConnection from "../../../helpers/axiosConnection";
 
 export default function ModalRedes(props) {
-    const { id } = useParams();
-    const urlACompartir = `http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/${id}`
+  const { id } = useParams();
+  const urlACompartir = axiosConnection.get(`/productos/${id}`)
 
   return (
     <Modal
@@ -39,8 +40,8 @@ export default function ModalRedes(props) {
             </a>
           </li>
           <li>
-            <a target="_blank" href={"https://api.whatsapp.com/send?text=digital%20booking%20" + urlACompartir}>              
-              <FontAwesomeIcon icon={faWhatsapp} className="icon"/>
+            <a target="_blank" href={"https://api.whatsapp.com/send?text=digital%20booking%20" + urlACompartir}>
+              <FontAwesomeIcon icon={faWhatsapp} className="icon" />
             </a>
           </li>
         </ul>

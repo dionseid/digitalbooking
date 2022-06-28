@@ -11,7 +11,7 @@ export default function UbicacionProducto() {
 
   useEffect(() => {
     axiosConnection
-      .get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/buscarProductoPorId/${id}`)
+      .get(`/productos/buscarProductoPorId/${id}`)
       .then((response) => {
         setDataUbicacion(response.data.data.ciudad);
       });

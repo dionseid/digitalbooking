@@ -41,7 +41,7 @@ export default function DetallesReserva() {
 
   useEffect(() => {
     axios
-      .get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/productos/buscarProductoPorId/${id}`)
+      .get(`/productos/buscarProductoPorId/${id}`)
       .then((response) => {
         setDataProducto(response.data.data);
       });
@@ -50,7 +50,7 @@ export default function DetallesReserva() {
   useEffect(() => {
     // TODO modificar url
     axios
-      .get(`http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/imagenes/listarImagenes`)
+      .get(`/imagenes/listarImagenes`)
       .then((response) => {
         setDataImagen(response.data.data);
       });
