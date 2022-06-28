@@ -18,31 +18,54 @@ public class ReservaController {
     @Autowired
     private ReservaService reservaService;
 
-    // crear query
-
     @ApiOperation(value = "listarReservas", notes = "Listar todas las reservas")
     @GetMapping("/listarReservas")
-    public ResponseEntity<Object> readAllReservas() throws Exception {
-        return ResponseHandler.generateResponse("Listado de reservas", HttpStatus.OK, reservaService.readAll());
+    public ResponseEntity<Object> listarReservas() throws Exception {
+        return ResponseHandler.generateResponse("Listado de reservas", HttpStatus.OK, reservaService.listarReservas());
     }
 
     @ApiOperation(value = "nuevaReserva", notes = "Agregar una nueva reserva")
     @PostMapping("/nuevaReserva")
-    public ResponseEntity<Object> addReserva(@RequestBody Reserva reserva) throws Exception {
+    public ResponseEntity<Object> agregarReserva(@RequestBody Reserva reserva) throws Exception {
         return ResponseHandler.generateResponse("La reserva fue guardada con éxito", HttpStatus.OK,
                 reservaService.newReserva(reserva));
     }
 
     @ApiOperation(value = "buscarReserva", notes = "Buscar una reserva")
     @GetMapping("/buscarReserva/{id}")
-    public ResponseEntity<Object> findImage(@PathVariable Integer id) throws Exception {
-        return ResponseHandler.generateResponse("La reserva fue encontrada", HttpStatus.OK, reservaService.find(id));
+    public ResponseEntity<Object> buscarReserva(@PathVariable Integer id) throws Exception {
+        return ResponseHandler.generateResponse("La reserva fue encontrada", HttpStatus.OK,
+                reservaService.buscarReserva(id));
     }
 
     @ApiOperation(value = "eliminarReserva", notes = "Eliminar una reserva por ID")
     @DeleteMapping("/eliminarReserva/{id}")
-    public ResponseEntity<Object> deleteImage(@PathVariable Integer id) throws Exception {
-        reservaService.deleteReserva(id);
-        return ResponseHandler.generateResponse("Reserva eliminada", HttpStatus.OK, null);
+    public ResponseEntity<Object> eliminarReserva(@PathVariable Integer id) throws Exception {
+        ResponseEntity<Object> response = null;
+
+        if (reservaService.buscarReserva(id).isPresent()) {
+
+            reservaService.eliminarReserva(id);
+            response = ResponseHandler.generateResponse("Producto eliminado", HttpStatus.OK, null);
+
+        } else {
+            response = ResponseHandler.generateResponse("Producto no encontrado", HttpStatus.NOT_FOUND, null);
+        }
+        return response;
+
+    }
+
+    // Endpoint para buscar reservas por usuario
+    @ApiOperation(value = "listarReservasPorUsuario", notes = "Listar las reservas filtradas por un ID de usuario")
+    @GetMapping("/listarByUsuario/{id}")
+    public ResponseEntity<Object> listarReservasByUsuario(@PathVariable Integer id) throws Exception {
+        ResponseEntity<Object> response = null;
+        if (reservaService.buscarPorUsuario(id).isEmpty()) {
+            response = ResponseHandler.generateResponse("El usuario no posee reservas", HttpStatus.NOT_FOUND, null);
+        } else {
+            response = ResponseHandler.generateResponse("Listado de reservas", HttpStatus.OK,
+                    reservaService.buscarPorUsuario(id));
+        }
+        return response;
     }
 }

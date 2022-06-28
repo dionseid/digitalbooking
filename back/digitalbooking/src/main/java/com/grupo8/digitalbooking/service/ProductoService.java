@@ -1,17 +1,14 @@
 package com.grupo8.digitalbooking.service;
 
 import com.grupo8.digitalbooking.exceptions.BadRequestException;
-import com.grupo8.digitalbooking.model.Categoria;
-import com.grupo8.digitalbooking.model.Ciudad;
-import com.grupo8.digitalbooking.model.Producto;
-import com.grupo8.digitalbooking.repository.CategoriaRepository;
-import com.grupo8.digitalbooking.repository.CiudadRepository;
-import com.grupo8.digitalbooking.repository.ProductoRepository;
+import com.grupo8.digitalbooking.model.*;
+import com.grupo8.digitalbooking.repository.*;
 import com.grupo8.digitalbooking.util.ProductoFiltrado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,13 +17,14 @@ public class ProductoService {
     private final ProductoRepository productoRepository;
     private final CiudadRepository ciudadRepository;
     private final CategoriaRepository categoriaRepository;
-    private CiudadService ciudadService;
+    private final ProductoCaracteristicaRepository productoCaracteristicaRepository;
 
     @Autowired
-    public ProductoService(ProductoRepository productoRepository, CiudadRepository ciudadRepository, CategoriaRepository categoriaRepository) {
+    public ProductoService(ProductoRepository productoRepository, CiudadRepository ciudadRepository, CategoriaRepository categoriaRepository, ProductoCaracteristicaRepository productoCaracteristicaRepository) {
         this.productoRepository = productoRepository;
         this.ciudadRepository = ciudadRepository;
         this.categoriaRepository = categoriaRepository;
+        this.productoCaracteristicaRepository= productoCaracteristicaRepository;
     }
 
     //Agregar producto
@@ -35,6 +33,9 @@ public class ProductoService {
         producto.setCiudad(ciudad.get());
         Optional<Categoria> categoria =  categoriaRepository.findById(producto.getCategoria().getId());
         producto.setCategoria(categoria.get());
+
+//        producto.setCaracteristicas(getProdCaractId(producto));
+
         return productoRepository.save(producto);
     }
 
@@ -95,7 +96,6 @@ public class ProductoService {
 
         List<Producto> results = productoRepository.getProductsByCityAndDates(filter.getCiudadId(), filter.getFechaInicial(), filter.getFechaFinal());
 
-
         if (results == null){
         //no anda
             throw new BadRequestException("No se encuentran alojamientos disponibles con su búsqueda");
@@ -104,4 +104,13 @@ public class ProductoService {
         }
         //return results;
     };
+//    private List<ProductoCaracteristica> getProdCaractId(Producto producto){
+//        List<ProductoCaracteristica> prodCaractIdList = producto.getCaracteristicas();
+//        List<ProductoCaracteristica> prodCaractList = new ArrayList<>();
+//            for (ProductoCaracteristica pc: prodCaractIdList) {
+//                ProductoCaracteristica prodCaract = productoCaracteristicaRepository.findById(pc.getId()).get();
+//                prodCaractList.add(prodCaract);
+//         }
+//        return prodCaractList;
+//     }
 }

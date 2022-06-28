@@ -38,6 +38,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                             "/configuration/**"
                         ).permitAll()
                 .antMatchers("/usuarios/agregarUsuario").permitAll()
+                .antMatchers("/usuarios/actualizarUsuario").permitAll()
+                .antMatchers("/usuarios/eliminarUsuario/**").permitAll()
+                .antMatchers("/usuarios/listarTodos").permitAll()
                 .antMatchers("/roles/**").permitAll()
                 .antMatchers("/caracteristicas/**").permitAll()
                 .antMatchers("/categorias/**").permitAll()
@@ -49,9 +52,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/productos/filtroCategoria/**").permitAll()
                 .antMatchers("/productos/filtroCiudad/**").permitAll()
                 .antMatchers("/productos/FiltroPorCiudadYFechas/**").permitAll()
+                .antMatchers("/productos/agregarProducto").permitAll()
+                .antMatchers("/productosCaracteristicas/**").permitAll()
                 .antMatchers("/productos/agregarProducto").hasAuthority("ADMIN")
                 .antMatchers("/reserva/nuevaReserva").hasAuthority("CLIENT")
-                .anyRequest().authenticated()
+//                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
