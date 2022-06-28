@@ -3,6 +3,7 @@ package com.grupo8.digitalbooking.controller;
 import com.grupo8.digitalbooking.exceptions.BadRequestException;
 import com.grupo8.digitalbooking.handler.ResponseHandler;
 import com.grupo8.digitalbooking.model.Producto;
+import com.grupo8.digitalbooking.model.dto.ProductoDTO;
 import com.grupo8.digitalbooking.service.ProductoService;
 import com.grupo8.digitalbooking.util.ProductoFiltrado;
 import io.swagger.annotations.Api;
@@ -35,9 +36,9 @@ public class ProductoController {
 
     @ApiOperation(value = "agregarProducto", notes = "Agregar producto")
     @PostMapping("/agregarProducto")
-    public ResponseEntity<Object> agregarProducto(@RequestBody Producto producto) {
+    public ResponseEntity<Object> agregarProducto(@RequestBody ProductoDTO productoDTO) {
         return ResponseHandler.generateResponse("El producto se ha agregado correctamente", HttpStatus.OK,
-                productoService.agregarProducto(producto));
+                productoService.agregarProducto(productoDTO));
     }
 
     @ApiOperation(value = "buscarProducto", notes = "Buscar un producto por ID")
@@ -57,12 +58,12 @@ public class ProductoController {
 
     @ApiOperation(value = "actualizarProducto", notes = "Actualizar un producto")
     @PutMapping("/actualizarProd")
-    public ResponseEntity<Object> actualizarProducto(@RequestBody Producto producto) {
+    public ResponseEntity<Object> actualizarProducto(@RequestBody ProductoDTO productoDTO) {
         ResponseEntity<Object> response = null;
 
-        if (producto.getId() != null && productoService.buscarProducto(producto.getId()).isPresent())
+        if (productoDTO.getId() != null && productoService.buscarProducto(productoDTO.getId()).isPresent())
             response = ResponseHandler.generateResponse("El producto se ha actualizado correctamente", HttpStatus.OK,
-                    productoService.actualizarProducto(producto));
+                    productoService.actualizarProducto(productoDTO));
         else
             response = ResponseHandler.generateResponse("Producto no encontrado", HttpStatus.NOT_FOUND, null);
 

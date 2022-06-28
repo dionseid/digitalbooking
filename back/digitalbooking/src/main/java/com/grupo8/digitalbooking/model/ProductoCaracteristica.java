@@ -1,5 +1,6 @@
 package com.grupo8.digitalbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -20,7 +21,8 @@ public class ProductoCaracteristica {
     private Integer id;
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnore
     @JoinColumn(name = "productos_id")
     private Producto producto;
 

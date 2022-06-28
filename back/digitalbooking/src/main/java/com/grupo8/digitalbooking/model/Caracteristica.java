@@ -21,10 +21,10 @@ public class Caracteristica {
     private Integer id;
     private String nombre;
     private String icono;
-
-    @OneToMany(mappedBy = "caracteristica", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<ProductoCaracteristica> productos = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "caracteristica", fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    private List<ProductoCaracteristica> productos = new ArrayList<>();
 
 
 //    @ManyToMany(mappedBy = "caracteristicas")
