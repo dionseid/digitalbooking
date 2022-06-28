@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPlus } from "@fortawesome/free-solid-svg-icons";
 import axiosConnection from "../../../../helpers/axiosConnection";
 import { Boton, Label } from "../../../elementStyle/Form";
+import { useNavigate } from "react-router-dom";
 
 export default function FormCrearProducto() {
   const [dataCiudades, setDataCiudades] = useState([]);
@@ -16,6 +17,9 @@ export default function FormCrearProducto() {
   const [nombreIconoCaracteristica, setNombreIconoCaracteristica] = useState([]);
   const [nombre, cambiarNombre] = useState({ campo: "", valido: null });
   const [direccion, cambiarDireccion] = useState({ campo: "", valido: null });
+  const [latitud, setLatitud] = useState({ campo: "", valido: null });
+  const [longitud, setLongitud] = useState({ campo: "", valido: null });
+  const navigate = useNavigate();
 
   const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -34,10 +38,17 @@ export default function FormCrearProducto() {
     });
   }, []);
 
+  const onSubmit = (e) =>{
+    e.preventDefault();
+
+    navigate("/creacionExitosa")
+
+  }
+
   return (
     <>
       <h2>Crear propiedad</h2>
-      <Form className="FormularioCrearProducto">
+      <Form action="" onSubmit={onSubmit} className="FormularioCrearProducto">
         <div className="dosDatos">
           <div className="datoSolo">
             <ComponenteInput
@@ -110,6 +121,32 @@ export default function FormCrearProducto() {
                 value: ciudad.id,
               }))}
               styles={selectStyles}
+            />
+          </div>
+        </div>
+        <div className="dosDatos">
+          <div className="datoSolo">
+            <ComponenteInput
+              estado={latitud}
+              cambiarEstado={setLatitud}
+              tipo="text"
+              label="Latitud"
+              placeholder="Ej: -34.88504462222943"
+              name="latitud"
+             /*  parrafoError="El nombre solo puede contener letras y espacios."
+              expresionRegular={expresiones.nombre} */
+            />
+          </div>
+          <div className="datoSolo">
+          <ComponenteInput
+              estado={longitud}
+              cambiarEstado={setLongitud}
+              tipo="text"
+              label="Longitud"
+              placeholder="Ej: -57.9565587541576"
+              name="longitud"
+              /* parrafoError="El nombre solo puede contener letras y espacios."
+              expresionRegular={expresiones.nombre} */
             />
           </div>
         </div>
@@ -201,7 +238,7 @@ export default function FormCrearProducto() {
                 <FontAwesomeIcon icon={faPlus} className="iconoPlus" />
               </button>
             </div>
-            <Boton>Crear</Boton>
+            <Boton type="submit">Crear</Boton>
           </div>
         </div>
       </Form>

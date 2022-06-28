@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./mensajeReservaExitosa.scss";
-import { Boton } from "../../elementStyle/Form";
+import "../mensajeExito.scss";
+import { Boton } from "../../../elementStyle/Form";
 
-export default function MensajeReservaExitosa() {
+export default function MensajeCreacionProducto() {
   return (
     <div className="contenedorMensajeReserva">
       <div className="contenidoMensajeReserva">
         <span class="material-symbols-outlined">verified</span>
         <span className="agradecimiento">¡Muchas gracias!</span>
-        <p>Su reserva se ha realizado con éxito</p>
+        <p>Tu propiedad se ha creado con éxito</p>
         <Link to="/">
           <Boton>ok</Boton>
         </Link>
