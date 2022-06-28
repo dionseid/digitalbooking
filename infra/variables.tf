@@ -37,3 +37,11 @@ variable "db_pass" {
   type        = string
   sensitive   = true
 }
+
+variable "account_id" {
+  type = string
+}
+
+variable "elb_account_id" {
+  type = string
+}

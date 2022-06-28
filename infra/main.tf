@@ -16,8 +16,8 @@ terraform {
 }
 
 provider "aws" {
-  #profile = "digital_booking_g8" # Uso local; no va a formar parte del pipeline
-  region = var.region
+  profile = "digital_booking_g8" # Uso local; no va a formar parte del pipeline
+  region  = var.region
 }
 
 # module "web_app" {
@@ -75,7 +75,8 @@ module "vpc" {
 }
 
 module "elastic_beanstalk_app" {
-  source = "./modules/eb"
+  source     = "./modules/eb"
+  depends_on = [module.storage]
 
   team_name        = var.team_name
   product_name     = var.product_name
@@ -87,6 +88,9 @@ module "elastic_beanstalk_app" {
   vpc_id           = module.vpc.vpc_id
   app_sg_id        = aws_security_group.g8_app_sg.id
   ingress_sg_id    = aws_security_group.g8_ingress_sg.id
+  bucket           = "elasticbeanstalk-${var.region}-${var.account_id}"
+  account_id       = var.account_id
+  elb_account_id   = var.elb_account_id
 }
 
 module "database" {

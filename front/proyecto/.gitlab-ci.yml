@@ -13,18 +13,29 @@ stages:
   - test
   - deploy
 
-build frontend:
+build_frontend: &build_frontend
   stage: build
   image: node:16-alpine
-  script:
+  before_script:
     - cd front/proyecto
     - npm install --force
-    - npm test
+  script:
+    - echo "This job builds the frontend"
+  after_script:
     - CI=false npm run build # Investigar 'CI=false'
     - echo $PARENT_PIPELINE_ID > build/version.html
+  rules:
+    - if: $CI_COMMIT_BRANCH != "test"
   artifacts:
     paths:
       - front/proyecto/build
+
+build frontend with testing:
+  <<: *build_frontend
+  script:
+    - npm test
+  rules:
+    - if: $CI_COMMIT_BRANCH == "test"
 
 build docker image:
   stage: package

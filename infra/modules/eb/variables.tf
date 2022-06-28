@@ -46,3 +46,15 @@ variable "app_sg_id" {
 variable "ingress_sg_id" {
   type = string
 }
+
+variable "bucket" {
+  type = string
+}
+
+variable "account_id" {
+  type = string
+}
+
+variable "elb_account_id" {
+  type = string
+}

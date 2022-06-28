@@ -43,12 +43,79 @@ resource "aws_iam_instance_profile" "eb_instance_profile" {
   role = aws_iam_role.ec2_role.name
 }
 
+# prerrequisite: Bucket for storing logs
+
+data "aws_s3_bucket" "eb_bucket" {
+  bucket = var.bucket
+}
+
+resource "aws_s3_bucket_policy" "allow_elb_to_write" {
+  bucket = data.aws_s3_bucket.eb_bucket.id
+  policy = data.aws_iam_policy_document.allow_elb_to_write.json
+}
+
+data "aws_iam_policy_document" "allow_elb_to_write" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${var.elb_account_id}:root"]
+    }
+
+    actions = ["s3:PutObject"]
+
+    resources = [
+      data.aws_s3_bucket.eb_bucket.arn,
+      "${data.aws_s3_bucket.eb_bucket.arn}/*",
+      "arn:aws:s3:::${var.bucket}/${var.team_name != "" ? "-" : ""}${var.product_name}-lb-logs${var.environment_name != "" ? "-${var.environment_name}" : ""}/AWSLogs/${var.account_id}/*"
+    ]
+  }
+
+  statement {
+    principals {
+      type        = "Service"
+      identifiers = ["delivery.logs.amazonaws.com"]
+    }
+
+    actions = ["s3:PutObject"]
+
+    resources = [
+      "arn:aws:s3:::${var.bucket}/${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-lb-logs${var.environment_name != "" ? "-${var.environment_name}" : ""}/AWSLogs/${var.account_id}/*",
+      data.aws_s3_bucket.eb_bucket.arn,
+      "${data.aws_s3_bucket.eb_bucket.arn}/*",
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "s3:x-amz-acl"
+      values   = ["bucket-owner-full-control"]
+    }
+  }
+
+  statement {
+    principals {
+      type        = "Service"
+      identifiers = ["delivery.logs.amazonaws.com"]
+    }
+
+    actions = ["s3:GetBucketAcl"]
+
+    resources = [
+      "arn:aws:s3:::${var.bucket}",
+      data.aws_s3_bucket.eb_bucket.arn,
+      "${data.aws_s3_bucket.eb_bucket.arn}/*",
+      "arn:aws:s3:::${var.bucket}/${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-lb-logs${var.environment_name != "" ? "-${var.environment_name}" : ""}/AWSLogs/${var.account_id}/*"
+    ]
+  }
+}
+
 # Create Elastic Beanstalk environment
 
 resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
   name                = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-env${var.environment_name != "" ? "-${var.environment_name}" : ""}"
   application         = aws_elastic_beanstalk_application.elastic_app.name
   solution_stack_name = "64bit Amazon Linux 2 v3.4.16 running Docker" #"64bit Amazon Linux 2 v2.14.3 running Docker"
+
+  depends_on = [aws_s3_bucket_policy.allow_elb_to_write]
 
   # EB environment --»
 
@@ -113,7 +180,6 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
   }
 
   # rules --»
-
 
   setting {
     name      = "Priority"
@@ -263,6 +329,29 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     value     = "default8080"
   }
 
+  # logs --»
+
+  setting {
+    name      = "AccessLogsS3Enabled"
+    namespace = "aws:elbv2:loadbalancer"
+    resource  = ""
+    value     = "true"
+  }
+
+  setting {
+    name      = "AccessLogsS3Bucket"
+    namespace = "aws:elbv2:loadbalancer"
+    resource  = ""
+    value     = var.bucket
+  }
+
+  setting {
+    name      = "AccessLogsS3Prefix"
+    namespace = "aws:elbv2:loadbalancer"
+    resource  = ""
+    value     = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-lb-logs${var.environment_name != "" ? "-${var.environment_name}" : ""}"
+  }
+
   /* ------------------------------ instances ----------------------------- */
 
   setting {
@@ -357,6 +446,3 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
 output "cname" {
   value = aws_elastic_beanstalk_environment.beanstalk_app_env.cname
 }
-
-
-# papuche
