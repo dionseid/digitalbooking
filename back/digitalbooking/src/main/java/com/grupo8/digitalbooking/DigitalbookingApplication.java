@@ -1,13 +1,9 @@
 package com.grupo8.digitalbooking;
 
-import com.grupo8.digitalbooking.model.*;
-import com.grupo8.digitalbooking.repository.CiudadRepository;
-import com.grupo8.digitalbooking.service.CiudadService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
@@ -25,7 +21,7 @@ public class DigitalbookingApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins("/**")
+						.allowedOrigins("*")
 						.allowedMethods("*")
 						.allowedHeaders("*");
 			}
