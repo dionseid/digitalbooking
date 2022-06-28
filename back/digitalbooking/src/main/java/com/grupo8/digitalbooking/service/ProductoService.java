@@ -23,11 +23,12 @@ public class ProductoService {
     private ObjectMapper mapper;
 
     @Autowired
-    public ProductoService(ProductoRepository productoRepository, CiudadRepository ciudadRepository, CategoriaRepository categoriaRepository, ProductoCaracteristicaRepository productoCaracteristicaRepository) {
+    public ProductoService(ProductoRepository productoRepository, CiudadRepository ciudadRepository, CategoriaRepository categoriaRepository, ProductoCaracteristicaRepository productoCaracteristicaRepository, ObjectMapper mapper) {
         this.productoRepository = productoRepository;
         this.ciudadRepository = ciudadRepository;
         this.categoriaRepository = categoriaRepository;
         this.productoCaracteristicaRepository= productoCaracteristicaRepository;
+        this.mapper = mapper;
     }
 
     //Agregar producto
