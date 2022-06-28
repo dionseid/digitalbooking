@@ -1,0 +1,16 @@
+.contenedorSpinner{
+    display: flex ;
+    flex-direction: row ;
+    justify-content: center ;
+    align-items: center ;
+    text-align: center ;
+    
+}
+
+.spinnerReactstrap{
+    width: 100px !important;
+    height: 100px !important;
+
+    border: 10px solid #F0572D !important;
+    border-right-color:transparent !important;
+}
