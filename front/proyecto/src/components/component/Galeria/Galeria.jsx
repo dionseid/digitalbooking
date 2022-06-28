@@ -28,7 +28,7 @@ const Galeria = () => {
     axiosConnection
       .get("/imagenes/listarImagenes")
       .then((response) => {
-        setDataImagen(response.data);
+        setDataImagen(response.data.data);
         console.log(dataImagen);
       });
   }, []);

@@ -24,7 +24,7 @@ const Calendario = () => {
 
   useEffect(() => {
     axiosConnection.get("/reserva/listarReservas").then((response) => {
-      setDataReservas(response.data);
+      setDataReservas(response.data.data);
     });
   }, []);
 

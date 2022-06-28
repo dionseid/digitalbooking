@@ -16,7 +16,7 @@ export default function BootstrapCarousel() {
     // TODO modificar url
     axiosConnection.get("/imagenes/listarImagenes")
       .then(response => {
-        setDataImagen(response.data)
+        setDataImagen(response.data.data)
       })
 
   }, [])

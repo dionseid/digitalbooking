@@ -9,7 +9,7 @@ const CardAlojamiento = ({ idCategoria, setIdCategoria, onDoubleClick }) => {
 
   useEffect(() => {
     axiosConnection.get("/categorias").then((response) => {
-      setDataCategoria(response.data);
+      setDataCategoria(response.data.data);
     });
   }, []);
 

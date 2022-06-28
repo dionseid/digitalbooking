@@ -31,11 +31,11 @@ const CardRecomendacion = ({
 
   useEffect(() => {
     axiosConnection.get(getUrl()).then((response) => {
-      setDataProducto(response.data);
+      setDataProducto(response.data.data);
     });
     // TODO Modificar url
     axiosConnection.get(`/imagenes/listarImagenes`).then((response) => {
-      setImagen(response.data);
+      setImagen(response.data.data);
     });
   }, [selectCiudad, startDate, endDate]);
 
@@ -44,7 +44,7 @@ const CardRecomendacion = ({
     axiosConnection
       .get(`/caracteristicas/listarCaracteristicas`)
       .then((response) => {
-        setCaracteristicas(response.data);
+        setCaracteristicas(response.data.data);
       });
   }, []);
 
@@ -82,7 +82,6 @@ const CardRecomendacion = ({
     } else {
       return (
         <>
-        <span class="material-symbols-outlined">tv</span>
           {filteredList?.map((card) => (
             <div key={card.id} className="cardRecomendacion">
               <div

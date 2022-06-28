@@ -13,7 +13,7 @@ export default function UbicacionProducto() {
     axiosConnection
       .get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
       .then((response) => {
-        setDataUbicacion(response.data.ciudad);
+        setDataUbicacion(response.data.data.ciudad);
       });
   }, []);
 

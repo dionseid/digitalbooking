@@ -43,7 +43,7 @@ export default function DetallesReserva() {
     axios
       .get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
       .then((response) => {
-        setDataProducto(response.data);
+        setDataProducto(response.data.data);
       });
   }, []);
 
@@ -52,7 +52,7 @@ export default function DetallesReserva() {
     axios
       .get(`http://localhost:8080/imagenes/listarImagenes`)
       .then((response) => {
-        setDataImagen(response.data);
+        setDataImagen(response.data.data);
       });
   }, []);
 

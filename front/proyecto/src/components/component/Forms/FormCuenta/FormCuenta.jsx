@@ -66,10 +66,10 @@ const FormCuenta = () => {
       if (respuesta.status === 200) {
         console.log("REGISTRO EXITOSO API ", respuesta);
         loginLogoutEvent({
-          nombre: respuesta.data.nombre,
-          apellido: respuesta.data.apellido,
-          mail: respuesta.data.email,
-          id: respuesta.data.id,
+          nombre: respuesta.data.data.nombre,
+          apellido: respuesta.data.data.apellido,
+          mail: respuesta.data.data.email,
+          id: respuesta.data.data.id,
           auth: true,
           redirect: false,
           ciudad: "",
@@ -83,10 +83,10 @@ const FormCuenta = () => {
           cuentasGurdadas = [
             ...cuentasGurdadas,
             {
-              nombre: respuesta.data.nombre,
-              apellido: respuesta.data.apellido,
-              mail: respuesta.data.email,
-              id: respuesta.data.id,
+              nombre: respuesta.data.data.nombre,
+              apellido: respuesta.data.data.apellido,
+              mail: respuesta.data.data.email,
+              id: respuesta.data.data.id,
               auth: true,
               redirect: false,
               ciudad: "",
@@ -101,10 +101,10 @@ const FormCuenta = () => {
             "user",
             JSON.stringify([
               {
-                nombre: respuesta.data.nombre,
-                apellido: respuesta.data.apellido,
-                mail: respuesta.data.email,
-                id: respuesta.data.id,
+                nombre: respuesta.data.data.nombre,
+                apellido: respuesta.data.data.apellido,
+                mail: respuesta.data.data.email,
+                id: respuesta.data.data.id,
                 auth: true,
                 redirect: false,
                 ciudad: "",
@@ -113,8 +113,8 @@ const FormCuenta = () => {
           );
         }
 
-        console.log(respuesta.data);
-        return respuesta.data;
+        console.log("respuesta: ", respuesta.data.data);
+        return respuesta.data.data;
       } else {
         throw new Error(
           "Lamentablemente no ha podido registrarse. Por favor intente más tarde"

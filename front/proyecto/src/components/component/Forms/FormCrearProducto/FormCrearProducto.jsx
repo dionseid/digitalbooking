@@ -28,13 +28,13 @@ export default function FormCrearProducto() {
 
   useEffect(() => {
     axiosConnection.get("/ciudades").then((response) => {
-      setDataCiudades(response.data);
+      setDataCiudades(response.data.data);
     });
   }, []);
 
   useEffect(() => {
     axiosConnection.get("/categorias").then((response) => {
-      setDataCategoria(response.data);
+      setDataCategoria(response.data.data);
     });
   }, []);
 
