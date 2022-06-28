@@ -1,9 +1,7 @@
 package com.grupo8.digitalbooking.service;
 
 import com.grupo8.digitalbooking.model.Caracteristica;
-import com.grupo8.digitalbooking.model.Producto;
 import com.grupo8.digitalbooking.repository.CaracteristicaRepository;
-import com.grupo8.digitalbooking.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +10,18 @@ import java.util.Optional;
 
 @Service
 public class CaracteristicaService {
-    private final CaracteristicaRepository caractProdRepository;
+    private final CaracteristicaRepository caracteristicaRepository;
 
 
     @Autowired
-    public CaracteristicaService(CaracteristicaRepository caractProdRepository) {
-        this.caractProdRepository = caractProdRepository;
+    public CaracteristicaService(CaracteristicaRepository caracteristicaRepository) {
+        this.caracteristicaRepository = caracteristicaRepository;
     }
 
     //AGREGAR
 
         public Caracteristica agregarCaracteristica(Caracteristica caracteristica){
-        return caractProdRepository.save(caracteristica);
+        return caracteristicaRepository.save(caracteristica);
     }
 
 
@@ -36,7 +34,7 @@ public class CaracteristicaService {
     //ACTUALIZAR
 
     public Caracteristica actualizarCarateristica(Caracteristica caracteristica){
-        return caractProdRepository.save(caracteristica);
+        return caracteristicaRepository.save(caracteristica);
     }
 
 
@@ -49,21 +47,21 @@ public class CaracteristicaService {
 
     //BUSCAR POR ID
     public Optional<Caracteristica> buscarCaracteristica(Integer id){
-        return caractProdRepository.findById(id);
+        return caracteristicaRepository.findById(id);
     }
 
     //ELIMINAR POR ID
     public void eliminarCaracteristica(Integer id) throws Exception{
         Optional<Caracteristica> caractBuscada = buscarCaracteristica(id);
         if (caractBuscada.isPresent())
-            caractProdRepository.deleteById(id);
+            caracteristicaRepository.deleteById(id);
         else
             throw new Exception("Característica no encontrada");
     }
 
     //LISTAR TODAS
     public List<Caracteristica> listarCaracteristicas(){
-        List<Caracteristica> caracteristicas = caractProdRepository.findAll();
+        List<Caracteristica> caracteristicas = caracteristicaRepository.findAll();
         return caracteristicas;
     }
 
