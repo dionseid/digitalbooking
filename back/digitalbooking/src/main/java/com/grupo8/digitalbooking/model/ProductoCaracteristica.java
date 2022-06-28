@@ -1,5 +1,6 @@
 package com.grupo8.digitalbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -11,18 +12,23 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
-//nombre de la tabla en la bd
 @Entity
-@Table(name = "Politicas")
-public class Politica {
+@Table(name = "productos_caracteristicas")
+public class ProductoCaracteristica {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer tipo;
-    private String descripcion;
+
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnore
     @JoinColumn(name = "productos_id")
     private Producto producto;
+
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "caracteristicas_id")
+    private Caracteristica caracteristica;
 
 }
