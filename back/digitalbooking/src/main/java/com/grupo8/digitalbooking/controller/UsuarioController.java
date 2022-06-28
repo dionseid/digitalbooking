@@ -2,6 +2,7 @@ package com.grupo8.digitalbooking.controller;
 
 import com.grupo8.digitalbooking.handler.ResponseHandler;
 import com.grupo8.digitalbooking.model.Usuario;
+import com.grupo8.digitalbooking.model.dto.UsuarioDTO;
 import com.grupo8.digitalbooking.service.UsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,8 +23,8 @@ public class UsuarioController {
     @ApiOperation(value="agregarUsuario", notes="Agregar un nuevo usuario")
     @CrossOrigin(origins="http://localhost:3000/")
     @PostMapping("/agregarUsuario")
-    public ResponseEntity<Object> agregarUsuario(@RequestBody Usuario usuario){
-        return ResponseHandler.generateResponse("El Usuario se ha generado exitosamente", HttpStatus.OK, usuarioService.agregarUsuario(usuario));
+    public ResponseEntity<Object> agregarUsuario(@RequestBody UsuarioDTO usuarioDTO){
+        return ResponseHandler.generateResponse("El Usuario se ha generado exitosamente", HttpStatus.OK, usuarioService.agregarUsuario(usuarioDTO));
     }
 
     @ApiOperation(value="listarTodos", notes="Listar todos los usuarios")
@@ -41,10 +42,10 @@ public class UsuarioController {
 
     @ApiOperation(value="actualizarUsuario", notes="Actualizar un usuario")
     @PutMapping("/actualizarUsuario")
-    public ResponseEntity<Object> actualizarUsuario(@RequestBody Usuario usuario){
+    public ResponseEntity<Object> actualizarUsuario(@RequestBody UsuarioDTO usuarioDTO){
         ResponseEntity<Object> response=null;
-        if (usuario.getId()!=null && usuarioService.buscarUsuario(usuario.getId()).isPresent())
-            response= ResponseHandler.generateResponse("El usuario ha sido actualizado correctamente", HttpStatus.OK, usuarioService.actualizarUsuario(usuario));
+        if (usuarioDTO.getId()!=null && usuarioService.buscarUsuario(usuarioDTO.getId()).isPresent())
+            response= ResponseHandler.generateResponse("El usuario ha sido actualizado correctamente", HttpStatus.OK, usuarioService.actualizarUsuario(usuarioDTO));
         else
             response= ResponseHandler.generateResponse("El usuario NO ha sido encontrado", HttpStatus.NOT_FOUND, null);
         return response;
