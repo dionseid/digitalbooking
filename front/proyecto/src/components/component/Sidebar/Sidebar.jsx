@@ -93,9 +93,9 @@ const Sidebar = () => {
     if (isAuthenticatedMenu) {
       return (
         <div className="SidebarBienvenida">
-          {console.log(user)}
+          {/* {console.log(user)} */}
           <span>{user.nombre[0] + user.apellido[0]}</span>
-          {console.log(user.nombre[0])}
+          {/* {console.log(user.nombre[0])} */}
           <p>Hola,</p>
           <p className="nombreCompletoMenu">{`${user.nombre} ${user.apellido}`}</p>
         </div>

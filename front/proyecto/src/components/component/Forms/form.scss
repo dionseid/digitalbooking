@@ -309,6 +309,10 @@ h1{
     .contenedorAgregarCaracteristicas .contenedorPlus{
         margin-top: 30px;
     }
+
+    .contenedorDeReglas{
+        flex-direction: column;
+    }
   }
 
   @media screen and (max-width: 460px){
@@ -321,7 +325,12 @@ h1{
     }
 
     .contenedorCargarImagenes{
-        padding: 2px;
+        padding: 15px !important;
+    }
+
+    .FormularioCrearProducto{
+        margin: 15px;
+        margin-bottom: 50px;
     }
 
 
