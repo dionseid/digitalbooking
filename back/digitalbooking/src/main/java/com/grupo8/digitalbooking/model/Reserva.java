@@ -23,17 +23,16 @@ public class Reserva {
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @JoinColumn(name = "productos_id")
     private Producto producto;
-    /*@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(name = "usuarios_id")
-    private Usuario usuario;*/
-
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @JoinColumn(name = "usuarios_id")
     private Usuario usuario;
+    // @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    // @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    // @JoinColumn(name = "usuarios_id")
+    // private Usuario usuario;
 
 }
