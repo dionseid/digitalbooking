@@ -8,6 +8,8 @@ import javax.persistence.*;
 @ToString
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 @Table(name = "imagenes")
@@ -25,21 +27,4 @@ public class Imagen {
     @JoinColumn(name = "productos_id")
     private Producto producto;
 
-
-    public Imagen(Integer id, String nombre, String url, Producto producto) {
-        this.id = id;
-        this.nombre = nombre;
-        this.url = url;
-        this.producto= producto;
-    }
-
-    public Imagen(String nombre, String url, Producto producto) {
-        this.nombre = nombre;
-        this.url = url;
-        this.producto= producto;
-
-    }
-
-    public Imagen() {
-    }
 }

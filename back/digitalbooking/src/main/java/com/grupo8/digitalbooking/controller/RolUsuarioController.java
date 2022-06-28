@@ -10,11 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 
 @RestController
 @Api(tags = "Rol")
 @RequestMapping("/roles")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RolUsuarioController {
     @Autowired
     private RolUsuarioService rolUsuarioService;
