@@ -75,4 +75,17 @@ public class ProductoCaracteristicaController {
         return response;
     }
 
+    @ApiOperation(value="listarCaracteristicasPorProducto", notes="Listar las caracteristicas filtradas por un ID de producto")
+    @GetMapping("/listarPorProducto/{id}")
+    public ResponseEntity<Object> listarCaracteristicasPorProducto(@PathVariable Integer id) throws Exception{
+        ResponseEntity<Object> response = null;
+        if (productoCaracteristicaService.buscarPorProducto(id).isEmpty()){
+            response = ResponseHandler.generateResponse("El producto no posee caracteristicas asociadas", HttpStatus.NOT_FOUND, null);
+        }else {
+            response=ResponseHandler.generateResponse("Listado de caracteristicas", HttpStatus.OK, productoCaracteristicaService.buscarPorProducto(id));
+        }
+        return response;
+    }
+
+
 }

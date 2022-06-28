@@ -36,9 +36,9 @@ public class Producto {
     @JoinColumn(name = "categorias_id")
     private Categoria categoria;
 
-    @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<ProductoCaracteristica> caracteristicas = new ArrayList<>();
+//    @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    private List<ProductoCaracteristica> caracteristicas = new ArrayList<>();
 
 //    @ManyToMany(cascade = { CascadeType.ALL })
 //    @JoinTable(
