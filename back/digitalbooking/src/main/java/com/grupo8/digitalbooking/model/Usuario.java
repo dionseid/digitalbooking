@@ -26,7 +26,7 @@ public class Usuario {
     private String ciudadUsuario;
     private String username;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "roles_id")
     /* @Enumerated(EnumType.STRING)*/
