@@ -25,25 +25,11 @@ public class CaracteristicaService {
     }
 
 
-//    public Caracteristica agregarCaracteristica(Caracteristica caracteristica){
-//        Optional<Producto> producto = productoRepository.findById(caracteristica.getProducto().getId());
-//        caracteristica.setProducto(producto.get());
-//        return caractProdRepository.save(caracteristica);
-//    }
-
     //ACTUALIZAR
 
     public Caracteristica actualizarCarateristica(Caracteristica caracteristica){
         return caracteristicaRepository.save(caracteristica);
     }
-
-
-//    public Caracteristica actualizarCarateristica(Caracteristica caracteristica){
-//        Optional<Producto> producto = productoRepository.findById(caracteristica.getProducto().getId());
-//        caracteristica.setProducto(producto.get());
-//        return caractProdRepository.save(caracteristica);
-//    }
-
 
     //BUSCAR POR ID
     public Optional<Caracteristica> buscarCaracteristica(Integer id){

@@ -110,13 +110,4 @@ public class ProductoService {
         }
         //return results;
     };
-//    private List<ProductoCaracteristica> getProdCaractId(Producto producto){
-//        List<ProductoCaracteristica> prodCaractIdList = producto.getCaracteristicas();
-//        List<ProductoCaracteristica> prodCaractList = new ArrayList<>();
-//            for (ProductoCaracteristica pc: prodCaractIdList) {
-//                ProductoCaracteristica prodCaract = productoCaracteristicaRepository.findById(pc.getId()).get();
-//                prodCaractList.add(prodCaract);
-//         }
-//        return prodCaractList;
-//     }
 }

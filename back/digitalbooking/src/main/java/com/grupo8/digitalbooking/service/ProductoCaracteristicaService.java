@@ -7,7 +7,6 @@ import com.grupo8.digitalbooking.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,29 +68,4 @@ public class ProductoCaracteristicaService {
         return productoCaracteristicaRepository.findByProductoId(id);
 
     }
-
-
-//    public List<Caracteristica> buscarPorProducto(Integer id){
-//
-//        List<ProductoCaracteristica> prodCaractList = productoCaracteristicaRepository.findByProductoId(id);
-//
-//        List<Caracteristica> caracteristicas = new ArrayList<>();
-//
-//        for (ProductoCaracteristica pc: prodCaractList) {
-//                Caracteristica caracteristica = pc.getCaracteristica();
-//                caracteristicas.add(caracteristica);
-//         }
-//
-//        return caracteristicas;
-//    }
-
 }
-//    private List<ProductoCaracteristica> getProdCaractId(Producto producto){
-//        List<ProductoCaracteristica> prodCaractIdList = producto.getCaracteristicas();
-//        List<ProductoCaracteristica> prodCaractList = new ArrayList<>();
-//            for (ProductoCaracteristica pc: prodCaractIdList) {
-//                ProductoCaracteristica prodCaract = productoCaracteristicaRepository.findById(pc.getId()).get();
-//                prodCaractList.add(prodCaract);
-//         }
-//        return prodCaractList;
-//     }
