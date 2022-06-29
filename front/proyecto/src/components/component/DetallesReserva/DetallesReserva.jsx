@@ -18,6 +18,7 @@ export default function DetallesReserva() {
   const [dataProducto, setDataProducto] = useState([]);
   const [dataImagen, setDataImagen] = useState([]);
   const [isCiudad, setIsCiudad] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -56,7 +57,7 @@ export default function DetallesReserva() {
 
   const getImage = () => {
     if (dataImagen.length !== 0) {
-      const imagenes = dataImagen.filter((img) => img.producto?.id === id);
+      const imagenes = dataImagen.filter((img) => img.producto?.id == id);
       return imagenes[0]?.url;
     }
   };
@@ -85,21 +86,36 @@ export default function DetallesReserva() {
     }
   };
 
+  useEffect(() => {
+    if (rango[0] !== null && rango[1] !== null && isHora!==null && isCiudad) {
+      setIsDisabled(false);
+    }else{
+      setIsDisabled(true)
+    }
+  }, [rango, isHora,isCiudad])
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (rango[0] !== null && rango[1] !== null && isHora && isCiudad) {
       // if(getLoginApi().status === 200 ){
-      axiosConnection.post('/reserva/nuevaReserva',{
-        hora: "15:00:00",
-        fechaInicial: fechaInicio,
-        fechaFinal: fechaFinal,
-        producto: {
-          id: id,
+/*       fetch("http://localhost:8080/reserva/nuevaReserva", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
-        usuario: {
-          id: user.id,
-        },
-      })
+        body: JSON.stringify({
+          hora: "15:00:00",
+          fechaInicial: fechaInicio,
+          fechaFinal: fechaFinal,
+          producto: {
+            id: id,
+          },
+          usuario: {
+            id: user.id,
+          },
+        }),
+      }); */
       navigate(`/reservaExitosa`);
     } //}
   };
@@ -142,7 +158,10 @@ export default function DetallesReserva() {
                 <p>Check out</p>
                 <p>{fechaFinal}</p>
               </div>
-              <button className="confirmarReserva" onClick={onSubmit}>
+              <button 
+              className="confirmarReserva" 
+              onClick={onSubmit}
+              disabled={isDisabled}>
                 Confirmar reserva
               </button>
             </div>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState} from "react";
 //import FechaRangoContextProvider from "../components/context/FechaRangoContextProvider";
 import Footer from "../../components/component/Footer/Footer";
 import Navbar from "../../components/component/Navbar/Navbar";
@@ -17,8 +17,10 @@ import UbicacionProducto from "../../components/component/UbicacionProducto/Ubic
 import TituloProducto from "../../components/component/TituloProducto/TituloProducto";
 import GoogleMaps from "../../components/component/GoogleMaps/GoogleMaps";
 import UserProvider from "../../components/context/UserContext";
+import ModalRedes from "../../components/component/ModalRedes/ModalRedes";
 
 const Productos = () => {
+  const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   const { user, loginLogoutEvent } = useContext(UserProvider);
@@ -65,10 +67,12 @@ const Productos = () => {
           <UbicacionProducto />
         </section>
         <section className="imagenes">
-          <p>
-            <FontAwesomeIcon icon={faShareNodes} className="iconosLike" />
-            <FontAwesomeIcon icon={faHeart} className="iconosLike" />
-          </p>
+        <p><button className="botonCompartir"><FontAwesomeIcon icon={faShareNodes} className='iconosLike' onClick={() => setModalShow(true)}/></button><FontAwesomeIcon icon={faHeart} className='iconosLike'/></p>
+      <ModalRedes
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+
           <Media query="(max-width:768px)">
             {(matches) => {
               return matches ? <BootstrapCarousel /> : <Galeria />;
@@ -97,10 +101,11 @@ const Productos = () => {
         </section>
         <section className="contenedorMapa">
           <h2>¿Dónde vas a estar?</h2>
-          {<GoogleMaps />}
+          <GoogleMaps/>
         </section>
         <section>
           <h2>¿Qué tenes que saber?</h2>
+          <div className="linea" />
           <Reglas />
         </section>
       </body>

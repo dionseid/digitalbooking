@@ -170,7 +170,15 @@
   .fondoImagen{
     height:100%;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 10px 10px 0px 0px;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .fondoImagenProducto{
+    height:100%;
+    width: 100%;
+    border-radius: 10px 0px 0px 10px;
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -183,6 +191,22 @@
   display: flex;
 }
 
+.emptyState{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.parrafoEmpty{
+  position: absolute;
+  top:90px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+
+}
 
 
   /*Responsive*/
@@ -231,6 +255,16 @@
     width: 635px;
     height: 500px;
     margin-bottom: 30px;
+  }
+
+  .parrafoEmpty{
+    text-align: center;
+    font-size: 14px;
+    max-width: 60%;
+  }
+
+  .fondoImagenProducto{
+    border-radius: 10px 10px 0px 0px;
   }
  
 }

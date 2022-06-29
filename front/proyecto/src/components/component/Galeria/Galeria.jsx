@@ -7,6 +7,7 @@ import BootstrapModal from "../BootstrapModal/BootstrapModal";
 import "./galeria.scss";
 import { useParams } from "react-router-dom";
 import axiosConnection from "../../../helpers/axiosConnection";
+import SpinnerLoader from "../SpinnerLoader/SpinnerLoader";
 
 function srcset(image, size, rows = 1, cols = 1) {
   return {
@@ -25,70 +26,89 @@ const Galeria = () => {
   useEffect(() => {
     // TODO cambiar url
     axiosConnection
-      .get("http://localhost:8080/imagenes/listarImagenes")
+      .get("/imagenes/listarImagenes")
       .then((response) => {
         setDataImagen(response.data);
+        console.log(dataImagen);
       });
   }, []);
 
-  return (
-    <SimpleReactLightbox>
-      <SRLWrapper>
-        <ImageList variant="quilted" cols={4} rowHeight={200}>
-          {dataImagen
-            .filter((imagen) => imagen.producto?.id === id)
-            .map((item, index) => (
-              <ImageListItem
-                key={item.id}
-                cols={
-                  pattern[
-                    index - Math.floor(index / pattern.length) * pattern.length
-                  ].cols
-                }
-                rows={
-                  pattern[
-                    index - Math.floor(index / pattern.length) * pattern.length
-                  ].rows
-                }
-                sx={{
-                  opacity: ".7",
-                  transition: "opacity .3s linear",
-                  cursor: "pointer",
-                  "&:hover": { opacity: 1 },
-                }}
-              >
-                <img
-                  {...srcset(
-                    item.url,
-                    200,
+  const buscadorImagenes = () => {
+    if (dataImagen.length === 0) {
+      return (
+        <>
+            <SpinnerLoader/>
+        </>
+      );
+    } else {
+      return (
+        <SimpleReactLightbox>
+        <SRLWrapper>
+          <ImageList variant="quilted" cols={4} rowHeight={200}>
+            {dataImagen
+              .filter((imagen) => imagen.producto?.id == id)
+              .map((item, index) => (
+                <ImageListItem
+                  key={item.id}
+                  cols={
                     pattern[
-                      index -
-                        Math.floor(index / pattern.length) * pattern.length
-                    ].rows,
-                    pattern[
-                      index -
-                        Math.floor(index / pattern.length) * pattern.length
+                      index - Math.floor(index / pattern.length) * pattern.length
                     ].cols
-                  )}
-                  alt={item.nombre}
-                  loading="lazy"
-                  className="imagenGaleria"
-                />
-              </ImageListItem>
-            ))}
-        </ImageList>
-        <div className="contendorGaleria">
-          <Button
-            variant="link"
-            onClick={() => setModalShow(true)}
-            className="botonGaleria"
-          >
-            ver más
-          </Button>
-        </div>
-        <BootstrapModal show={modalShow} onHide={() => setModalShow(false)} />
-      </SRLWrapper>
-    </SimpleReactLightbox>
+                  }
+                  rows={
+                    pattern[
+                      index - Math.floor(index / pattern.length) * pattern.length
+                    ].rows
+                  }
+                  sx={{
+                    opacity: ".7",
+                    transition: "opacity .3s linear",
+                    cursor: "pointer",
+                    "&:hover": { opacity: 1 },
+                  }}
+                >
+                  <img
+                    {...srcset(
+                      item.url,
+                      200,
+                      pattern[
+                        index -
+                          Math.floor(index / pattern.length) * pattern.length
+                      ].rows,
+                      pattern[
+                        index -
+                          Math.floor(index / pattern.length) * pattern.length
+                      ].cols
+                    )}
+                    alt={item.nombre}
+                    loading="lazy"
+                    className="imagenGaleria"
+                  />
+                </ImageListItem>
+              ))}
+          </ImageList>
+          <div className="contendorGaleria">
+            <Button
+              variant="link"
+              onClick={() => setModalShow(true)}
+              className="botonGaleria"
+            >
+              ver más
+            </Button>
+          </div>
+          <BootstrapModal show={modalShow} onHide={() => setModalShow(false)} />
+        </SRLWrapper>
+      </SimpleReactLightbox>
+      );
+    }
+  };
+
+
+
+  return (
+    <>
+    {buscadorImagenes()}
+    </>
   );
 };
 

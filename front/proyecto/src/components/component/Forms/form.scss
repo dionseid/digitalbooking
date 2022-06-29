@@ -137,8 +137,152 @@ h1{
     background-color: #FF0000;
     border-radius: 50%;
 }
+.selectPlaceholder{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    opacity: 0.85;
+    padding-top: 15px;
+}
 
-@media screen and (max-width: 768px) {
+//Formulario Crear Producto
+
+.FormularioCrearProducto{
+    background: #FFFFFF;
+    border: 1px solid #DFE4EA;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    margin: 25px;
+    margin-bottom: 120px; 
+}
+
+.selectCiudadCrearProducto, .selectCategoriaCrearProducto{
+    background: #FFFFFF;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    height:35px;    
+}
+.selectCategoriaCrearProducto{
+    z-index: 101;
+}
+.selectCiudadCrearProducto{
+    z-index: 100;
+}
+
+.form-group{
+    padding: 30px;
+}
+
+.form-control{
+    height: 200px;
+}
+
+.contenedorDeReglas{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;    
+    margin-bottom: 20px; 
+}
+
+.cajaRegla{
+    width: 100%;
+    padding: 20px;
+}
+
+
+.contenedorCargarImagenes{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 50px 70px 50px !important;
+    border-radius: 5px;
+}
+
+.inputCargarImagen{
+    width: 90%;
+    height: 40px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.inputCargarImagen::placeholder{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 8px;
+}
+
+
+.contenedorInputPlusImagenes{
+    display: flex;
+    width: 100%;
+}
+
+.contenedorPlus{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F0572D;
+    color: #FFFFFF;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    margin-left: 5px;
+    border-radius: 3px;
+    border: none;
+}
+
+.iconoPlus{    
+    font-size: 25px;
+}
+
+
+.final{
+    margin-bottom: 50px;
+}
+
+.contenedorAgregarCaracteristicas{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px 50px 20px 50px;
+    gap: 10px;
+    margin-bottom: 60px;
+}
+
+
+.inputCargarNombreCaracteristica, .inputCargarIconoCaracteristica{
+    height: 40px;
+    background: #FFFFFF;
+}
+
+.inputCargarNombreCaracteristica{
+    width: 70%;
+}
+.inputCargarIconoCaracteristica{
+    width: 30%;
+}
+
+.contenedorAgregarCaracteristicas .contenedorPlus{
+    margin-top: 90px;
+}
+.contenedorDosInputs{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+
+@media screen and (max-width: 768px){
     .nombreCompleto{
         flex-direction: column;
     }
@@ -146,6 +290,51 @@ h1{
     .contenido{
         margin-top: 110px;
     }
+
+    .selectCrearProducto{
+        margin-bottom: 25px;        
+    }
+
+    .contenedorDosInputs{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .inputCargarNombreCaracteristica, .inputCargarIconoCaracteristica{
+        width: 100%;
+        margin-bottom: 60px;
+    }
+
+    .contenedorAgregarCaracteristicas .contenedorPlus{
+        margin-top: 30px;
+    }
+
+    .contenedorDeReglas{
+        flex-direction: column;
+    }
+  }
+
+  @media screen and (max-width: 460px){
+    .contenedorAgregarCaracteristicas{
+        padding: 10px;
+    }
+
+    .contenedorDeReglas{
+        flex-direction: column;
+    }
+
+    .contenedorCargarImagenes{
+        padding: 15px !important;
+    }
+
+    .FormularioCrearProducto{
+        margin: 15px;
+        margin-bottom: 50px;
+    }
+
+
+
   }
 
 

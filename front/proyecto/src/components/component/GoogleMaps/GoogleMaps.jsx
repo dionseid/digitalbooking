@@ -15,7 +15,9 @@ const GoogleMaps = () => {
   useEffect(() => {
     axiosConnection
       .get(`/productos/buscarProductoPorId/${id}`)
-      .then((res) => setDataLocacion([res.latitud, res.longitud]));
+      .then((res) => {
+        setDataLocacion([res.data.latitud, res.data.longitud])
+      });
   }, []);
 
   const position = [dataLocacion[0], dataLocacion[1]];
@@ -27,6 +29,8 @@ const GoogleMaps = () => {
       return true;
     }
   };
+
+
 
   return (
     <>

@@ -11,6 +11,8 @@ import { FechaRangoContextProvider } from "./components/context/FechaRangoContex
 import ReservaExitosa from "./pages/ReservaExitosa/ReservaExitosa";
 import { UserProvider } from "./components/context/UserContext";
 import { HoraContextProvider } from "./components/context/HoraContextProvider";
+import Administracion from "./pages/Administracion/Administracion";
+import CreacionExitosa from "./pages/CreacionDeProductoExitosa/CreacionDeProductoExitosa";
 
 function App() {
   //// const [isAuthenticated, setIsAuthenticated] = React.useState(false);
@@ -33,7 +35,9 @@ function App() {
                 <Route path="/account" element={<Account />} />
                 <Route path="/productos/:id" element={<Productos />} />
                 <Route path="/producto/:id/reserva" element={<Reserva />} />
-                <Route path="/reservaExitosa" element={<ReservaExitosa />} />
+                <Route path="/reservaExitosa" element={<ReservaExitosa />} />                
+                <Route path="/administracion" element={<Administracion />} />
+                <Route path="/creacionExitosa" element={<CreacionExitosa />} />
               </Routes>
             </HoraContextProvider>
           </FechaRangoContextProvider>
