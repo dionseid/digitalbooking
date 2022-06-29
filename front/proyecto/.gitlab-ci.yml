@@ -22,7 +22,8 @@ build_frontend: &build_frontend
   script:
     - echo "This job builds the frontend"
   after_script:
-    - CI=false npm run build # Investigar 'CI=false'
+    - cd front/proyecto
+    - CI=false npm run build # ref: https://dev.to/kapi1/solved-treating-warnings-as-errors-because-of-process-env-ci-true-bk5
     - echo $PARENT_PIPELINE_ID > build/version.html
   rules:
     - if: $CI_COMMIT_BRANCH != "test"
