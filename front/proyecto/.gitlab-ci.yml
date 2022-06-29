@@ -30,10 +30,12 @@ build_frontend: &build_frontend
   artifacts:
     paths:
       - front/proyecto/build
+  allow_failure: false
 
 build frontend with testing:
   <<: *build_frontend
   script:
+    - cd front/proyecto
     - npm test
   rules:
     - if: $CI_COMMIT_BRANCH == "test"
