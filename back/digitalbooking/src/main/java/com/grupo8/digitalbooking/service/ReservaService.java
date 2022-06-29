@@ -1,7 +1,5 @@
 package com.grupo8.digitalbooking.service;
 
-
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo8.digitalbooking.exceptions.ResourceNotFoundException;
 import com.grupo8.digitalbooking.model.Producto;
@@ -12,7 +10,6 @@ import com.grupo8.digitalbooking.repository.ReservaRepository;
 import com.grupo8.digitalbooking.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.util.*;
 
@@ -39,8 +36,9 @@ public class ReservaService {
         reserva.setUsuario(usuario);
         reserva.setProducto(producto);
 
-        Reserva reserva1 = mapper.convertValue(reserva, Reserva.class);
-        return reservaRepository.save(reserva1);
+        // Reserva reserva1 = mapper.convertValue(reserva, Reserva.class); // Por qué
+        // estoy mapeando un entidad a sí misma?
+        return reservaRepository.save(reserva); // save(reserva1)
     }
 
     public Reserva newReserva(Reserva reserva) {
@@ -52,7 +50,8 @@ public class ReservaService {
         if (reservaFound.isPresent()) {
             reservaRepository.deleteById(id);
         } else {
-            throw new ResourceNotFoundException("La reserva con el id: " + id + " no pudo ser eliminada. Reserva no encontrada");
+            throw new ResourceNotFoundException(
+                    "La reserva con el id: " + id + " no pudo ser eliminada. Reserva no encontrada");
         }
     }
 
@@ -66,7 +65,7 @@ public class ReservaService {
         return reservas1;
     }
 
-    public List<Reserva> buscarPorUsuario(Integer id){
+    public List<Reserva> buscarPorUsuario(Integer id) {
         return reservaRepository.findByUsuarioId(id);
     }
 
