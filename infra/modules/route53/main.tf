@@ -30,7 +30,7 @@ module "records" {
   records = [
     {
       name    = "www.remo-digitalbooking.click"
-      type    = "CNAME"
+      type    = "A"
       ttl     = 300
       records = [var.eb_endpoint]
     }
