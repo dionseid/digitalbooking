@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/productos/filtroCategoria/**").permitAll()
                 .antMatchers("/productos/filtroCiudad/**").permitAll()
                 .antMatchers("/productos/FiltroPorCiudadYFechas/**").permitAll()
-                .antMatchers("/reserva/listarReservas").permitAll()
+                .antMatchers("/productos/agregarProducto").permitAll()
                 .antMatchers("/productosCaracteristicas/**").permitAll()
                 .antMatchers("/productos/agregarProducto").hasAuthority("ADMIN")
                 .antMatchers("/reserva/nuevaReserva").hasAuthority("CLIENT")

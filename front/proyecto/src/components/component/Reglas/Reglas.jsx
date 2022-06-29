@@ -10,7 +10,7 @@ export default function Reglas() {
   useEffect(() => {
     // TODO cambiar url
     axiosConnection.get("/politicas/listarPoliticas").then((response) => {
-      setDataReglas(response.data);
+      setDataReglas(response.data.data);
     });
   }, []);
 

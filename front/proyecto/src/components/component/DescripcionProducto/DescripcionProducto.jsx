@@ -10,7 +10,7 @@ const DescripcionProducto = () => {
     axiosConnection
       .get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
       .then((response) => {
-        setDataDescripcion(response.data);
+        setDataDescripcion(response.data.data);
       });
   }, []);
 

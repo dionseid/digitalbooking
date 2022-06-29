@@ -12,7 +12,7 @@ const TituloProducto = () => {
     axiosConnection
       .get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
       .then((response) => {
-        setDataTitulo(response.data);
+        setDataTitulo(response.data.data);
       });
   }, [id]);
 

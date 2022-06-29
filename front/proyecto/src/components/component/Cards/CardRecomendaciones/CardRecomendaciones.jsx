@@ -31,11 +31,11 @@ const CardRecomendacion = ({
 
   useEffect(() => {
     axiosConnection.get(getUrl()).then((response) => {
-      setDataProducto(response.data);
+      setDataProducto(response.data.data);
     });
     // TODO Modificar url
     axiosConnection.get(`/imagenes/listarImagenes`).then((response) => {
-      setImagen(response.data);
+      setImagen(response.data.data);
     });
   }, [selectCiudad, startDate, endDate]);
 
@@ -44,7 +44,7 @@ const CardRecomendacion = ({
     axiosConnection
       .get(`/caracteristicas/listarCaracteristicas`)
       .then((response) => {
-        setCaracteristicas(response.data);
+        setCaracteristicas(response.data.data);
       });
   }, []);
 
@@ -66,7 +66,7 @@ const CardRecomendacion = ({
   }, [dataProducto, selectCategoria, selectCiudad]);
 
   //const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
-  // console.log("caracteristicas: ",dataCaracteristicas.filter((c) => c.producto?.id == 2));
+  console.log("caracteristicas: ",dataCaracteristicas.filter((c) => c.producto?.id == 2));
   //const getFilteredCategoryList = () => selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
   const buscadorCards = () => {
     if (filteredList.length === 0) {
@@ -82,8 +82,7 @@ const CardRecomendacion = ({
     } else {
       return (
         <>
-        <span class="material-symbols-outlined">tv</span>
-          {()=>filteredList?.map((card) => (
+          {filteredList?.map((card) => (
             <div key={card.id} className="cardRecomendacion">
               <div
                 style={{ backgroundImage: "url('" + getImage(card) + "')" }}
@@ -121,7 +120,7 @@ const CardRecomendacion = ({
                     <span className="mostrarMapa">MOSTRAR EN EL MAPA</span>
                   </p>
                   <p className="iconosInfoHotel">
-                    {()=>dataCaracteristicas
+                    {dataCaracteristicas
                       .filter((c) => c.producto?.id == card.id)
                       .map((cat) => (
                         <span class="material-symbols-outlined">

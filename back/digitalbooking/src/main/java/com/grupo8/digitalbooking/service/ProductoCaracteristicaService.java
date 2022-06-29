@@ -63,5 +63,9 @@ public class ProductoCaracteristicaService {
         return prodCaract;
     }
 
+    public List<ProductoCaracteristica> buscarPorProducto(Integer id){
 
+        return productoCaracteristicaRepository.findByProductoId(id);
+
+    }
 }

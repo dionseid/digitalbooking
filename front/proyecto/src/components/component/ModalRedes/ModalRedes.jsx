@@ -24,22 +24,22 @@ export default function ModalRedes(props) {
       <Modal.Body className="modalBody">
         <ul className="listaRedes">
           <li>
-            <a href={"https://www.facebook.com/sharer/sharer.php?u=" + urlACompartir}>
+            <a target="_blank" href={"https://www.facebook.com/sharer/sharer.php?u=" + urlACompartir}>
               <i class="fab fa-facebook-f icon"></i>
             </a>
           </li>
           <li>
-            <a href="https://twitter.com/intent/tweet?text=[text]&url=[url]&hashtags=[hashtag]">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=[text]&url=[url]&hashtags=[hashtag]">
               <i class="fab fa-twitter icon"></i>
             </a>
           </li>
           <li>
-            <a href={'https://www.linkedin.com/sharing/share-offsite/?url=' + urlACompartir}>
+            <a target="_blank" href={'https://www.linkedin.com/sharing/share-offsite/?url=' + urlACompartir}>
               <i class="fab fa-linkedin-in icon"></i>
             </a>
           </li>
           <li>
-            <a href={"https://api.whatsapp.com/send?text=digital%20booking%20" + urlACompartir}>              
+            <a target="_blank" href={"https://api.whatsapp.com/send?text=digital%20booking%20" + urlACompartir}>              
               <FontAwesomeIcon icon={faWhatsapp} className="icon"/>
             </a>
           </li>

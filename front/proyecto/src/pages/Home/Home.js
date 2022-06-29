@@ -19,6 +19,7 @@ const Home = ({ authenticated }) => {
 
   const onDoubleClick = (searchCategoria, e) => {
     setFilterCategoria(searchCategoria);
+    console.log("categoria: ", filterCategoria);
   };
 
   const onClick = () => {

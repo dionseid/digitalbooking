@@ -10,7 +10,7 @@ export default function SelectCiudades({ onChange }) {
   const [dataCiudades, setDataCiudades] = useState([]);
   useEffect(() => {
     axiosConnection.get("/ciudades").then((response) => {
-      setDataCiudades(response.data);
+      setDataCiudades(response.data.data);
     });
   }, []);
 

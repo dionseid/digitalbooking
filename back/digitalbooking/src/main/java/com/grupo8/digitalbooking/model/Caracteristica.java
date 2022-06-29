@@ -22,17 +22,7 @@ public class Caracteristica {
     private String nombre;
     private String icono;
 
-    @OneToMany(mappedBy = "caracteristica", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<ProductoCaracteristica> productos = new ArrayList<>();
-
-
-//    @ManyToMany(mappedBy = "caracteristicas")
-//    private List<Producto> productos = new ArrayList<>();
-
-//    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//    @JoinColumn(name = "productos_id")
-//    private Producto producto;
+//    @OneToMany(mappedBy = "caracteristica", fetch = FetchType.LAZY)
+//    private List<ProductoCaracteristica> productos = new ArrayList<>();
 
 }

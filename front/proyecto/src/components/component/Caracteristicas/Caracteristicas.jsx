@@ -11,7 +11,7 @@ export default function Caracteristicas() {
     axiosConnection
       .get("http://localhost:8080/caracteristicas/listarCaracteristicas")
       .then((response) => {
-        setDataCaracteristicas(response.data);
+        setDataCaracteristicas(response.data.data);
       });
   }, []);
 
