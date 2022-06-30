@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @Api(tags = "Productos")
 @RequestMapping("/productos")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductoController {
 
     @Autowired
