@@ -10,10 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+
 @RestController
 @Api(tags = "Políticas")
 @RequestMapping("/politicas")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 
 public class PoliticaController {
     @Autowired
@@ -54,18 +56,14 @@ public class PoliticaController {
 
     @ApiOperation(value="eliminarPolitica", notes="Eliminar una política")
     @DeleteMapping("/eliminarPolitica/{id}")
-    public ResponseEntity<Object> eliminarPolitica(@PathVariable Integer id) throws Exception {
-        ResponseEntity<Object> response = null;
-
-        if (politicaService.buscarPolitica(id).isPresent()) {
-
+    public ResponseEntity<String> eliminarPolitica(@PathVariable Integer id) throws Exception {
+        ResponseEntity<String> response = null;
+        if (politicaService.buscarPolitica(id).isPresent())
             politicaService.eliminarPolitica(id);
-            response = ResponseHandler.generateResponse("Política eliminada", HttpStatus.OK, null);
-
-        }else {
-            response = ResponseHandler.generateResponse("Política no encontrada", HttpStatus.NOT_FOUND, null);
-        }
+        else
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return response;
+
     }
 
     @ApiOperation(value="listarPoliticas", notes="Listar todas las políticas")

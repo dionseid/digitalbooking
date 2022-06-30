@@ -15,7 +15,7 @@ import java.util.Collection;
 @RestController
 @Api(tags = "Ciudades")
 @RequestMapping("/ciudades")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CiudadController {
     @Autowired
     private CiudadService ciudadService;

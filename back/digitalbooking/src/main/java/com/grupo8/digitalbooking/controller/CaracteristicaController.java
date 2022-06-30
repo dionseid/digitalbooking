@@ -10,11 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 
 @RestController
 @Api(tags = "Características")
 @RequestMapping("/caracteristicas")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+/* @CrossOrigin(origins = "*", allowedHeaders = "*") */
 public class CaracteristicaController {
     @Autowired
     private CaracteristicaService caracteristicaService;

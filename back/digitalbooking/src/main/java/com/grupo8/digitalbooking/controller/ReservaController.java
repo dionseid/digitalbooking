@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Api(tags = "Reservas")
 @RequestMapping("/reserva")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ReservaController {
     @Autowired
     private ReservaService reservaService;

@@ -16,8 +16,8 @@ terraform {
 }
 
 provider "aws" {
-  profile = "digital_booking_g8" # Uso local; no va a formar parte del pipeline
-  region  = var.region
+  #profile = "digital_booking_g8" # Uso local; no va a formar parte del pipeline
+  region = var.region
 }
 
 # module "web_app" {
@@ -129,8 +129,8 @@ module "cloud9" {
   key_name         = aws_key_pair.key_public.key_name
 }
 
-# module "route53" {
-#   source = "./modules/route53"
+module "route53" {
+  source = "./modules/route53"
 
-#   eb_endpoint = module.elastic_beanstalk_app.cname
-# }
+  eb_endpoint = module.elastic_beanstalk_app.cname
+}

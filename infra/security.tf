@@ -33,6 +33,15 @@ resource "aws_security_group_rule" "app_http_ingress" {
   source_security_group_id = aws_security_group.g8_ingress_sg.id
 }
 
+resource "aws_security_group_rule" "app_8080_ingress" {
+  security_group_id        = aws_security_group.g8_app_sg.id
+  type                     = "ingress"
+  from_port                = 8080
+  to_port                  = 8080
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.g8_ingress_sg.id
+}
+
 resource "aws_security_group_rule" "app_egress_to_sg" { # Creamos este recurso separadamente para evitar el error 'Error: Cycle' entre g8_app_sg y g8_rds_sg
   security_group_id        = aws_security_group.g8_app_sg.id
   type                     = "egress"
@@ -64,7 +73,7 @@ resource "aws_security_group" "g8_rds_sg" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [aws_security_group.g8_app_sg.id, tolist(module.cloud9.bastion_instace_sg)[0], aws_security_group.g8_ingress_sg.id] # Probando Bastion https://aws.amazon.com/es/premiumsupport/knowledge-center/rds-mysql-ssh-workbench-connect-ec2/#:~:text=Open%20MySQL%20Workbench.,address%20of%20your%20EC2%20instance.
+    security_groups = [aws_security_group.g8_app_sg.id, tolist(module.cloud9.bastion_instace_sg)[0]] # Probando Bastion https://aws.amazon.com/es/premiumsupport/knowledge-center/rds-mysql-ssh-workbench-connect-ec2/#:~:text=Open%20MySQL%20Workbench.,address%20of%20your%20EC2%20instance.
   }
 }
 
@@ -124,5 +133,5 @@ resource "aws_security_group_rule" "cloud9_ingress" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0", "170.239.90.87/32"]
+  cidr_blocks       = ["0.0.0.0/0", "186.5.246.192/32"]
 }

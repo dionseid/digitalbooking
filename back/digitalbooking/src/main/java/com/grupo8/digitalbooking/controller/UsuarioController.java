@@ -11,17 +11,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 @RestController
 @Api(tags = "Usuarios")
 @RequestMapping("/usuarios")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @ApiOperation(value="agregarUsuario", notes="Agregar un nuevo usuario")
-    @CrossOrigin(origins="http://localhost:3000/")
+    @ApiOperation(value = "agregarUsuario", notes = "Agregar un nuevo usuario")
+    // @CrossOrigin(origins="http://localhost:3000/")
     @PostMapping("/agregarUsuario")
     public ResponseEntity<Object> agregarUsuario(@RequestBody UsuarioDTO usuarioDTO){
         return ResponseHandler.generateResponse("El Usuario se ha generado exitosamente", HttpStatus.OK, usuarioService.agregarUsuario(usuarioDTO));
@@ -37,7 +37,7 @@ public class UsuarioController {
     @DeleteMapping("/eliminarUsuario/{id}")
     public ResponseEntity<Object> eliminarUsuario(@PathVariable Integer id) throws Exception{
         usuarioService.eliminarUsuario(id);
-        return ResponseHandler.generateResponse("Se eliminó el usuario correctamente", HttpStatus.OK, null);
+        return ResponseEntity.ok("Se eliminó el usuario correctamente");
     }
 
     @ApiOperation(value="actualizarUsuario", notes="Actualizar un usuario")
@@ -57,4 +57,6 @@ public class UsuarioController {
         return ResponseHandler.generateResponse("El usuario fue encontrado", HttpStatus.OK, usuario);
     }
 
+//    hacer post login
+//    @PostMapping("/login")
 }

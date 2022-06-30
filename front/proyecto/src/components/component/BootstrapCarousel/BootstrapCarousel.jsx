@@ -1,7 +1,8 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Carousel } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
-import axiosConnection from '../../../helpers/axiosConnection'
+
 
 
 export default function BootstrapCarousel() {
@@ -14,9 +15,9 @@ export default function BootstrapCarousel() {
   const [dataImagen, setDataImagen] = useState([]);
   useEffect(() => {
     // TODO modificar url
-    axiosConnection.get("/imagenes/listarImagenes")
+    axios.get("http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/imagenes/listarImagenes")
       .then(response => {
-        setDataImagen(response.data.data)
+        setDataImagen(response.data)
       })
 
   }, [])

@@ -15,7 +15,7 @@ import java.util.Collection;
 @RestController
 @Api(tags = "Imágenes")
 @RequestMapping("/imagenes")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ImagenController {
     @Autowired
     private ImagenService imagenService;
@@ -58,15 +58,12 @@ public class ImagenController {
     public ResponseEntity<Object> eliminarImagen(@PathVariable Integer id) throws Exception{
         ResponseEntity<Object> response = null;
 
-        if (imagenService.buscarImagen(id).isPresent()) {
-
+        if (imagenService.buscarImagen(id).isPresent())
             imagenService.eliminarImagen(id);
-            response = ResponseHandler.generateResponse("Imagen eliminada", HttpStatus.OK, null);
-
-        }else {
-            response = ResponseHandler.generateResponse("Imagen NO encontrada", HttpStatus.NOT_FOUND, null);
-        }
+        else
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return response;
+
     }
 
     @ApiOperation(value="listarImagenes", notes="Listar todas las imágenes")

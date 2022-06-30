@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Api(tags = "Productos")
 @RequestMapping("/productos")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductoController {
 
     @Autowired
@@ -58,28 +59,19 @@ public class ProductoController {
     public ResponseEntity<Object> actualizarProducto(@RequestBody ProductoDTO productoDTO){
         ResponseEntity<Object> response=null;
 
-        if (productoDTO.getId() != null && productoService.buscarProducto(productoDTO.getId()).isPresent())
-            response = ResponseHandler.generateResponse("El producto se ha actualizado correctamente", HttpStatus.OK, productoService.actualizarProducto(productoDTO));
+        if (producto.getId() != null && productoService.buscarProducto(producto.getId()).isPresent())
+            response = ResponseEntity.ok(productoService.actualizarProducto(producto));
         else
-            response = ResponseHandler.generateResponse("Producto no encontrado",HttpStatus.NOT_FOUND,null);
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
         return response;
     }
 
     @ApiOperation(value="eliminarProducto", notes="Eliminar un producto")
     @DeleteMapping("/eliminarProducto/{id}")
-    public ResponseEntity<Object> eliminarProducto(@PathVariable Integer id) throws Exception {
-        ResponseEntity<Object> response = null;
-
-        if (productoService.buscarProducto(id).isPresent()) {
-
-            productoService.eliminarProducto(id);
-            response = ResponseHandler.generateResponse("Producto eliminado", HttpStatus.OK, null);
-
-        }else {
-            response = ResponseHandler.generateResponse("Producto no encontrado", HttpStatus.NOT_FOUND, null);
-        }
-        return response;
+    public ResponseEntity<String> eliminarProducto(@PathVariable Integer id) throws Exception {
+        productoService.eliminarProducto(id);
+        return ResponseEntity.ok("Se eliminó el producto correctamente");
     }
 
     @ApiOperation(value="filtroCategoria", notes="Buscar productos por categoría")
@@ -104,6 +96,6 @@ public class ProductoController {
         filtro.setFechaFinal(fechaFinal);
         filtro.setCiudadId(ciudadId);
         List<Producto> productosFiltrados = productoService.getProductosPorCiudadYFecha(filtro);
-        return ResponseHandler.generateResponse("Listado de Productos con la ciudad y fechas buscados",HttpStatus.OK,productosFiltrados);
+        return ResponseEntity.ok(productosFiltrados);
     }
 }
