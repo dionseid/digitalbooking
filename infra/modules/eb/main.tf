@@ -232,6 +232,20 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
   }
 
   setting {
+    name      = "Priority"
+    namespace = "aws:elbv2:listenerrule:usuarios"
+    resource  = ""
+    value     = "8"
+  }
+
+  setting {
+    name      = "Priority"
+    namespace = "aws:elbv2:listenerrule:authenticate"
+    resource  = ""
+    value     = "9"
+  }
+
+  setting {
     name      = "PathPatterns"
     namespace = "aws:elbv2:listenerrule:caracteristicas"
     resource  = ""
@@ -281,6 +295,20 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
   }
 
   setting {
+    name      = "PathPatterns"
+    namespace = "aws:elbv2:listenerrule:usuarios"
+    resource  = ""
+    value     = "/usuarios*"
+  }
+
+  setting {
+    name      = "PathPatterns"
+    namespace = "aws:elbv2:listenerrule:authenticate"
+    resource  = ""
+    value     = "/authenticate"
+  }
+
+  setting {
     name      = "Process"
     namespace = "aws:elbv2:listenerrule:caracteristicas"
     resource  = ""
@@ -325,6 +353,20 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
   setting {
     name      = "Process"
     namespace = "aws:elbv2:listenerrule:reserva"
+    resource  = ""
+    value     = "default8080"
+  }
+
+  setting {
+    name      = "Process"
+    namespace = "aws:elbv2:listenerrule:usuarios"
+    resource  = ""
+    value     = "default8080"
+  }
+
+  setting {
+    name      = "Process"
+    namespace = "aws:elbv2:listenerrule:authenticate"
     resource  = ""
     value     = "default8080"
   }

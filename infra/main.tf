@@ -130,7 +130,6 @@ module "cloud9" {
   product_name     = var.product_name
   environment_name = var.environment_name
   subnet_id        = module.vpc.public_subnets[1]
-  key_name         = aws_key_pair.key_public.key_name
 }
 
 module "route53" {
