@@ -1,15 +1,15 @@
 package com.grupo8.digitalbooking.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @ToString
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 
 //nombre de la tabla en la bd
 @Entity
@@ -24,24 +24,5 @@ public class Politica {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "productos_id")
     private Producto producto;
-
-    //constructor vacio
-    public Politica() {
-    }
-
-    //constructor SIN id
-    public Politica(Integer tipo, String descripcion, Producto producto) {
-        this.tipo = tipo;
-        this.descripcion = descripcion;
-        this.producto= producto;
-    }
-
-    //constructor CON id
-    public Politica(Integer id, Integer tipo, String descripcion, Producto producto) {
-        this.tipo = tipo;
-        this.descripcion = descripcion;
-        this.producto= producto;
-
-    }
 
 }

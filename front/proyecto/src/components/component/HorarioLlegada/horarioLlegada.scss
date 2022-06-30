@@ -1,0 +1,54 @@
+.tablaHorarioLlegada{
+    border: 1px solid #DFE4EA;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+}
+
+.tablaHorarioLlegada p{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.contenedorHorario{
+    display: flex;
+    flex-direction: column;
+}
+
+.placeholderSelect{
+    font-family: "Font Awesome 5 Free";
+    font-style:normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    margin-left: 12px;    
+}
+
+.inputHora{
+    background: #ffffff;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    width: 422px;
+    height: 38px;
+    margin-right: 8px;
+    font-weight: 500;
+    text-align: start;
+    font-size: 14px;
+    padding-left: 8px;    
+}
+
+.inputHora:placeholder-shown{
+    font-family: "Font Awesome 5 Free";
+    font-style:normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    margin-left: 12px;
+    padding-left: 10px;
+}
+
+@media screen and (max-width: 460px){
+    .inputHora{
+        width: 90%;
+    }
+}

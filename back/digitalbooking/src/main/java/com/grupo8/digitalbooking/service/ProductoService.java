@@ -1,17 +1,16 @@
 package com.grupo8.digitalbooking.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo8.digitalbooking.exceptions.BadRequestException;
-import com.grupo8.digitalbooking.model.Categoria;
-import com.grupo8.digitalbooking.model.Ciudad;
-import com.grupo8.digitalbooking.model.Producto;
-import com.grupo8.digitalbooking.repository.CategoriaRepository;
-import com.grupo8.digitalbooking.repository.CiudadRepository;
-import com.grupo8.digitalbooking.repository.ProductoRepository;
+import com.grupo8.digitalbooking.model.*;
+import com.grupo8.digitalbooking.model.dto.ProductoDTO;
+import com.grupo8.digitalbooking.repository.*;
 import com.grupo8.digitalbooking.util.ProductoFiltrado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,30 +19,38 @@ public class ProductoService {
     private final ProductoRepository productoRepository;
     private final CiudadRepository ciudadRepository;
     private final CategoriaRepository categoriaRepository;
-    private CiudadService ciudadService;
+    private final ProductoCaracteristicaRepository productoCaracteristicaRepository;
+    private ObjectMapper mapper;
 
     @Autowired
-    public ProductoService(ProductoRepository productoRepository, CiudadRepository ciudadRepository, CategoriaRepository categoriaRepository) {
+    public ProductoService(ProductoRepository productoRepository, CiudadRepository ciudadRepository, CategoriaRepository categoriaRepository, ProductoCaracteristicaRepository productoCaracteristicaRepository, ObjectMapper mapper) {
         this.productoRepository = productoRepository;
         this.ciudadRepository = ciudadRepository;
         this.categoriaRepository = categoriaRepository;
+        this.productoCaracteristicaRepository= productoCaracteristicaRepository;
+        this.mapper = mapper;
     }
 
     //Agregar producto
-    public Producto agregarProducto(Producto producto){
-        Optional<Ciudad> ciudad =  ciudadRepository.findById(producto.getCiudad().getId());
-        producto.setCiudad(ciudad.get());
-        Optional<Categoria> categoria =  categoriaRepository.findById(producto.getCategoria().getId());
-        producto.setCategoria(categoria.get());
+    public Producto agregarProducto(ProductoDTO productoDTO){
+        Optional<Ciudad> ciudad =  ciudadRepository.findById(productoDTO.getCiudad().getId());
+        productoDTO.setCiudad(ciudad.get());
+        Optional<Categoria> categoria =  categoriaRepository.findById(productoDTO.getCategoria().getId());
+        productoDTO.setCategoria(categoria.get());
+        Producto producto = mapper.convertValue(productoDTO, Producto.class);
+
+//        producto.setCaracteristicas(getProdCaractId(producto));
+
         return productoRepository.save(producto);
     }
 
     //Actualizar producto
-    public Producto actualizarProducto(Producto producto){
-        Optional<Ciudad> ciudad =  ciudadRepository.findById(producto.getCiudad().getId());
-        producto.setCiudad(ciudad.get());
-        Optional<Categoria> categoria =  categoriaRepository.findById(producto.getCategoria().getId());
-        producto.setCategoria(categoria.get());
+    public Producto actualizarProducto(ProductoDTO productoDTO){
+        Optional<Ciudad> ciudad =  ciudadRepository.findById(productoDTO.getCiudad().getId());
+        productoDTO.setCiudad(ciudad.get());
+        Optional<Categoria> categoria =  categoriaRepository.findById(productoDTO.getCategoria().getId());
+        productoDTO.setCategoria(categoria.get());
+        Producto producto = mapper.convertValue(productoDTO, Producto.class);
         return productoRepository.save(producto);
     }
 
@@ -94,7 +101,6 @@ public class ProductoService {
         //ciudadService.buscarCiudadPorId(filter.getCiudadId());     //si no existe el id, tira un badRequest
 
         List<Producto> results = productoRepository.getProductsByCityAndDates(filter.getCiudadId(), filter.getFechaInicial(), filter.getFechaFinal());
-
 
         if (results == null){
         //no anda

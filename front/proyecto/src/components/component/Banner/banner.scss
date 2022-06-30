@@ -1,0 +1,184 @@
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #282c34;
+  color: #dfe4ea;
+  margin-top: 78px;
+}
+
+.botonBanner {
+  color: #dfe4ea;
+  background-color: #f0572d;
+  width: 206px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  transition: 0.5s ease all;
+}
+
+.botonBanner:hover{
+  background:#dfe4ea;
+  color: #F0572D;
+  padding: 7px 20px;
+}
+
+.botonCalendario{
+  width: 260px;
+  height: 40px;
+  border: none;
+  background: #F0572D;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+}
+
+.botonCalendario:hover{
+  background: #F0572D;
+  font-weight: 900;
+}
+
+.inputBanner {
+  background: #ffffff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  width: 422px;
+  height: 38px;
+  margin-right: 8px;
+  font-weight: 500;
+  text-align: start;
+  font-size: 14px;
+  padding-left: 8px;
+  font-style: normal;
+  padding-left: 10px;
+}
+
+::placeholder,
+.calendar-input {
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  }
+
+
+.hide {
+  display: none;
+}
+
+.daterangepicker td.active,
+.daterangepicker td.in-range{
+  background-color:#F0572D;
+  color:white;
+  font-weight:bold
+}
+.daterangepicker .drp-buttons .btn {
+  margin-left: 0;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 8px;
+  width: 100%;
+}
+
+
+/* .daterangepicker td.start-date{
+  border-radius: 25px;
+} */
+
+th.month {
+  /* display: none; */
+  /* content: " "; */
+}
+th.month::after {
+  /* display: inline-block; */
+  /* content: "heey"; */
+}
+
+.tituloBanner {
+  padding: 10px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  color: #dfe4ea;
+  margin-top: 15px;
+}
+
+.buscador {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 10px 25px 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .buscador{
+    flex-direction: row;    
+  }
+
+  .inputBanner{
+    width: 254px;
+  }
+
+  .botonBanner {
+    width:166px;
+  }    
+
+  .input-contenedor{
+    width: 254px;
+    
+  }
+  
+  h1 {
+    font-size: 30px;
+    padding: 8px;
+  }
+
+  .buscador {
+    max-width: 90%;
+    gap: 10px;
+  }
+}
+
+option{
+  color: #282c34;
+}
+
+
+@media screen and (max-width: 460px) {
+  .buscador {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .contenedorSelect{
+    width: 100%;
+  }
+
+  .banner {
+    height: 330px;
+    margin-top: 93px;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 35px;
+    text-align: center;
+  }
+
+  .inputBanner {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .botonBanner {
+    width: 100%;
+  }
+}

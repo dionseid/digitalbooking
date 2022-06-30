@@ -1,14 +1,15 @@
 package com.grupo8.digitalbooking.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
+
 @Entity
 @Table(name = "roles")
 public class RolUsuario {
@@ -17,15 +18,4 @@ public class RolUsuario {
     private Integer id;
     public String nombre;
 
-    public RolUsuario() {
-    }
-
-    public RolUsuario(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public RolUsuario(Integer id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
 }

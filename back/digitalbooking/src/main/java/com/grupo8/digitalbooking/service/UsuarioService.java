@@ -1,10 +1,12 @@
 package com.grupo8.digitalbooking.service;
 
-import com.grupo8.digitalbooking.model.Reserva;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo8.digitalbooking.model.RolUsuario;
 import com.grupo8.digitalbooking.model.Usuario;
+import com.grupo8.digitalbooking.model.dto.UsuarioDTO;
 import com.grupo8.digitalbooking.repository.RolUsuarioRepository;
 import com.grupo8.digitalbooking.repository.UsuarioRepository;
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,6 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,22 +27,27 @@ public class UsuarioService implements UserDetailsService {
     private final UsuarioRepository usuarioRepository;
     @Autowired
     private final RolUsuarioRepository rolUsuarioRepository;
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    ObjectMapper mapper;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, RolUsuarioRepository rolUsuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, RolUsuarioRepository rolUsuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
         this.rolUsuarioRepository = rolUsuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public Usuario agregarUsuario(Usuario usuario){
-        /*Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
-        usuario.setRol(rolUsuario.get());*/
-        RolUsuario rolUsuario = rolUsuarioRepository.findById(usuario.getRol().getId()).get();
-        usuario.setRol(rolUsuario);
+    public Usuario agregarUsuario(UsuarioDTO usuarioDTO){
+        RolUsuario rolUsuario = rolUsuarioRepository.findById(usuarioDTO.getRol().getId()).get();
+        usuarioDTO.setRol(rolUsuario);
+        usuarioDTO.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
+        Usuario usuario = mapper.convertValue(usuarioDTO, Usuario.class);
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario newUsuario(Usuario usuario) {
-        return agregarUsuario(usuario);
+    public Usuario newUsuario(UsuarioDTO usuarioDTO) {
+        return agregarUsuario(usuarioDTO);
     }
 
     //listar todos los usuarios
@@ -48,9 +56,10 @@ public class UsuarioService implements UserDetailsService {
     }
 
     //actualizar usuario
-    public Usuario actualizarUsuario(Usuario usuario){
-        Optional<RolUsuario> rolUsuario = rolUsuarioRepository.findById(usuario.getId());
-        usuario.setRol(rolUsuario.get());
+    public Usuario actualizarUsuario(UsuarioDTO usuarioDTO){
+        RolUsuario rolUsuario = rolUsuarioRepository.findById(usuarioDTO.getRol().getId()).get();
+        usuarioDTO.setRol(rolUsuario);
+        Usuario usuario = mapper.convertValue(usuarioDTO, Usuario.class);
         return usuarioRepository.save(usuario);
     }
     //eliminar usuario
@@ -77,5 +86,24 @@ public class UsuarioService implements UserDetailsService {
         authorities.add(new SimpleGrantedAuthority(rol));
 
         return new User(username, usuario.getPassword(), true, true, true, true, authorities);
+    }
+
+    public String nombreUsuario(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        String nombre = usuario.getNombre();
+
+        return (nombre);
+    }
+    public String apellidoUsuario(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        String apellido = usuario.getApellido();
+        //String ciudadUsuario = usuario.getCiudadUsuario();
+        return (apellido);
+    }
+
+    public String ciudadUsuario(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        String ciudadUsuario = usuario.getCiudadUsuario();
+        return (ciudadUsuario);
     }
 }

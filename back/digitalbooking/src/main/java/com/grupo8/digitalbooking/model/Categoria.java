@@ -1,8 +1,6 @@
 package com.grupo8.digitalbooking.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,6 +8,8 @@ import javax.persistence.*;
 @ToString
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 
 //nombre de la tabla en la bd
 @Entity
@@ -21,24 +21,5 @@ public class Categoria {
     private String titulo;
     private String descripcion;
     private String urlImg;
-
-    //constructor vacio
-    public Categoria() {
-    }
-
-    //constructor SIN id
-    public Categoria(String titulo, String descripcion, String urlImg) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.urlImg = urlImg;
-    }
-
-    //constructor CON id
-    public Categoria(Integer id, String titulo, String descripcion, String urlImg) {
-        this.id = id;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.urlImg = urlImg;
-    }
 
 }

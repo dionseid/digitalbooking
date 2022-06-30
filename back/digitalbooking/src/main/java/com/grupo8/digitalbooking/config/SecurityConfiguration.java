@@ -11,8 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -39,11 +37,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                             "/swagger-resources/**",
                             "/configuration/**"
                         ).permitAll()
-                .antMatchers("/roles","/ciudades/**","/categorias/**").permitAll()
-                .antMatchers("/productos/**","/usuarios/**").permitAll()
+                .antMatchers("/usuarios/agregarUsuario").permitAll()
+                .antMatchers("/usuarios/actualizarUsuario").permitAll()
+                .antMatchers("/usuarios/eliminarUsuario/**").permitAll()
+                .antMatchers("/usuarios/listarTodos").permitAll()
+                .antMatchers("/roles/**").permitAll()
+                .antMatchers("/caracteristicas/**").permitAll()
+                .antMatchers("/categorias/**").permitAll()
+                .antMatchers("/ciudades/**").permitAll()
+                .antMatchers("/imagenes/**").permitAll()
+                .antMatchers("/politicas/**").permitAll()
+                .antMatchers("/productos/traerTodos").permitAll()
+                .antMatchers("/productos/buscarProductoPorId/**").permitAll()
+                .antMatchers("/productos/filtroCategoria/**").permitAll()
+                .antMatchers("/productos/filtroCiudad/**").permitAll()
+                .antMatchers("/productos/FiltroPorCiudadYFechas/**").permitAll()
+                .antMatchers("/productos/agregarProducto").permitAll()
+                .antMatchers("/productosCaracteristicas/**").permitAll()
                 .antMatchers("/productos/agregarProducto").hasAuthority("ADMIN")
                 .antMatchers("/reserva/nuevaReserva").hasAuthority("CLIENT")
-                .anyRequest().authenticated()
+//                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
@@ -55,8 +69,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
 }

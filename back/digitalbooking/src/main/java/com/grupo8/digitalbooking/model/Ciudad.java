@@ -1,14 +1,14 @@
 package com.grupo8.digitalbooking.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @ToString
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 @Table(name="ciudades")
@@ -19,22 +19,5 @@ public class Ciudad {
     private String Nombre;
     private String Provincia;
     private String Pais;
-
-    public Ciudad(Integer id, String nombre, String provincia, String pais) {
-        this.id = id;
-        Nombre = nombre;
-        Provincia = provincia;
-        Pais = pais;
-    }
-
-    public Ciudad(String nombre, String provincia, String pais) {
-        Nombre = nombre;
-        Provincia = provincia;
-        Pais = pais;
-    }
-
-    public Ciudad() {
-    }
-
 
 }

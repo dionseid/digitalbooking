@@ -1,5 +1,6 @@
 package com.grupo8.digitalbooking.controller;
 
+import com.grupo8.digitalbooking.handler.ResponseHandler;
 import com.grupo8.digitalbooking.model.Ciudad;
 import com.grupo8.digitalbooking.service.CiudadService;
 import io.swagger.annotations.Api;
@@ -14,55 +15,57 @@ import java.util.Collection;
 @RestController
 @Api(tags = "Ciudades")
 @RequestMapping("/ciudades")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CiudadController {
     @Autowired
     private CiudadService ciudadService;
 
-    // AGREGAR
     @PostMapping
-    public ResponseEntity<Ciudad> agregarCiudad(@RequestBody Ciudad ciudad) {
-        return ResponseEntity.ok(ciudadService.agregarCiudad(ciudad));
+    public ResponseEntity<Object> agregarCiudad(@RequestBody Ciudad ciudad) {
+        return ResponseHandler.generateResponse("La ciudad se ha agregado correctamente",HttpStatus.OK,ciudadService.agregarCiudad(ciudad));
     }
 
-    // BUSCAR
     @GetMapping("/{id}")
-    public ResponseEntity<Ciudad> buscarCiudadPorId(@PathVariable Integer id) {
-        Ciudad ciudad = ciudadService.buscarCiudadPorId(id).orElse(null);
-        return ResponseEntity.ok(ciudad);
+    public ResponseEntity<Object> buscarCiudadPorId(@PathVariable Integer id) {
+        ResponseEntity<Object> response=null;
+
+        if (id != null && ciudadService.buscarCiudadPorId(id).isPresent())
+            response = ResponseHandler.generateResponse("Ciudad encontrada", HttpStatus.OK, ciudadService.buscarCiudadPorId(id));
+        else
+            response = ResponseHandler.generateResponse("Ciudad NO encontrada",HttpStatus.NOT_FOUND,null);
+
+        return response;
     }
 
-    // ACTUALIZAR
     @PutMapping()
-    public ResponseEntity<Ciudad> actualizarCiudad(@RequestBody Ciudad ciudad) {
-        ResponseEntity<Ciudad> response;
+    public ResponseEntity<Object> actualizarCiudad(@RequestBody Ciudad ciudad) {
+        ResponseEntity<Object> response=null;
 
         if (ciudad.getId() != null && ciudadService.buscarCiudadPorId(ciudad.getId()).isPresent())
-            response = ResponseEntity.ok(ciudadService.actualizarCiudad(ciudad));
+            response = ResponseHandler.generateResponse("La ciudad se ha actualizado correctamente", HttpStatus.OK, ciudadService.actualizarCiudad(ciudad));
         else
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            response = ResponseHandler.generateResponse("Ciudad NO encontrada",HttpStatus.NOT_FOUND,null);
+
         return response;
     }
 
-    // ELIMINAR
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarCiudad(@PathVariable Integer id) throws Exception {
-
-        ResponseEntity<String> response = null;
+    public ResponseEntity<Object> eliminarCiudad(@PathVariable Integer id) throws Exception {
+        ResponseEntity<Object> response = null;
 
         if (ciudadService.buscarCiudadPorId(id).isPresent()) {
-            ciudadService.eliminarCiudad(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Se eliminó la categoria correctamente");
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: no se encontró el id");
-        }
 
+            ciudadService.eliminarCiudad(id);
+            response = ResponseHandler.generateResponse("Ciudad eliminada", HttpStatus.OK, null);
+
+        }else {
+            response = ResponseHandler.generateResponse("Ciudad NO encontrada", HttpStatus.NOT_FOUND, null);
+        }
         return response;
     }
 
-    // LISTAR TODAS LAS CIUDADES
-    @CrossOrigin(origins = "http://awseb-AWSEB-185HFL68KS755-374311792.us-west-1.elb.amazonaws.com:8080")
     @GetMapping()
-    public ResponseEntity<Collection<Ciudad>> listarCiudades() {
-        return ResponseEntity.ok(ciudadService.listarCiudades());
+    public ResponseEntity<Object> listarCiudades() {
+        return ResponseHandler.generateResponse("Listado de todas las Ciudades", HttpStatus.OK, ciudadService.listarCiudades());
     }
 }
