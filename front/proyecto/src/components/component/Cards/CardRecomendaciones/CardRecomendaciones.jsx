@@ -39,7 +39,7 @@ const CardRecomendacion = ({
     });
   }, [selectCiudad, startDate, endDate]);
 
-  console.log(startDate);
+  // console.log(startDate);
   useEffect(() => {
     axiosConnection
       .get(`/caracteristicas/listarCaracteristicas`)
@@ -66,7 +66,7 @@ const CardRecomendacion = ({
   }, [dataProducto, selectCategoria, selectCiudad]);
 
   //const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
-  console.log("caracteristicas: ",dataCaracteristicas.filter((c) => c.producto?.id == 2));
+  // console.log("caracteristicas: ",dataCaracteristicas.filter((c) => c.producto?.id == 2));
   //const getFilteredCategoryList = () => selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
   const buscadorCards = () => {
     if (filteredList.length === 0) {

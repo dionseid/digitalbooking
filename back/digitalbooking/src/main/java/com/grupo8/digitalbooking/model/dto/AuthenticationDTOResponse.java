@@ -13,9 +13,12 @@ import lombok.experimental.FieldDefaults;
 public class AuthenticationDTOResponse {
 
     String jwt;
+    Integer id;
     String nombre;
     String apellido;
     String ciudadUsuario;
+    String emailUsuario;
+
 
 
 }

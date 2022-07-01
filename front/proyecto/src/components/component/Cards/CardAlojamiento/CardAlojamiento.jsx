@@ -24,7 +24,7 @@ const CardAlojamiento = ({ idCategoria, setIdCategoria, onDoubleClick }) => {
       return (
         <>
           <div className="cards" >
-                {()=>dataCategoria.map((cat)=>(
+                {dataCategoria.map((cat)=>(
                     <div key={cat.id} className="cardAlojamiento" onDoubleClick={(e)=>{onDoubleClick(cat.id,e)}}>
                         <div style={{backgroundImage:"url('" + cat.urlImg + "')"}} className="fondoImagen"/>
                         <div className="cardBody">
