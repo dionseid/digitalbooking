@@ -39,7 +39,7 @@ const CardRecomendacion = ({
     });
   }, [selectCiudad, startDate, endDate]);
 
-  // console.log(startDate);
+  console.log(startDate);
   useEffect(() => {
     axiosConnection
       .get(`/caracteristicas/listarCaracteristicas`)
@@ -54,11 +54,6 @@ const CardRecomendacion = ({
     return imagenes[0]?.url;
   };
 
-  /*     const getCaracteristicas = (card) =>{
-        const caracteristicas = dataCaracteristicas.filter((c) => c.producto?.id == card.id);
-        return caracteristicas      
-    } */
-
   const filteredList = useMemo(() => {
     return selectCategoria
       ? dataProducto.filter((prod) => prod.categoria.id === selectCategoria)
@@ -66,7 +61,7 @@ const CardRecomendacion = ({
   }, [dataProducto, selectCategoria, selectCiudad]);
 
   //const getFilteredList = () => selectCiudad ? dataProducto.filter((prod) => prod.ciudad.id == selectCiudad) : dataProducto;
-  // console.log("caracteristicas: ",dataCaracteristicas.filter((c) => c.producto?.id == 2));
+
   //const getFilteredCategoryList = () => selectCategoria ? dataProducto.filter((prod) => prod.categoria.id == selectCategoria) : dataProducto;
   const buscadorCards = () => {
     if (filteredList.length === 0) {
@@ -120,11 +115,10 @@ const CardRecomendacion = ({
                     <span className="mostrarMapa">MOSTRAR EN EL MAPA</span>
                   </p>
                   <p className="iconosInfoHotel">
-                    {dataCaracteristicas
-                      .filter((c) => c.producto?.id == card.id)
+                    {card.caracteristicas
                       .map((cat) => (
                         <span class="material-symbols-outlined">
-                          {cat.icono}
+                          {cat.caracteristica?.icono}
                         </span>
                       ))}
                   </p>
