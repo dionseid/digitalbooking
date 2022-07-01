@@ -88,6 +88,12 @@ public class UsuarioService implements UserDetailsService {
         return new User(username, usuario.getPassword(), true, true, true, true, authorities);
     }
 
+    public Integer idUsuario(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        Integer id = usuario.getId();
+
+        return (id);
+    }
     public String nombreUsuario(String username){
         Usuario usuario = usuarioRepository.findByUsername(username);
         String nombre = usuario.getNombre();
@@ -106,4 +112,11 @@ public class UsuarioService implements UserDetailsService {
         String ciudadUsuario = usuario.getCiudadUsuario();
         return (ciudadUsuario);
     }
+
+    public String emailUsuario(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        String email = usuario.getEmail();
+        return (email);
+    }
+
 }

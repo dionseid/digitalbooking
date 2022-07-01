@@ -112,7 +112,7 @@ const Navbar = ({ onClick }) => {
           <div className="lineaHorizontal"/>
           <div>
             <span> 
-              {console.log("user: ", user)}             
+              {/* {console.log("user: ", user)}              */}
               {user.nombre[0] + user.apellido[0]}
             </span>
           </div>

@@ -3,7 +3,7 @@ import "./googleMaps.scss";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { useParams } from "react-router-dom";
 import axiosConnection from "../../../helpers/axiosConnection";
-import axios from "axios";
+
 //import { parseTwoDigitYear } from "moment";
 
 const GoogleMaps = () => {

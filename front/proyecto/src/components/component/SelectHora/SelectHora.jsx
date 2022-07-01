@@ -10,7 +10,7 @@ import HoraContextProvider from '../../context/HoraContextProvider';
 
 export default function SelectHora(requerido) {
     const [startTime, setStartTime] = useState(null);
-    const {isHora, setIsHora} = useContext(HoraContextProvider);
+    const {setIsHora} = useContext(HoraContextProvider);
 
 
 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faLocationDot } from "@fortawesome/free-solid-svg-icons";
@@ -40,8 +39,8 @@ export default function DetallesReserva() {
     : "_/_/_";
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
+    axiosConnection
+      .get(`/productos/buscarProductoPorId/${id}`)
       .then((response) => {
         setDataProducto(response.data.data);
       });
@@ -49,8 +48,8 @@ export default function DetallesReserva() {
 
   useEffect(() => {
     // TODO modificar url
-    axios
-      .get(`http://localhost:8080/imagenes/listarImagenes`)
+    axiosConnection
+      .get(`/imagenes/listarImagenes`)
       .then((response) => {
         setDataImagen(response.data.data);
       });
