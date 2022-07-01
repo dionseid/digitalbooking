@@ -1,16 +1,16 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./googleMaps.scss";
+import "../styles/googleMaps.css";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { useParams } from "react-router-dom";
-import axiosConnection from "../../../helpers/axiosConnection";
-import axios from "axios";
-//import { parseTwoDigitYear } from "moment";
+import { parseTwoDigitYear } from "moment";
 
 const GoogleMaps = () => {
   const [dataLocacion, setDataLocacion] = useState({
     currentLocation: { lat: "", lng: "" },
   });
   const { id } = useParams();
+
 
   useEffect(() => {
     axiosConnection
@@ -22,15 +22,14 @@ const GoogleMaps = () => {
 
   const position = [dataLocacion[0], dataLocacion[1]];
 
+
   const isNotNull = () => {
     if (position[0] !== undefined) {
-      return false;
+      return false
     } else {
-      return true;
+      return true
     }
-  };
-
-
+  }
 
   return (
     <>
@@ -41,7 +40,9 @@ const GoogleMaps = () => {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={position}></Marker>
+            <Marker
+              position={position}
+            ></Marker>
           </MapContainer>
         )}
       </div>

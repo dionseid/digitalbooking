@@ -1,5 +1,6 @@
 package com.grupo8.digitalbooking.controller;
 
+
 import com.grupo8.digitalbooking.handler.ResponseHandler;
 import com.grupo8.digitalbooking.model.Categoria;
 import com.grupo8.digitalbooking.service.CategoriaService;
@@ -19,34 +20,30 @@ public class CategoriaController {
     private CategoriaService categoriaService;
 
     @PostMapping
-    public ResponseEntity<Object> agregarCategoria(@RequestBody Categoria categoria) {
-        return ResponseHandler.generateResponse("La categoría se ha agregado correctamente", HttpStatus.OK,
-                categoriaService.agregarCategoria(categoria));
+    public ResponseEntity<Object> agregarCategoria(@RequestBody Categoria categoria){
+        return ResponseHandler.generateResponse("La categoría se ha agregado correctamente",HttpStatus.OK,categoriaService.agregarCategoria(categoria));
     }
-
-    // @CrossOrigin(origins = "http://localhost:3000")
+//    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
-    public ResponseEntity<Object> buscarCategoria(@PathVariable Integer id) {
-        ResponseEntity<Object> response = null;
+    public ResponseEntity<Object> buscarCategoria (@PathVariable Integer id){
+        ResponseEntity<Object> response=null;
 
         if (id != null && categoriaService.buscarCategoria(id).isPresent())
-            response = ResponseHandler.generateResponse("Categoría encontrada", HttpStatus.OK,
-                    categoriaService.buscarCategoria(id));
+            response = ResponseHandler.generateResponse("Categoría encontrada", HttpStatus.OK, categoriaService.buscarCategoria(id));
         else
-            response = ResponseHandler.generateResponse("Categoría NO encontrada", HttpStatus.NOT_FOUND, null);
+            response = ResponseHandler.generateResponse("Categoría NO encontrada",HttpStatus.NOT_FOUND,null);
 
         return response;
     }
 
     @PutMapping()
-    public ResponseEntity<Object> actualizarCategoria(@RequestBody Categoria categoria) {
-        ResponseEntity<Object> response = null;
+    public ResponseEntity<Object> actualizarCategoria(@RequestBody Categoria categoria){
+        ResponseEntity<Object> response=null;
 
         if (categoria.getId() != null && categoriaService.buscarCategoria(categoria.getId()).isPresent())
-            response = ResponseHandler.generateResponse("La categoría se ha actualizado correctamente", HttpStatus.OK,
-                    categoriaService.actualizarCategoria(categoria));
+            response = ResponseHandler.generateResponse("La categoría se ha actualizado correctamente", HttpStatus.OK, categoriaService.actualizarCategoria(categoria));
         else
-            response = ResponseHandler.generateResponse("Categoría NO encontrada", HttpStatus.NOT_FOUND, null);
+            response = ResponseHandler.generateResponse("Categoría NO encontrada",HttpStatus.NOT_FOUND,null);
 
         return response;
     }
@@ -61,17 +58,16 @@ public class CategoriaController {
             categoriaService.eliminarCategoria(id);
             response = ResponseHandler.generateResponse("Categoría eliminada", HttpStatus.OK, null);
 
-        } else {
+        }else {
             response = ResponseHandler.generateResponse("Categoría NO encontrada", HttpStatus.NOT_FOUND, null);
         }
         return response;
     }
-
-    // @CrossOrigin(origins = "http://localhost:3000")
+//    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping()
-    public ResponseEntity<Object> listarCategorias() {
-        return ResponseHandler.generateResponse("Listado de todas las categorías", HttpStatus.OK,
-                categoriaService.listarCategorias());
+    public ResponseEntity<Object> listarCategorias(){
+        return ResponseHandler.generateResponse("Listado de todas las categorías", HttpStatus.OK, categoriaService.listarCategorias());
     }
+
 
 }

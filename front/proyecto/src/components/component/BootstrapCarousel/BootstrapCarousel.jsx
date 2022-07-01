@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Carousel } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
@@ -16,7 +17,7 @@ export default function BootstrapCarousel() {
     // TODO modificar url
     axiosConnection.get("/imagenes/listarImagenes")
       .then(response => {
-        setDataImagen(response.data.data)
+        setDataImagen(response.data)
       })
 
   }, [])
