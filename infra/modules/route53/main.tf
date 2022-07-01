@@ -19,26 +19,6 @@ module "zones" {
   }
 }
 
-# Provide Route 53 record --»
-
-module "records" {
-  source  = "terraform-aws-modules/route53/aws//modules/records"
-  version = "~> 2.0"
-
-  zone_name = keys(module.zones.route53_zone_zone_id)[0]
-
-  records = [
-    {
-      name    = "www.remo-digitalbooking.click"
-      type    = "A"
-      ttl     = 300
-      records = [var.eb_endpoint]
-    }
-  ]
-
-  depends_on = [module.zones]
-}
-
 output "name_server" {
   value = module.zones.route53_zone_name_servers
 }
