@@ -22,7 +22,7 @@ const FormCuenta = () => {
   const [email, cambiarCorreo] = useState({ campo: "", valido: null });
   const [password, cambiarPassword] = useState({ campo: "", valido: null });
   const [password2, cambiarPassword2] = useState({ campo: "", valido: null });
-  const [formularioValido, cambiarFormularioValido] = useState(false);
+  const [formularioValido, cambiarFormularioValido] = useState(true);
   const navigate = useNavigate();
 
   const expresiones = {
@@ -51,7 +51,7 @@ const FormCuenta = () => {
       apellido.valido &&
       email.valido &&
       password.valido &&
-      password2.valido
+      password2.valido === 'true'
     );
   };
 
@@ -83,7 +83,7 @@ const FormCuenta = () => {
     });
         navigate("/");
     } else {
-      cambiarFormularioValido(true);
+      cambiarFormularioValido(false);
     }
   };
 
@@ -135,7 +135,7 @@ const FormCuenta = () => {
             label="Contraseña"
             placeholder="Escriba su contraseña"
             name="password1"
-            parrafoError="La contraseña tiene que tener más de 6 caracteres"
+            parrafoError="La contraseña tiene que tener entre 6 y 15 caracteres"
             expresionRegular={expresiones.password}
           />
           <ComponenteInput
@@ -149,7 +149,7 @@ const FormCuenta = () => {
             funcion={validarPassword2}
           />
 
-          {formularioValido === false && (
+          {formularioValido === 'false' && (
             <MensajeError>
               <p>
                 <FontAwesomeIcon icon={faExclamationTriangle} />
@@ -165,12 +165,7 @@ const FormCuenta = () => {
                 <span>Iniciar sesión</span>
               </Link>
             </p>
-            {formularioValido === true && (
-              <MensajeExito>
-                Formulario enviado exitosamente!
-                {/*// TODO - hay que hacer uno de error para cuando no se puede registrar y no tendria que haber mensaje de exito, redirecciona al home*/}
-              </MensajeExito>
-            )}
+
           </ContenedorBotonCentrado>
         </Formulario>
       </div>

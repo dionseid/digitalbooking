@@ -88,7 +88,7 @@ const FormLogin = () => {
             label="Contraseña"
             placeholder="Escriba su contraseña"
             name="password1"
-            parrafoError="La contraseña tiene que tener más de 6 caracteres"
+            parrafoError="La contraseña tiene que tener entre 6 y 15 caracteres"
             expresionRegular={expresiones.password}
           />
           { formularioValido === false && (
