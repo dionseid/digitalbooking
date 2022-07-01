@@ -37,7 +37,7 @@ const ComponenteInput = ({estado, cambiarEstado, tipo, label, placeholder, name,
 					id={name}
 					value={estado.campo}
 					onChange={onChange}
-					onKeyUp={validacion}
+			
 					onBlur={validacion}
 					valido={estado.valido}
 				/>

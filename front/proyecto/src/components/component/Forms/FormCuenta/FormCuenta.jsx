@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 //import { useForm } from '../hooks/useForm';
-import "..//form.scss";
+import "../form.scss";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Formulario,
@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import ComponenteInput from "../../ComponenteInput/ComponenteInput";
-import axiosConnection from "../../../../helpers/axiosConnection";
+import {registroApi, loginApi} from '../RegisterLoginHelper'
 import UserProvider from "../../../context/UserContext";
 
 const FormCuenta = () => {
@@ -22,7 +22,7 @@ const FormCuenta = () => {
   const [email, cambiarCorreo] = useState({ campo: "", valido: null });
   const [password, cambiarPassword] = useState({ campo: "", valido: null });
   const [password2, cambiarPassword2] = useState({ campo: "", valido: null });
-  const [formularioValido, cambiarFormularioValido] = useState(null);
+  const [formularioValido, cambiarFormularioValido] = useState(true);
   const navigate = useNavigate();
 
   const expresiones = {
@@ -51,81 +51,11 @@ const FormCuenta = () => {
       apellido.valido &&
       email.valido &&
       password.valido &&
-      password2.valido
+      password2.valido === 'true'
     );
   };
 
-  // TODO - ver si se puede refactorizar para tambien utilizar en el componente de login
-  const registroApi = async (data) => {
-    // ** CAMBIAR POR EL URL DE LA API
-    try {
-      const respuesta = await axiosConnection.post(
-        "/usuarios/agregarUsuario",
-        data
-      );
-      if (respuesta.status === 200) {
-        console.log("REGISTRO EXITOSO API ", respuesta);
-        loginLogoutEvent({
-          nombre: respuesta.data.data.nombre,
-          apellido: respuesta.data.data.apellido,
-          mail: respuesta.data.data.email,
-          id: respuesta.data.data.id,
-          auth: true,
-          redirect: false,
-          ciudad: "",
-        });
-        // sessionStorage.clear()
-        let cuentasGurdadas =
-          localStorage.getItem("user") &&
-          JSON.parse(localStorage.getItem("user"));
-        if (cuentasGurdadas) {
-          console.log("Entro");
-          cuentasGurdadas = [
-            ...cuentasGurdadas,
-            {
-              nombre: respuesta.data.data.nombre,
-              apellido: respuesta.data.data.apellido,
-              mail: respuesta.data.data.email,
-              id: respuesta.data.data.id,
-              auth: true,
-              redirect: false,
-              ciudad: "",
-            },
-          ];
-          localStorage.clear();
-          localStorage.setItem("user", JSON.stringify(cuentasGurdadas));
-        } else if (!cuentasGurdadas) {
-          console.error("no entro: ", cuentasGurdadas);
-          localStorage.clear();
-          localStorage.setItem(
-            "user",
-            JSON.stringify([
-              {
-                nombre: respuesta.data.data.nombre,
-                apellido: respuesta.data.data.apellido,
-                mail: respuesta.data.data.email,
-                id: respuesta.data.data.id,
-                auth: true,
-                redirect: false,
-                ciudad: "",
-              },
-            ])
-          );
-        }
-
-        console.log("respuesta: ", respuesta.data.data);
-        return respuesta.data.data;
-      } else {
-        throw new Error(
-          "Lamentablemente no ha podido registrarse. Por favor intente más tarde"
-        );
-      }
-    } catch (error) {
-      console.error("ERROR REGISTRO API ", error);
-    }
-  };
-
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const newUser = {
@@ -140,12 +70,20 @@ const FormCuenta = () => {
     };
 
     if (isFormValid()) {
-      // ! Revisar esto, si el formulario es valido tendria que ser true y si despues se va a login no tiene sentido que este
-      // cambiarFormularioValido(false);
-      const respAPI = registroApi(newUser);
-      navigate("/");
+      const respAPI = await registroApi(newUser)
+      const respToken = await loginApi(newUser)  
+      loginLogoutEvent({
+        nombre: respToken.nombre,
+        apellido: respToken.apellido,
+        mail: respAPI.email,
+        id: respAPI.id,
+        auth: true,
+        redirect: false,
+        ciudad: respAPI.ciudad ? respAPI.ciudad : ""
+    });
+        navigate("/");
     } else {
-      cambiarFormularioValido(true);
+      cambiarFormularioValido(false);
     }
   };
 
@@ -197,7 +135,7 @@ const FormCuenta = () => {
             label="Contraseña"
             placeholder="Escriba su contraseña"
             name="password1"
-            parrafoError="La contraseña tiene que tener más de 6 caracteres"
+            parrafoError="La contraseña tiene que tener entre 6 y 15 caracteres"
             expresionRegular={expresiones.password}
           />
           <ComponenteInput
@@ -211,7 +149,7 @@ const FormCuenta = () => {
             funcion={validarPassword2}
           />
 
-          {formularioValido === false && (
+          {formularioValido === 'false' && (
             <MensajeError>
               <p>
                 <FontAwesomeIcon icon={faExclamationTriangle} />
@@ -227,12 +165,7 @@ const FormCuenta = () => {
                 <span>Iniciar sesión</span>
               </Link>
             </p>
-            {formularioValido === true && (
-              <MensajeExito>
-                Formulario enviado exitosamente!
-                {/*// TODO - hay que hacer uno de error para cuando no se puede registrar y no tendria que haber mensaje de exito, redirecciona al home*/}
-              </MensajeExito>
-            )}
+
           </ContenedorBotonCentrado>
         </Formulario>
       </div>
