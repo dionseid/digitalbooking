@@ -83,19 +83,20 @@ export default function DetallesReserva() {
     }
   }, [rango, isHora,isCiudad])
 
-  const registroReserva = async (data) => {
+  /* const registroReserva = async (data) => {
     let corsOptions = {
       origin: "*",
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
     }
     const token = sessionStorage.getItem('token')
     //JSON.parse(sessionStorage.getItem('token'))
-    console.log(token);
+    console.log(JSON.parse(token));
     try {
         const respuesta = await axios.post("http://localhost:8080/reserva/nuevaReserva",cors(corsOptions),data,{
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            "Content-type":"application/json",
+            "Accept": "application/json",
+            'Authorization': `Bearer ${JSON.parse(token)}`
           }
         })
         if (respuesta.status !== 200) {
@@ -107,7 +108,7 @@ export default function DetallesReserva() {
     } catch (error) {
         console.error("ERROR REGISTRO RESERVA ", error);
     }
-  }
+  } */
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -127,10 +128,10 @@ export default function DetallesReserva() {
     console.log(newReserva);
     
     if (rango[0] !== null && rango[1] !== null && isHora && isCiudad) {
-      registroReserva(newReserva)
-      /* const token = sessionStorage.getItem('token') */
+      //registroReserva(newReserva)
+      const token =JSON.parse(sessionStorage.getItem('token')) 
       // if(getLoginApi().status === 200 ){
-      /* fetch("http://localhost:8080/reserva/nuevaReserva", {
+      fetch("http://localhost:8080/reserva/nuevaReserva", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -148,7 +149,7 @@ export default function DetallesReserva() {
             id: user.id,
           },
         }),
-      }); */
+      });
       navigate(`/reservaExitosa`);
     } //}
   };
