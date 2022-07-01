@@ -13,6 +13,8 @@ export const registroApi = async (data) => {
     } catch (error) {
         console.error("ERROR REGISTRO API ", error);
     }
+
+    //probando
 };
 
 
