@@ -134,7 +134,7 @@ const FormCuenta = () => {
       email: email.campo,
       password: password.campo,
       rol: {
-        id: 1,
+        id: 2,
       },
       username: email.campo,
     };
