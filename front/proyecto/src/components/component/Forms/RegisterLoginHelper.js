@@ -14,7 +14,6 @@ export const registroApi = async (data) => {
         console.error("ERROR REGISTRO API ", error);
     }
 
-    //probando
 };
 
 
