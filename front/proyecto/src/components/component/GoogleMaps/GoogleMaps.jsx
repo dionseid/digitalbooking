@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "../styles/googleMaps.css";
+import "./googleMaps.scss";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { useParams } from "react-router-dom";
 import axiosConnection from "../../../helpers/axiosConnection";
