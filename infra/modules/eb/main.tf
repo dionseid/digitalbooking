@@ -113,7 +113,7 @@ data "aws_iam_policy_document" "allow_elb_to_write" {
 resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
   name                = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-env${var.environment_name != "" ? "-${var.environment_name}" : ""}"
   application         = aws_elastic_beanstalk_application.elastic_app.name
-  solution_stack_name = "64bit Amazon Linux 2 v3.4.16 running Docker" #"64bit Amazon Linux 2 v2.14.3 running Docker"
+  solution_stack_name = "64bit Amazon Linux 2 v3.4.17 running Docker"
 
   depends_on = [aws_s3_bucket_policy.allow_elb_to_write]
 
@@ -153,7 +153,7 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     name      = "Rules"
     namespace = "aws:elbv2:listener:default"
     resource  = ""
-    value     = "politicas,imagenes,caracteristicas,categorias,productos,ciudades"
+    value     = "politicas,imagenes,caracteristicas,categorias,productos,ciudades,reserva,usuarios,authenticate"
   }
 
   # processes --»
@@ -284,7 +284,7 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     name      = "PathPatterns"
     namespace = "aws:elbv2:listenerrule:productos"
     resource  = ""
-    value     = "/productos/*"
+    value     = "/productos*"
   }
 
   setting {
