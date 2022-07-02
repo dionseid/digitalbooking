@@ -5,18 +5,33 @@ import { Form } from "react-bootstrap";
 import selectStyles from "../../../elementStyle/selectStyles";
 import ComponenteInput from "../../ComponenteInput/ComponenteInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLocationDot,
+  faPlus,
+  faMinus,
+} from "@fortawesome/free-solid-svg-icons";
 import axiosConnection from "../../../../helpers/axiosConnection";
 import { Boton, Label } from "../../../elementStyle/Form";
 import { useNavigate } from "react-router-dom";
 import { Category } from "@material-ui/icons";
+import axios from "axios";
+
+
 
 export default function FormCrearProducto() {
   const [dataCiudades, setDataCiudades] = useState([]);
+  const [idCiudad, setIdCiudad] = useState([]);
   const [dataCategoria, setDataCategoria] = useState([]);
-  const [nombreCaracteristica, setNombreCaracteristica] = useState({ campo: "", valido: null});
-  const [nombreIconoCaracteristica, setNombreIconoCaracteristica] = useState({ campo: "", valido: null });
-  const [arrayCaracteristicas, setArrayCaracteristicas] = useState([])
+  const [idCategoria, setIdCategoria] = useState([]);
+  const [nombreCaracteristica, setNombreCaracteristica] = useState({
+    campo: "",
+    valido: null,
+  });
+  const [nombreIconoCaracteristica, setNombreIconoCaracteristica] = useState({
+    campo: "",
+    valido: null,
+  });
+  const [arrayCaracteristicas, setArrayCaracteristicas] = useState([]);
   const [nombre, cambiarNombre] = useState({ campo: "", valido: null });
   const [direccion, cambiarDireccion] = useState({ campo: "", valido: null });
   const [latitud, setLatitud] = useState({ campo: "", valido: null });
@@ -28,8 +43,10 @@ export default function FormCrearProducto() {
   const [urlImagen, setUrlImagen] = useState([]);
   const [arrayUrlImagen, setArrayUrlImagen] = useState([]);
   const [formularioValido, setFormularioValido] = useState(false);
-  const [btonDisable, setBtonDisable] = useState(true)
+  const [btonDisable, setBtonDisable] = useState(true);
   const navigate = useNavigate();
+  const cors = require("cors");
+
 
   //useEffect
 
@@ -45,14 +62,14 @@ export default function FormCrearProducto() {
     });
   }, []);
 
-  console.log(nombreCaracteristica);
+  //console.log(idCiudad);
 
   useEffect(() => {
     if (
       nombre.campo !== null &&
       direccion.campo !== null &&
-      dataCategoria !== null &&
-      dataCiudades !== null &&
+      idCategoria !== null &&
+      idCiudad !== null &&
       latitud.campo !== null &&
       longitud.campo !== null &&
       descripcion.length !== 0 &&
@@ -64,65 +81,134 @@ export default function FormCrearProducto() {
       urlImagen.campo !== null
     ) {
       setFormularioValido(true);
-      setBtonDisable(false)
+      setBtonDisable(false);
     } else {
       setFormularioValido(false);
-      setBtonDisable(true)
+      setBtonDisable(true);
     }
   }, [
     nombre.campo,
     direccion.campo,
-    dataCategoria,
-    dataCiudades,
+    idCategoria,
+    idCiudad,
     latitud.campo,
     longitud.campo,
     descripcion.length,
-    nombreCaracteristica.campo, 
-    nombreIconoCaracteristica.campo, 
+    nombreCaracteristica.campo,
+    nombreIconoCaracteristica.campo,
     descripcionNorma.length,
     descripcionSeguridad.length,
     descripcionCancelacion.length,
-    urlImagen.campo
+    urlImagen.campo,
   ]);
 
   //onSubmit
 
+  const registroProducto = async (data) => {
+    let corsOptions = {
+      origin: "*",
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
+    }
+    const token = JSON.parse(sessionStorage.getItem('token'))
+    console.log(token);
+    try {
+        const respuesta = await axios.post("http://localhost:8080/productos/agregarProducto",data,{
+          headers: {
+            "Content-type":"application/json",
+            "Accept": "application/json",
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        if (respuesta.status !== 200) {
+            throw new Error("Lamentablemente no se ha podido crear el producto. Por favor intente más tarde")
+        } else {
+            console.log("respuesta1: ", respuesta.data);
+        }
+        return respuesta.data;
+    } catch (error) {
+        console.error("ERROR REGISTRO PRODUCTO ", error);
+    }
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
-    if (formularioValido) {
-      navigate("/creacionExitosa");
-    }
-
     
+    const newProducto = {
+      nombre: nombre.campo,
+      descripcion: descripcion,
+      latitud: parseFloat(latitud.campo),
+      longitud: parseFloat(longitud.campo),
+      ciudad: {
+        id: idCiudad,
+      },
+      categoria: {
+        id: idCategoria,
+      }
+    };
+
+    console.log(newProducto);
+
+
+    if (formularioValido) {
+      const token = JSON.parse(sessionStorage.getItem("token"));
+      //registroProducto(newProducto)
+
+      fetch("productos/agregarProducto", {
+        mode: 'cors',
+        method: "POST",
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          nombre: nombre.campo,
+          descripcion: descripcion,
+          latitud: parseFloat(latitud.campo),
+          longitud: parseFloat(longitud.campo),
+          ciudad: {
+            id: idCiudad,
+          },
+          categoria: {
+            id: idCategoria,
+          },
+        }),
+      }).then((response)=>response.json())
+      .then(data => console.log("data: ", data));
+      //navigate("/creacionExitosa");
+    }
   };
 
   //botones plus
 
-  const handleAddImagen = () =>{
+  const handleAddImagen = () => {
     const newImagen = {
       nombre: "imagen",
-      url: urlImagen
+      url: urlImagen,
     };
     setArrayUrlImagen([...arrayUrlImagen, newImagen]);
   };
 
-  const handleRemoveImagen = (urlImg)=>{
-    const newUrlsImagen = arrayUrlImagen.filter((img)=>img.url !== urlImg);
+  const handleRemoveImagen = (urlImg) => {
+    const newUrlsImagen = arrayUrlImagen.filter((img) => img.url !== urlImg);
     setArrayUrlImagen(newUrlsImagen);
-  }
+  };
 
-    const handleAddCaracteristica = () =>{
+  const handleAddCaracteristica = () => {
     const newCaracteristica = {
       nombre: nombreCaracteristica,
-      icono: nombreIconoCaracteristica
+      icono: nombreIconoCaracteristica,
     };
     setArrayCaracteristicas([...arrayCaracteristicas, newCaracteristica]);
   };
 
-  const handleRemoveCaracteristica = (iconoCar)=>{
-    const newCaracteristica = arrayCaracteristicas.filter((car)=>car.icono !== iconoCar);
+  const handleRemoveCaracteristica = (iconoCar) => {
+    const newCaracteristica = arrayCaracteristicas.filter(
+      (car) => car.icono !== iconoCar
+    );
     setArrayCaracteristicas(newCaracteristica);
-  }
+  };
 
   return (
     <>
@@ -154,6 +240,9 @@ export default function FormCrearProducto() {
                 value: cat.id,
               }))}
               styles={selectStyles}
+              onChange={(e) => {
+                setIdCategoria(e.value);
+              }}
             />
           </div>
         </div>
@@ -198,6 +287,9 @@ export default function FormCrearProducto() {
                 value: ciudad.id,
               }))}
               styles={selectStyles}
+              onChange={(e) => {
+                setIdCiudad(e.value);
+              }}
             />
           </div>
         </div>
@@ -240,32 +332,35 @@ export default function FormCrearProducto() {
         </div>
         <div>
           <h2>Agregar atributos</h2>
-          {arrayCaracteristicas.map((car, i)=>(
+          {arrayCaracteristicas.map((car, i) => (
             <div className="contenedorAgregarCaracteristicas">
-            <div className="contenedorDosInputs">
-              <div className="inputCargarNombreCaracteristica">
-                <ComponenteInput
-                  estado={arrayCaracteristicas[i]}
-                  tipo="text"
-                  label="Nombre"
-                  placeholder={car.nombre.campo}
-                  name="nombreCaracteristica"
-                />
+              <div className="contenedorDosInputs">
+                <div className="inputCargarNombreCaracteristica">
+                  <ComponenteInput
+                    estado={arrayCaracteristicas[i]}
+                    tipo="text"
+                    label="Nombre"
+                    placeholder={car.nombre.campo}
+                    name="nombreCaracteristica"
+                  />
+                </div>
+                <div className="inputCargarIconoCaracteristica">
+                  <ComponenteInput
+                    estado={arrayCaracteristicas[i]}
+                    tipo="text"
+                    label="Icono"
+                    placeholder={car.icono.campo}
+                    name="nombreIconoCaracteristica"
+                  />
+                </div>
               </div>
-              <div className="inputCargarIconoCaracteristica">
-                <ComponenteInput
-                  estado={arrayCaracteristicas[i]}
-                  tipo="text"
-                  label="Icono"
-                  placeholder={car.icono.campo}
-                  name="nombreIconoCaracteristica"
-                />
+              <div
+                className="contenedorMinus"
+                onClick={(e) => handleRemoveCaracteristica(car.icono)}
+              >
+                <FontAwesomeIcon icon={faMinus} className="iconoMinus" />
               </div>
             </div>
-            <button className="contenedorMinus" onClick={(e)=>handleRemoveCaracteristica(car.icono)}>
-              <FontAwesomeIcon icon={faMinus} className="iconoMinus" />
-            </button>
-          </div>
           ))}
           <div className="contenedorAgregarCaracteristicas">
             <div className="contenedorDosInputs">
@@ -290,9 +385,9 @@ export default function FormCrearProducto() {
                 />
               </div>
             </div>
-            <button className="contenedorPlus" onClick={handleAddCaracteristica}>
+            <div className="contenedorPlus" onClick={handleAddCaracteristica}>
               <FontAwesomeIcon icon={faPlus} className="iconoPlus" />
-            </button>
+            </div>
           </div>
         </div>
 
@@ -341,36 +436,45 @@ export default function FormCrearProducto() {
         <div className="h2CargaImagenes">
           <h2>Cargar imágenes</h2>
           <div className="contenedorCargarImagenes">
-            {arrayUrlImagen.map((img, i)=>(
+            {arrayUrlImagen.map((img, i) => (
               <div className="contenedorInputPlusImagenes">
-              <div className="inputCargarImagen">
-              <ComponenteInput
-              estado={arrayUrlImagen[i]}
-              tipo="text"
-              name="inputCargarImagen"
-              placeholder={img.url.campo}
-              />
+                <div className="inputCargarImagen">
+                  <ComponenteInput
+                    estado={arrayUrlImagen[i]}
+                    tipo="text"
+                    name="inputCargarImagen"
+                    placeholder={img.url.campo}
+                  />
+                </div>
+                <div
+                  className="contenedorMinus"
+                  onClick={(e) => handleRemoveImagen(img.url)}
+                >
+                  <FontAwesomeIcon icon={faMinus} className="iconoMinus" />
+                </div>
               </div>
-              <button className="contenedorMinus" onClick={(e) =>handleRemoveImagen(img.url)}>
-                <FontAwesomeIcon icon={faMinus} className="iconoMinus" />
-              </button>
-            </div>
             ))}
             <div className="contenedorInputPlusImagenes">
               <div className="inputCargarImagen">
-              <ComponenteInput
-              estado={urlImagen}
-              cambiarEstado={setUrlImagen}
-              tipo="text"
-              name="inputCargarImagen"
-              placeholder="Insertar https://"
-              />
+                <ComponenteInput
+                  estado={urlImagen}
+                  cambiarEstado={setUrlImagen}
+                  tipo="text"
+                  name="inputCargarImagen"
+                  placeholder="Insertar https://"
+                />
               </div>
-              <button className="contenedorPlus" onClick={handleAddImagen}>
+              <div className="contenedorPlus" onClick={handleAddImagen}>
                 <FontAwesomeIcon icon={faPlus} className="iconoPlus" />
-              </button>
+              </div>
             </div>
-            <Boton type="submit" disabled={btonDisable} className="botonCrearProducto">Crear</Boton>
+            <Boton
+              type="submit"
+              disabled={btonDisable}
+              className="botonCrearProducto"
+            >
+              Crear
+            </Boton>
           </div>
         </div>
       </Form>
