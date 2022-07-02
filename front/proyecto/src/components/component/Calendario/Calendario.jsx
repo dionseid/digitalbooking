@@ -9,12 +9,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./calendario.scss";
 import { Container, Row, Col } from "react-bootstrap";
 import FechaRangoContextProvider from "../../context/FechaRangoContextProvider";
-//import axios from "axios";
+
 import { useParams } from "react-router-dom";
 import axiosConnection from "../../../helpers/axiosConnection";
 
 const Calendario = () => {
-  const { /*rango,*/ setRango } = useContext(FechaRangoContextProvider);
+  const { rango, setRango } = useContext(FechaRangoContextProvider);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const { id } = useParams();

@@ -23,7 +23,7 @@ export default function Reglas() {
         <div className="listaReglas">
           <ul>
             {dataReglas
-              .filter((regla) => regla.tipo === 1 && regla.producto?.id == id)
+              .filter((regla) => regla.tipo === 1 && regla.producto?.id === id)
               .map((regla) => (
                 <li key={regla.id}>{regla.descripcion}</li>
               ))}
@@ -37,7 +37,7 @@ export default function Reglas() {
         <div className="listaReglas">
           <ul>
             {dataReglas
-              .filter((regla) => regla.tipo === 2 && regla.producto?.id == id)
+              .filter((regla) => regla.tipo === 2 && regla.producto?.id === id)
               .map((regla) => (
                 <li key={regla.id}>{regla.descripcion}</li>
               ))}
@@ -51,7 +51,7 @@ export default function Reglas() {
         <div className="listaReglas">
           <ul>
             {dataReglas
-              .filter((regla) => regla.tipo === 3 && regla.producto?.id == id)
+              .filter((regla) => regla.tipo === 3 && regla.producto?.id === id)
               .map((regla) => (
                 <li key={regla.id}>{regla.descripcion}</li>
               ))}

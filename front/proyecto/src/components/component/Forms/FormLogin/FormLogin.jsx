@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 //import { useForm } from '../hooks/useForm';
 import {
   Formulario,
@@ -13,7 +13,7 @@ import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import ComponenteInput from "../../ComponenteInput/ComponenteInput";
 import { useNavigate } from "react-router-dom";
 import UserProvider from "../../../context/UserContext";
-import axiosConnection from "../../../../helpers/axiosConnection";
+import { loginApi } from "../RegisterLoginHelper";
 
 const FormLogin = () => {
   const { user, loginLogoutEvent } = useContext(UserProvider);
@@ -28,70 +28,34 @@ const FormLogin = () => {
     email: /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/, //coreo electrónico válido
   };
 
-  // TODO - ver si se puede refactorizar para tambien utilizar en el componente de registro
+  useEffect(()=>{
+    cambiarFormularioValido(true)
+  },[email.campo,password.campo])
 
-  const postLoginApi = async (data) => {
-    try {
-      console.log("data que le llega al post: ", data);
-      // ** CAMBIAR POR EL URL DE LA API
-      const respuesta = await axiosConnection.post("/authenticate", data);
-      console.log("resspuesta post login", respuesta);
-      if (respuesta.status === 200) {
-        sessionStorage.setItem("token", JSON.stringify(respuesta.data.jwt));
-        const cuentas = JSON.parse(localStorage.getItem("user"));
-        const cuentaFiltrada = cuentas.filter(
-          (cuenta) => cuenta.mail === data.username
-        );
-        loginLogoutEvent(cuentaFiltrada[0]);
-        console.warn(cuentaFiltrada);
-        return respuesta;
-      } else if (respuesta.status !== 200 || respuesta.status !== 201) {
-        throw new Error(
-          "Lamentablemente no ha podido registrarse. Por favor intente más tarde"
-        );
-      }
-    } catch (error) {
-      console.log("error login: ", error);
-    }
-  };
-
-  /* const getLoginApi = async () => {
-        try{
-            // ** CAMBIAR POR EL URL DE LA API
-            // const token = sessionStorage.getItem('token')&& JSON.parse(sessionStorage.getItem('token'));
-            const respuesta = await axiosConnection.get('/login', {
-                headers: {
-                    Authorization: `Bearer `
-            }
-        });
-            return respuesta;
-        }
-        catch(error){
-            console.log(error);
-        }
-    }*/
-
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    //// const { usuarios: userList } = usuarios;
-    ////const getUser = userList.find(user => user.mail === email.campo && user.password === password.campo);
-    ////console.log({ getUser });
-    const respuestaPost = postLoginApi({
-      username: email.campo,
-      password: password.campo,
-    });
-    /*const respuestaGet = respuestaPost && getLoginApi();
-        const getUser = respuestaGet*/
-    if (respuestaPost) {
-      //// const { nombre, apellido } = getUser;
-      //// cambiarFormularioValido(false);
-      //// localStorage.setItem('user', JSON.stringify({ nombre , apellido }));
-      //// setIsAuthenticated(true);
 
-      navigate("/");
-    } else {
-      cambiarFormularioValido(true);
-    }
+    if(email.valido && password.valido){
+        const respuestaPost = await loginApi({
+          username: email.campo,
+          password: password.campo,
+        });
+        if (respuestaPost) {
+          loginLogoutEvent({
+            nombre: respuestaPost.nombre,
+            apellido: respuestaPost.apellido,
+            mail: respuestaPost.email&&respuestaPost.email,
+            id: respuestaPost.id&&respuestaPost.id,
+            auth: true,
+            redirect: false,
+            ciudad: respuestaPost.ciudad ? respuestaPost.ciudad : ""});
+          navigate("/")}else{
+          
+            cambiarFormularioValido(false)
+      }
+          
+        }
+    console.log("formvalid: ",formularioValido)
   };
 
   return (
@@ -124,16 +88,14 @@ const FormLogin = () => {
             label="Contraseña"
             placeholder="Escriba su contraseña"
             name="password1"
-            parrafoError="La contraseña tiene que tener más de 6 caracteres"
+            parrafoError="La contraseña tiene que tener entre 6 y 15 caracteres"
             expresionRegular={expresiones.password}
           />
-          {formularioValido && (
+          { formularioValido === false && (
             <MensajeError>
               <p>
                 <FontAwesomeIcon icon={faExclamationTriangle} />
-                {/* Credenciales Inválidas */}
-                Lamentablemente no ha podido registrarse. Por favor intente más
-                tarde
+                  Credenciales Inválidas 
               </p>
             </MensajeError>
           )}
