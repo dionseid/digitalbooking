@@ -43,7 +43,7 @@ resource "aws_iam_instance_profile" "eb_instance_profile" {
   role = aws_iam_role.ec2_role.name
 }
 
-# prerrequisite: Bucket for storing logs
+# prerrequisite: Bucket for storing LB logs
 
 data "aws_s3_bucket" "eb_bucket" {
   bucket = var.bucket
@@ -416,13 +416,35 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     value     = 2
   }
 
-  # monitoring --»
+  /* ---------------------------- monitoring ---------------------------- */
 
   setting {
     namespace = "aws:elasticbeanstalk:healthreporting:system"
     name      = "SystemType"
     value     = "enhanced" # Enhanced health reporting requires a service role and a version 2 or newer platform version
   }
+
+  # CloudWatch logs --»
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "StreamLogs"
+    value     = "true"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "DeleteOnTerminate"
+    value     = "true"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "RetentionInDays"
+    value     = "7"
+  }
+
+  # autoscaling --»
 
   setting {
     namespace = "aws:autoscaling:trigger"
@@ -448,7 +470,7 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     value     = 60
   }
 
-  # IAM --»
+  /* ----------------------------------- IAM ---------------------------------- */
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
@@ -456,7 +478,7 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     value     = aws_iam_instance_profile.eb_instance_profile.name
   }
 
-  # security groups --»
+  /* ----------------------------- security groups ---------------------------- */
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
@@ -476,7 +498,7 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     value     = var.ingress_sg_id
   }
 
-  # DB --»
+  /* ----------------------------------- DB ----------------------------------- */
 
   setting {
     name      = "HasCoupledDatabase"
