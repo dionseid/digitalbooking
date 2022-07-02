@@ -5,26 +5,33 @@ import { Form } from "react-bootstrap";
 import selectStyles from "../../../elementStyle/selectStyles";
 import ComponenteInput from "../../ComponenteInput/ComponenteInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import axiosConnection from "../../../../helpers/axiosConnection";
 import { Boton, Label } from "../../../elementStyle/Form";
 import { useNavigate } from "react-router-dom";
+import { Category } from "@material-ui/icons";
 
 export default function FormCrearProducto() {
   const [dataCiudades, setDataCiudades] = useState([]);
   const [dataCategoria, setDataCategoria] = useState([]);
-  const [nombreCaracteristica, setNombreCaracteristica] = useState([]);
-  const [nombreIconoCaracteristica, setNombreIconoCaracteristica] = useState([]);
+  const [nombreCaracteristica, setNombreCaracteristica] = useState({ campo: "", valido: null});
+  const [nombreIconoCaracteristica, setNombreIconoCaracteristica] = useState({ campo: "", valido: null });
+  const [arrayCaracteristicas, setArrayCaracteristicas] = useState([])
   const [nombre, cambiarNombre] = useState({ campo: "", valido: null });
   const [direccion, cambiarDireccion] = useState({ campo: "", valido: null });
   const [latitud, setLatitud] = useState({ campo: "", valido: null });
   const [longitud, setLongitud] = useState({ campo: "", valido: null });
+  const [descripcion, setDescripcion] = useState([]);
+  const [descripcionNorma, setDescripcionNorma] = useState([]);
+  const [descripcionSeguridad, setDescripcionSeguridad] = useState([]);
+  const [descripcionCancelacion, setDescripcionCancelacion] = useState([]);
+  const [urlImagen, setUrlImagen] = useState([]);
+  const [arrayUrlImagen, setArrayUrlImagen] = useState([]);
+  const [formularioValido, setFormularioValido] = useState(false);
+  const [btonDisable, setBtonDisable] = useState(true)
   const navigate = useNavigate();
 
-  const expresiones = {
-    nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-    email: /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/, //coreo electrónico válido
-  };
+  //useEffect
 
   useEffect(() => {
     axiosConnection.get("/ciudades").then((response) => {
@@ -38,11 +45,83 @@ export default function FormCrearProducto() {
     });
   }, []);
 
-  const onSubmit = (e) =>{
+  console.log(nombreCaracteristica);
+
+  useEffect(() => {
+    if (
+      nombre.campo !== null &&
+      direccion.campo !== null &&
+      dataCategoria !== null &&
+      dataCiudades !== null &&
+      latitud.campo !== null &&
+      longitud.campo !== null &&
+      descripcion.length !== 0 &&
+      nombreCaracteristica.campo !== null &&
+      nombreIconoCaracteristica.campo !== null &&
+      descripcionNorma.length !== 0 &&
+      descripcionSeguridad.length !== 0 &&
+      descripcionCancelacion.length !== 0 &&
+      urlImagen.campo !== null
+    ) {
+      setFormularioValido(true);
+      setBtonDisable(false)
+    } else {
+      setFormularioValido(false);
+      setBtonDisable(true)
+    }
+  }, [
+    nombre.campo,
+    direccion.campo,
+    dataCategoria,
+    dataCiudades,
+    latitud.campo,
+    longitud.campo,
+    descripcion.length,
+    nombreCaracteristica.campo, 
+    nombreIconoCaracteristica.campo, 
+    descripcionNorma.length,
+    descripcionSeguridad.length,
+    descripcionCancelacion.length,
+    urlImagen.campo
+  ]);
+
+  //onSubmit
+
+  const onSubmit = (e) => {
     e.preventDefault();
+    if (formularioValido) {
+      navigate("/creacionExitosa");
+    }
 
-    navigate("/creacionExitosa")
+    
+  };
 
+  //botones plus
+
+  const handleAddImagen = () =>{
+    const newImagen = {
+      nombre: "imagen",
+      url: urlImagen
+    };
+    setArrayUrlImagen([...arrayUrlImagen, newImagen]);
+  };
+
+  const handleRemoveImagen = (urlImg)=>{
+    const newUrlsImagen = arrayUrlImagen.filter((img)=>img.url !== urlImg);
+    setArrayUrlImagen(newUrlsImagen);
+  }
+
+    const handleAddCaracteristica = () =>{
+    const newCaracteristica = {
+      nombre: nombreCaracteristica,
+      icono: nombreIconoCaracteristica
+    };
+    setArrayCaracteristicas([...arrayCaracteristicas, newCaracteristica]);
+  };
+
+  const handleRemoveCaracteristica = (iconoCar)=>{
+    const newCaracteristica = arrayCaracteristicas.filter((car)=>car.icono !== iconoCar);
+    setArrayCaracteristicas(newCaracteristica);
   }
 
   return (
@@ -59,7 +138,6 @@ export default function FormCrearProducto() {
               placeholder="Nombre de la propiedad"
               name="nombre"
               parrafoError="El nombre solo puede contener letras y espacios."
-              expresionRegular={expresiones.nombre}
             />
           </div>
           <div className="datoSolo">
@@ -89,7 +167,6 @@ export default function FormCrearProducto() {
               placeholder="Escriba la dirección"
               name="direccion"
               parrafoError="Dirección inválido"
-              expresionRegular={expresiones.nombre}
             />
           </div>
           <div className="datoSolo">
@@ -133,12 +210,12 @@ export default function FormCrearProducto() {
               label="Latitud"
               placeholder="Ej: -34.88504462222943"
               name="latitud"
-             /*  parrafoError="El nombre solo puede contener letras y espacios."
+              /*  parrafoError="El nombre solo puede contener letras y espacios."
               expresionRegular={expresiones.nombre} */
             />
           </div>
           <div className="datoSolo">
-          <ComponenteInput
+            <ComponenteInput
               estado={longitud}
               cambiarEstado={setLongitud}
               tipo="text"
@@ -157,40 +234,69 @@ export default function FormCrearProducto() {
             id="descripcion"
             rows="3"
             placeholder="Escribir aquí"
+            onChange={(e) => setDescripcion(e.target.value)}
+            value={descripcion}
           ></textarea>
         </div>
         <div>
           <h2>Agregar atributos</h2>
+          {arrayCaracteristicas.map((car, i)=>(
+            <div className="contenedorAgregarCaracteristicas">
+            <div className="contenedorDosInputs">
+              <div className="inputCargarNombreCaracteristica">
+                <ComponenteInput
+                  estado={arrayCaracteristicas[i]}
+                  tipo="text"
+                  label="Nombre"
+                  placeholder={car.nombre.campo}
+                  name="nombreCaracteristica"
+                />
+              </div>
+              <div className="inputCargarIconoCaracteristica">
+                <ComponenteInput
+                  estado={arrayCaracteristicas[i]}
+                  tipo="text"
+                  label="Icono"
+                  placeholder={car.icono.campo}
+                  name="nombreIconoCaracteristica"
+                />
+              </div>
+            </div>
+            <button className="contenedorMinus" onClick={(e)=>handleRemoveCaracteristica(car.icono)}>
+              <FontAwesomeIcon icon={faMinus} className="iconoMinus" />
+            </button>
+          </div>
+          ))}
           <div className="contenedorAgregarCaracteristicas">
             <div className="contenedorDosInputs">
               <div className="inputCargarNombreCaracteristica">
                 <ComponenteInput
-                estado={nombreCaracteristica}
-                cambiarEstado={setNombreCaracteristica}
-                tipo="text"
-                label="Nombre"
-                placeholder="Wifi"
-                name="nombreCaracteristica"
+                  estado={nombreCaracteristica}
+                  cambiarEstado={setNombreCaracteristica}
+                  tipo="text"
+                  label="Nombre"
+                  placeholder="Wifi"
+                  name="nombreCaracteristica"
                 />
-                </div>
-                <div className="inputCargarIconoCaracteristica">
-                <ComponenteInput             
-                estado={nombreIconoCaracteristica}
-                cambiarEstado={setNombreIconoCaracteristica}
-                tipo="text"
-                label="Icono"
-                placeholder="fa-Wifi"
-                name="nombreIconoCaracteristica"
-                /> 
-                </div>
-                </div>          
-              <button className="contenedorPlus">
-                <FontAwesomeIcon icon={faPlus} className="iconoPlus" />
-              </button>
+              </div>
+              <div className="inputCargarIconoCaracteristica">
+                <ComponenteInput
+                  estado={nombreIconoCaracteristica}
+                  cambiarEstado={setNombreIconoCaracteristica}
+                  tipo="text"
+                  label="Icono"
+                  placeholder="fa-Wifi"
+                  name="nombreIconoCaracteristica"
+                />
+              </div>
+            </div>
+            <button className="contenedorPlus" onClick={handleAddCaracteristica}>
+              <FontAwesomeIcon icon={faPlus} className="iconoPlus" />
+            </button>
           </div>
         </div>
 
-        <h2>Políticas del producto</h2>
+        <h2 className="tituloPoliticasProducto">Políticas del producto</h2>
         <div className="contenedorDeReglas">
           <div className="cajaRegla">
             <h4>Normas de la casa</h4>
@@ -200,6 +306,8 @@ export default function FormCrearProducto() {
                 class="form-control"
                 id="descripcion"
                 rows="3"
+                onChange={(e) => setDescripcionNorma(e.target.value)}
+                value={descripcionNorma}
               ></textarea>
             </div>
           </div>
@@ -211,6 +319,8 @@ export default function FormCrearProducto() {
                 class="form-control"
                 id="descripcion"
                 rows="3"
+                onChange={(e) => setDescripcionSeguridad(e.target.value)}
+                value={descripcionSeguridad}
               ></textarea>
             </div>
           </div>
@@ -222,6 +332,8 @@ export default function FormCrearProducto() {
                 class="form-control"
                 id="descripcion"
                 rows="3"
+                onChange={(e) => setDescripcionCancelacion(e.target.value)}
+                value={descripcionCancelacion}
               ></textarea>
             </div>
           </div>
@@ -229,16 +341,36 @@ export default function FormCrearProducto() {
         <div className="h2CargaImagenes">
           <h2>Cargar imágenes</h2>
           <div className="contenedorCargarImagenes">
+            {arrayUrlImagen.map((img, i)=>(
+              <div className="contenedorInputPlusImagenes">
+              <div className="inputCargarImagen">
+              <ComponenteInput
+              estado={arrayUrlImagen[i]}
+              tipo="text"
+              name="inputCargarImagen"
+              placeholder={img.url.campo}
+              />
+              </div>
+              <button className="contenedorMinus" onClick={(e) =>handleRemoveImagen(img.url)}>
+                <FontAwesomeIcon icon={faMinus} className="iconoMinus" />
+              </button>
+            </div>
+            ))}
             <div className="contenedorInputPlusImagenes">
-              <input
-                className="inputCargarImagen"
-                placeholder="Insertar https://"
-              ></input>
-              <button className="contenedorPlus">
+              <div className="inputCargarImagen">
+              <ComponenteInput
+              estado={urlImagen}
+              cambiarEstado={setUrlImagen}
+              tipo="text"
+              name="inputCargarImagen"
+              placeholder="Insertar https://"
+              />
+              </div>
+              <button className="contenedorPlus" onClick={handleAddImagen}>
                 <FontAwesomeIcon icon={faPlus} className="iconoPlus" />
               </button>
             </div>
-            <Boton type="submit">Crear</Boton>
+            <Boton type="submit" disabled={btonDisable} className="botonCrearProducto">Crear</Boton>
           </div>
         </div>
       </Form>
