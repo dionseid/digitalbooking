@@ -19,6 +19,7 @@ import axios from "axios";
 
 
 export default function FormCrearProducto() {
+  const [dataCaracteristicas, setDataCaracteristicas] = useState([])
   const [dataCiudades, setDataCiudades] = useState([]);
   const [idCiudad, setIdCiudad] = useState([]);
   const [dataCategoria, setDataCategoria] = useState([]);
@@ -44,6 +45,8 @@ export default function FormCrearProducto() {
   const [arrayUrlImagen, setArrayUrlImagen] = useState([]);
   const [formularioValido, setFormularioValido] = useState(false);
   const [btonDisable, setBtonDisable] = useState(true);
+  const [idProductoCreado, setIdProductoCreado] = useState([])
+  const [idCaracteristica, setIdCaracteristica] = useState([])
   const navigate = useNavigate();
   const cors = require("cors");
 
@@ -62,7 +65,13 @@ export default function FormCrearProducto() {
     });
   }, []);
 
-  //console.log(idCiudad);
+  useEffect(() => {
+    axiosConnection.get("/caracteristicas/listarCaracteristicas").then((response) => {
+      setDataCaracteristicas(response.data.data);
+    });
+  }, []);
+
+  //console.log(arrayCaracteristicas);
 
   useEffect(() => {
     if (
@@ -73,12 +82,11 @@ export default function FormCrearProducto() {
       latitud.campo !== null &&
       longitud.campo !== null &&
       descripcion.length !== 0 &&
-      nombreCaracteristica.campo !== null &&
-      nombreIconoCaracteristica.campo !== null &&
+      arrayCaracteristicas.length !== 0 &&
       descripcionNorma.length !== 0 &&
       descripcionSeguridad.length !== 0 &&
       descripcionCancelacion.length !== 0 &&
-      urlImagen.campo !== null
+      arrayUrlImagen.length !== 0
     ) {
       setFormularioValido(true);
       setBtonDisable(false);
@@ -94,13 +102,148 @@ export default function FormCrearProducto() {
     latitud.campo,
     longitud.campo,
     descripcion.length,
-    nombreCaracteristica.campo,
-    nombreIconoCaracteristica.campo,
+    arrayCaracteristicas.length,
     descripcionNorma.length,
     descripcionSeguridad.length,
     descripcionCancelacion.length,
-    urlImagen.campo,
+    arrayUrlImagen.length,
   ]);
+
+  //botones plus
+
+  const handleAddImagen = () => {
+    const newImagen = {
+      nombre: "imagen",
+      url: urlImagen,
+    };
+    setArrayUrlImagen([...arrayUrlImagen, newImagen]);
+  };
+
+  const handleRemoveImagen = (urlImg) => {
+    const newUrlsImagen = arrayUrlImagen.filter((img) => img.url !== urlImg);
+    setArrayUrlImagen(newUrlsImagen);
+  };
+
+  const handleAddCaracteristica = () => {
+    const newCaracteristica = {
+      nombre: nombreCaracteristica,
+      icono: nombreIconoCaracteristica,
+    };
+    setArrayCaracteristicas([...arrayCaracteristicas, newCaracteristica]);
+  };
+
+  const handleRemoveCaracteristica = (iconoCar) => {
+    const newCaracteristica = arrayCaracteristicas.filter(
+      (car) => car.icono !== iconoCar
+    );
+    setArrayCaracteristicas(newCaracteristica);
+  };
+
+
+  //peticionesFetch
+  const peticionUrlImagenes = () =>{
+    const token = JSON.parse(sessionStorage.getItem('token'))
+    console.log(arrayUrlImagen);
+    arrayUrlImagen.map((urlImagen)=>{
+      console.log(urlImagen);
+      fetch("imagenes/agregarImagen", {
+        mode: 'cors',
+        method: "POST",
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          nombre: "imagen",
+          url: urlImagen.url.campo,
+          producto:{
+              id:idProductoCreado
+          },
+        }),
+      }).then((response)=>response.json())
+      .then(data =>console.log(data));
+    })    
+  }
+
+  const peticionCaracteristicas = () =>{
+    const token = JSON.parse(sessionStorage.getItem('token'))
+    console.log("arrayCaracteristicas: ", arrayCaracteristicas);
+    arrayCaracteristicas.map((caract, i)=>{
+      const caracteristica = dataCaracteristicas.filter((cat)=>cat.icono === caract.icono.campo)
+      console.log("caracteristica: ", caracteristica);
+      if (caracteristica.length === 0) {
+        console.log("no se encontro esta caracteristica en la bbdd");
+        fetch("caracteristicas/agregarCaracteristica", {
+          mode: 'cors',
+          method: "POST",
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            nombre: arrayCaracteristicas[i].nombre.campo,
+            icono: arrayCaracteristicas[i].icono.campo,
+          }),
+        }).then((response)=>response.json())
+        .then(data =>setIdCaracteristica(data.data.id));
+
+        fetch("productosCaracteristicas/agregarProdCaract", {
+          mode: 'cors',
+          method: "POST",
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            producto: {
+              id: idProductoCreado
+          },
+          caracteristica: {
+              id: idCaracteristica
+          },
+          }),
+        }).then((response)=>response.json())
+        .then(data =>console.log(data));
+
+      }else{
+        setIdCaracteristica(caracteristica[0]?.id)
+        console.log("idCaracteristica: ", idCaracteristica);
+
+        fetch("productosCaracteristicas/agregarProdCaract", {
+          mode: 'cors',
+          method: "POST",
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            producto: {
+              id: idProductoCreado
+          },
+          caracteristica: {
+              id: idCaracteristica
+          },
+          }),
+        }).then((response)=>response.json())
+        .then(data =>console.log(data));
+        
+      }
+      
+    })
+    
+  }
+
+
+
+
 
   //onSubmit
 
@@ -132,22 +275,6 @@ export default function FormCrearProducto() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    
-    const newProducto = {
-      nombre: nombre.campo,
-      descripcion: descripcion,
-      latitud: parseFloat(latitud.campo),
-      longitud: parseFloat(longitud.campo),
-      ciudad: {
-        id: idCiudad,
-      },
-      categoria: {
-        id: idCategoria,
-      }
-    };
-
-    console.log(newProducto);
-
 
     if (formularioValido) {
       const token = JSON.parse(sessionStorage.getItem("token"));
@@ -175,40 +302,74 @@ export default function FormCrearProducto() {
           },
         }),
       }).then((response)=>response.json())
-      .then(data => console.log("data: ", data));
-      //navigate("/creacionExitosa");
+      .then(data =>setIdProductoCreado(data.data.id));
+
+      fetch("politicas/agregarPolitica", {
+        mode: 'cors',
+        method: "POST",
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          tipo:1,
+          descripcion:descripcionNorma,
+          producto:{
+              id:idProductoCreado
+          },
+        }),
+      }).then((response)=>response.json())
+      .then(data =>console.log(data));
+
+      fetch("politicas/agregarPolitica", {
+        mode: 'cors',
+        method: "POST",
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          tipo:2,
+          descripcion:descripcionSeguridad,
+          producto:{
+              id:idProductoCreado
+          },
+        }),
+      }).then((response)=>response.json())
+      .then(data =>console.log(data));;
+
+      fetch("politicas/agregarPolitica", {
+        mode: 'cors',
+        method: "POST",
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          tipo:3,
+          descripcion:descripcionCancelacion,
+          producto:{
+              id:idProductoCreado
+          },
+        }),
+      }).then((response)=>response.json())
+      .then(data =>console.log(data));
+
+      peticionUrlImagenes()
+      
+      peticionCaracteristicas()      
+
+      navigate("/creacionExitosa");
     }
   };
 
-  //botones plus
-
-  const handleAddImagen = () => {
-    const newImagen = {
-      nombre: "imagen",
-      url: urlImagen,
-    };
-    setArrayUrlImagen([...arrayUrlImagen, newImagen]);
-  };
-
-  const handleRemoveImagen = (urlImg) => {
-    const newUrlsImagen = arrayUrlImagen.filter((img) => img.url !== urlImg);
-    setArrayUrlImagen(newUrlsImagen);
-  };
-
-  const handleAddCaracteristica = () => {
-    const newCaracteristica = {
-      nombre: nombreCaracteristica,
-      icono: nombreIconoCaracteristica,
-    };
-    setArrayCaracteristicas([...arrayCaracteristicas, newCaracteristica]);
-  };
-
-  const handleRemoveCaracteristica = (iconoCar) => {
-    const newCaracteristica = arrayCaracteristicas.filter(
-      (car) => car.icono !== iconoCar
-    );
-    setArrayCaracteristicas(newCaracteristica);
-  };
+  
 
   return (
     <>
