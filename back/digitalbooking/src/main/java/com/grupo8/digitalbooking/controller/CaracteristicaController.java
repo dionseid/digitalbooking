@@ -47,30 +47,6 @@ public class CaracteristicaController {
     //ELIMINAR
     @ApiOperation(value="eliminarCaracteristica", notes="Eliminar una característica por su ID")
     @DeleteMapping("/eliminarCaracteristica/{id}")
-
-    public ResponseEntity<String> eliminarCaracteristica(@PathVariable Integer id) throws Exception {
-        ResponseEntity<String> response = null;
-
-        if (caracteristicaService.buscarCaracteristica(id).isPresent()) {
-            caracteristicaService.eliminarCaracteristica(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Se eliminó la categoría correctamente");
-        } else
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: no se encontró el id");
-        return response;
-    }
-
-    // ACTUALIZAR
-    @ApiOperation(value = "actualizarCaracteristica", notes = "Actualizar una característica")
-    @PutMapping("/actualizarCaracteristica")
-    public ResponseEntity<Caracteristica> actualizarCaracteristica(@RequestBody Caracteristica caracteristica) {
-        ResponseEntity<Caracteristica> response;
-
-        if (caracteristica.getId() != null
-                && caracteristicaService.buscarCaracteristica(caracteristica.getId()).isPresent())
-            response = ResponseEntity.ok(caracteristicaService.actualizarCarateristica(caracteristica));
-        else
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
     public ResponseEntity<Object> eliminarCaracteristica(@PathVariable Integer id) throws Exception {
         ResponseEntity<Object> response = null;
 
@@ -79,14 +55,15 @@ public class CaracteristicaController {
             caracteristicaService.eliminarCaracteristica(id);
             response = ResponseHandler.generateResponse("Característica eliminada", HttpStatus.OK, null);
 
-        }else {
+        } else {
             response = ResponseHandler.generateResponse("Característica NO encontrada", HttpStatus.NOT_FOUND, null);
         }
         return response;
     }
 
-    //ACTUALIZAR
-    @ApiOperation(value="actualizarCaracteristica", notes="Actualizar una característica")
+
+    // ACTUALIZAR
+    @ApiOperation(value = "actualizarCaracteristica", notes = "Actualizar una característica")
     @PutMapping("/actualizarCaracteristica")
     public ResponseEntity<Object> actualizarCaracteristica(@RequestBody Caracteristica caracteristica){
         ResponseEntity<Object> response=null;
