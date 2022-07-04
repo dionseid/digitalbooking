@@ -1,5 +1,5 @@
 import Select from "react-select";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "../form.scss";
 import { Form } from "react-bootstrap";
 import selectStyles from "../../../elementStyle/selectStyles";
@@ -45,13 +45,30 @@ export default function FormCrearProducto() {
   const [arrayUrlImagen, setArrayUrlImagen] = useState([]);
   const [formularioValido, setFormularioValido] = useState(false);
   const [btonDisable, setBtonDisable] = useState(true);
+  const [ProductoCreado, setProductoCreado] = useState([])
+  const [isProductoCreado, setIsProductoCreado] = useState(false)
   const [idProductoCreado, setIdProductoCreado] = useState([])
+  const [caracteristicaCreada, setCaracteristicaCreada] = useState([])
   const [idCaracteristica, setIdCaracteristica] = useState([])
+  const [bandera, setBandera] = useState(false)
   const navigate = useNavigate();
   const cors = require("cors");
 
 
   //useEffect
+  const didMount = React.useRef(false);
+  useEffect(() => {
+    if (!didMount.current) {
+      didMount.current = true;
+      setIsProductoCreado(false)
+      return;
+    }
+
+    setIsProductoCreado(true)
+    console.log("idProductoCreado: ", idProductoCreado);
+    
+    
+ }, [bandera]);
 
   useEffect(() => {
     axiosConnection.get("/ciudades").then((response) => {
@@ -141,10 +158,10 @@ export default function FormCrearProducto() {
 
 
   //peticionesFetch
-  const peticionUrlImagenes = () =>{
+  const peticionUrlImagenes = (idProducto) =>{
     const token = JSON.parse(sessionStorage.getItem('token'))
     console.log(arrayUrlImagen);
-    arrayUrlImagen.map((urlImagen)=>{
+    arrayUrlImagen?.map((urlImagen)=>{
       console.log(urlImagen);
       fetch("imagenes/agregarImagen", {
         mode: 'cors',
@@ -159,19 +176,26 @@ export default function FormCrearProducto() {
           nombre: "imagen",
           url: urlImagen.url.campo,
           producto:{
-              id:idProductoCreado
+              id:idProducto
           },
         }),
       }).then((response)=>response.json())
-      .then(data =>console.log(data));
+      .then(data =>console.log("peticionUrlImagenes: ",data,{
+        nombre: "imagen",
+        url: urlImagen.url.campo,
+        producto:{
+            id:idProductoCreado
+        },
+      }));
     })    
   }
 
-  const peticionCaracteristicas = () =>{
+  const peticionCaracteristicas = (idProducto) =>{
     const token = JSON.parse(sessionStorage.getItem('token'))
     console.log("arrayCaracteristicas: ", arrayCaracteristicas);
-    arrayCaracteristicas.map((caract, i)=>{
+    arrayCaracteristicas?.map((caract, i)=>{
       const caracteristica = dataCaracteristicas.filter((cat)=>cat.icono === caract.icono.campo)
+      setCaracteristicaCreada(caracteristica[0])
       console.log("caracteristica: ", caracteristica);
       if (caracteristica.length === 0) {
         console.log("no se encontro esta caracteristica en la bbdd");
@@ -189,30 +213,9 @@ export default function FormCrearProducto() {
             icono: arrayCaracteristicas[i].icono.campo,
           }),
         }).then((response)=>response.json())
-        .then(data =>setIdCaracteristica(data.data.id));
-
-        fetch("productosCaracteristicas/agregarProdCaract", {
-          mode: 'cors',
-          method: "POST",
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            producto: {
-              id: idProductoCreado
-          },
-          caracteristica: {
-              id: idCaracteristica
-          },
-          }),
-        }).then((response)=>response.json())
-        .then(data =>console.log(data));
-
-      }else{
-        setIdCaracteristica(caracteristica[0]?.id)
+        .then(data =>setCaracteristicaCreada(data.data));
+        
+        setIdCaracteristica(caracteristicaCreada.id)
         console.log("idCaracteristica: ", idCaracteristica);
 
         fetch("productosCaracteristicas/agregarProdCaract", {
@@ -233,7 +236,46 @@ export default function FormCrearProducto() {
           },
           }),
         }).then((response)=>response.json())
-        .then(data =>console.log(data));
+        .then(data =>console.log("peticionCaracteristicas, si no se encontro en la bbdd: ", data, {
+          producto: {
+            id: idProducto
+        },
+        caracteristica: {
+            id: idCaracteristica
+        },
+        }));
+
+      }else{
+
+        setIdCaracteristica(caracteristicaCreada.id)
+        console.log("idCaracteristica: ", idCaracteristica);
+
+        fetch("productosCaracteristicas/agregarProdCaract", {
+          mode: 'cors',
+          method: "POST",
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            producto: {
+              id: idProducto
+          },
+          caracteristica: {
+              id: idCaracteristica
+          },
+          }),
+        }).then((response)=>response.json())
+        .then(data =>console.log("peticionCaracteristicas si ya estaba en la bbdd: ",data, {
+          producto: {
+            id: idProducto
+        },
+        caracteristica: {
+            id: idCaracteristica
+        },
+        }));
         
       }
       
@@ -247,7 +289,7 @@ export default function FormCrearProducto() {
 
   //onSubmit
 
-  const registroProducto = async (data) => {
+  /* const registroProducto = async (data) => {
     let corsOptions = {
       origin: "*",
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
@@ -271,16 +313,66 @@ export default function FormCrearProducto() {
     } catch (error) {
         console.error("ERROR REGISTRO PRODUCTO ", error);
     }
+  } */
+
+  const crearProducto = async() =>{
+    const token = JSON.parse(sessionStorage.getItem("token"));
+
+    try{
+      const response = await fetch("productos/agregarProducto", {
+        mode: 'cors',
+        method: "POST",
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          nombre: nombre.campo,
+          descripcion: descripcion,
+          latitud: parseFloat(latitud.campo),
+          longitud: parseFloat(longitud.campo),
+          ciudad: {
+            id: idCiudad,
+          },
+          categoria: {
+            id: idCategoria,
+          },
+        }),
+      })
+      
+      const json = await response.json();
+      console.log(json.data);
+
+     setIdProductoCreado(json.data.id)
+      //console.log("idProductoCreado desde funcion crear producto: ", idProductoCreado);
+      setBandera((prevBandera)=> !prevBandera )
+      console.log("bandera: ", bandera);
+      return json.data     
+
+    }catch (error) {
+      console.error("ERROR REGISTRO PRODUCTO ", error);
+    }
+    
   }
 
-  const onSubmit = (e) => {
+
+  
+  
+
+  const onSubmit = async(e) => {
     e.preventDefault();
 
     if (formularioValido) {
       const token = JSON.parse(sessionStorage.getItem("token"));
-      //registroProducto(newProducto)
 
-      fetch("productos/agregarProducto", {
+      const respuestaPostProducto = await crearProducto()
+      console.log("respuestaPostProducto: ", respuestaPostProducto);
+      const idProducto = respuestaPostProducto.id;
+      console.log("idProducto: ", idProducto);       
+
+      /* fetch("productos/agregarProducto", {
         mode: 'cors',
         method: "POST",
         headers: {
@@ -302,7 +394,13 @@ export default function FormCrearProducto() {
           },
         }),
       }).then((response)=>response.json())
-      .then(data =>setIdProductoCreado(data.data.id));
+      .then(data =>setProductoCreado(data?.data));
+
+      console.log("ProductoCreado: ", ProductoCreado); 
+      
+      setIdProductoCreado(ProductoCreado.id)*/
+
+      
 
       fetch("politicas/agregarPolitica", {
         mode: 'cors',
@@ -317,11 +415,17 @@ export default function FormCrearProducto() {
           tipo:1,
           descripcion:descripcionNorma,
           producto:{
-              id:idProductoCreado
+              id:idProducto
           },
         }),
       }).then((response)=>response.json())
-      .then(data =>console.log(data));
+      .then(data =>console.log("agregarPoliticaNorma: ",data, {
+        tipo:1,
+        descripcion:descripcionNorma,
+        producto:{
+            id:idProducto
+        },
+      }));
 
       fetch("politicas/agregarPolitica", {
         mode: 'cors',
@@ -336,11 +440,11 @@ export default function FormCrearProducto() {
           tipo:2,
           descripcion:descripcionSeguridad,
           producto:{
-              id:idProductoCreado
+              id:idProducto
           },
         }),
       }).then((response)=>response.json())
-      .then(data =>console.log(data));;
+      .then(data =>console.log("agregarPoliticaSeguridad: ",data));;
 
       fetch("politicas/agregarPolitica", {
         mode: 'cors',
@@ -355,17 +459,17 @@ export default function FormCrearProducto() {
           tipo:3,
           descripcion:descripcionCancelacion,
           producto:{
-              id:idProductoCreado
+              id:idProducto
           },
         }),
       }).then((response)=>response.json())
-      .then(data =>console.log(data));
+      .then(data =>console.log("agregarPoliticaCancelacion: ",data));
 
-      peticionUrlImagenes()
+      peticionUrlImagenes(idProducto)
       
-      peticionCaracteristicas()      
+      //peticionCaracteristicas()      
 
-      navigate("/creacionExitosa");
+      //navigate("/creacionExitosa");
     }
   };
 
