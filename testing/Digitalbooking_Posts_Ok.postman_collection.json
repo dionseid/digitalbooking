@@ -1,0 +1,2669 @@
+{
+	"info": {
+		"_postman_id": "50d2b433-be5f-4b77-af20-ac63b9f7a451",
+		"name": "Digitalbooking Posts Ok",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18045963"
+	},
+	"item": [
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Crear Rol ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}roles/agregarRol",
+							"host": [
+								"{{url}}roles"
+							],
+							"path": [
+								"agregarRol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Rol CLIENT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"CLIENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}roles/agregarRol",
+							"host": [
+								"{{url}}roles"
+							],
+							"path": [
+								"agregarRol"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Agregar Usuario ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Ale\",\r\n    \"apellido\":\"Pan\",\r\n    \"email\":\"ap@gmail.com\",\r\n    \"password\":\"123ale\",\r\n    \"username\":\"ap@gmail.com\",\r\n    \"rol\":{\r\n        \"id\":1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}usuarios/agregarUsuario",
+							"host": [
+								"{{url}}usuarios"
+							],
+							"path": [
+								"agregarUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Usuario CLIENT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Sofi\",\r\n    \"apellido\":\"Mon\",\r\n    \"email\":\"sm@gmail.com\",\r\n    \"password\":\"123sof\",\r\n    \"username\":\"sm@gmail.com\",\r\n    \"rol\":{\r\n        \"id\":2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}usuarios/agregarUsuario",
+							"host": [
+								"{{url}}usuarios"
+							],
+							"path": [
+								"agregarUsuario"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authenticate ADMIN",
+			"item": [
+				{
+					"name": "login ADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resp = pm.response.json();\r",
+									"pm.globals.set(\"jwt_token\", resp.jwt);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"ap@gmail.com\",\r\n    \"password\":\"123ale\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}authenticate",
+							"host": [
+								"{{url}}authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categorias",
+			"item": [
+				{
+					"name": "Categoria 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"Bed and breakfast\",\r\n    \"descripcion\":\"45 Habitaciones\",\r\n    \"urlImg\":\"https://hotelpropeller.com/wp-content/uploads/2013/04/Bed-and-Breakfast-Facebook-Page.jpg\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}categorias",
+							"host": [
+								"{{url}}categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categoria 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"Departamento\",\r\n    \"descripcion\":\"50 Departamentos\",\r\n    \"urlImg\":\"https://sp-ao.shortpixel.ai/client/q_glossy,ret_img,w_1200,h_900/https://www.mejorbnb.com/wp-content/uploads/2020/11/1f71aec8-cb00-4600-9c32-c691c391e8b8.jpg\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}categorias",
+							"host": [
+								"{{url}}categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categoria 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"Casa\",\r\n    \"descripcion\":\"26 Casas\",\r\n    \"urlImg\":\"https://sp-ao.shortpixel.ai/client/q_glossy,ret_img,w_1438,h_960/https://www.mejorbnb.com/wp-content/uploads/2020/10/e51d8897-e281-41c7-aead-0124a8b21280-1.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}categorias",
+							"host": [
+								"{{url}}categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categoria 4",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"Habitación\",\r\n    \"descripcion\":\"52 Habitaciones\",\r\n    \"urlImg\":\"https://a0.muscache.com/im/pictures/ba6303db-e160-4152-b1b1-4f0f2641e02e.jpg?im_w=720\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}categorias",
+							"host": [
+								"{{url}}categorias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ciudades",
+			"item": [
+				{
+					"name": "Ciudad 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"La Plata\",\r\n    \"provincia\":\"Buenos Aires\",\r\n    \"pais\":\"Argentina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}ciudades",
+							"host": [
+								"{{url}}ciudades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ciudad 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Mar del Plata\",\r\n    \"provincia\":\"Buenos Aires\",\r\n    \"pais\":\"Argentina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}ciudades",
+							"host": [
+								"{{url}}ciudades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ciudad 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"San Rafael\",\r\n    \"provincia\":\"Mendoza\",\r\n    \"pais\":\"Argentina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}ciudades",
+							"host": [
+								"{{url}}ciudades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ciudad 4",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Cordoba\",\r\n    \"provincia\":\"Cordoba\",\r\n    \"pais\":\"Argentina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}ciudades",
+							"host": [
+								"{{url}}ciudades"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "Producto 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Departamento en ciudad de La Plata\",\r\n    \"descripcion\": \"Departamento de 3 ambientes a Estrenar de 130 m2 con vista al campo de Polo. Estilo moderno e imponente frente al polo, Terrazas al Polo nos hará vivir la comodidad y las vistas extraordinarias del complejo con sus 3 edificios de 5 y 6 niveles.\",\r\n    \"latitud\": -34.898814369791445,\r\n    \"longitud\": -57.95332992913662,\r\n    \"ciudad\":{\r\n        \"id\": 1\r\n            },\r\n    \"categoria\":{\r\n        \"id\": 2\r\n    }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}productos/agregarProducto",
+							"host": [
+								"{{url}}productos"
+							],
+							"path": [
+								"agregarProducto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Producto 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"La Jacinta - B&B - Mar del Plata\",\r\n    \"descripcion\":\"Se encuentra a 1,2 km de Bristol y a 1,3 km de la playa de La Perla, y cuenta con terraza. Entre las instalaciones de este establecimiento se encuentran una cocina compartida y un salón compartido, además de wifi gratis en todo el establecimiento.\",\r\n    \"latitud\": -37.936315060520656,\r\n    \"longitud\": -57.5368681586712,\r\n    \"ciudad\":{\r\n        \"id\": 2\r\n            },\r\n    \"categoria\":{\r\n        \"id\": 1\r\n    }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}productos/agregarProducto",
+							"host": [
+								"{{url}}productos"
+							],
+							"path": [
+								"agregarProducto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Producto 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Casa en San Rafael - Mendoza\",\r\n    \"descripcion\":\"El Talu Apart Hotel se encuentra a 3,5 km de la plaza central de San Martín y ofrece alojamiento con wifi gratis y estacionamiento privado gratuito. Las instalaciones son muy modernas y cómodas. La tranquilidad del lugar es impagable.\",\r\n    \"latitud\": -34.58855649454186,\r\n    \"longitud\": -68.3380197297567,\r\n    \"ciudad\":{\r\n        \"id\": 3\r\n            },\r\n    \"categoria\":{\r\n        \"id\": 3\r\n    }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}productos/agregarProducto",
+							"host": [
+								"{{url}}productos"
+							],
+							"path": [
+								"agregarProducto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Producto 4",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Habitacion privada en Bariloche\",\r\n    \"descripcion\":\"Habitación con vistas al lago. Posee balcón y hervidor de agua a unos 1,7 km de la playa del Centenario. Ofrece vistas a la ciudad y a la montaña y se encuentra a 600 metros del centro. Amplio cuarto y muy bien decorado.\",\r\n    \"latitud\": -41.13801583348047,\r\n    \"longitud\": -71.29978303075455,\r\n    \"ciudad\":{\r\n        \"id\":4\r\n            },\r\n    \"categoria\":{\r\n        \"id\":4\r\n    }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}productos/agregarProducto",
+							"host": [
+								"{{url}}productos"
+							],
+							"path": [
+								"agregarProducto"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Politicas",
+			"item": [
+				{
+					"name": "Producto 1",
+					"item": [
+						{
+							"name": "Normas",
+							"item": [
+								{
+									"name": "Politica 1",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Prohibido fumar\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Politica 2",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"No se permiten fiestas\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Seguridad",
+							"item": [
+								{
+									"name": "Politica 3",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Ciudados del COVID segun reglamentación vigente\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Politica 4",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Detector de humo\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Politica 5",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Cancelacion",
+							"item": [
+								{
+									"name": "Politica 6",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":3,\r\n    \"descripcion\":\"Descargar detalles de cancelacion de esta estadia\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Producto 2",
+					"item": [
+						{
+							"name": "Normas",
+							"item": [
+								{
+									"name": "Politica 1",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Prohibido fumar\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Politica 2",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"No se permiten fiestas\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Seguridad",
+							"item": [
+								{
+									"name": "Politica 3",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Ciudados del COVID segun reglamentación vigente\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Politica 4",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Detector de humo\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Politica 5",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Cancelacion",
+							"item": [
+								{
+									"name": "Politica 6",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Producto 3",
+					"item": [
+						{
+							"name": "Normas",
+							"item": [
+								{
+									"name": "Politica 1",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Prohibido fumar\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Politica 2",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"No se permiten fiestas\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Seguridad",
+							"item": [
+								{
+									"name": "Politica 3",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Ciudados del COVID segun reglamentación vigente\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Politica 4",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Detector de humo\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Politica 5",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Cancelacion",
+							"item": [
+								{
+									"name": "Politica 6",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":3,\r\n    \"descripcion\":\"descargar detalles de cancelación de esta estadía\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Producto 4",
+					"item": [
+						{
+							"name": "Normas",
+							"item": [
+								{
+									"name": "Politica 1",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Prohibido fumar\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Politica 2",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"No se permiten fiestas\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Seguridad",
+							"item": [
+								{
+									"name": "Politica 3",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Ciudados del COVID segun reglamentación vigente\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Politica 4",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Detector de humo\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Politica 5",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Cancelacion",
+							"item": [
+								{
+									"name": "Politica 6",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipo\":3,\r\n    \"descripcion\":\"descargar detalles de cancelación de esta estadía\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}politicas/agregarPolitica",
+											"host": [
+												"{{url}}politicas"
+											],
+											"path": [
+												"agregarPolitica"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Imagenes",
+			"item": [
+				{
+					"name": "Producto 1",
+					"item": [
+						{
+							"name": "Imagen 1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Sala de estar\",\r\n    \"url\": \"https://images.pexels.com/photos/11125429/pexels-photo-11125429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Mesa\",\r\n    \"url\": \"https://images.pexels.com/photos/271696/pexels-photo-271696.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Cama\",\r\n    \"url\": \"https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Baño\",\r\n    \"url\": \"https://images.pexels.com/photos/3935352/pexels-photo-3935352.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Cocina\",\r\n    \"url\": \"https://images.pexels.com/photos/94865/pexels-photo-94865.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Producto 2",
+					"item": [
+						{
+							"name": "Imagen 1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Sala de estar\",\r\n    \"url\":\"https://www.agribb.it/files/rustico-sara-cottage-giusy/photo/big-12130.jpg\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Dormitorio\",\r\n    \"url\":\"https://media.indebuurt.nl/zwolle/2019/07/08164234/image00016.jpeg\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Recibidor\",\r\n    \"url\":\"https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/17588455.jpg?k=4b7ce5766884736c5cd04a32edc1852de7f08b81aac1f77140279c93395cd5f9&o=\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Vista exterior\",\r\n    \"url\":\"https://dhqbz5vfue3y3.cloudfront.net/fotobbit/20656/1/20656_medium.jpg?rfh=1\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Baño\",\r\n    \"url\":\"https://espaciohogar.com/wp-content/uploads/2015/04/BANOS-RUSTICOS-COMO-DECORARLOS-EN-2015-640x480.jpg\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Producto 3",
+					"item": [
+						{
+							"name": "Imagen 1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Vista exterior\",\r\n    \"url\": \"https://images.pexels.com/photos/4933643/pexels-photo-4933643.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Comedor\",\r\n    \"url\": \"https://images.pexels.com/photos/1457841/pexels-photo-1457841.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Cocina\",\r\n    \"url\": \"https://images.pexels.com/photos/3214064/pexels-photo-3214064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Baño\",\r\n    \"url\": \"https://images.pexels.com/photos/105934/pexels-photo-105934.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Cama\",\r\n    \"url\": \"https://images.pexels.com/photos/90317/pexels-photo-90317.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Producto 4",
+					"item": [
+						{
+							"name": "Imagen 1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Living Comedor\",\r\n    \"url\":\"https://i.pinimg.com/originals/15/29/34/1529345a2a3ceb0df0ae04f1645914bc.jpg\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Terraza\",\r\n    \"url\":\"https://media.cntraveler.com/photos/5dead5b8503bcd0009991e0f/master/pass/31121149-airbnb-mexico-city.jpg\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Dormitorio\",\r\n    \"url\":\"https://static.mothership.sg/1/2020/10/Screen-Shot-2020-10-13-at-4.20.24-PM.png\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Baño\",\r\n    \"url\": \"https://images.pexels.com/photos/6207947/pexels-photo-6207947.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Imagen 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Cocina\",\r\n    \"url\": \"https://images.pexels.com/photos/534151/pexels-photo-534151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}imagenes/agregarImagen",
+									"host": [
+										"{{url}}imagenes"
+									],
+									"path": [
+										"agregarImagen"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Caracteristicas",
+			"item": [
+				{
+					"name": "1 Microondas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Microondas\",\r\n    \"icono\":\"microwave\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2 Cocina",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Cocina\",\r\n    \"icono\":\"countertops\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 Estacionamiento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Estacionamiento\",\r\n    \"icono\":\"directions_car\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4 Wifi",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"WiFi\",\r\n    \"icono\":\"wifi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5 Pileta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Pileta\",\r\n    \"icono\": \"pool\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6 Mascotas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"nombre\": \"Apto mascotas\",\r\n    \"icono\": \"pets\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7 Aire acondicionado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"nombre\": \"Aire acondicionado\",\r\n    \"icono\": \"ac_unit\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8 Tv",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Televisor\",\r\n  \"icono\": \"tv\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authenticate CLIENT",
+			"item": [
+				{
+					"name": "login CLIENT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resp = pm.response.json();\r",
+									"pm.globals.set(\"jwt_token\", resp.jwt);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"sm@gmail.com\",\r\n    \"password\":\"123sof\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}authenticate",
+							"host": [
+								"{{url}}authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservas",
+			"item": [
+				{
+					"name": "Agregar Reserva 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hora\": \"15:00:00\",\r\n    \"fechaInicial\": \"2022-12-12\",\r\n    \"fechaFinal\": \"2022-12-13\",\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}reserva/nuevaReserva",
+							"host": [
+								"{{url}}reserva"
+							],
+							"path": [
+								"nuevaReserva"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Reserva 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hora\": \"15:00:00\",\r\n    \"fechaInicial\": \"2022-12-11\",\r\n    \"fechaFinal\": \"2022-12-15\",\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}reserva/nuevaReserva",
+							"host": [
+								"{{url}}reserva"
+							],
+							"path": [
+								"nuevaReserva"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Productos-Caracteristicas",
+			"item": [
+				{
+					"name": "Producto 1",
+					"item": [
+						{
+							"name": "P1 C1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P1 C2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 2\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P1 C3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 3\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P1 C4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 4\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Producto 2",
+					"item": [
+						{
+							"name": "P2 C1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 2\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P2 C4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 2\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 4\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P2 C6",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 2\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 6\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P2 C7",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 2\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 7\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Producto 3",
+					"item": [
+						{
+							"name": "P3 C2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 3\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 2\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P3 C4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 3\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 4\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P3 C5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 3\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 5\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P3 C7",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 3\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 7\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P3 C8",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 3\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 8\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Producto 4",
+					"item": [
+						{
+							"name": "P4 C3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 4\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 3\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P4 C4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 4\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 4\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P4 C6",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 4\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 6\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P4 C7",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 4\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 7\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P4 C8",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 4\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 8\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8080/",
+			"type": "string"
+		}
+	]
+}

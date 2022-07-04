@@ -13,6 +13,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,10 +44,11 @@ public class AutenticationController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationDTORequest.getUsername());
         final String jwt = jwtService.generateToken(userDetails);
         //final String username = String.valueOf(userDetails);
+        final Integer id = usuario.idUsuario(authenticationDTORequest.getUsername());
         final String nombre = usuario.nombreUsuario(authenticationDTORequest.getUsername());
         final String apellido = usuario.apellidoUsuario(authenticationDTORequest.getUsername());
         final String ciudadUsuario = usuario.ciudadUsuario(authenticationDTORequest.getUsername());
-
-        return ResponseEntity.ok(new AuthenticationDTOResponse((jwt), nombre, apellido, ciudadUsuario));
+        final String email = usuario.emailUsuario(authenticationDTORequest.getUsername());
+        return ResponseEntity.ok(new AuthenticationDTOResponse((jwt), id, nombre, apellido, ciudadUsuario, email));
     }
 }

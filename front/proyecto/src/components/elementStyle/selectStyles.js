@@ -9,6 +9,7 @@ const selectStyles = {
       fontSize: '14px',
       lineHeight: '19px',
       display:'flex'
+      
     }),
     control:()=>({
       display:'flex',
