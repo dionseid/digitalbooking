@@ -19,7 +19,7 @@ const TituloProducto = () => {
   const Titulo = () => {
     if (dataTitulo.length === 0) {
       return (
-            <h2>Administracion</h2>
+            <h2>Administración</h2>
       );
     } else {
       return (

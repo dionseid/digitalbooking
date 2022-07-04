@@ -190,7 +190,8 @@ export default function FormCrearProducto() {
     })    
   }
 
-  const peticionCaracteristicas = (idProducto) =>{
+  const peticionCaracteristicas = (idProductoCreado) =>{
+    let idCaracteristicaCreada = []
     const token = JSON.parse(sessionStorage.getItem('token'))
     console.log("arrayCaracteristicas: ", arrayCaracteristicas);
     arrayCaracteristicas?.map((caract, i)=>{
@@ -213,10 +214,12 @@ export default function FormCrearProducto() {
             icono: arrayCaracteristicas[i].icono.campo,
           }),
         }).then((response)=>response.json())
-        .then(data =>setCaracteristicaCreada(data.data));
-        
-        setIdCaracteristica(caracteristicaCreada.id)
-        console.log("idCaracteristica: ", idCaracteristica);
+        .then(data => {
+          const caracteristicaCreada = data.data;
+        console.log("caracteristicaCreada: ", caracteristicaCreada);
+      idCaracteristicaCreada = caracteristicaCreada.id
+      console.log("idCaracteristicaCreada: ", idCaracteristicaCreada);});
+
 
         fetch("productosCaracteristicas/agregarProdCaract", {
           mode: 'cors',
@@ -232,23 +235,23 @@ export default function FormCrearProducto() {
               id: idProductoCreado
           },
           caracteristica: {
-              id: idCaracteristica
+              id: idCaracteristicaCreada
           },
           }),
         }).then((response)=>response.json())
         .then(data =>console.log("peticionCaracteristicas, si no se encontro en la bbdd: ", data, {
           producto: {
-            id: idProducto
+            id: idProductoCreado
         },
         caracteristica: {
-            id: idCaracteristica
+            id: idCaracteristicaCreada
         },
         }));
 
       }else{
+        idCaracteristicaCreada=caracteristica[0].id
 
-        setIdCaracteristica(caracteristicaCreada.id)
-        console.log("idCaracteristica: ", idCaracteristica);
+        console.log("idCaracteristicaCreada: ", idCaracteristicaCreada);
 
         fetch("productosCaracteristicas/agregarProdCaract", {
           mode: 'cors',
@@ -261,19 +264,19 @@ export default function FormCrearProducto() {
           },
           body: JSON.stringify({
             producto: {
-              id: idProducto
+              id: idProductoCreado
           },
           caracteristica: {
-              id: idCaracteristica
+              id: idCaracteristicaCreada
           },
           }),
         }).then((response)=>response.json())
         .then(data =>console.log("peticionCaracteristicas si ya estaba en la bbdd: ",data, {
           producto: {
-            id: idProducto
+            id: idProductoCreado
         },
         caracteristica: {
-            id: idCaracteristica
+            id: idCaracteristicaCreada
         },
         }));
         
@@ -467,7 +470,7 @@ export default function FormCrearProducto() {
 
       peticionUrlImagenes(idProducto)
       
-      //peticionCaracteristicas()      
+      peticionCaracteristicas(idProducto)      
 
       //navigate("/creacionExitosa");
     }
