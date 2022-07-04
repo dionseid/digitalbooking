@@ -18,6 +18,8 @@ Grupo 8:
   *https://docs.google.com/spreadsheets/d/1tAaT3oQ7jLcEvnNv0OAC6NGJBlTjYwVbo0Xz5UBDbUQ/edit?usp=sharing*
   - *Tests automatizados con framework Jest:*
   *https://drive.google.com/drive/folders/1oUV2rEMtiSr0oQWvqzWTlPHpVv2TNLUu?usp=sharing*
+  - *Tests automatizados con Selenium:*
+  *https://drive.google.com/drive/folders/1WqzMzRRUK1TwkkxXqDWlsNphaJUnippj?usp=sharing*
 
 - Infraestructura:
   - *Link al diseño de la red y demás recursos en AWS:*
