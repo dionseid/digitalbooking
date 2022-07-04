@@ -13,6 +13,11 @@ const CardAlojamiento = ({ idCategoria, setIdCategoria, onDoubleClick }) => {
     });
   }, []);
 
+  const cantidadProductos = (catagoria) =>{
+    const dataCategoriaFiltrada = dataCategoria.filter((cat)=> cat.titulo === catagoria.titulo)
+    return dataCategoriaFiltrada
+  }
+
   const buscadorCardsCategoria = () => {
     if (dataCategoria.length === 0) {
       return (
@@ -29,7 +34,7 @@ const CardAlojamiento = ({ idCategoria, setIdCategoria, onDoubleClick }) => {
                         <div style={{backgroundImage:"url('" + cat.urlImg + "')"}} className="fondoImagen"/>
                         <div className="cardBody">
                             <h4>{cat.titulo}</h4>
-                            <p style={{fontWeight:"700"}}>{cat.descripcion}</p>
+                            <p style={{fontWeight:"700"}}>{cantidadProductos(cat).length} {cat.descripcion}</p>
                         </div>
                                                 
                     </div>
