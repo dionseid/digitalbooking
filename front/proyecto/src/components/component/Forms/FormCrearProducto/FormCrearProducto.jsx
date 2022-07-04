@@ -472,7 +472,7 @@ export default function FormCrearProducto() {
       
       peticionCaracteristicas(idProducto)      
 
-      //navigate("/creacionExitosa");
+      navigate("/creacionExitosa");
     }
   };
 
