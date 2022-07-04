@@ -79,6 +79,7 @@ const FormCuenta = () => {
         id: respAPI.id,
         auth: true,
         redirect: false,
+        rol: respToken.rol,
         ciudad: respAPI.ciudad ? respAPI.ciudad : ""
     });
         navigate("/");

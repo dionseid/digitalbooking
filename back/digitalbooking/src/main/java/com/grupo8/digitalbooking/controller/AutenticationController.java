@@ -49,6 +49,9 @@ public class AutenticationController {
         final String apellido = usuario.apellidoUsuario(authenticationDTORequest.getUsername());
         final String ciudadUsuario = usuario.ciudadUsuario(authenticationDTORequest.getUsername());
         final String email = usuario.emailUsuario(authenticationDTORequest.getUsername());
-        return ResponseEntity.ok(new AuthenticationDTOResponse((jwt), id, nombre, apellido, ciudadUsuario, email));
+
+        final String rol = usuario.rolUsuario(authenticationDTORequest.getUsername());
+
+        return ResponseEntity.ok(new AuthenticationDTOResponse((jwt), id, nombre, apellido, ciudadUsuario, email, rol));
     }
 }

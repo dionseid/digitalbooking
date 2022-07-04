@@ -48,6 +48,7 @@ const FormLogin = () => {
             id: respuestaPost.id&&respuestaPost.id,
             auth: true,
             redirect: false,
+            rol: respuestaPost.rol,
             ciudad: respuestaPost.ciudad ? respuestaPost.ciudad : ""});
           navigate("/")}else{
           

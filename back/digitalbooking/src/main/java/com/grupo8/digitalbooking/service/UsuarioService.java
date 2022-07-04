@@ -119,4 +119,11 @@ public class UsuarioService implements UserDetailsService {
         return (email);
     }
 
+    public String rolUsuario(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        String rol = usuario.getRol().getNombre();
+        return (rol);
+    }
+
+
 }

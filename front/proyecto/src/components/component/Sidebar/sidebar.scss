@@ -1,3 +1,5 @@
+@import '../../../Scss/abstracts/variables';
+
 /* El colorido cuadrado superior del sidebar que contiene el botón para cerrar */
 .upper-colored-box {
   background-color:#F0572D;
@@ -154,6 +156,9 @@
   text-decoration: none;
   padding: 5px;
   margin-top: 5px;
+  &:hover{
+    color: $primaryColorOrange;
+  }
 }
 
 .SidebarBienvenida{
