@@ -55,16 +55,6 @@ update token:
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
 
-start database:
-  stage: update
-  image:
-    name: amazon/aws-cli:2.4.11
-    entrypoint: [""]
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-  script:
-    - aws rds start-db-instance --db-instance-identifier remo-digitalbooking-db-prod
-
 avoid remaining:
   stage: cancel if update
   extends: .cancel_pipeline_template

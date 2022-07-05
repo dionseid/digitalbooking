@@ -5,7 +5,7 @@ terraform {
     region         = "us-west-1"
     dynamodb_table = "g8-terraform-state-locking"
     encrypt        = true
-    #profile        = "digital_booking_g8"
+    profile        = "digital_booking_g8"
   }
   required_providers {
     aws = {
@@ -17,7 +17,7 @@ terraform {
 
 provider "aws" {
   #profile = "digital_booking_g8" # Uso local; no forma parte del pipeline
-  region = var.region
+  region  = var.region
 }
 
 # module "web_app" {
