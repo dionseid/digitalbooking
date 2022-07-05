@@ -30,6 +30,7 @@ const Sidebar = () => {
       id: null,
       auth: false,
       redirect: false,
+      rol:"",
       ciudad: "",
     });
   };
