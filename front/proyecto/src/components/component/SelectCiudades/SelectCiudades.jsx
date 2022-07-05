@@ -27,7 +27,7 @@ export default function SelectCiudades({ onChange }) {
           </div>
         }
         className="inputBanner"
-        options={()=>dataCiudades.map((ciudad) => ({
+        options={dataCiudades.map((ciudad) => ({
           label: (
             <div className="contenedorLabel">
               <FontAwesomeIcon

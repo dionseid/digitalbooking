@@ -447,7 +447,7 @@ export default function FormCrearProducto() {
           },
         }),
       }).then((response)=>response.json())
-      .then(data =>console.log("agregarPoliticaSeguridad: ",data));;
+      .then(data =>console.log("agregarPoliticaSeguridad: ",data));
 
       fetch("politicas/agregarPolitica", {
         mode: 'cors',

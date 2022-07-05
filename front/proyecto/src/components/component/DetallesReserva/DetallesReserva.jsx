@@ -11,6 +11,7 @@ import UserProvider from "../../context/UserContext";
 import axiosConnection from "../../../helpers/axiosConnection";
 import axios from "axios";
 
+
 export default function DetallesReserva() {
   const { user } = useContext(UserProvider);
   const { isHora, setIsHora } = useContext(HoraContextProvider);
@@ -130,13 +131,16 @@ export default function DetallesReserva() {
     if (rango[0] !== null && rango[1] !== null && isHora && isCiudad) {
       //registroReserva(newReserva)
       const token =JSON.parse(sessionStorage.getItem('token')) 
+      console.log(token);
       // if(getLoginApi().status === 200 ){
-      fetch("http://localhost:8080/reserva/nuevaReserva", {
+      fetch("/reserva/nuevaReserva", {
+        mode: 'cors',
         method: "POST",
         headers: {
+          'Access-Control-Allow-Origin': '*',
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           hora: "15:00:00",
@@ -149,8 +153,20 @@ export default function DetallesReserva() {
             id: user.id,
           },
         }),
-      });
-      navigate(`/reservaExitosa`);
+      }).then((response)=>response.json())
+      .then(data =>console.log("nuevaReserva: ",data,{
+        hora: "15:00:00",
+        fechaInicial: fechaInicio,
+        fechaFinal: fechaFinal,
+        producto: {
+          id: parseInt(id),
+        },
+        usuario: {
+          id: user.id,
+        },
+      }));
+
+      //navigate(`/reservaExitosa`);
     } //}
   };
 
