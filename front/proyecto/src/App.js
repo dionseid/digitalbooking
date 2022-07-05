@@ -13,6 +13,7 @@ import { UserProvider } from "./components/context/UserContext";
 import { HoraContextProvider } from "./components/context/HoraContextProvider";
 import Administracion from "./pages/Administracion/Administracion";
 import CreacionExitosa from "./pages/CreacionDeProductoExitosa/CreacionDeProductoExitosa";
+import MisReservas from "./pages/MisReservas/MisReservas";
 
 function App() {
   //// const [isAuthenticated, setIsAuthenticated] = React.useState(false);
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/producto/:id/reserva" element={<Reserva />} />
                 <Route path="/reservaExitosa" element={<ReservaExitosa />} />                
                 <Route path="/administracion" element={<Administracion />} />
+                <Route path="//misReservas" element={<MisReservas />} />
                 <Route path="/creacionExitosa" element={<CreacionExitosa />} />
               </Routes>
             </HoraContextProvider>

@@ -125,4 +125,5 @@ public class UsuarioService implements UserDetailsService {
         return (rol);
     }
 
+
 }

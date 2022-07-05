@@ -1,6 +1,5 @@
 package com.grupo8.digitalbooking.controller;
 
-import com.grupo8.digitalbooking.model.RolUsuario;
 import com.grupo8.digitalbooking.model.dto.AuthenticationDTORequest;
 import com.grupo8.digitalbooking.model.dto.AuthenticationDTOResponse;
 import com.grupo8.digitalbooking.service.IJwtService;
@@ -50,7 +49,9 @@ public class AutenticationController {
         final String apellido = usuario.apellidoUsuario(authenticationDTORequest.getUsername());
         final String ciudadUsuario = usuario.ciudadUsuario(authenticationDTORequest.getUsername());
         final String email = usuario.emailUsuario(authenticationDTORequest.getUsername());
+
         final String rol = usuario.rolUsuario(authenticationDTORequest.getUsername());
+
         return ResponseEntity.ok(new AuthenticationDTOResponse((jwt), id, nombre, apellido, ciudadUsuario, email, rol));
     }
 }

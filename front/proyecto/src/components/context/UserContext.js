@@ -11,6 +11,7 @@ export const UserProvider = ({ children }) => {
         id:null,
         auth: false,
         redirect:false,
+        rol:'',
         ciudad:''
 });
 

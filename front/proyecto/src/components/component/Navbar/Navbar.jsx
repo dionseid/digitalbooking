@@ -107,7 +107,11 @@ const Navbar = ({ onClick }) => {
       return (
         <div className="SidebarBienvenida">
           <div>
-            <Link to="/administracion" className="linkAdministracion">Administracion</Link>            
+          {
+            user.rol === "ADMIN" ?
+            <Link to="/administracion" className="linkAdministracion">Administracion</Link> :
+            <Link to="/misReservas" className="linkAdministracion">Mis Reservas</Link>            
+          }
           </div>          
           <div className="lineaHorizontal"/>
           <div>
@@ -138,6 +142,7 @@ const Navbar = ({ onClick }) => {
       id: null,
       auth: false,
       redirect: false,
+      rol:"",
       ciudad: "",
     });
     navigate("/");
