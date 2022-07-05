@@ -3,7 +3,6 @@
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    padding-top: 20px;
     margin-bottom: 30px;
   }
   
@@ -152,6 +151,10 @@
     font-size: 18px;
   }
 
+/*   .cardRecomendacion .cardBody{
+    width: 600px;
+  } */
+
   
   .cardBody{
     padding: 10px;
@@ -255,6 +258,10 @@
     width: 635px;
     height: 500px;
     margin-bottom: 30px;
+  }
+
+  .cardRecomendacion .cardBody{
+    width: 100%;
   }
 
   .parrafoEmpty{
