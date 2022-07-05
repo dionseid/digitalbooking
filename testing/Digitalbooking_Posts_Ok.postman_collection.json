@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "0254d26f-68eb-41ba-9823-0cbeb9bb360d",
-		"name": "Digitalbooking Posts",
+		"_postman_id": "50d2b433-be5f-4b77-af20-ac63b9f7a451",
+		"name": "Digitalbooking Posts Ok",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18045963"
 	},
@@ -24,14 +24,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/roles/agregarRol",
-							"protocol": "http",
+							"raw": "{{url}}roles/agregarRol",
 							"host": [
-								"localhost"
+								"{{url}}roles"
 							],
-							"port": "8080",
 							"path": [
-								"roles",
 								"agregarRol"
 							]
 						}
@@ -53,14 +50,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/roles/agregarRol",
-							"protocol": "http",
+							"raw": "{{url}}roles/agregarRol",
 							"host": [
-								"localhost"
+								"{{url}}roles"
 							],
-							"port": "8080",
 							"path": [
-								"roles",
 								"agregarRol"
 							]
 						}
@@ -87,14 +81,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/usuarios/agregarUsuario",
-							"protocol": "http",
+							"raw": "{{url}}usuarios/agregarUsuario",
 							"host": [
-								"localhost"
+								"{{url}}usuarios"
 							],
-							"port": "8080",
 							"path": [
-								"usuarios",
 								"agregarUsuario"
 							]
 						}
@@ -116,14 +107,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/usuarios/agregarUsuario",
-							"protocol": "http",
+							"raw": "{{url}}usuarios/agregarUsuario",
 							"host": [
-								"localhost"
+								"{{url}}usuarios"
 							],
-							"port": "8080",
 							"path": [
-								"usuarios",
 								"agregarUsuario"
 							]
 						}
@@ -163,14 +151,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/authenticate",
-							"protocol": "http",
+							"raw": "{{url}}authenticate",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"authenticate"
+								"{{url}}authenticate"
 							]
 						}
 					},
@@ -196,14 +179,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/categorias",
-							"protocol": "http",
+							"raw": "{{url}}categorias",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"categorias"
+								"{{url}}categorias"
 							]
 						}
 					},
@@ -224,14 +202,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/categorias",
-							"protocol": "http",
+							"raw": "{{url}}categorias",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"categorias"
+								"{{url}}categorias"
 							]
 						}
 					},
@@ -252,14 +225,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/categorias",
-							"protocol": "http",
+							"raw": "{{url}}categorias",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"categorias"
+								"{{url}}categorias"
 							]
 						}
 					},
@@ -280,14 +248,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/categorias",
-							"protocol": "http",
+							"raw": "{{url}}categorias",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"categorias"
+								"{{url}}categorias"
 							]
 						}
 					},
@@ -313,14 +276,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/ciudades",
-							"protocol": "http",
+							"raw": "{{url}}ciudades",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"ciudades"
+								"{{url}}ciudades"
 							]
 						}
 					},
@@ -341,14 +299,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/ciudades",
-							"protocol": "http",
+							"raw": "{{url}}ciudades",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"ciudades"
+								"{{url}}ciudades"
 							]
 						}
 					},
@@ -369,14 +322,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/ciudades",
-							"protocol": "http",
+							"raw": "{{url}}ciudades",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"ciudades"
+								"{{url}}ciudades"
 							]
 						}
 					},
@@ -389,7 +337,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"San Carlos de Bariloche\",\r\n    \"provincia\":\"Rio Negro\",\r\n    \"pais\":\"Argentina\"\r\n}",
+							"raw": "{\r\n    \"nombre\":\"Cordoba\",\r\n    \"provincia\":\"Cordoba\",\r\n    \"pais\":\"Argentina\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -397,14 +345,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/ciudades",
-							"protocol": "http",
+							"raw": "{{url}}ciudades",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"ciudades"
+								"{{url}}ciudades"
 							]
 						}
 					},
@@ -440,14 +383,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/productos/agregarProducto",
-							"protocol": "http",
+							"raw": "{{url}}productos/agregarProducto",
 							"host": [
-								"localhost"
+								"{{url}}productos"
 							],
-							"port": "8080",
 							"path": [
-								"productos",
 								"agregarProducto"
 							]
 						}
@@ -469,14 +409,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/productos/agregarProducto",
-							"protocol": "http",
+							"raw": "{{url}}productos/agregarProducto",
 							"host": [
-								"localhost"
+								"{{url}}productos"
 							],
-							"port": "8080",
 							"path": [
-								"productos",
 								"agregarProducto"
 							]
 						}
@@ -498,14 +435,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/productos/agregarProducto",
-							"protocol": "http",
+							"raw": "{{url}}productos/agregarProducto",
 							"host": [
-								"localhost"
+								"{{url}}productos"
 							],
-							"port": "8080",
 							"path": [
-								"productos",
 								"agregarProducto"
 							]
 						}
@@ -527,14 +461,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/productos/agregarProducto",
-							"protocol": "http",
+							"raw": "{{url}}productos/agregarProducto",
 							"host": [
-								"localhost"
+								"{{url}}productos"
 							],
-							"port": "8080",
 							"path": [
-								"productos",
 								"agregarProducto"
 							]
 						}
@@ -589,7 +520,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Prohibido fumar\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Prohibido fumar\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -597,14 +528,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -618,7 +546,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"No se permiten fiestas\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"No se permiten fiestas\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -626,14 +554,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -660,14 +585,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -681,7 +603,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Detector de humo\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Detector de humo\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -689,14 +611,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -710,7 +629,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -718,14 +637,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -744,7 +660,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":3,\r\n    \"descripcion\":\"descargar detalles de cancelación de esta estadía\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":3,\r\n    \"descripcion\":\"Descargar detalles de cancelacion de esta estadia\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -752,14 +668,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -783,7 +696,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Prohibido fumar\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Prohibido fumar\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -791,14 +704,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -812,7 +722,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"No se permiten fiestas\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"No se permiten fiestas\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -820,14 +730,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -854,14 +761,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -875,7 +779,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Detector de humo\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Detector de humo\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -883,14 +787,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -904,7 +805,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -912,14 +813,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -938,7 +836,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":3,\r\n    \"descripcion\":\"descargar detalles de cancelación de esta estadía\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -946,14 +844,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -977,7 +872,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Prohibido fumar\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Prohibido fumar\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -985,14 +880,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -1006,7 +898,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"No se permiten fiestas\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"No se permiten fiestas\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1014,14 +906,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -1048,14 +937,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -1069,7 +955,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Detector de humo\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Detector de humo\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1077,14 +963,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -1098,7 +981,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1106,14 +989,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -1132,7 +1012,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":3,\r\n    \"descripcion\":\"descargar detalles de cancelación de esta estadía\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":3,\r\n    \"descripcion\":\"descargar detalles de cancelación de esta estadía\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1140,14 +1020,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -1171,7 +1048,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Prohibido fumar\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"Prohibido fumar\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1179,14 +1056,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -1200,7 +1074,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"No se permiten fiestas\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":1,\r\n    \"descripcion\":\"No se permiten fiestas\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1208,14 +1082,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -1242,14 +1113,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -1263,7 +1131,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Detector de humo\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Detector de humo\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1271,14 +1139,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -1292,7 +1157,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":2,\r\n    \"descripcion\":\"Depósito de seguridad\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1300,14 +1165,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -1326,7 +1188,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"tipo\":3,\r\n    \"descripcion\":\"descargar detalles de cancelación de esta estadía\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
+											"raw": "{\r\n    \"tipo\":3,\r\n    \"descripcion\":\"descargar detalles de cancelación de esta estadía\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1334,14 +1196,11 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8080/politicas/agregarPolitica",
-											"protocol": "http",
+											"raw": "{{url}}politicas/agregarPolitica",
 											"host": [
-												"localhost"
+												"{{url}}politicas"
 											],
-											"port": "8080",
 											"path": [
-												"politicas",
 												"agregarPolitica"
 											]
 										}
@@ -1375,14 +1234,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1404,14 +1260,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1433,14 +1286,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1462,14 +1312,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1491,14 +1338,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1525,14 +1369,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1554,14 +1395,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1583,14 +1421,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1612,14 +1447,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1641,14 +1473,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1675,14 +1504,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1704,14 +1530,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1733,14 +1556,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1762,14 +1582,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1791,14 +1608,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1825,14 +1639,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1854,14 +1665,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1883,14 +1691,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1912,14 +1717,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1941,14 +1743,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/imagenes/agregarImagen",
-									"protocol": "http",
+									"raw": "{{url}}imagenes/agregarImagen",
 									"host": [
-										"localhost"
+										"{{url}}imagenes"
 									],
-									"port": "8080",
 									"path": [
-										"imagenes",
 										"agregarImagen"
 									]
 								}
@@ -1963,575 +1762,212 @@
 			"name": "Caracteristicas",
 			"item": [
 				{
-					"name": "Producto 1",
-					"item": [
-						{
-							"name": "Caracteristica 1",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"Microondas\",\r\n    \"icono\":\"microwave\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
+					"name": "1 Microondas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Microondas\",\r\n    \"icono\":\"microwave\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							},
-							"response": []
+							}
 						},
-						{
-							"name": "Caracteristica 2",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"Cocina\",\r\n    \"icono\":\"countertops\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Caracteristica 3",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"Estacionamiento\",\r\n    \"icono\":\"directions_car\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Caracteristica 4",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"WiFi\",\r\n    \"icono\":\"wifi\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Caracteristica 5",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\": \"Pileta\",\r\n    \"icono\": \"pool\",\r\n    \"producto\":{\r\n        \"id\":1\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
 						}
-					]
+					},
+					"response": []
 				},
 				{
-					"name": "Producto 2",
-					"item": [
-						{
-							"name": "Caracteristica 1",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"Microondas\",\r\n    \"icono\":\"microwave\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
+					"name": "2 Cocina",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Cocina\",\r\n    \"icono\":\"countertops\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							},
-							"response": []
+							}
 						},
-						{
-							"name": "Caracteristica 2",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"Cocina\",\r\n    \"icono\":\"countertops\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Caracteristica 3",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"Estacionamiento\",\r\n    \"icono\":\"directions_car\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Caracteristica 4",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"WiFi\",\r\n    \"icono\":\"wifi\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Caracteristica 5",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\": \"Pileta\",\r\n    \"icono\": \"pool\",\r\n    \"producto\":{\r\n        \"id\":2\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
 						}
-					]
+					},
+					"response": []
 				},
 				{
-					"name": "Producto 3",
-					"item": [
-						{
-							"name": "Caracteristica 1",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"Microondas\",\r\n    \"icono\":\"microwave\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
+					"name": "3 Estacionamiento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Estacionamiento\",\r\n    \"icono\":\"directions_car\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							},
-							"response": []
+							}
 						},
-						{
-							"name": "Caracteristica 2",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"Cocina\",\r\n    \"icono\":\"countertops\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Caracteristica 3",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\": \"Apto mascotas\",\r\n    \"icono\": \"pets\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Caracteristica 4",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"WiFi\",\r\n    \"icono\":\"wifi\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Caracteristica 5",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\": \"Televisor\",\r\n    \"icono\": \"tv\",\r\n    \"producto\":{\r\n        \"id\":3\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
 						}
-					]
+					},
+					"response": []
 				},
 				{
-					"name": "Producto 4",
-					"item": [
-						{
-							"name": "Caracteristica 1",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"WiFi\",\r\n    \"icono\":\"wifi\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
+					"name": "4 Wifi",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"WiFi\",\r\n    \"icono\":\"wifi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							},
-							"response": []
+							}
 						},
-						{
-							"name": "Caracteristica 2",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"Cocina\",\r\n    \"icono\":\"countertops\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Caracteristica 3",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"Televisor\",\r\n    \"icono\":\"tv\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Caracteristica 4",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\": \"Apto mascotas\",\r\n    \"icono\": \"pets\",\r\n    \"producto\":{\r\n        \"id\":4\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/caracteristicas/agregarCaracteristica",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"caracteristicas",
-										"agregarCaracteristica"
-									]
-								}
-							},
-							"response": []
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "5 Pileta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Pileta\",\r\n    \"icono\": \"pool\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6 Mascotas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"nombre\": \"Apto mascotas\",\r\n    \"icono\": \"pets\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7 Aire acondicionado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"nombre\": \"Aire acondicionado\",\r\n    \"icono\": \"ac_unit\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8 Tv",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Televisor\",\r\n  \"icono\": \"tv\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}caracteristicas/agregarCaracteristica",
+							"host": [
+								"{{url}}caracteristicas"
+							],
+							"path": [
+								"agregarCaracteristica"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -2566,14 +2002,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/authenticate",
-							"protocol": "http",
+							"raw": "{{url}}authenticate",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"authenticate"
+								"{{url}}authenticate"
 							]
 						}
 					},
@@ -2622,14 +2053,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/reserva/nuevaReserva",
-							"protocol": "http",
+							"raw": "{{url}}reserva/nuevaReserva",
 							"host": [
-								"localhost"
+								"{{url}}reserva"
 							],
-							"port": "8080",
 							"path": [
-								"reserva",
 								"nuevaReserva"
 							]
 						}
@@ -2674,14 +2102,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/reserva/nuevaReserva",
-							"protocol": "http",
+							"raw": "{{url}}reserva/nuevaReserva",
 							"host": [
-								"localhost"
+								"{{url}}reserva"
 							],
-							"port": "8080",
 							"path": [
-								"reserva",
 								"nuevaReserva"
 							]
 						}
@@ -2719,6 +2144,526 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "Productos-Caracteristicas",
+			"item": [
+				{
+					"name": "Producto 1",
+					"item": [
+						{
+							"name": "P1 C1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P1 C2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 2\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P1 C3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 3\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P1 C4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 1\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 4\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Producto 2",
+					"item": [
+						{
+							"name": "P2 C1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 2\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P2 C4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 2\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 4\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P2 C6",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 2\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 6\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P2 C7",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 2\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 7\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Producto 3",
+					"item": [
+						{
+							"name": "P3 C2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 3\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 2\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P3 C4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 3\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 4\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P3 C5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 3\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 5\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P3 C7",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 3\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 7\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P3 C8",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 3\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 8\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Producto 4",
+					"item": [
+						{
+							"name": "P4 C3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 4\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 3\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P4 C4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 4\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 4\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P4 C6",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 4\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 6\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P4 C7",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 4\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 7\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "P4 C8",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"producto\": {\r\n        \"id\": 4\r\n    },\r\n    \"caracteristica\": {\r\n        \"id\": 8\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}productosCaracteristicas/agregarProdCaract",
+									"host": [
+										"{{url}}productosCaracteristicas"
+									],
+									"path": [
+										"agregarProdCaract"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8080/",
+			"type": "string"
 		}
 	]
 }

@@ -32,6 +32,9 @@ const FormLogin = () => {
     cambiarFormularioValido(true)
   },[email.campo,password.campo])
 
+
+  
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -44,17 +47,18 @@ const FormLogin = () => {
           loginLogoutEvent({
             nombre: respuestaPost.nombre,
             apellido: respuestaPost.apellido,
-            mail: respuestaPost.email&&respuestaPost.email,
+            mail: respuestaPost.emailUsuario,
             id: respuestaPost.id&&respuestaPost.id,
             auth: true,
             redirect: false,
             rol: respuestaPost.rol,
             ciudad: respuestaPost.ciudad ? respuestaPost.ciudad : ""});
+            
           navigate("/")}else{
           
             cambiarFormularioValido(false)
       }
-          
+      
         }
     console.log("formvalid: ",formularioValido)
   };

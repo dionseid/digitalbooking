@@ -1,17 +1,18 @@
-import axiosConnection from "../../../helpers/axiosConnection";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axiosConnection from "../../../helpers/axiosConnection";
 import "./caracteristicas.scss";
 
 export default function Caracteristicas() {
   const [dataCaracteristicas, setDataCaracteristicas] = useState([]);
   const { id } = useParams();
+
   useEffect(() => {
     // TODO modificar url
     axiosConnection
-      .get("http://localhost:8080/caracteristicas/listarCaracteristicas")
+      .get(`/productos/buscarProductoPorId/${id}`)
       .then((response) => {
-        setDataCaracteristicas(response.data.data);
+        setDataCaracteristicas(response.data.data.caracteristicas);
       });
   }, []);
 
@@ -20,10 +21,9 @@ export default function Caracteristicas() {
       <h2>¿Qué ofrece este lugar?</h2>
       <div className="contendorCaracteristicas">
         {dataCaracteristicas
-          .filter((imagen) => imagen.producto?.id === id)
           .map((cat) => (
             <div key={cat.id} className="caracteristica">
-              <span class="material-symbols-outlined">{cat.icono}</span>
+              <span class="material-symbols-outlined">{cat.caracteristica.icono}</span>
               <p>{cat.nombre}</p>
             </div>
           ))}

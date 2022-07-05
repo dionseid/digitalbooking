@@ -8,7 +8,7 @@ const Banner = ({ onChange, startDate, endDate, setDateRange, onClick }) => {
   return (
     <div className="banner">
       <h1 className="tituloBanner">
-        Busca ofertas en hoteles, casas y mucho más
+        Busca ofertas en departamentos, casas y mucho más
       </h1>
       <div className="buscador">
         <SelectCiudades onChange={onChange} />

@@ -8,7 +8,7 @@ const DescripcionProducto = () => {
   const { id } = useParams();
   useEffect(() => {
     axiosConnection
-      .get(`http://localhost:8080/productos/buscarProductoPorId/${id}`)
+      .get(`/productos/buscarProductoPorId/${id}`)
       .then((response) => {
         setDataDescripcion(response.data.data);
       });
