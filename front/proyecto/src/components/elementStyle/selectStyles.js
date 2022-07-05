@@ -3,6 +3,8 @@ const selectStyles = {
     option: (provided, state) => ({
       ...provided,
       borderBottom: '1px solid #f0572d',
+      backgroundColor: state.isSelected? '#f0572d': "#fff",       
+      lastOfType: 'none',
       color: '#000000',
       fontStyle: 'normal',
       fontWeight: '700',

@@ -26,7 +26,7 @@ export default function SelectCiudades({ onChange }) {
             ¿A dónde vamos?
           </div>
         }
-        className="inputBanner"
+        className="inputBanner"        
         options={dataCiudades.map((ciudad) => ({
           label: (
             <div className="contenedorLabel">
@@ -35,8 +35,9 @@ export default function SelectCiudades({ onChange }) {
                 className="iconoLocacionLabel"
               />
               <div>
-                <dt>{ciudad.nombre}</dt>
-                <dd
+                <dt>{ciudad.nombre}, {ciudad.pais}</dt>
+                
+           {/*      <dd
                   style={{
                     fontSize: "14px",
                     lineHeight: "16px",
@@ -44,9 +45,11 @@ export default function SelectCiudades({ onChange }) {
                   }}
                 >
                   {ciudad.pais}
-                </dd>
-              </div>
+                </dd> */}
+                
+              </div>              
             </div>
+            
           ),
           value: ciudad.id,
         }))}
