@@ -166,7 +166,7 @@ export default function DetallesReserva() {
         },
       }));
 
-      //navigate(`/reservaExitosa`);
+      navigate(`/reservaExitosa`);
     } //}
   };
 
