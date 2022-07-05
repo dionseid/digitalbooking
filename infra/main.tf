@@ -17,7 +17,7 @@ terraform {
 
 provider "aws" {
   #profile = "digital_booking_g8" # Uso local; no forma parte del pipeline
-  region  = var.region
+  region = var.region
 }
 
 # module "web_app" {
