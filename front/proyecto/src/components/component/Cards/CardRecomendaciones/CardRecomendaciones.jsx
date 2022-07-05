@@ -126,7 +126,7 @@ const CardRecomendacion = ({
                 <p>
                   {verMas
                     ? card.descripcion
-                    : card.descripcion.split(" ", 8).join(" ")}
+                    : card.descripcion?.split(" ", 12).join(" ")}
                   <span className="mas" onClick={() => setVerMas(!verMas)}>
                     {verMas ? " ver menos" : " ver más..."}
                   </span>

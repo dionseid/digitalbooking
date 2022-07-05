@@ -13,7 +13,6 @@ export default function Caracteristicas() {
       .get(`/productos/buscarProductoPorId/${id}`)
       .then((response) => {
         setDataCaracteristicas(response.data.data.caracteristicas);
-        console.log("CaracteristicasCaracteristicas: ", response.data.data.caracteristicas);
       });
   }, []);
 
