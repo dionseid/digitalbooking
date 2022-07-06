@@ -83,7 +83,7 @@ const CardRecomendacion = ({
                 style={{ backgroundImage: "url('" + getImage(card) + "')" }}
                 className="fondoImagenProducto"
               />
-              <div className="cardBody">
+              <div className={`cardBody ${verMas? null : "widthBody"}`}>
                 <div className="presentacion">
                   <div>
                     <div className="categoriaYEstrellas">
