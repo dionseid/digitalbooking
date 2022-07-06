@@ -16,7 +16,6 @@
 
 .logoNavBar {
   display: flex;
-  padding: 10px;
   color: #282c34;
   align-items: center;
 }
@@ -25,6 +24,15 @@
   font-style: italic;
   font-weight: 300;
   font-size: 20px;
+  margin-bottom: 0;
+  align-self: center;
+}
+
+.cruz{
+  border: none;
+  background-color: #FFFFFF;
+  padding: 3px;
+  font-weight: bold;
 }
 
 
