@@ -20,7 +20,7 @@ public class DigitalbookingApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins("https://remo-digitalbooking.click", "http://www.remo-digitalbooking.click",
+						.allowedOrigins("https://remo-digitalbooking.click", "https://www.remo-digitalbooking.click",
 								"http://remo-digitalbooking.click", "http://www.remo-digitalbooking.click")
 						.allowedMethods("*")
 						.allowedHeaders("*");
