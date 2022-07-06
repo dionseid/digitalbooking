@@ -1,1 +1,1 @@
-GET http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/categorias HTTP/1.1
+GET http://remo-digitalbooking.click/categorias HTTP/1.1
