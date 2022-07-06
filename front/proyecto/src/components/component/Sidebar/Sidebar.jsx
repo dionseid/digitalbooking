@@ -39,7 +39,7 @@ const Sidebar = () => {
       id: null,
       auth: false,
       redirect: false,
-      rol:"",
+      rol: "",
       ciudad: "",
     });
   };
@@ -51,7 +51,7 @@ const Sidebar = () => {
           Crear cuenta
         </Link>
         <Link to="/login" className="buttonNavSideLogin" /*onClick={cerrarMenu}*/>
-          Iniciar Sesión
+          Iniciar sesión
         </Link>
       </>
     ),
@@ -61,14 +61,14 @@ const Sidebar = () => {
           Crear cuenta
         </Link>
         <Link to="/login" className="buttonNavSideLogin" /*onClick={cerrarMenu}*/>
-          Iniciar Sesión
+          Iniciar sesión
         </Link>
       </>
     ),
     "/account": (
       <>
         <Link to="/login" className="buttonNavSideLogin" /*onClick={cerrarMenu}*/>
-          Iniciar Sesión
+          Iniciar sesión
         </Link>
       </>
     ),
@@ -88,10 +88,10 @@ const Sidebar = () => {
           <div className="contenedorMisReservas-administracion">
             {
               user.rol === "ADMIN" ?
-              <Link to="/administracion" className="linkAdministracion">Administracion</Link> :
-              <Link to="/misReservas" className="linkAdministracion">Mis Reservas</Link>            
+                <Link to="/administracion" className="linkAdministracion">Administracion</Link> :
+                <Link to="/misReservas" className="linkAdministracion">Mis Reservas</Link>
             }
-          </div> 
+          </div>
           <p>
             ¿Deseas{" "}
             <Link className="menu-item" to="/login" onClick={handleClick}>
@@ -125,7 +125,7 @@ const Sidebar = () => {
   return (
     <>
       {windowWidth <= 768 && (
-        <Menu  right /*isOpen={menuAbierto} onStateChange={estado=>manejarCambioDeEstadoMenu(estado)}*/  >
+        <Menu right /*isOpen={menuAbierto} onStateChange={estado=>manejarCambioDeEstadoMenu(estado)}*/  >
           <div className="upper-colored-box">{handleAuthenticated()}</div>
           <div className="menuConFooter">
             <div className="menu-main">{handleIsAuthMenu()}</div>

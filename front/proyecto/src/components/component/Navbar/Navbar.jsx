@@ -48,7 +48,7 @@ const Navbar = ({ onClick }) => {
         </Link>
         <Link to="/login">
           <Button variant="primary" className="buttonNavBarLogin">
-            Iniciar Sesión
+            Iniciar sesión
           </Button>
         </Link>
       </>
@@ -62,7 +62,7 @@ const Navbar = ({ onClick }) => {
         </Link>
         <Link to="/login">
           <Button variant="primary" className="buttonNavBarLogin">
-            Iniciar Sesión
+            Iniciar sesión
           </Button>
         </Link>
       </>
@@ -76,7 +76,7 @@ const Navbar = ({ onClick }) => {
         </Link>
         <Link to="/login">
           <Button variant="primary" className="buttonNavBarLogin">
-            Iniciar Sesión
+            Iniciar sesión
           </Button>
         </Link>
       </>
@@ -85,7 +85,7 @@ const Navbar = ({ onClick }) => {
       <>
         <Link to="/login">
           <Button variant="primary" className="buttonNavBarLogin">
-            Iniciar Sesión
+            Iniciar sesión
           </Button>
         </Link>
       </>
@@ -107,15 +107,15 @@ const Navbar = ({ onClick }) => {
       return (
         <div className="SidebarBienvenida">
           <div>
-          {
-            user.rol === "ADMIN" ?
-            <Link to="/administracion" className="linkAdministracion">Administracion</Link> :
-            <Link to="/misReservas" className="linkAdministracion">Mis Reservas</Link>            
-          }
-          </div>          
-          <div className="lineaHorizontal"/>
+            {
+              user.rol === "ADMIN" ?
+                <Link to="/administracion" className="linkAdministracion">Administracion</Link> :
+                <Link to="/misReservas" className="linkAdministracion">Mis Reservas</Link>
+            }
+          </div>
+          <div className="lineaHorizontal" />
           <div>
-            <span> 
+            <span>
               {/* {console.log("user: ", user)}              */}
               {user.nombre[0] + user.apellido[0]}
             </span>
@@ -142,7 +142,7 @@ const Navbar = ({ onClick }) => {
       id: null,
       auth: false,
       redirect: false,
-      rol:"",
+      rol: "",
       ciudad: "",
     });
     navigate("/");
