@@ -2,13 +2,15 @@
 
 .botonGaleria{
     color: #fff;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 18px;
     border: none;
     position: absolute;
     right: 10px;
     top: -64px;
     z-index: 30;
     width: 90px;
+    text-decoration: none;
 }
 
 .botonGaleria:hover{
