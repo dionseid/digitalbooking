@@ -7,6 +7,7 @@ import  UserProvider  from "../../components/context/UserContext";
 import MensajeSinReservas from "../../components/component/MensajeExito/MensajeSinReservas/MensajeSinReservas";
 import ListadoMisReservas from "../../components/component/ListadoMisReservas/ListadoMisReservas";
 
+
 const MisReservas = () => {
     const [reservas, setReservas] = useState(null)
     const {user} = useContext(UserProvider)
@@ -15,7 +16,7 @@ const MisReservas = () => {
         try{
             console.log("user id", user.id)
             const respApi = await axiosConnection.get(`/reserva/listarByUsuario/${user.id}`)
-            setReservas(respApi.data)
+            setReservas(respApi.data.data)
             console.log("Traer reservas",reservas)
             return traerReservas
         }catch(error){
@@ -37,7 +38,7 @@ const MisReservas = () => {
             {console.log("reservas: ",reservas)}
         </header>
         <body>
-            {reservas === null ? <ListadoMisReservas/> : <MensajeSinReservas reservas={reservas}/>}
+            {reservas === null ? <MensajeSinReservas />  : <ListadoMisReservas reservas={reservas} /> }
         </body>
         <footer>
             <Footer/>
