@@ -4,7 +4,7 @@ const axiosConnection = axios.create({
     baseURL: "https://remo-digitalbooking.click",
     headers: {
         "Content-type": "application/json",
-        "Accept": "application/json"
+        "Accept": "application/json",
     }
 })
 

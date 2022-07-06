@@ -4,21 +4,30 @@ import TituloProducto from "../../components/component/TituloProducto/TituloProd
 import Footer from "../../components/component/Footer/Footer";
 import axiosConnection from "../../helpers/axiosConnection";
 import  UserProvider  from "../../components/context/UserContext";
+import MensajeSinReservas from "../../components/component/MensajeExito/MensajeSinReservas/MensajeSinReservas";
+import ListadoMisReservas from "../../components/component/ListadoMisReservas/ListadoMisReservas";
+
 
 const MisReservas = () => {
-    const [reservas, setReservas] = useState()
+    const [reservas, setReservas] = useState(null)
     const {user} = useContext(UserProvider)
 
     const traerReservas = async () => {
-        const respApi = await axiosConnection.get(`/reserva/listarByUsuario/${user.id}`)
-        setReservas(respApi.data)
-        console.log(reservas)
-        return traerReservas
+        try{
+            console.log("user id", user.id)
+            const respApi = await axiosConnection.get(`/reserva/listarByUsuario/${user.id}`)
+            setReservas(respApi.data.data)
+            console.log("Traer reservas",reservas)
+            return traerReservas
+        }catch(error){
+            console.log("Traer reservas",error)
+        }
     }
 
     useEffect(()=>{
-        
-    })
+        traerReservas()
+
+    },[])
 
 
 
@@ -26,8 +35,10 @@ const MisReservas = () => {
         <header>
             <Navbar />
             <TituloProducto/>
+            {console.log("reservas: ",reservas)}
         </header>
         <body>
+            {reservas === null ? <MensajeSinReservas />  : <ListadoMisReservas reservas={reservas} /> }
         </body>
         <footer>
             <Footer/>
