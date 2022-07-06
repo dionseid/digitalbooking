@@ -3,10 +3,14 @@ import axiosConnection from "../../../helpers/axiosConnection";
 import './ListadoMisReservas.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 
 const ListadoMisReservas = ({reservas}) => {
     const [imagenes, setImagenes] = useState([])
+    const [elementoEliminado, setElementoEliminado] = useState(false)
+    const [reservasTraidas ,setReservasTraidas] = useState(reservas)
+    const navigate = useNavigate()
     
     const traerImagenes = async () => {
         try{
@@ -22,22 +26,40 @@ const ListadoMisReservas = ({reservas}) => {
         traerImagenes()
     },[])
 
+
+    
+    
+    
     const filtrarImagenes = id => {
         if(imagenes.length>0)
-            return imagenes.filter(e => e.producto.id === id)[0]?.url
+        return imagenes.filter(e => e.producto.id === id)[0]?.url
     }
+    
+    const eliminarReserva = async (id) => {
+        try{
+            const respApi = await axiosConnection.delete(`/reserva/eliminarReserva/${id}`)
+            setReservasTraidas(reservasTraidas.filter(e =>e.id !== id))
+            console.log("reservas modificado", reservas)
+            setElementoEliminado((prev) => !prev)
+            
+        }catch(error){
+            console.error(error)
+        }
+    }
+
+    useEffect(()=> console.log(elementoEliminado),[reservasTraidas])
+    
     return<div className="contenedorReservas">
-        {console.log("ListadoMisReservas: ",reservas)   }
-        {reservas.map((e)=><div className="reserva">
+        {console.log("ListadoMisReservas: ",reservasTraidas)   }
+        {reservasTraidas?.map((e)=><div className="reserva">
             <div className="contenedorImagen">
+                <span onClick={()=>eliminarReserva(e.id)}>&times;</span>
                 <img src={filtrarImagenes(e.producto.id)}/>
             </div>
             <span className="categoriaListadoMisReservas">{e.producto.categoria.titulo}</span>
             <h2 className="tituloListadoMisReservas">{e.producto.nombre}</h2>
-            <p className="ciudadListadoReserva">                <FontAwesomeIcon
-                  icon={faLocationDot}
-                  style={{ paddingRight: "5px" }}
-                />{`${e.producto.ciudad.provincia}, ${e.producto.ciudad.nombre}, ${e.producto.ciudad.pais}.`}</p>
+            <p className="ciudadListadoReserva">                
+            <FontAwesomeIcon icon={faLocationDot} style={{ paddingRight: "5px" }}/>{`${e.producto.ciudad.provincia}, ${e.producto.ciudad.nombre}, ${e.producto.ciudad.pais}.`}</p>
             <div className="checkinReservaListadoContenedor">
                 <span className="checkinReservaListadoDescripcion">Check in</span>
                 <span className="fechaReservaListado">{e.fechaInicial}</span>
