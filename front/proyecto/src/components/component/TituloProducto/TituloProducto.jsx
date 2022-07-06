@@ -21,7 +21,7 @@ const TituloProducto = () => {
   const Titulo = () => {
     if (dataTitulo.length === 0) {
       return (<>
-              <h2>{user.rol === "ADMIN" ? "Administración" : "Mis Reservas" }</h2>
+              {user.rol === "ADMIN" ? <div className="tituloAdministracion"><h2>Administración</h2><Link to="/misProductos" className="linkMisProductos"><h2>Mis productos</h2></Link></div> : <h2>Mis Reservas</h2> }
             </>
       );
     } else {

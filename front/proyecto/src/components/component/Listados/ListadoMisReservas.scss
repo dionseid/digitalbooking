@@ -1,15 +1,16 @@
 @import './../../../Scss/abstracts/variables';
 
-.contenedorReservas{
+.contenedorReservas, .contenedorProductos{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 25px;
+    margin-bottom: 80px;
 }
 
-.reserva{
+.reserva, .productos{
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     height: 460px;
@@ -27,7 +28,7 @@
     }
 }
 
-.categoriaListadoMisReservas{
+.categoriaListadoMisReservas, .categoriaListadoMisProductos{
     margin-top: 20px;
     margin-left: 10px;
     font-size: 14px;
@@ -35,17 +36,21 @@
     color: #ac9b9f;
 }
 
-.tituloListadoMisReservas{
+.tituloListadoMisReservas, .tituloListadoMisProductos{
     color: #31363F;
     font-size: 20px;
     padding-bottom: 0;
     
 }
 
-.ciudadListadoReserva{
+.ciudadListadoReserva, .ciudadListadoProductos{
     margin: 0 10px;
     padding: 10px;
     border-bottom: 1px solid $primaryColorOrange;
+}
+.ciudadListadoProductos{
+    padding-left: 0px;
+
 }
 
 .checkinReservaListadoContenedor, .checkoutReservaListado{
@@ -67,18 +72,27 @@
     border-bottom: 1px solid $primaryColorOrange;
 }
 
+.info{
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+
 
 
 /*Responsive*/
 @media screen and (max-width: 768px){
 
-    .contenedorReservas{
+    .contenedorReservas, .contenedorProductos{
         margin-top: 70px;
         margin-bottom: 80px;
         
     }
 
-    .reserva{
+    .reserva, .productos{
         width: 350px;
         height: 490px;
     }
@@ -89,12 +103,12 @@
   }
 
 @media screen and (max-width: 460px){
-    .contenedorReservas{
+    .contenedorReservas, .contenedorProductos{
         flex-direction: column;
         margin-bottom: 80px;
     }
 
-    .reserva{
+    .reserva, .productos{
         margin-bottom: 20px;
         height: 490px;
     }

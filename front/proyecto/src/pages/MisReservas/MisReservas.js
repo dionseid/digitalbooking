@@ -5,7 +5,7 @@ import Footer from "../../components/component/Footer/Footer";
 import axiosConnection from "../../helpers/axiosConnection";
 import  UserProvider  from "../../components/context/UserContext";
 import MensajeSinReservas from "../../components/component/MensajeExito/MensajeSinReservas/MensajeSinReservas";
-import ListadoMisReservas from "../../components/component/ListadoMisReservas/ListadoMisReservas";
+import ListadoMisReservas from "../../components/component/Listados/ListadoMisReservas/ListadoMisReservas";
 
 
 const MisReservas = () => {

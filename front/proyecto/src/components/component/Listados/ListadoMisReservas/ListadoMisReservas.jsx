@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from "react";
-import axiosConnection from "../../../helpers/axiosConnection";
-import './ListadoMisReservas.scss';
+import axiosConnection from "../../../../helpers/axiosConnection";
+import '../ListadoMisReservas.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
