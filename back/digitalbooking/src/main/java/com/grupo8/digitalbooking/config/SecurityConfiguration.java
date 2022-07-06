@@ -32,11 +32,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/authenticate",
-                            "/v2/api-docs/**",
-                            "/swagger-ui/**",
-                            "/swagger-resources/**",
-                            "/configuration/**"
-                        ).permitAll()
+                        "/v2/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-resources/**",
+                        "/configuration/**")
+                .permitAll()
                 .antMatchers("/usuarios/agregarUsuario").permitAll()
                 .antMatchers("/usuarios/actualizarUsuario").permitAll()
                 .antMatchers("/usuarios/eliminarUsuario/**").permitAll()
@@ -56,8 +56,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/productosCaracteristicas/**").permitAll()
                 .antMatchers("/productos/agregarProducto").hasAuthority("ADMIN")
                 .antMatchers("/reserva/nuevaReserva").hasAuthority("CLIENT")
-//                .anyRequest().authenticated()
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
+                // .anyRequest().permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
