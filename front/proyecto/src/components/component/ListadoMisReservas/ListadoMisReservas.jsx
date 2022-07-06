@@ -1,6 +1,8 @@
 import React, { useEffect, useState} from "react";
 import axiosConnection from "../../../helpers/axiosConnection";
-import './ListadoMisReservas.scss'
+import './ListadoMisReservas.scss';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 
 const ListadoMisReservas = ({reservas}) => {
@@ -32,7 +34,10 @@ const ListadoMisReservas = ({reservas}) => {
             </div>
             <span className="categoriaListadoMisReservas">{e.producto.categoria.titulo}</span>
             <h2 className="tituloListadoMisReservas">{e.producto.nombre}</h2>
-            <p className="ciudadListadoReserva">{`${e.producto.ciudad.provincia}, ${e.producto.ciudad.nombre}, ${e.producto.ciudad.pais}.`}</p>
+            <p className="ciudadListadoReserva">                <FontAwesomeIcon
+                  icon={faLocationDot}
+                  style={{ paddingRight: "5px" }}
+                />{`${e.producto.ciudad.provincia}, ${e.producto.ciudad.nombre}, ${e.producto.ciudad.pais}.`}</p>
             <div className="checkinReservaListadoContenedor">
                 <span className="checkinReservaListadoDescripcion">Check in</span>
                 <span className="fechaReservaListado">{e.fechaInicial}</span>
@@ -42,7 +47,9 @@ const ListadoMisReservas = ({reservas}) => {
                 <span className="fechaReservaListado">{e.fechaFinal}</span>
             </div>
         </div>)}
+        <div className="separador"/>
     </div>
+    
 }
 
 export default ListadoMisReservas;
