@@ -18,6 +18,10 @@ h2{
     font-style: normal;
 }
 
+.contenedorDeDetalleReserva{
+    width: 430px;
+}
+
 
 /* Responsive */
 @media screen and (max-width: 768px){
@@ -28,4 +32,24 @@ h2{
     .completarDatos{
         width: 100%;
     }
+    .contenedorDeDetalleReserva{
+        width: 100%;
+    }
+
+    .linea{
+        margin-bottom: 15px;
+    }
 }
+
+@media screen and (max-width: 460px){
+    .contenedorDeDetalleReserva{
+        width: 100%;
+    }
+    
+    .tablasDeInformacion{
+        padding: 5px;
+    }
+
+}
+
+

@@ -746,7 +746,7 @@ export default function FormCrearProducto() {
           </div>
         </div>
       </Form>
-      <div className="final">separador de formulario</div>
+      <div className="final"/>
     </>
   );
 }

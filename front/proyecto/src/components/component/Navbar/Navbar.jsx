@@ -124,9 +124,9 @@ const Navbar = ({ onClick }) => {
             <p>Hola,</p>
             <p className="nombreCompletoMenu">{`${user.nombre} ${user.apellido}`}</p>
           </div>
-          <p className="cruz" onClick={handleClick}>
+          <button className="cruz" onClick={handleClick}>
             X
-          </p>
+          </button>
         </div>
       );
     } else {
