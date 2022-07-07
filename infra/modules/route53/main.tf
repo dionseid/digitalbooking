@@ -1,6 +1,6 @@
 # ref --» https://www.youtube.com/watch?v=jLvBx_V2x18&t=1006s 22'
 
-# Manage Route 53 hosted zone --»
+/* ----------------------- Manage Route 53 hosted zone ---------------------- */
 
 module "zones" {
   source  = "terraform-aws-modules/route53/aws//modules/zones"
@@ -19,7 +19,7 @@ module "zones" {
   }
 }
 
-# Provide Route 53 record --»
+/* ------------------------- Provide Route 53 record ------------------------ */
 
 data "aws_elastic_beanstalk_hosted_zone" "current" {}
 
@@ -51,18 +51,28 @@ module "records" {
   depends_on = [module.zones]
 }
 
-# resource "aws_route53_record" "www" {
-#   zone_id = module.zones.route53_zone_zone_id[0] #aws_route53_zone.primary.zone_id
-#   name    = "www.remo-digitalbooking.click"
-#   type    = "A"
-
-#   alias {
-#     name                   = var.eb_endpoint
-#     zone_id                = module.zones.route53_zone_zone_id[0]
-#     evaluate_target_health = true
-#   }
-# }
-
 output "name_server" {
   value = module.zones.route53_zone_name_servers
+}
+
+/* ---------------------- SSL certificate with AWS ACM ---------------------- */
+
+module "acm" {
+  source  = "terraform-aws-modules/acm/aws"
+  version = "~> 3.0"
+
+  domain_name = "remo-digitalbooking.click"
+  zone_id     = module.zones.route53_zone_zone_id["remo-digitalbooking.click"]
+
+  subject_alternative_names = ["www.remo-digitalbooking.click"]
+
+  wait_for_validation = true
+
+  tags = {
+    Name = "remo-digitalbooking.click"
+  }
+}
+
+output "ssl_certificate" {
+  value = module.acm.acm_certificate_arn
 }

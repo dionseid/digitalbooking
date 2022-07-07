@@ -58,3 +58,7 @@ variable "account_id" {
 variable "elb_account_id" {
   type = string
 }
+
+variable "ssl_certificate" {
+  type = string
+}

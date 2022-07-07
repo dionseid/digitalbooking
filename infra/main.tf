@@ -17,7 +17,7 @@ terraform {
 
 provider "aws" {
   #profile = "digital_booking_g8" # Uso local; no forma parte del pipeline
-  region = var.region
+  region  = var.region
 }
 
 # module "web_app" {
@@ -91,6 +91,7 @@ module "elastic_beanstalk_app" {
   bucket           = "elasticbeanstalk-${var.region}-${var.account_id}"
   account_id       = var.account_id
   elb_account_id   = var.elb_account_id
+  ssl_certificate  = module.route53.ssl_certificate
 }
 
 module "database" {

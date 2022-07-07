@@ -150,11 +150,33 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
   # listener --»
 
   setting {
+    name      = "Protocol"
+    namespace = "aws:elbv2:listener:443"
+    resource  = ""
+    value     = "HTTPS"
+  }
+
+  setting {
+    name      = "SSLCertificateArns"
+    namespace = "aws:elbv2:listener:443"
+    resource  = ""
+    value     = var.ssl_certificate
+  }
+
+  # setting {
+  #   name      = "SSLPolicy"
+  #   namespace = "aws:elbv2:listener:443"
+  #   resource  = ""
+  #   value     = "ELBSecurityPolicy-TLS13-1-3-2021-06"
+  # }
+
+  setting {
     name      = "Rules"
-    namespace = "aws:elbv2:listener:default"
+    namespace = "aws:elbv2:listener:443"
     resource  = ""
     value     = "politicas,imagenes,caracteristicas,categorias,productos,ciudades,reserva,usuarios,authenticate"
   }
+
 
   # processes --»
 
@@ -284,15 +306,22 @@ resource "aws_elastic_beanstalk_environment" "beanstalk_app_env" {
     name      = "PathPatterns"
     namespace = "aws:elbv2:listenerrule:productos"
     resource  = ""
-    value     = "/productos*"
+    value     = "/productos*,/productos/*"
   }
 
   setting {
     name      = "PathPatterns"
     namespace = "aws:elbv2:listenerrule:reserva"
     resource  = ""
-    value     = "/reserva*"
+    value     = "/reserva*,/reserva/*"
   }
+
+  # setting {
+  #   name      = "PathPatterns"
+  #   namespace = "aws:elbv2:listenerrule:reserva"
+  #   resource  = ""
+  #   value     = "/reserva/listarReservas"
+  # }
 
   setting {
     name      = "PathPatterns"
