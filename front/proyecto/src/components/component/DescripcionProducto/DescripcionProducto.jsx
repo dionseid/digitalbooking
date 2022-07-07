@@ -12,6 +12,7 @@ const DescripcionProducto = () => {
       .then((response) => {
         setDataDescripcion(response.data.data);
       });
+    return
   }, []);
 
   return (

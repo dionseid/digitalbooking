@@ -47,6 +47,7 @@ export default function DetallesReserva() {
       .then((response) => {
         setDataProducto(response.data.data);
       });
+    return
   }, []);
 
   useEffect(() => {
@@ -56,6 +57,7 @@ export default function DetallesReserva() {
       .then((response) => {
         setDataImagen(response.data.data);
       });
+    return
   }, []);
 
   const getImage = () => {

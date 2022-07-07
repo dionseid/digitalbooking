@@ -20,6 +20,7 @@ const GoogleMaps = () => {
       .then((res) => {
         setDataLocacion([res.data.data.latitud, res.data.data.longitud])
       });
+    return
   }, []);
 
   const position = [dataLocacion[0], dataLocacion[1]];

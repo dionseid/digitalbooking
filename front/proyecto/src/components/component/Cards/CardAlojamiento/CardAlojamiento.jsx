@@ -12,12 +12,14 @@ const CardAlojamiento = ({ idCategoria, setIdCategoria, onDoubleClick }) => {
     axiosConnection.get("/categorias").then((response) => {
       setDataCategoria(response.data.data);
     });
+    return
   }, []);
 
   useEffect(() => {
     axiosConnection.get("/productos/traerTodos").then((response) => {
       setDataProductos(response.data.data);
     });
+    return
   }, []);
 
   const cantidadProductos = (cat) =>{

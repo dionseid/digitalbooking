@@ -15,6 +15,7 @@ export default function UbicacionProducto() {
       .then((response) => {
         setDataUbicacion(response.data.data.ciudad);
       });
+    return
   }, []);
 
   return (
