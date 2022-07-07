@@ -17,8 +17,13 @@ export default function BootstrapCarousel() {
     // TODO modificar url
     axiosConnection.get("/imagenes/listarImagenes")
       .then(response => {
-        setDataImagen(response.data)
+        setDataImagen(response.data.data)
+        console.log("Probando /imagenes/listarImagenes: ", response.data.data);
       })
+    // fetch("imagenes/listarImagenes", {
+    //   mode: 'cors'
+    // }).then((response)=>response.json())
+    // .then(data =>setDataImagen(data.data));
     return
   }, [])
   return (
