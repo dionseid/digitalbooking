@@ -31,6 +31,7 @@ const Galeria = () => {
         setDataImagen(response.data.data);
         console.log(dataImagen);
       });
+    return
   }, []);
 
   const buscadorImagenes = () => {

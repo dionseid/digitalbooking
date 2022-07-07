@@ -13,6 +13,11 @@ const Sidebar = () => {
   useEffect(() => setIsAuthenticatedMenu(user.auth), [user]);
   const { pathname } = useLocation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [menuAbierto, setMenuAbierto] = useState(false)
+
+  // const manejarCambioDeEstadoMenu = (estado) => {setMenuAbierto(estado)}
+
+  // const cerrarMenu = () => {setMenuAbierto(false)}
 
   useEffect(() => {
     function handleSize() {
@@ -22,6 +27,10 @@ const Sidebar = () => {
     return () => window.removeEventListener("resize", handleSize);
   });
 
+  // useEffect(()=>{
+  //   console.log("Menu Abierto",menuAbierto)
+  // },[menuAbierto])
+
   const handleClick = () => {
     loginLogoutEvent({
       nombre: "",
@@ -30,6 +39,7 @@ const Sidebar = () => {
       id: null,
       auth: false,
       redirect: false,
+      rol:"",
       ciudad: "",
     });
   };
@@ -37,34 +47,34 @@ const Sidebar = () => {
   const buttonsView = {
     "/": (
       <>
-        <Link to="/account" className="buttonSideBarAccount">
+        <Link to="/account" className="buttonSideBarAccount" /*onClick={cerrarMenu}*/>
           Crear cuenta
         </Link>
-        <Link to="/login" className="buttonNavSideLogin">
+        <Link to="/login" className="buttonNavSideLogin" /*onClick={cerrarMenu}*/>
           Iniciar Sesión
         </Link>
       </>
     ),
     "/reserva": (
       <>
-        <Link to="/account" className="buttonSideBarAccount">
+        <Link to="/account" className="buttonSideBarAccount" /*onClick={cerrarMenu}*/>
           Crear cuenta
         </Link>
-        <Link to="/login" className="buttonNavSideLogin">
+        <Link to="/login" className="buttonNavSideLogin" /*onClick={cerrarMenu}*/>
           Iniciar Sesión
         </Link>
       </>
     ),
     "/account": (
       <>
-        <Link to="/login" className="buttonNavSideLogin">
+        <Link to="/login" className="buttonNavSideLogin" /*onClick={cerrarMenu}*/>
           Iniciar Sesión
         </Link>
       </>
     ),
     "/login": (
       <>
-        <Link to="/account" className="buttonSideBarAccount">
+        <Link to="/account" className="buttonSideBarAccount" /*onClick={cerrarMenu}*/ >
           Crear cuenta
         </Link>
       </>
@@ -75,6 +85,13 @@ const Sidebar = () => {
     if (isAuthenticatedMenu) {
       return (
         <>
+          <div className="contenedorMisReservas-administracion">
+            {
+              user.rol === "ADMIN" ?
+              <Link to="/administracion" className="linkAdministracion">Administracion</Link> :
+              <Link to="/misReservas" className="linkAdministracion">Mis Reservas</Link>            
+            }
+          </div> 
           <p>
             ¿Deseas{" "}
             <Link className="menu-item" to="/login" onClick={handleClick}>
@@ -108,7 +125,7 @@ const Sidebar = () => {
   return (
     <>
       {windowWidth <= 768 && (
-        <Menu right>
+        <Menu  right /*isOpen={menuAbierto} onStateChange={estado=>manejarCambioDeEstadoMenu(estado)}*/  >
           <div className="upper-colored-box">{handleAuthenticated()}</div>
           <div className="menuConFooter">
             <div className="menu-main">{handleIsAuthMenu()}</div>

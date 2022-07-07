@@ -12,6 +12,7 @@ export default function SelectCiudades({ onChange }) {
     axiosConnection.get("/ciudades").then((response) => {
       setDataCiudades(response.data.data);
     });
+    return
   }, []);
 
   return (
@@ -26,8 +27,8 @@ export default function SelectCiudades({ onChange }) {
             ¿A dónde vamos?
           </div>
         }
-        className="inputBanner"
-        options={()=>dataCiudades.map((ciudad) => ({
+        className="inputBanner"        
+        options={dataCiudades.map((ciudad) => ({
           label: (
             <div className="contenedorLabel">
               <FontAwesomeIcon
@@ -35,8 +36,9 @@ export default function SelectCiudades({ onChange }) {
                 className="iconoLocacionLabel"
               />
               <div>
-                <dt>{ciudad.nombre}</dt>
-                <dd
+                <dt>{ciudad.nombre}, {ciudad.pais}</dt>
+                
+           {/*      <dd
                   style={{
                     fontSize: "14px",
                     lineHeight: "16px",
@@ -44,9 +46,11 @@ export default function SelectCiudades({ onChange }) {
                   }}
                 >
                   {ciudad.pais}
-                </dd>
-              </div>
+                </dd> */}
+                
+              </div>              
             </div>
+            
           ),
           value: ciudad.id,
         }))}

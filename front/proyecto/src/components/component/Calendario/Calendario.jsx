@@ -25,12 +25,14 @@ const Calendario = () => {
   useEffect(() => {
     axiosConnection.get("/reserva/listarReservas").then((response) => {
       setDataReservas(response.data.data);
+      console.log("response.data.data: ", response.data.data);
     });
+    return
   }, []);
 
   const getFechasReservadas = () => {
-    const reservas = dataReservas?.data
-      ?.filter((reserva) => reserva.producto?.id === id)
+    const reservas = dataReservas
+      .filter((reserva) => reserva.producto?.id == id)
       .map((fecha) => ({
         start: new Date(fecha.fechaInicial),
         end: new Date(fecha.fechaFinal),
@@ -38,7 +40,7 @@ const Calendario = () => {
     return reservas;
   };
 
-  //console.log(getFechasReservadas()?.map((date)=>(date.start)));
+  console.log("getFechasReservadas: ", getFechasReservadas());
 
   /*   const fechasNo = [
     { start: new Date("Dec 11 2022"), end: new Date("Dec 12 2022") }

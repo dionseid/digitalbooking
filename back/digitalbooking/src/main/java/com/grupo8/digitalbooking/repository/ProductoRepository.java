@@ -18,7 +18,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
 
     @Query(
-            value = "select P.* from Productos P " +
+            value = "select P.* from productos P " +
                     "where P.ciudades_id = ?1 " +
                     "and P.id not in ( " +
                     "    select distinct R.productos_id " +

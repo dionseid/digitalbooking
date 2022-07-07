@@ -30,7 +30,7 @@ export default function Reserva() {
             </div>
             <HorarioLlegada />
           </div>
-          <div>
+          <div className="contenedorDeDetalleReserva">
             <DetallesReserva />
           </div>
         </div>

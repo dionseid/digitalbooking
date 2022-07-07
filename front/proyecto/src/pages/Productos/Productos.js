@@ -50,6 +50,7 @@ const Productos = () => {
         id: null,
         auth: false,
         redirect: true,
+        rol:"",
         ciudad: "",
       });
       navigate(`/login`);

@@ -18,6 +18,7 @@ public class AuthenticationDTOResponse {
     String apellido;
     String ciudadUsuario;
     String emailUsuario;
+    String rol;
 
 
 

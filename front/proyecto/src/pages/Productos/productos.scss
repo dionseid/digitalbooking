@@ -11,6 +11,10 @@
     margin-top: 55px;
 }
 
+.headerProducto div{
+    width: 100%;
+}
+
 .headerProducto div h2{
     color: #DFE4EA;
     font-style: normal;
@@ -100,6 +104,19 @@
     border: none;
     background-color: #FFF;
 }
+
+.tituloAdministracion{
+    display: flex;
+    justify-content: space-between;
+}
+
+.linkMisProductos{
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+
+
 
 
 

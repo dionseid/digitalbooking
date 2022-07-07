@@ -1,0 +1,125 @@
+@import './../../../Scss/abstracts/variables';
+
+.contenedorReservas, .contenedorProductos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 25px;
+    margin-bottom: 80px;
+}
+
+.reserva, .productos{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    height: 460px;
+}
+
+.contenedorImagen{
+    width: 100%;
+    height: 250px;
+    position: relative;
+    img{
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+    }
+    span{
+        position: absolute;
+        right: 15px;
+        font-size: 30px;
+        color: #FFF;
+        cursor: pointer;
+    }
+}
+
+.categoriaListadoMisReservas, .categoriaListadoMisProductos{
+    margin-top: 20px;
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ac9b9f;
+}
+
+.tituloListadoMisReservas, .tituloListadoMisProductos{
+    color: #31363F;
+    font-size: 20px;
+    padding-bottom: 0;
+    
+}
+
+.ciudadListadoReserva, .ciudadListadoProductos{
+    margin: 0 10px;
+    padding: 10px;
+    border-bottom: 1px solid $primaryColorOrange;
+}
+.ciudadListadoProductos{
+    padding-left: 0px;
+
+}
+
+.checkinReservaListadoContenedor, .checkoutReservaListado{
+    display: grid;
+    margin: 0 10px;
+    grid-template-columns: 1fr 1fr;
+    span{
+        
+        margin: 10px;
+        
+        
+        &:nth-of-type(2){
+            text-align: right;
+        }
+    }
+}
+
+.checkinReservaListadoContenedor{
+    border-bottom: 1px solid $primaryColorOrange;
+}
+
+.info{
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+
+
+
+/*Responsive*/
+@media screen and (max-width: 768px){
+
+    .contenedorReservas, .contenedorProductos{
+        margin-top: 70px;
+        margin-bottom: 80px;
+        
+    }
+
+    .reserva, .productos{
+        width: 350px;
+        height: 490px;
+    }
+
+  
+
+
+  }
+
+@media screen and (max-width: 460px){
+    .contenedorReservas, .contenedorProductos{
+        flex-direction: column;
+        margin-bottom: 80px;
+    }
+
+    .reserva, .productos{
+        margin-bottom: 20px;
+        height: 490px;
+    }
+
+ 
+}

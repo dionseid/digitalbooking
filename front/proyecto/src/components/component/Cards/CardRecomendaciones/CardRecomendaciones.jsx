@@ -37,6 +37,7 @@ const CardRecomendacion = ({
     axiosConnection.get(`/imagenes/listarImagenes`).then((response) => {
       setImagen(response.data.data);
     });
+    return
   }, [selectCiudad, startDate, endDate]);
 
   console.log(startDate);
@@ -46,6 +47,7 @@ const CardRecomendacion = ({
       .then((response) => {
         setCaracteristicas(response.data.data);
       });
+    return
   }, []);
 
   const getImage = (card) => {
@@ -83,7 +85,7 @@ const CardRecomendacion = ({
                 style={{ backgroundImage: "url('" + getImage(card) + "')" }}
                 className="fondoImagenProducto"
               />
-              <div className="cardBody">
+              <div className={`cardBody ${verMas? null : "widthBody"}`}>
                 <div className="presentacion">
                   <div>
                     <div className="categoriaYEstrellas">
@@ -126,7 +128,7 @@ const CardRecomendacion = ({
                 <p>
                   {verMas
                     ? card.descripcion
-                    : card.descripcion.split(" ", 8).join(" ")}
+                    : card.descripcion?.split(" ", 12).join(" ")}
                   <span className="mas" onClick={() => setVerMas(!verMas)}>
                     {verMas ? " ver menos" : " ver más..."}
                   </span>

@@ -9,20 +9,23 @@ import FechaRangoContextProvider from "../../context/FechaRangoContextProvider";
 import HoraContextProvider from "../../context/HoraContextProvider";
 import UserProvider from "../../context/UserContext";
 import axiosConnection from "../../../helpers/axiosConnection";
+import axios from "axios";
+
 
 export default function DetallesReserva() {
   const { user } = useContext(UserProvider);
   const { isHora, setIsHora } = useContext(HoraContextProvider);
   const { rango, setRango } = useContext(FechaRangoContextProvider);
-  console.log("rango: ", rango);
+  //console.log("rango: ", rango);
   const [dataProducto, setDataProducto] = useState([]);
   const [dataImagen, setDataImagen] = useState([]);
   const [isCiudad, setIsCiudad] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
+  var cors = require('cors')
 
-  console.log("isCiudad: ", isCiudad);
+  //console.log("isCiudad: ", isCiudad);
   useEffect(() => {
     if (user.ciudad !== "") {
       setIsCiudad(true);
@@ -44,6 +47,7 @@ export default function DetallesReserva() {
       .then((response) => {
         setDataProducto(response.data.data);
       });
+    return
   }, []);
 
   useEffect(() => {
@@ -53,6 +57,7 @@ export default function DetallesReserva() {
       .then((response) => {
         setDataImagen(response.data.data);
       });
+    return
   }, []);
 
   const getImage = () => {
@@ -70,21 +75,8 @@ export default function DetallesReserva() {
     }
   };
 
-  console.log("isHora:", isHora);
-  const getLoginApi = async () => {
-    try {
-      // ** CAMBIAR POR EL URL DE LA API
-      // const token = sessionStorage.getItem('token')&& JSON.parse(sessionStorage.getItem('token'));
-      const respuesta = await axiosConnection.get("/login", {
-        headers: {
-          Authorization: `Bearer `,
-        },
-      });
-      return respuesta;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //console.log("isHora:", isHora);
+  
 
   useEffect(() => {
     if (rango[0] !== null && rango[1] !== null && isHora!==null && isCiudad) {
@@ -94,28 +86,88 @@ export default function DetallesReserva() {
     }
   }, [rango, isHora,isCiudad])
 
+  /* const registroReserva = async (data) => {
+    let corsOptions = {
+      origin: "*",
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
+    }
+    const token = sessionStorage.getItem('token')
+    //JSON.parse(sessionStorage.getItem('token'))
+    console.log(JSON.parse(token));
+    try {
+        const respuesta = await axios.post("http://localhost:8080/reserva/nuevaReserva",cors(corsOptions),data,{
+          headers: {
+            "Content-type":"application/json",
+            "Accept": "application/json",
+            'Authorization': `Bearer ${JSON.parse(token)}`
+          }
+        })
+        if (respuesta.status !== 200) {
+            throw new Error("Lamentablemente no se ha podido crear la reserva. Por favor intente más tarde")
+        } else {
+            console.log("respuesta1: ", respuesta.data);
+        }
+        return respuesta.data;
+    } catch (error) {
+        console.error("ERROR REGISTRO RESERVA ", error);
+    }
+  } */
+
   const onSubmit = (e) => {
     e.preventDefault();
+
+    const newReserva = {
+      hora: "15:00:00",
+      fechaInicial: fechaInicio,
+      fechaFinal: fechaFinal,
+      producto: {
+        id: parseInt(id),
+      },
+      usuario: {
+        id: user.id,
+      }
+    };
+
+    console.log(newReserva);
+    
     if (rango[0] !== null && rango[1] !== null && isHora && isCiudad) {
+      //registroReserva(newReserva)
+      const token =JSON.parse(sessionStorage.getItem('token')) 
+      console.log(token);
       // if(getLoginApi().status === 200 ){
-/*       fetch("http://localhost:8080/reserva/nuevaReserva", {
+      fetch("/reserva/nuevaReserva", {
+        mode: 'cors',
         method: "POST",
         headers: {
+          'Access-Control-Allow-Origin': '*',
           Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           hora: "15:00:00",
           fechaInicial: fechaInicio,
           fechaFinal: fechaFinal,
           producto: {
-            id: id,
+            id: parseInt(id),
           },
           usuario: {
             id: user.id,
           },
         }),
-      }); */
+      }).then((response)=>response.json())
+      .then(data =>console.log("nuevaReserva: ",data,{
+        hora: "15:00:00",
+        fechaInicial: fechaInicio,
+        fechaFinal: fechaFinal,
+        producto: {
+          id: parseInt(id),
+        },
+        usuario: {
+          id: user.id,
+        },
+      }));
+
       navigate(`/reservaExitosa`);
     } //}
   };

@@ -1,3 +1,5 @@
+@import '../../../Scss/abstracts/variables';
+
 /* El colorido cuadrado superior del sidebar que contiene el botón para cerrar */
 .upper-colored-box {
   background-color:#F0572D;
@@ -25,6 +27,15 @@
     color: #383B58;
     font-size: 20px;
     font-weight: 700;
+}
+.contenedorMisReservas-administracion{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 10px;
+  .linkAdministracion{
+    margin: 0;
+    color: #383B58;
+  }
 }
 
 /* Position and sizing of burger button */
@@ -154,6 +165,9 @@
   text-decoration: none;
   padding: 5px;
   margin-top: 5px;
+  &:hover{
+    color: $primaryColorOrange;
+  }
 }
 
 .SidebarBienvenida{
