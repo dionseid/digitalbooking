@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
-//nombre de la tabla en la bd
+// nombre de la tabla en la bd
 @Entity
 @Table(name = "Politicas")
 public class Politica {
@@ -20,8 +20,8 @@ public class Politica {
     private Integer id;
     private Integer tipo;
     private String descripcion;
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @JoinColumn(name = "productos_id")
     private Producto producto;
 
