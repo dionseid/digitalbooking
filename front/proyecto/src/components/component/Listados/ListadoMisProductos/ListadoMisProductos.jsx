@@ -7,32 +7,57 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 const ListadoMisProductos = ({productos}) => {
     const [dataImagen, setDataImagen] = useState([])
+    const [productosTraidos,setProductosTraidos] = useState(productos)
     
     useEffect(() => {
         axiosConnection.get(`/imagenes/listarImagenes`).then((response) => {
             setDataImagen(response.data.data);
             console.log("info: ",response.data.data);
         });
+        return
       }, []);
 
+      useEffect(()=>{},[productosTraidos])
+
     const getImage = (card) => {
-        const imagenes = dataImagen.filter((img) => img.producto?.id == card.id);
+        const imagenes = dataImagen?.filter((img) => img.producto?.id == card.id);
         console.log("imagenes: ", imagenes);
         return imagenes[0]?.url;
       };
 
+      const eliminarImagenesPorProducto = async (idProducto) => {
+        const imagenes = dataImagen?.filter((img) => img?.producto?.id == idProducto);
+        imagenes?.forEach(async (e) => {
+          await axiosConnection.delete(`/imagenes/eliminarImagen/${e?.id}`)
+        })
+      };
+
+      const eliminarProducto = async (id) => {
+        try{
+          const respApi = await axiosConnection.delete(`/productos/eliminarProducto/${id}`)
+          setProductosTraidos(productosTraidos?.filter(e=> e?.id !== id))
+          const respApiImagenes = await eliminarImagenesPorProducto(id)
+          return respApi
+        }catch(error){
+          console.error(error)
+        }
+      }
+
+
+
     return<div className="contenedorProductos">
-        {console.log("ListadoMisProductos: ",productos)   }
-        {productos.map((prod)=><div className="productos">
+        {console.log("ListadoMisProductos: ",productosTraidos)   }
+        {productosTraidos.map((prod)=><div className="productos">
             <div className="contenedorImagen">
+            <span onClick={()=>eliminarProducto(prod?.id)}>&times;</span>
                 <img src={getImage(prod)}/>
             </div>
-            <span className="categoriaListadoMisProductos">{prod.categoria.titulo}</span>
-            <h2 className="tituloListadoMisProductos">{prod.nombre}</h2>
+            <span className="categoriaListadoMisProductos">{prod?.categoria.titulo}</span>
+            <h2 className="tituloListadoMisProductos">{prod?.nombre}</h2>
             <p className="ciudadListadoProductos">                <FontAwesomeIcon
                   icon={faLocationDot}
                   style={{ paddingRight: "5px" }}
-                />{`${prod.ciudad.provincia}, ${prod.ciudad.nombre}, ${prod.ciudad.pais}.`}</p>
+                />{`${prod.ciudad.provincia}, ${prod?.ciudad.nombre}, ${prod?.ciudad.pais}.`}</p>
             <div className="info">
                 <p>Características:</p>
                   <p className="iconosInfoHotel">

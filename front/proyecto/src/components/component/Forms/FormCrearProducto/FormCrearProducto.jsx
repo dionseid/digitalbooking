@@ -74,18 +74,21 @@ export default function FormCrearProducto() {
     axiosConnection.get("/ciudades").then((response) => {
       setDataCiudades(response.data.data);
     });
+    return
   }, []);
 
   useEffect(() => {
     axiosConnection.get("/categorias").then((response) => {
       setDataCategoria(response.data.data);
     });
+    return
   }, []);
 
   useEffect(() => {
     axiosConnection.get("/caracteristicas/listarCaracteristicas").then((response) => {
       setDataCaracteristicas(response.data.data);
     });
+    return
   }, []);
 
   //console.log(arrayCaracteristicas);
@@ -372,7 +375,7 @@ export default function FormCrearProducto() {
 
       const respuestaPostProducto = await crearProducto()
       console.log("respuestaPostProducto: ", respuestaPostProducto);
-      const idProducto = respuestaPostProducto.id;
+      const idProducto = respuestaPostProducto?.id;
       console.log("idProducto: ", idProducto);       
 
       /* fetch("productos/agregarProducto", {

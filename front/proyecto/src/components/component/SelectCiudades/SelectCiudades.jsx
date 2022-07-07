@@ -12,6 +12,7 @@ export default function SelectCiudades({ onChange }) {
     axiosConnection.get("/ciudades").then((response) => {
       setDataCiudades(response.data.data);
     });
+    return
   }, []);
 
   return (

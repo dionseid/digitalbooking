@@ -12,6 +12,7 @@ export default function Reglas() {
     axiosConnection.get("/politicas/listarPoliticas").then((response) => {
       setDataReglas(response.data.data);
     });
+    return
   }, []);
 
   return (

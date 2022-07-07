@@ -16,6 +16,7 @@ const TituloProducto = () => {
       .then((response) => {
         setDataTitulo(response.data.data);
       });
+    return
   }, [id]);
 
   const Titulo = () => {

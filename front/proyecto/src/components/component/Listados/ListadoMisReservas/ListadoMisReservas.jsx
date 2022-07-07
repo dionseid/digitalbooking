@@ -4,6 +4,7 @@ import '../ListadoMisReservas.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import MensajeSinReservas from "../../MensajeExito/MensajeSinReservas/MensajeSinReservas";
 
 
 const ListadoMisReservas = ({reservas}) => {
@@ -24,6 +25,7 @@ const ListadoMisReservas = ({reservas}) => {
     }
     useEffect(()=>{
         traerImagenes()
+        return
     },[])
 
 
@@ -47,10 +49,9 @@ const ListadoMisReservas = ({reservas}) => {
         }
     }
 
-    useEffect(()=> console.log(elementoEliminado),[reservasTraidas])
+    useEffect(()=> {},[reservasTraidas])
     
-    return<div className="contenedorReservas">
-        {console.log("ListadoMisReservas: ",reservasTraidas)   }
+    return <div className="contenedorReservas">
         {reservasTraidas?.map((e)=><div className="reserva">
             <div className="contenedorImagen">
                 <span onClick={()=>eliminarReserva(e.id)}>&times;</span>
@@ -70,7 +71,7 @@ const ListadoMisReservas = ({reservas}) => {
             </div>
         </div>)}
         <div className="separador"/>
-    </div>
+    </div> 
     
 }
 

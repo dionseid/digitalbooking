@@ -37,6 +37,7 @@ const CardRecomendacion = ({
     axiosConnection.get(`/imagenes/listarImagenes`).then((response) => {
       setImagen(response.data.data);
     });
+    return
   }, [selectCiudad, startDate, endDate]);
 
   console.log(startDate);
@@ -46,6 +47,7 @@ const CardRecomendacion = ({
       .then((response) => {
         setCaracteristicas(response.data.data);
       });
+    return
   }, []);
 
   const getImage = (card) => {

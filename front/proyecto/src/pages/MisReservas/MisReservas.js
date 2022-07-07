@@ -26,7 +26,7 @@ const MisReservas = () => {
 
     useEffect(()=>{
         traerReservas()
-
+        return
     },[])
 
 

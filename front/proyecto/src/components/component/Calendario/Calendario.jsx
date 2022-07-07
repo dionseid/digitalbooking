@@ -27,6 +27,7 @@ const Calendario = () => {
       setDataReservas(response.data.data);
       console.log("response.data.data: ", response.data.data);
     });
+    return
   }, []);
 
   const getFechasReservadas = () => {

@@ -25,7 +25,7 @@ const MisProductos = () => {
 
     useEffect(()=>{
         traerProductos()
-
+        return
     },[])
 
 

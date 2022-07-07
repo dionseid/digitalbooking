@@ -14,6 +14,7 @@ export default function Caracteristicas() {
       .then((response) => {
         setDataCaracteristicas(response.data.data.caracteristicas);
       });
+      return
   }, []);
 
   return (
