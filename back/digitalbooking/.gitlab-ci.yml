@@ -16,23 +16,29 @@ cache:
     - back/digitalbooking/target
 
 build backend:
+  image: maven:3-jdk-11
   stage: build
   script:
+    - "mvn install -B"
     - cd back/digitalbooking
     - mvn compile
 
 test job:
+  image: maven:3-jdk-11
   stage: test
   script:
+    - "mvn install -B"
     - cd back/digitalbooking
     - mvn test #mvn clean test
 
 package job:
+  image: maven:3-jdk-11
   stage: package
   artifacts:
     paths:
       - back/digitalbooking/target/*.jar #target/consoleapp.jar
   script:
+    - "mvn install -B"
     - cd back/digitalbooking
     - mvn package
 
