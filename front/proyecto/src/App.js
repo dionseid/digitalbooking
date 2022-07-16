@@ -37,7 +37,7 @@ function App() {
                 <Route path="/account" element={<Account />} />
                 <Route path="/productos/:id" element={<Productos />} />
                 <Route path="/producto/:id/reserva" element={<Reserva />} />
-                <Route path="/reservaExitosa" element={<ReservaExitosa />} />                
+                <Route path="/reservaExitosa" element={<ReservaExitosa />} />
                 <Route path="/administracion" element={<Administracion />} />
                 <Route path="//misReservas" element={<MisReservas />} />
                 <Route path="/creacionExitosa" element={<CreacionExitosa />} />
@@ -54,3 +54,5 @@ function App() {
 export default App;
 
 //<Route path='/login' element={ <> <Navigate to="/login" /> </> }/>
+
+/* Triggering the pipeline */

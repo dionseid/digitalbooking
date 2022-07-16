@@ -28,3 +28,5 @@ public class DigitalbookingApplication {
 		};
 	}
 }
+
+/* Triggering the pipeline */
