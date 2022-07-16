@@ -4,10 +4,10 @@ data "aws_iam_policy_document" "allow_public_access_policy" {
     sid       = "ReadOnlyAccess"
     effect    = "Allow"
     resources = ["arn:aws:s3:::${var.bucket_name}/*"]
-    principals {
-      type        = "*"
-      identifiers = ["*"]
-    }
+    # principals {
+    #   type        = "*"
+    #   identifiers = ["*"]
+    # }
   }
 }
 

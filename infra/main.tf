@@ -1,12 +1,13 @@
 terraform {
   backend "s3" {
-    bucket         = "g8-tf-backend"
-    key            = "digital-booking/terraform.tfstate" # location inside bucket. It can have several subfolders
+    bucket         = "remo-digitalbooking-terraform-backend-dev"
+    key            = "terraform.tfstate" # location inside bucket. It can have several subfolders
     region         = "us-west-1"
-    dynamodb_table = "g8-terraform-state-locking"
+    dynamodb_table = "remo-digitalbooking-terraform-state-locking-dev"
     encrypt        = true
-    profile        = "digital_booking_g8"
+    #profile        = "default"
   }
+  # backend "local" {}
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -16,25 +17,9 @@ terraform {
 }
 
 provider "aws" {
-  #profile = "digital_booking_g8" # Uso local; no forma parte del pipeline
+  profile = "default"
   region  = var.region
 }
-
-# module "web_app" {
-#   source = "./modules"
-
-#   region           = var.region
-#   azs              = [data.aws_availability_zones.available.names[0], data.aws_availability_zones.available.names[1]]
-#   public_subnets   = slice(cidrsubnets(var.main_vpc_cidr, 8, 8, 8, 8, 8, 8), 0, 2)
-#   private_subnets  = slice(cidrsubnets(var.main_vpc_cidr, 8, 8, 8, 8, 8, 8), 2, 4)
-#   database_subnets = slice(cidrsubnets(var.main_vpc_cidr, 8, 8, 8, 8, 8, 8), 4, 6)
-#   app_name         = var.app_name
-#   instance_type    = ["t2.medium", "t2.small", "t2.micro"]
-#   public_key       = var.public_key
-#   db_name          = "g8dbdigitalbooking"
-#   db_user          = "g8digitalbooking"
-#   db_pass          = var.db_pass
-# }
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
@@ -81,7 +66,7 @@ module "elastic_beanstalk_app" {
   team_name        = var.team_name
   product_name     = var.product_name
   environment_name = var.environment_name
-  instance_type    = ["t2.medium", "t2.small", "t2.micro"]
+  instance_type    = ["t2.micro", "t2.small", "t2.medium"]
   public_subnets   = module.vpc.public_subnets
   private_subnets  = module.vpc.private_subnets
   public_key_name  = aws_key_pair.key_public.key_name
@@ -90,7 +75,6 @@ module "elastic_beanstalk_app" {
   ingress_sg_id    = aws_security_group.g8_ingress_sg.id
   bucket           = "elasticbeanstalk-${var.region}-${var.account_id}"
   account_id       = var.account_id
-  elb_account_id   = var.elb_account_id
   ssl_certificate  = module.route53.ssl_certificate
 }
 
@@ -122,6 +106,7 @@ module "ecr" {
   team_name        = var.team_name
   product_name     = var.product_name
   environment_name = var.environment_name
+  account_id       = var.account_id
 }
 
 module "cloud9" {
@@ -131,6 +116,7 @@ module "cloud9" {
   product_name     = var.product_name
   environment_name = var.environment_name
   subnet_id        = module.vpc.public_subnets[1]
+  account_id       = var.account_id
 }
 
 module "route53" {

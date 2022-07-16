@@ -118,22 +118,6 @@ resource "aws_security_group_rule" "lb_https_ingress" {
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
-# resource "aws_security_group" "g8_cloud9_sg" { # ❗ Cloud9 automáticamente ya desplegaría su propie SG
-#   name   = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}-cloud9-sg${var.environment_name != "" ? "-${var.environment_name}" : ""}"
-#   vpc_id = module.vpc.vpc_id
-
-#   tags = {
-#     Role = "public"
-#   }
-
-#   egress {
-#     from_port   = 0
-#     to_port     = 0
-#     protocol    = "-1"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
-# }
-
 resource "aws_security_group_rule" "cloud9_ingress" {
   security_group_id = tolist(module.cloud9.bastion_instace_sg)[0]
   type              = "ingress"

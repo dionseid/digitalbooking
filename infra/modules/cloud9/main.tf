@@ -2,6 +2,7 @@ resource "aws_cloud9_environment_ec2" "bastion" {
   name          = "${var.team_name}${var.team_name != "" ? "-" : ""}${var.product_name}${var.environment_name != "" ? "-${var.environment_name}" : ""}"
   instance_type = "t2.micro"
   subnet_id     = var.subnet_id
+  owner_arn     = "arn:aws:iam::${var.account_id}:user/Administrator"
 }
 
 data "aws_instance" "cloud9_instance" {

@@ -17,3 +17,7 @@ variable "environment_name" {
 variable "subnet_id" {
   type = string
 }
+
+variable "account_id" {
+  type = string
+}

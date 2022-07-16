@@ -13,3 +13,7 @@ variable "environment_name" {
   type        = string
   default     = ""
 }
+
+variable "account_id" {
+  type = string
+}
