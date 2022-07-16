@@ -19,16 +19,16 @@ build backend:
   image: maven:3-jdk-11
   stage: build
   script:
-    - "mvn install -B"
     - cd back/digitalbooking
+    - "mvn install -B"
     - mvn compile
 
 test job:
   image: maven:3-jdk-11
   stage: test
   script:
-    - "mvn install -B"
     - cd back/digitalbooking
+    - "mvn install -B"
     - mvn test #mvn clean test
 
 package job:
@@ -38,8 +38,8 @@ package job:
     paths:
       - back/digitalbooking/target/*.jar #target/consoleapp.jar
   script:
-    - "mvn install -B"
     - cd back/digitalbooking
+    - "mvn install -B"
     - mvn package
 
 build docker image:
