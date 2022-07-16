@@ -8,19 +8,19 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema remodigitalbookingprod
+-- Schema remodigitalbookingdev
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema remodigitalbookingprod
+-- Schema remodigitalbookingdev
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `remodigitalbookingprod` DEFAULT CHARACTER SET utf8mb4 ;
-USE `remodigitalbookingprod` ;
+CREATE SCHEMA IF NOT EXISTS `remodigitalbookingdev` DEFAULT CHARACTER SET utf8mb4 ;
+USE `remodigitalbookingdev` ;
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`caracteristicas`
+-- Table `remodigitalbookingdev`.`caracteristicas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`caracteristicas` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`caracteristicas` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `icono` VARCHAR(255) NULL DEFAULT NULL,
   `nombre` VARCHAR(255) NULL DEFAULT NULL,
@@ -30,9 +30,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`categorias`
+-- Table `remodigitalbookingdev`.`categorias`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`categorias` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`categorias` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(255) NULL DEFAULT NULL,
   `titulo` VARCHAR(255) NULL DEFAULT NULL,
@@ -43,9 +43,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`ciudades`
+-- Table `remodigitalbookingdev`.`ciudades`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`ciudades` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`ciudades` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(255) NULL DEFAULT NULL,
   `pais` VARCHAR(255) NULL DEFAULT NULL,
@@ -56,9 +56,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`productos`
+-- Table `remodigitalbookingdev`.`productos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`productos` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`productos` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(255) NULL DEFAULT NULL,
   `latitud` DOUBLE NULL DEFAULT NULL,
@@ -74,9 +74,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`imagenes`
+-- Table `remodigitalbookingdev`.`imagenes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`imagenes` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`imagenes` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(255) NULL DEFAULT NULL,
   `url` VARCHAR(255) NULL DEFAULT NULL,
@@ -88,9 +88,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`politicas`
+-- Table `remodigitalbookingdev`.`politicas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`politicas` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`politicas` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(255) NULL DEFAULT NULL,
   `tipo` INT NULL DEFAULT NULL,
@@ -102,9 +102,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`productos_caracteristicas`
+-- Table `remodigitalbookingdev`.`productos_caracteristicas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`productos_caracteristicas` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`productos_caracteristicas` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `productos_id` INT NOT NULL,
   `caracteristicas_id` INT NOT NULL,
@@ -116,9 +116,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`roles`
+-- Table `remodigitalbookingdev`.`roles`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`roles` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`roles` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
@@ -127,9 +127,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`usuarios`
+-- Table `remodigitalbookingdev`.`usuarios`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`usuarios` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`usuarios` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `apellido` VARCHAR(255) NULL DEFAULT NULL,
   `ciudad_usuario` VARCHAR(255) NULL DEFAULT NULL,
@@ -145,9 +145,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`reservas`
+-- Table `remodigitalbookingdev`.`reservas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`reservas` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`reservas` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fecha_final` DATE NULL DEFAULT NULL,
   `fecha_inicial` DATE NULL DEFAULT NULL,

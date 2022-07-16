@@ -8,19 +8,19 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema remodigitalbookingprod
+-- Schema remodigitalbookingdev
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema remodigitalbookingprod
+-- Schema remodigitalbookingdev
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `remodigitalbookingprod` DEFAULT CHARACTER SET latin1 ;
-USE `remodigitalbookingprod` ;
+CREATE SCHEMA IF NOT EXISTS `remodigitalbookingdev` DEFAULT CHARACTER SET latin1 ;
+USE `remodigitalbookingdev` ;
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`categorias`
+-- Table `remodigitalbookingdev`.`categorias`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`categorias` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`categorias` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(55) NOT NULL,
   `descripcion` VARCHAR(100) NOT NULL,
@@ -32,9 +32,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`ciudades`
+-- Table `remodigitalbookingdev`.`ciudades`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`ciudades` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`ciudades` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(55) NOT NULL,
   `provincia` VARCHAR(45) NOT NULL,
@@ -46,9 +46,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`productos`
+-- Table `remodigitalbookingdev`.`productos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`productos` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`productos` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(60) NOT NULL,
   `descripcion` VARCHAR(500) NOT NULL,
@@ -61,19 +61,19 @@ CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`productos` (
   INDEX `fk_productos_categorias1_idx` (`categorias_id` ASC),
   CONSTRAINT `fk_productos_categorias1`
     FOREIGN KEY (`categorias_id`)
-    REFERENCES `remodigitalbookingprod`.`categorias` (`id`),
+    REFERENCES `remodigitalbookingdev`.`categorias` (`id`),
   CONSTRAINT `fk_productos_ciudades1`
     FOREIGN KEY (`ciudades_id`)
-    REFERENCES `remodigitalbookingprod`.`ciudades` (`id`))
+    REFERENCES `remodigitalbookingdev`.`ciudades` (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`caracteristicas`
+-- Table `remodigitalbookingdev`.`caracteristicas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`caracteristicas` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`caracteristicas` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `icono` VARCHAR(45) NOT NULL,
@@ -82,16 +82,16 @@ CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`caracteristicas` (
   INDEX `fk_caracteristicas_productos1_idx` (`productos_id` ASC),
   CONSTRAINT `fk_caracteristicas_productos1`
     FOREIGN KEY (`productos_id`)
-    REFERENCES `remodigitalbookingprod`.`productos` (`id`))
+    REFERENCES `remodigitalbookingdev`.`productos` (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`imagenes`
+-- Table `remodigitalbookingdev`.`imagenes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`imagenes` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`imagenes` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `url` VARCHAR(500) NOT NULL,
@@ -100,16 +100,16 @@ CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`imagenes` (
   INDEX `fk_imagenes_productos1_idx` (`productos_id` ASC),
   CONSTRAINT `fk_imagenes_productos1`
     FOREIGN KEY (`productos_id`)
-    REFERENCES `remodigitalbookingprod`.`productos` (`id`))
+    REFERENCES `remodigitalbookingdev`.`productos` (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `remodigitalbookingprod`.`politicas`
+-- Table `remodigitalbookingdev`.`politicas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`politicas` (
+CREATE TABLE IF NOT EXISTS `remodigitalbookingdev`.`politicas` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `tipo` INT(11) NOT NULL,
   `descripcion` MEDIUMTEXT NOT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `remodigitalbookingprod`.`politicas` (
   INDEX `fk_politicas_productos1_idx` (`productos_id` ASC),
   CONSTRAINT `fk_politicas_productos1`
     FOREIGN KEY (`productos_id`)
-    REFERENCES `remodigitalbookingprod`.`productos` (`id`))
+    REFERENCES `remodigitalbookingdev`.`productos` (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4;

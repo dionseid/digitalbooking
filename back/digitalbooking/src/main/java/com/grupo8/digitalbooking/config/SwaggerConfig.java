@@ -19,7 +19,7 @@ import java.util.List;
 @Configuration
 public class SwaggerConfig implements WebMvcConfigurer {
     @Bean
-    public Docket api(){
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .securityContexts(Arrays.asList(securityContext()))
@@ -38,23 +38,25 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .tags(new Tag("Usuarios", "Usuarios Controller"));
     }
 
-    private ApiKey apiKey(){
-        return new ApiKey("JWT","Authorization", "header");
+    private ApiKey apiKey() {
+        return new ApiKey("JWT", "Authorization", "header");
     }
-    private SecurityContext securityContext(){
+
+    private SecurityContext securityContext() {
         return SecurityContext.builder().securityReferences(defaultAuth()).build();
     }
-    private List<SecurityReference> defaultAuth(){
-        AuthorizationScope authorizationScope = new AuthorizationScope("global","accessEverything");
-        AuthorizationScope[] authorizationScopes=new AuthorizationScope[1];
-        authorizationScopes[0]=authorizationScope;
+
+    private List<SecurityReference> defaultAuth() {
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
         return Arrays.asList(new SecurityReference("JWT", authorizationScopes));
     }
 
-    private ApiInfo apiInfo(){
+    private ApiInfo apiInfo() {
         return new ApiInfo("Digital Booking S.A.",
-                            "Aplicación desarrollada para el Proyecto Integrador de la carrera Certified Tech Developer de Digital House.",
-                            "V.01",
+                "Aplicación desarrollada para el Proyecto Integrador de la carrera Certified Tech Developer de Digital House.",
+                "V.01",
                 "Grupo 8(" +
                         "- María Alejandra Pantano" +
                         "- Diana Sauval" +
@@ -62,7 +64,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
                         "- Dionys Seidel" +
                         "- Sergio Andrés Perez Amsler" +
                         "- Franco Verón Peralta)",
-                new Contact("grupo8", "http://remo-digitalbooking-env-prod.eba-xby23mds.us-west-1.elasticbeanstalk.com/","grupo8@gmail.com"),
+                new Contact("grupo8", "https://remo-digitalbooking.click/", "sofimonasterio93@gmail.com"),
                 "licencia",
                 "licencia.com",
                 Collections.emptyList());
