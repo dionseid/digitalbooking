@@ -66,3 +66,4 @@ build docker image:
       "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/variables/BACKEND_VERSION" --form "value=`echo $PARENT_PIPELINE_ID`"
   variables:
     DOCKER_DRIVER: overlay
+    DOCKER_HOST: tcp://docker:2375
