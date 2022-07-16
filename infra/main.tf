@@ -5,7 +5,6 @@ terraform {
     region         = "us-west-1"
     dynamodb_table = "remo-digitalbooking-terraform-state-locking-dev"
     encrypt        = true
-    #profile        = "default"
   }
   # backend "local" {}
   required_providers {
@@ -17,8 +16,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "default"
-  region  = var.region
+  region = var.region
 }
 
 module "vpc" {
