@@ -1,5 +1,5 @@
 variables:
-  REPOSITORY_NAME: remo-digitalbooking-repo-prod
+  REPOSITORY_NAME: remo-digitalbooking-repo-dev
   TEAM: remo
   APP: front
 
@@ -60,7 +60,7 @@ build docker image:
     - |
       curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
       --silent --output /dev/null --show-error --fail \
-      "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/FRONTEND_VERSION" --form "value=`echo $PARENT_PIPELINE_ID`"
+      "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/variables/FRONTEND_VERSION" --form "value=`echo $PARENT_PIPELINE_ID`"
   variables:
     DOCKER_DRIVER: overlay
 

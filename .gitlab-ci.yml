@@ -2,11 +2,11 @@ include: cancel_pipeline_functions.yml
 
 variables:
   APP_VERSION: $CI_PIPELINE_IID
-  REPOSITORY_NAME: remo-digitalbooking-repo-prod
+  REPOSITORY_NAME: remo-digitalbooking-repo-dev
   TEAM: remo
   LOCK: deployment
-  APP_NAME: remo-digitalbooking-prod
-  APP_ENV_NAME: remo-digitalbooking-env-prod
+  APP_NAME: remo-digitalbooking-dev
+  APP_ENV_NAME: remo-digitalbooking-env-dev
 
 stages:
   - update
@@ -32,7 +32,7 @@ stages:
 #     - |
 #       curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
 #       --silent --output /dev/null --show-error --fail \
-#       "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH" --form "value=$AUTH"
+#       "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH" --form "value=$AUTH"
 
 update token:
   stage: update
@@ -122,8 +122,8 @@ deploy to production:
     name: amazon/aws-cli:2.4.11
     entrypoint: [""]
   variables:
-    APP_NAME: remo-digitalbooking-prod
-    APP_ENV_NAME: remo-digitalbooking-env-prod
+    APP_NAME: remo-digitalbooking-dev
+    APP_ENV_NAME: remo-digitalbooking-env-dev
   environment: production
   resource_group: ${LOCK}
   before_script:
@@ -163,7 +163,7 @@ save succeded version:
     - |
       curl --location --request PUT --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN" \
       --silent --output /dev/null --show-error --fail \
-      "https://gl.deitech.online/api/v4/projects/$CI_PROJECT_ID/variables/VERSION_OK" --form "value=$APP_VERSION"
+      "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/variables/VERSION_OK" --form "value=$APP_VERSION"
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule"
       changes:
