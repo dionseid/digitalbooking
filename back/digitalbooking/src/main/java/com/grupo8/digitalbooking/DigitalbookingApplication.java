@@ -29,4 +29,4 @@ public class DigitalbookingApplication {
 	}
 }
 
-/* Triggering the pipeline */
+/* Triggering the pipeline, again */

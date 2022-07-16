@@ -149,7 +149,7 @@ deploy to production:
       changes:
         - front/**/**
         - back/**/**
-      when: always
+      when: on_success
     - if: $CI_PIPELINE_SOURCE != "schedule"
       changes:
         - front/**/**
